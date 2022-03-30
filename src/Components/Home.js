@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react'
-import {Container, Heading } from '@chakra-ui/react'
+import {Button, Heading } from '@chakra-ui/react'
 import { TagCloud } from 'react-tagcloud'
 
 const Home = () => {
-  const initialTags = 10
-  const [showMoreTags, setShowMoreTags] = useState(5)
-  const [totalTags, setTotalTags] = useState(0)
-  const [data, setData] = useState([])
+  const [initialTags, setInitialTags] = useState(3);
+  const [increaseTags, setIncreaseTags] = useState(5);
+  const [totalTags, setTotalTags] = useState(0);
+  const [data, setData] = useState([]);
 
   const tags = [
     { value: 'happy', count: 78 },
@@ -31,16 +31,17 @@ const Home = () => {
     { value: 'blah', count: 30 },
   ]
 
-  useEffect(() =>{
-    setData(tags.slice(0, initialTags))
-    console.log(tags.length === 2)
-    console.log(totalTags)
-  },[])
+  useEffect(() => {
+    setData(tags.slice(0, initialTags));
+    console.log(tags.length === 2);
+    console.log(totalTags);
+  }, [tags]);
 
   const handleShowmore = () => {
-    let counter = initialTags + showMoreTags
-    setData(tags.slice(0, counter))
-  }
+    setInitialTags((prev) => prev + increaseTags);
+    let counter = initialTags + increaseTags;
+    setData(tags.slice(0, counter));
+  };
 
   return (
     <>
@@ -55,7 +56,17 @@ const Home = () => {
             style={{margin: "0 auto", padding: "2rem 1rem", boxSizing: "border-box"}}
             // colorOptions={options} maybe needed
           />
-          <button onClick={handleShowmore}>Show more</button>
+          <Button 
+            onClick={handleShowmore} 
+            variant='outline' 
+            border='1px' 
+            color="white" 
+            fontWeight="500" 
+            borderColor='#ffffff'
+            _hover={{ color: 'blue.300', bg: "white", borderColor: "blue.300" }}
+            >
+            Show more
+            </Button>
       </div>
     </> 
   )
