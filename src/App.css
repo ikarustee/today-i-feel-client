@@ -1,0 +1,102 @@
+* {
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --primary: #598EFF;
+}
+
+body {
+  font-family: 'Work Sans';
+  font-weight: 300;
+}
+
+/* Typography ========== */
+/* ==================== */
+h1, h2 {
+  font-family: 'Playfair Display';
+  font-weight: normal!important;
+  font-style: italic;
+}
+h1.teaser {
+  font-size: 11vw;
+  margin: 2rem 0 4rem;
+  line-height: 1;
+}
+@media screen and (min-width: 768px) {
+  h1.teaser {
+    font-size:8vh;
+  }
+}
+
+/* Container ========== */
+/* =================== */
+.chakra-container {
+  row-gap: 2rem;
+}
+header {
+  height: 80px;
+  width: 100%;
+  margin: 0 auto 2rem;
+  padding: 0 1rem;
+  position: relative;
+  top: 2rem;
+  box-sizing: border-box;
+}
+a.logo img {
+  display: block;
+  width: calc(50% - 2rem);
+  max-width: 150px;
+  height:auto;
+  margin: 0 auto;
+  object-fit: cover;
+}
+.themeswitcher {
+  position: fixed;
+  right: 1rem;
+  top: 1rem;
+  cursor: pointer;
+}
+
+
+main {
+  position: relative;
+}
+
+@media screen and (min-width: 768px) {
+  a.logo img {
+    position: relative;
+    left: 0;
+    margin: 0;
+  }
+}
+
+
+
+
+/* Tag cloud ========== */
+/* =================== */
+.tagcloud {
+  background-color: #598EFF;
+  border-radius:6px;
+  margin:0 auto;
+  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+}
+.tag-cloud {
+  padding: 0!important;
+}
+.tag-cloud-tag {
+  /* -webkit-mix-blend-mode:multiply;*/
+  mix-blend-mode:color-dodge;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: bold;
+}
+
+/* Elements =========== */
+/* =================== */
+svg.chakra-icon path {
+  fill: var(--primary);
+}
