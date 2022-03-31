@@ -34,28 +34,42 @@ h1.teaser {
 .chakra-container {
   row-gap: 2rem;
 }
+.App > .chakra-container {
+  padding: 0;
+}
 header {
   height: 80px;
   width: 100%;
   margin: 0 auto 2rem;
-  padding: 0 1rem;
+  padding: 0;
   position: relative;
-  top: 2rem;
+  /* top: 2rem; */
   box-sizing: border-box;
 }
 a.logo img {
   display: block;
-  width: calc(50% - 2rem);
+  width: 100%;
   max-width: 150px;
   height:auto;
   margin: 0 auto;
   object-fit: cover;
 }
 .themeswitcher {
-  position: fixed;
-  right: 1rem;
-  top: 1rem;
+  width: 40px;
+  height:40px;
+  position: relative;
+  left: 1rem;
+  top:0;
   cursor: pointer;
+}
+nav {
+  /* background-color: rgba(255,255,255,0.8); */
+  position: relative;
+  padding-right:0.5rem;
+  text-align: right;
+  z-index: 10;
+  visibility: visible;
+  opacity: 1;
 }
 
 
@@ -81,7 +95,7 @@ main {
   border-radius:6px;
   margin:0 auto;
   padding: 1rem;
-  width: 100%;
+  width: calc(100% - 2rem);
   box-sizing: border-box;
   text-align: center;
 }
@@ -93,6 +107,15 @@ main {
   mix-blend-mode:color-dodge;
   font-family: 'Work Sans', sans-serif;
   font-weight: bold;
+}
+
+/* Footer ============= */
+/* =================== */
+.footer {
+  margin-top: 2rem;
+}
+.footer .logo img {
+  width: 100px;
 }
 
 /* Elements =========== */
