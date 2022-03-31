@@ -26,6 +26,20 @@ import logoLight from "../img/logo-light@2x.png"
 import logoDark from "../img/logo-dark@2x.png"
 
 const Links = ['/articles', 'About', 'Contact'];
+const LinksFromDOM = [
+  {
+    route: "articles",
+    name: "All articles"
+  },
+  {
+    route: "menu2",
+    name: "Menu 2"
+  },
+  {
+    route: "menu3",
+    name: "Menu 3"
+  }
+];
 
 const NavLink = ({ children }) => (
   <Link
@@ -36,12 +50,13 @@ const NavLink = ({ children }) => (
       textDecoration: 'none',
       bg: useColorModeValue('gray.200', 'gray.700'),
     }}
-    href={children}>{children}</Link>
+    href={children[0]}>{children[2]}</Link>
 );
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode()
+  console.log(LinksFromDOM)
 
   return (
       <header>
@@ -69,8 +84,8 @@ const Navbar = () => {
               spacing={4}
               display={{ base: 'none', md: 'flex' }}
               >
-              {Links.map((link) => (
-                <NavLink key={link}>{link}</NavLink>
+              {LinksFromDOM.map((link) => (
+                <NavLink key={link.route}>{link.route} {link.name}</NavLink>
               ))}
             </HStack>
           </HStack>
@@ -86,8 +101,8 @@ const Navbar = () => {
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
-              {Links.map((link) => (
-                <NavLink key={link} >{link}</NavLink>
+              {LinksFromDOM.map((link) => (
+                <NavLink key={link.route}>{link.route} {link.name}</NavLink>
               ))}
             </Stack>
           </Box>
@@ -98,6 +113,6 @@ const Navbar = () => {
       </header>
   )
 }
-
+// <NavLink key={link} >{link.name}</NavLink>
 
 export default Navbar
