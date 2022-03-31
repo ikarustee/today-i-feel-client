@@ -1,5 +1,5 @@
-import React, {ReactNode} from 'react'
-import {Link as RouteLink} from "react-router-dom";
+import React, {ReactNode, useEffect, useState} from 'react'
+import {Link as RouteLink, useNavigate, useLocation} from "react-router-dom";
 import {useColorMode} from "@chakra-ui/react"
 import {
   Box,
@@ -17,15 +17,13 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
-  Fade, ScaleFade, Slide, SlideFade, Collapse
+  Collapse
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import ArticleList from './ArticleList';
 import ThemeSwitcher from "./ThemeSwitcher"
 import logoLight from "../img/logo-light@2x.png"
 import logoDark from "../img/logo-dark@2x.png"
 
-const Links = ['/articles', 'About', 'Contact'];
 const LinksFromDOM = [
   {
     route: "articles",
@@ -56,20 +54,29 @@ const NavLink = ({ children }) => (
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode()
-  console.log(LinksFromDOM)
+  const [currentPage, setCurrentPage] = useState("home")
+  const [selectedPage, setSelectedPage] = useState()
+
+  let location = useLocation();
+  let navigate = useNavigate();
+  // console.log(LinksFromDOM)
+
+  const handleClick = (e) => {
+    setCurrentPage({ current: e.key });
+    setSelectedPage(currentPage)
+    navigate(e.key)
+  }
+
+  useEffect(() => {
+    setSelectedPage(location.pathname);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  },[location])
 
   return (
       <header>
         <Box>
         <Flex className="nav" h={16} alignItems={'center'} justifyContent={'space-between'}>
           <ThemeSwitcher />
-          {/* <IconButton
-            size={'md'}
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={'Open Menu'}
-            display={{ md: 'none' }}
-            onClick={isOpen ? onClose : onOpen}
-          /> */}
           <HStack spacing={8} alignItems={'center'}>
             <Box className="nav__logo">
               <RouteLink to="/" className="logo">
@@ -85,11 +92,12 @@ const Navbar = () => {
               display={{ base: 'none', md: 'flex' }}
               >
               {LinksFromDOM.map((link) => (
-                <NavLink key={link.route}>{link.route} {link.name}</NavLink>
+                <NavLink key={link.route} onClick={handleClick}>{link.route} {link.name}</NavLink>
               ))}
             </HStack>
           </HStack>
           <IconButton
+            className="nav__btn"
             size={'md'}
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             aria-label={'Open Menu'}

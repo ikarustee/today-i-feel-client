@@ -90,8 +90,8 @@ import { ReactNode } from 'react';
                 : (<img src={logoDark} alt="" />)
                 }
             </Link>
-            <Link href={'#'}>About</Link>
-            <Link href={'#'}>Imprint</Link>
+            <Link href={'#'} className="link">About</Link>
+            <Link href={'#'} className="link">Imprint</Link>
           </Stack>
         </Container>
   
