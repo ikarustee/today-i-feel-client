@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter } from "react-router-dom";
 import { ChakraProvider } from '@chakra-ui/react'
+import ArticleContextProvider from './Contexts/ArticleContext';
 import theme from './Components/Theme'
-// import Fonts from './Components/Fonts'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
@@ -12,8 +12,10 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <ChakraProvider theme={theme}>
-        {/* <Fonts /> */}
-          <App />
+        <ArticleContextProvider>
+          {/* <Fonts /> */}
+            <App />
+        </ArticleContextProvider>
       </ChakraProvider>
     </BrowserRouter>
   </React.StrictMode>,

@@ -33,9 +33,9 @@ const Home = () => {
 
   useEffect(() => {
     setData(tags.slice(0, initialTags));
-    console.log(tags.length === 2);
-    console.log(totalTags);
-  }, [tags]);
+    // console.log(tags.length === 2);
+    // console.log(totalTags);
+  }, []);
 
   const handleShowmore = () => {
     setInitialTags((prev) => prev + increaseTags);

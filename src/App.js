@@ -3,33 +3,31 @@ import "./fonts.css"
 import { Routes, Route, Link } from "react-router-dom";
 import {Container, useColorMode} from "@chakra-ui/react"
 import Home from "./Components/Home"
-import ThemeSwitcher from "./Components/ThemeSwitcher"
-import logoLight from "./img/logo-light@2x.png"
-import logoDark from "./img/logo-dark@2x.png"
+import ArticleList from './Components/ArticleList';
+import SingleArticle from './Components/SingleArticle';
+import Login from './Components/Login';
+import Navbar from './Components/Navbar';
+import Footer from "./Components/Footer"
 
 
 function App() {
-  const { colorMode, toggleColorMode } = useColorMode()
+
 
   return (
     <div className="App">
       <Container maxW='1100px' centerContent>
-      <header>
-        <Link to="/" className="logo">
-          {colorMode === 'light' ? 
-          (<img src={logoLight} alt="" width={400}/>) 
-          : (<img src={logoDark} alt="" />)
-          }
-        </Link>
-      <ThemeSwitcher />
-      </header>
+      <Navbar />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="about" element={<About />} /> */}
+          <Route path="/articles" element={<ArticleList />} />
+          <Route path="/articles/:id" element={<SingleArticle />} />
+          <Route path="/login" element={<Login />} />
+          {/* <Route path="/about" element={<About />} /> */}
         </Routes>
       </main>
       </Container>
+      <Footer />
     </div>
   );
 }
