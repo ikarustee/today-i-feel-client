@@ -3,10 +3,11 @@ import {Button, Heading } from '@chakra-ui/react'
 import { TagCloud } from 'react-tagcloud'
 
 const Home = () => {
-  const [initialTags, setInitialTags] = useState(3);
+  const [initialTags, setInitialTags] = useState(5);
   const [increaseTags, setIncreaseTags] = useState(5);
   const [totalTags, setTotalTags] = useState(0);
   const [data, setData] = useState([]);
+  const [singleTag, setSingleTag] = useState()
 
   const tags = [
     { value: 'happy', count: 78 },
@@ -42,6 +43,12 @@ const Home = () => {
     let counter = initialTags + increaseTags;
     setData(tags.slice(0, counter));
   };
+  const f1 = (tag) => {
+    alert(`'${tag.value}' was selected!`)
+  }
+  const f2 = (tag) => {
+    alert(`${tag.value} is not nice`)
+  }
 
   return (
     <>
@@ -52,7 +59,10 @@ const Home = () => {
             minSize={16}
             maxSize={52}
             tags={data}
-            onClick={tag => alert(`'${tag.value}' was selected!`)}
+            // value={tag.value}
+            onClick={(tag) => {f1(tag); f2(tag)}}
+            // onClick={tag => alert(`'${tag.value}' was selected!`)}
+            // onClick={(tag) => {f1(); f2()}}
             style={{margin: "0 auto", padding: "2rem 1rem", boxSizing: "border-box"}}
             // colorOptions={options} maybe needed
           />

@@ -26,15 +26,15 @@ import logoDark from "../img/logo-dark@2x.png"
 
 const LinksFromDOM = [
   {
-    route: "articles",
+    route: "/articles",
     name: "All articles"
   },
   {
-    route: "menu2",
+    route: "/menu2",
     name: "Menu 2"
   },
   {
-    route: "menu3",
+    route: "/menu3",
     name: "Menu 3"
   }
 ];
