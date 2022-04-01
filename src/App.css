@@ -137,6 +137,22 @@ main {
   margin-bottom: 1rem;
 }
 
+/* Searchform ========= */
+/* =================== */
+#search {
+  display:flex;
+  margin: 3rem 0;
+}
+#search input {
+  flex-basis:100%;
+}
+#search button {
+  position:absolute;
+  right:0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
 /* Footer ============= */
 /* =================== */
 .footer {
@@ -162,8 +178,15 @@ main {
 svg.chakra-icon path {
   fill: var(--primary);
 }
+.primary__btn,
 .readmore__btn {
   font-weight:300!important;
+}
+.primary__btn {
+  background-color: #5C90FF;
+}
+.primary__btn:hover {
+  background-color: #B8CEFF;
 }
 .readmore__btn:hover {
   text-decoration: none!important;
