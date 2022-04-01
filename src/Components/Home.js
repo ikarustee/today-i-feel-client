@@ -1,52 +1,113 @@
 import React, {useState, useEffect} from 'react'
 import {
-  Box,
   Button,
+  Flex,
   FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
   Input,
   Heading,
-  Link,
-  Image,
-  Text,
-  Divider,
-  Container,
-  VStack,
 } from '@chakra-ui/react';
 import { TagCloud } from 'react-tagcloud'
+
+let tags = [
+  { 
+    value: 'happy', 
+    count: 78,
+    isActive: false
+   },
+  { 
+    value: 'sad', 
+    count: 60,
+    isActive: false
+   },
+  { 
+    value: 'sleepy', 
+    count: 48,
+    isActive: false
+   },
+  { 
+    value: 'stressed', 
+    count: 45,
+    isActive: false
+   },
+  { 
+    value: 'frustrated', 
+    count: 33,
+    isActive: false
+   },
+  { 
+    value: 'annoyed', 
+    count: 18
+   },
+  { 
+    value: 'tense', 
+    count: 10
+   },
+  { 
+    value: 'irritated', 
+    count: 5
+   },
+  { 
+    value: 'calm', 
+    count: 25
+   },
+  { 
+    value: 'lonely', 
+    count: 4
+   },
+  { 
+    value: 'surprised', 
+    count: 20
+   },
+  { 
+    value: 'bothered', 
+    count: 8
+   },
+  { 
+    value: 'tired', 
+    count: 30
+   },
+  { 
+    value: 'angry', 
+    count: 10
+   },
+  { 
+    value: 'hangry', 
+    count: 50
+   },
+  { 
+    value: 'buoyant', 
+    count: 30
+   },
+  { 
+    value: 'cheerful', 
+    count: 30
+   },
+  { 
+    value: 'grouchy', 
+    count: 30
+   },
+  { 
+    value: 'blessed', 
+    count: 30
+   },
+  { 
+    value: 'blah', 
+    count: 30
+   },
+]
+
 
 const Home = () => {
   const [initialTags, setInitialTags] = useState(5);
   const [increaseTags, setIncreaseTags] = useState(5);
-  const [totalTags, setTotalTags] = useState(0);
+  const [countTags, setCountTags] = useState(0);
+  // const [tagClass, setTagClass] = useState("")
+  const [collectedTags, setCollectedTags] = useState([])
+  // const [isActive, setIsActive] = useState(false)
   const [data, setData] = useState([]);
   const [singleTag, setSingleTag] = useState()
-  const [userInput, setUserInput] = useState("")
+  // const [userInput, setUserInput] = useState("")
 
-  const tags = [
-    { value: 'happy', count: 78 },
-    { value: 'sad', count: 60 },
-    { value: 'sleepy', count: 48 },
-    { value: 'stressed', count: 45 },
-    { value: 'frustrated', count: 33 },
-    { value: 'annoyed', count: 18 },
-    { value: 'tense', count: 10 },
-    { value: 'irritated', count: 5 },
-    { value: 'calm', count: 25 },
-    { value: 'lonely', count: 4 },
-    { value: 'surprised', count: 20 },
-    { value: 'bothered', count: 8 },
-    { value: 'tired', count: 30 },
-    { value: 'angry', count: 10 },
-    { value: 'hangry', count: 50 },
-    { value: 'buoyant', count: 30 },
-    { value: 'cheerful', count: 30 },
-    { value: 'grouchy', count: 30 },
-    { value: 'blessed', count: 30 },
-    { value: 'blah', count: 30 },
-  ]
 
   const handleSearch = (event) => {
     event.preventDefault()
@@ -61,6 +122,7 @@ const Home = () => {
 
   useEffect(() => {
     setData(tags.slice(0, initialTags));
+    console.log(tags[0])
     // console.log(tags.length === 2);
     // console.log(totalTags);
   }, []);
@@ -70,40 +132,73 @@ const Home = () => {
     let counter = initialTags + increaseTags;
     setData(tags.slice(0, counter));
   };
-  const f1 = (tag) => {
-    alert(`'${tag.value}' was selected!`)
+
+  const processTags = (tag) => {
+    const value = tag.value
+    let count = tag.count
+    let isActive = tag.isActive
+    console.log(tag)
+
+    const selectedTag = {value, count: count, isActive}
+    const newData = data.map((t) => {
+      if (t.value === tag.value) {
+        setCountTags((prev) => prev + 1)
+        selectedTag.count += 1
+        selectedTag.isActive = true
+      } else if(!t.isActive === tag.isActive) {
+        selectedTag.isActive = false
+      }
+      return t
+    })
+    setData(newData)
+    console.log(selectedTag.isActive)
+    console.log(selectedTag, selectedTag.count, selectedTag.isActive, countTags)
+    
   }
-  const f2 = (tag) => {
-    alert(`${tag.value} is not nice`)
+
+  const handleTagCollect = () => {
+
   }
+
 
   return (
     <>
         <Heading as='h1' className="teaser" textAlign={[ 'center', 'center' ]} color='blue.300' >Share your mood.<br /> Take a deep breath. <br />Take your time.</Heading>
-        <p>THis is the wrong tonf</p>
+        <h6 className="heading--center">Click up to 3 feelings and share them <strong>anonymously</strong> with others</h6>
+        <p>Selected: {collectedTags.join(", ")} | Tag name: {singleTag} | Tag count: {countTags}</p>
           <div className="tagcloud">
           <TagCloud
             minSize={16}
             maxSize={52}
             tags={data}
-            // value={tag.value}
-            onClick={(tag) => {f1(tag); f2(tag)}}
-            // onClick={tag => alert(`'${tag.value}' was selected!`)}
-            // onClick={(tag) => {f1(); f2()}}
+            onClick={(tag) => processTags(tag)}
             style={{margin: "0 auto", padding: "2rem 1rem", boxSizing: "border-box"}}
             // colorOptions={options} maybe needed
           />
-          <Button 
-            onClick={handleShowmore} 
-            variant='outline' 
-            border='1px' 
-            color="white" 
-            fontWeight="500" 
-            borderColor='#ffffff'
-            _hover={{ color: 'blue.300', bg: "white", borderColor: "blue.300" }}
-            >
-            Show more
-            </Button>
+          <Flex className="tagcloud__btnholder" flexWrap="nowrap" justifyContent="center">
+            <Button 
+              onClick={handleShowmore} 
+              variant='outline' 
+              border='0' 
+              color="white" 
+              fontWeight="500" 
+              borderColor='transparent'
+              _hover={{ color: 'blue.700', bg: "transparent", borderColor: "transparent" }}
+              >
+                Show more
+              </Button>
+            <Button 
+              onClick={handleTagCollect} 
+              variant='outline' 
+              border='1px' 
+              color="white" 
+              fontWeight="500" 
+              borderColor='#ffffff'
+              _hover={{ bg: "blue.700", borderColor: "blue.300" }}
+              >
+                Share
+              </Button>
+            </Flex>
       </div>
       <FormControl>
         <form id="search" onSubmit={handleSearch}>
@@ -135,3 +230,44 @@ const Home = () => {
 }
 
 export default Home
+
+// const index = tags.map(object => object.value).indexOf(tag.value);
+    // console.log(tags[index])
+    // if(!tags[index].isActive) {
+      
+      // console.log(index, clickedTag.value)
+      // tags[index].isActive = true;
+      // clickedTag.isActive = true;
+      // setIsActive(true)
+      // setCountTags((prev) => prev + 1)
+      // setCountTags(countTags + 1)
+      // setSingleTag(tag.value)
+      // setCollectedTags((prev) => [...prev, tag.value])
+    // } else {
+      // console.log("Entered here")
+      // tags[index].isActive = false;
+      // setIsActive(false)
+      // setCountTags(countTags - 1)
+    // }
+    // console.log(tags[index])
+    
+    // if(tag = !isActive) {
+    //     setIsActive(true)
+    //     setCountTags((prev) => prev + 1)
+    //     setCollectedTags((prev) => [...prev, clickedTag])
+    //   } else {
+    //     setCountTags((prev) => prev - 1)
+    //     setCollectedTags((prev) => [...prev.filter((tag) => tag.value === clickedTag)])
+    // }
+    // setSingleTag(clickedTag)
+    // console.log(tags[index].value, tags[index].isActive,countTags, collectedTags)
+    // if(clickedTag === isActive) {
+    //   setIsActive(false)
+    //   setCountTags((prev) => prev - 1)
+    //   console.log("Nothing happens")
+    //   console.log(selCountTags, isActive)
+    // } else {
+    //   setIsActive(true)
+    //   setCountTags((prev) => prev + 1)
+    //   console.log(selCountTags, isActive)
+    // }

@@ -23,6 +23,13 @@ h1.teaser {
   margin: 2rem 0 4rem;
   line-height: 1;
 }
+h6.heading--center {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+h6 strong {
+  font-weight:500;
+}
 @media screen and (min-width: 768px) {
   h1.teaser {
     font-size:8vh;
@@ -76,16 +83,20 @@ button.nav__btn {
   right: 15px;
 }
 
-
 main {
   position: relative;
+  padding: 0 1rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
+/* @media screen and (min-width: 600px) {
+  main {
+    padding: 0;
+  }
+} */
+
 @media screen and (min-width: 768px) {
-  /* nav a.logo img {
-    position: absolute;
-    left: calc(50% - 75px);
-  } */
   a.logo img {
     position: relative;
     left: 0;
@@ -98,9 +109,6 @@ main {
   }
 }
 
-
-
-
 /* Tag cloud ========== */
 /* =================== */
 .tagcloud {
@@ -109,6 +117,7 @@ main {
   margin:0 auto;
   padding: 1rem;
   width: 100%;
+  min-width: 100%;
   box-sizing: border-box;
   text-align: center;
 }
@@ -120,6 +129,20 @@ main {
   mix-blend-mode:color-dodge;
   font-family: 'Work Sans', sans-serif;
   font-weight: bold;
+}
+.tag-cloud-tag:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.tagcloud__btnholder {
+  flex-flow: column;
+  row-gap: 1rem;
+}
+.tagcloud__btnholder button {
+  /* flex-basis: 100%; */
+  /* max-width: 320px; */
+  justify-items: center;
+  margin: 0 auto;
 }
 
 /* Articles =========== */
