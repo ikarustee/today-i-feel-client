@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {
+  Box,
   Button,
   Flex,
   FormControl,
@@ -103,7 +104,7 @@ const Home = () => {
   const [countTags, setCountTags] = useState(0);
   // const [tagClass, setTagClass] = useState("")
   const [collectedTags, setCollectedTags] = useState([])
-  // const [isActive, setIsActive] = useState(false)
+  const [isActive, setIsActive] = useState(false)
   const [data, setData] = useState([]);
   const [singleTag, setSingleTag] = useState()
   // const [userInput, setUserInput] = useState("")
@@ -122,7 +123,7 @@ const Home = () => {
 
   useEffect(() => {
     setData(tags.slice(0, initialTags));
-    console.log(tags[0])
+    // console.log(tags[0])
     // console.log(tags.length === 2);
     // console.log(totalTags);
   }, []);
@@ -133,27 +134,55 @@ const Home = () => {
     setData(tags.slice(0, counter));
   };
 
-  const processTags = (tag) => {
-    const value = tag.value
-    let count = tag.count
-    let isActive = tag.isActive
-    console.log(tag)
+  // const processTags = (tag) => {
+  //   const value = tag.value
+  //   let count = tag.count
+  //   let isActive = tag.isActive
+  //   console.log(tag)
 
-    const selectedTag = {value, count: count, isActive}
-    const newData = data.map((t) => {
-      if (t.value === tag.value) {
-        setCountTags((prev) => prev + 1)
-        selectedTag.count += 1
-        selectedTag.isActive = true
-      } else if(!t.isActive === tag.isActive) {
-        selectedTag.isActive = false
-      }
-      return t
-    })
-    setData(newData)
-    console.log(selectedTag.isActive)
-    console.log(selectedTag, selectedTag.count, selectedTag.isActive, countTags)
+  //   const selectedTag = {value, count: count, isActive}
+  //   const newData = data.map((t) => {
+  //     if (t.value === tag.value) {
+  //       setCountTags((prev) => prev + 1)
+  //       selectedTag.count += 1
+  //       selectedTag.isActive = true
+  //       // if(!collectedTags.filter(selectedTag)) {
+  //       //   let arr = collectedTags
+  //       //   setCollectedTags()
+  //       // }
+  //       setCollectedTags((prev) => [...prev, selectedTag.value])
+  //     } else if(!t.isActive === tag.isActive) {
+  //       selectedTag.isActive = false
+  //     }
+  //     return t
+  //   })
+  //   setData(newData)
+  //   console.log(collectedTags)
+  //   console.log(selectedTag, selectedTag.count, selectedTag.isActive, countTags)
     
+  // }
+
+  const processTags = (e) => {
+    console.log(e.target)
+    const myElement = e.target
+    const checked = e.target.checked
+    console.log(myElement.name, checked)
+    if(myElement.name === data.value) {
+    }
+    // const value = e.value
+    // let count = e.target.attributes.count.value
+    // let isActive = e.isActive
+    // console.log(e.target.attributes.count.value)
+    // console.log(e.target.attributes.value.value)
+    // console.log(e.target.classList.value)
+    // console.log(e.target.className)
+    // const selectedTag = {value, count, isActive}
+    // let myTarget = data.map((t) => {
+    //   if(t.value === e.target.attributes.value.value) {
+    //     selectedTag.isActive = true
+    //   }
+    // })
+    // console.log(myTarget)
   }
 
   const handleTagCollect = () => {
@@ -167,14 +196,43 @@ const Home = () => {
         <h6 className="heading--center">Click up to 3 feelings and share them <strong>anonymously</strong> with others</h6>
         <p>Selected: {collectedTags.join(", ")} | Tag name: {singleTag} | Tag count: {countTags}</p>
           <div className="tagcloud">
-          <TagCloud
+          {/* <TagCloud
+            className="singletag"
             minSize={16}
             maxSize={52}
             tags={data}
             onClick={(tag) => processTags(tag)}
             style={{margin: "0 auto", padding: "2rem 1rem", boxSizing: "border-box"}}
             // colorOptions={options} maybe needed
-          />
+          /> */}
+          <form>
+          {data.map((t) => {
+            return (
+            <>
+              <input
+                  key={t.value}
+                  type="checkbox"
+                  onClick={(e) => processTags(e)}
+                  id={t.value}
+                  value={t.count}
+                  name={t.value}
+                  className="tag"
+                  >
+                  </input>
+              <label
+                htmlFor={t.value}
+              >{t.value}
+                  {/* // value={t.value}
+                  // count={t.count}
+                  // className={t.isActive ? "active" : "meennnooo"} 
+                  // key={index}>
+                  // {t.value} {t.isActive} */}
+                  </label>
+                  </>
+
+            )
+          })}
+          </form>
           <Flex className="tagcloud__btnholder" flexWrap="nowrap" justifyContent="center">
             <Button 
               onClick={handleShowmore} 

@@ -124,6 +124,23 @@ main {
 .tag-cloud {
   padding: 0!important;
 }
+.tag-cloud .tag {
+  display: inline-block;
+}
+input[type="checkbox"] {
+  width: 60px;
+  padding: 0.5rem;
+  margin:4px;
+  visibility: hidden;
+}
+label {
+  border: 1px solid green;
+  padding: 0.5rem;
+  margin:4px;
+}
+input:checked + label {
+  color:red;
+}
 .tag-cloud-tag {
   /* -webkit-mix-blend-mode:multiply;*/
   mix-blend-mode:color-dodge;
