@@ -23,7 +23,7 @@ const ArticleList = ({p}) => {
     {loading ? (
      <DotLoader color={color} loading={loading} size={60} />
     ) : (
-     <Container maxW={'7xl'} p="12">
+     <Container maxW={'7xl'}>
       <Heading as="h1" color="blue.300">All articles</Heading>
       <Box
         marginTop={{ base: '1', sm: '5' }}
@@ -54,15 +54,12 @@ const ArticleList = ({p}) => {
             </Link>
           </Box>
           <Box className="bg--dotted" zIndex="1" width="100%" position="absolute" height="100%">
-            {/* <Box
-              bgGradient={useColorModeValue(
-                'radial(blue.500 1px, transparent 1px)',
-                'radial(blue.500 1px, transparent 1px)'
-              )}
+            <Box
+              className="bg__dotted"
               backgroundSize="20px 20px"
               opacity="0.4"
               height="100%"
-            /> */}
+            />
           </Box>
         </Box>
         <Box
@@ -74,22 +71,21 @@ const ArticleList = ({p}) => {
           {article.map((a) => {
               const excerpt = Object.values(a.body)
               return (
-                <>
-                <Heading key={a.id} marginTop="1" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
-                  <Link key={a.id} textDecoration="none" _hover={{ textDecoration: 'none' }}>
-                    {a.title}
-                  </Link>
-                </Heading>
-                <Text
-                  key={a.id}
-                  className="excerpt"
-                  as="p"
-                  marginTop="2"
-                  fontSize="md">
-                  {excerpt.join("").split(" ").slice(0, 25).join(" ") + " ..."}
-                </Text>
-                <Link key={a.id} href={a.id} className="readmore__btn" textAlign="center"><Button key={a.id} className="readmore__btn" colorScheme='blue' variant='outline'>Read article</Button></Link>
-                </>
+                <div key={a.id}>
+                  <Heading marginTop="1" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
+                    <Link textDecoration="none" _hover={{ textDecoration: 'none' }}>
+                      {a.title}
+                    </Link>
+                  </Heading>
+                  <Text
+                    className="excerpt"
+                    as="p"
+                    marginTop="2"
+                    fontSize="md">
+                    {excerpt.join("").split(" ").slice(0, 25).join(" ") + " ..."}
+                  </Text>
+                  <Link href={a.id} className="readmore__btn" textAlign="center"><Button className="readmore__btn" colorScheme='blue' variant='outline'>Read article</Button></Link>
+                </div>
               )
             })
             .slice(0,1)
@@ -104,21 +100,20 @@ const ArticleList = ({p}) => {
       {article.map((a) => {
               const excerpt = Object.values(a.body)
               return (
-                <div className="single">
-                <Heading key={a.id} marginTop="1" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
-                  <Link key={a.id} textDecoration="none" _hover={{ textDecoration: 'none' }}>
+                <div  key={a.id} className="single">
+                <Heading marginTop="1" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
+                  <Link textDecoration="none" _hover={{ textDecoration: 'none' }}>
                     {a.title}
                   </Link>
                 </Heading>
                 <Text
-                  key={a.id}
                   className="excerpt"
                   as="p"
                   marginTop="2"
                   fontSize="md">
                   {excerpt.join("").split(" ").slice(0, 25).join(" ") + " ..."}
                 </Text>
-                <Link key={a.id} href={`/articles/${a.id}`} className="readmore__btn" textAlign="center"><Button className="readmore__btn" colorScheme='blue' variant='outline'>Read article</Button></Link>
+                <Link href={`/articles/${a.id}`} className="readmore__btn" textAlign="center"><Button className="readmore__btn" colorScheme='blue' variant='outline'>Read article</Button></Link>
                 </div>
               )
             })

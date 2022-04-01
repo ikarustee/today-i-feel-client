@@ -130,11 +130,23 @@ main {
   column-gap:2rem;
 }
 .articles__list .single {
-  flex: 1 0 calc(50% - 2rem);
+  flex: 1 0 100%;
   margin:1rem 0 2rem;
 }
 .excerpt {
   margin-bottom: 1rem;
+}
+.bg__dotted {
+  background-image: radial-gradient(#5C90FF 1px, transparent 1px);
+  -webkit-background-size: 20px 20px;
+  background-size: 20px 20px;
+  opacity: 0.4;
+  height: 100%;
+}
+@media screen and (min-width:768px) {
+  .articles__list .single {
+    flex: 1 0 calc(50% - 2rem);
+  }
 }
 
 /* Searchform ========= */
