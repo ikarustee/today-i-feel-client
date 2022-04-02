@@ -8,6 +8,7 @@ import {
   Heading,
 } from '@chakra-ui/react';
 import { TagCloud } from 'react-tagcloud'
+import { m } from 'framer-motion';
 
 let tags = [
   { 
@@ -102,6 +103,7 @@ const Home = () => {
   const [initialTags, setInitialTags] = useState(5);
   const [increaseTags, setIncreaseTags] = useState(5);
   const [countTags, setCountTags] = useState(0);
+  const [tagCounter, setTagCounter] = useState()
   // const [tagClass, setTagClass] = useState("")
   const [collectedTags, setCollectedTags] = useState([])
   const [isActive, setIsActive] = useState(false)
@@ -162,39 +164,61 @@ const Home = () => {
     
   // }
 
-  const processTags = (e) => {
-    console.log(e.target)
-    const myElement = e.target
-    const checked = e.target.checked
-    console.log(myElement.name, checked)
-    if(myElement.name === data.value) {
-    }
-    // const value = e.value
-    // let count = e.target.attributes.count.value
-    // let isActive = e.isActive
-    // console.log(e.target.attributes.count.value)
-    // console.log(e.target.attributes.value.value)
-    // console.log(e.target.classList.value)
-    // console.log(e.target.className)
-    // const selectedTag = {value, count, isActive}
-    // let myTarget = data.map((t) => {
-    //   if(t.value === e.target.attributes.value.value) {
-    //     selectedTag.isActive = true
-    //   }
-    // })
-    // console.log(myTarget)
-  }
+  // const processTags = (e) => {
+  //   console.log(e.target)
+  //   const myElement = e.target
+  //   const checked = e.target.checked
+  //   console.log(myElement.name, checked)
+  //   if(myElement.name === data.value) {
+  //   }
+  //   // const value = e.value
+  //   // let count = e.target.attributes.count.value
+  //   // let isActive = e.isActive
+  //   // console.log(e.target.attributes.count.value)
+  //   // console.log(e.target.attributes.value.value)
+  //   // console.log(e.target.classList.value)
+  //   // console.log(e.target.className)
+  //   // const selectedTag = {value, count, isActive}
+  //   // let myTarget = data.map((t) => {
+  //   //   if(t.value === e.target.attributes.value.value) {
+  //   //     selectedTag.isActive = true
+  //   //   }
+  //   // })
+  //   // console.log(myTarget)
+  // }
 
   const handleTagCollect = () => {
 
   }
 
+  const processTags = (e) => {
+    const myTag = e.target.name
+    // setCollectedTags((prev) => [...prev, myTag])
+    // const count = e.target.value
+    // const newTask = {
+    //   id: nanoid(),
+    //   text: userinput,
+    //   completed: false
+    // }
+    const obj = {
+      value: e.target.name, 
+      count: e.target.value
+    }
+    console.log(obj)
+    // setTaskList((prev) => [...prev, newTask])
+    setCollectedTags((prev) => [...prev, obj])
+    // setCollectedTags((prev) => ({...prev, value: myTag, count: count}))
+    // setTagCounter(count + 1)
+
+    // console.log(e.target)
+  }
+  console.log(collectedTags)
 
   return (
     <>
         <Heading as='h1' className="teaser" textAlign={[ 'center', 'center' ]} color='blue.300' >Share your mood.<br /> Take a deep breath. <br />Take your time.</Heading>
         <h6 className="heading--center">Click up to 3 feelings and share them <strong>anonymously</strong> with others</h6>
-        <p>Selected: {collectedTags.join(", ")} | Tag name: {singleTag} | Tag count: {countTags}</p>
+        <p>Selected: {collectedTags} | Tag name: {singleTag} | Tag count: {countTags}</p>
           <div className="tagcloud">
           {/* <TagCloud
             className="singletag"
@@ -208,7 +232,7 @@ const Home = () => {
           <form>
           {data.map((t) => {
             return (
-            <>
+            <>  
               <input
                   key={t.value}
                   type="checkbox"
@@ -222,11 +246,6 @@ const Home = () => {
               <label
                 htmlFor={t.value}
               >{t.value}
-                  {/* // value={t.value}
-                  // count={t.count}
-                  // className={t.isActive ? "active" : "meennnooo"} 
-                  // key={index}>
-                  // {t.value} {t.isActive} */}
                   </label>
                   </>
 
