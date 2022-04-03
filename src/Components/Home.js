@@ -218,7 +218,7 @@ const Home = () => {
     <>
         <Heading as='h1' className="teaser" textAlign={[ 'center', 'center' ]} color='blue.300' >Share your mood.<br /> Take a deep breath. <br />Take your time.</Heading>
         <h6 className="heading--center">Click up to 3 feelings and share them <strong>anonymously</strong> with others</h6>
-        <p>Selected: {collectedTags} | Tag name: {singleTag} | Tag count: {countTags}</p>
+        <p>Selected: | Tag name: {singleTag} | Tag count: {countTags}</p>
           <div className="tagcloud">
           {/* <TagCloud
             className="singletag"
