@@ -194,12 +194,13 @@ input:checked + label {
     flex-basis: 50%;
   }
   .tagcloud {
-    display: flex;
-    flex-wrap: wrap;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
     justify-content: center;
     align-content: center;
-    margin: 0;
-  }
+    margin: 2rem auto;
+    max-width: 800px;
+}
 }
 
 /* Articles =========== */
@@ -241,7 +242,7 @@ input:checked + label {
 }
 #search {
   display:flex;
-  margin: 3rem 0;
+  margin: 0 0 3rem;
 }
 #search input {
   flex-basis:100%;
