@@ -18,21 +18,27 @@ h1, h2 {
   font-weight: normal!important;
   font-style: italic;
 }
+h4 {
+  font-size: 2rem;
+}
 h1.teaser {
   font-size: 11vw;
   margin: 2rem 0 4rem;
   line-height: 1;
 }
-h6.heading--center {
+h4.heading--center {
   text-align: center;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
+  font-size: 1.3rem;
+  line-height: 1.2;
 }
 h6 strong {
   font-weight:500;
 }
 @media screen and (min-width: 768px) {
   h1.teaser {
-    font-size:8vh;
+    font-size:7vh;
+    margin: 0;
   }
 }
 
@@ -70,7 +76,6 @@ a.logo img {
   cursor: pointer;
 }
 nav {
-  /* background-color: rgba(255,255,255,0.8); */
   position: relative;
   padding-right:0.5rem;
   text-align: right;
@@ -81,6 +86,14 @@ nav {
 button.nav__btn {
   position: relative;
   right: 15px;
+}
+.collapse { 
+  background-color: rgba(255,255,255,0.85);
+  position: relative;
+  z-index: 99;
+}
+.collapse .mobile nav {
+  text-align: center;
 }
 
 main {
@@ -111,13 +124,24 @@ main {
 
 /* Tag cloud ========== */
 /* =================== */
+.hero {
+  column-gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.tagcloud__holder {
+  flex-wrap: wrap;
+  width: 66.6666%;
+  justify-content: flex-end;
+}
 .tagcloud {
   background-color: #598EFF;
   border-radius:6px;
   margin:0 auto;
   padding: 1rem;
   width: 100%;
-  min-width: 100%;
+  /* min-width: 100%; */
   box-sizing: border-box;
   text-align: center;
 }
@@ -161,6 +185,23 @@ input:checked + label {
   justify-items: center;
   margin: 0 auto;
 }
+@media screen and (min-width:1024px) {
+  .hero {
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+  .hero > div {
+    flex-basis: 50%;
+  }
+  .tagcloud {
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    justify-content: center;
+    align-content: center;
+    margin: 2rem auto;
+    max-width: 800px;
+}
+}
 
 /* Articles =========== */
 /* =================== */
@@ -191,9 +232,17 @@ input:checked + label {
 
 /* Searchform ========= */
 /* =================== */
+.tagsearch {
+  max-width: 375px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 3rem auto 0;
+}
 #search {
   display:flex;
-  margin: 3rem 0;
+  margin: 0 0 3rem;
 }
 #search input {
   flex-basis:100%;

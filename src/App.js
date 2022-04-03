@@ -5,6 +5,7 @@ import {Container, useColorMode} from "@chakra-ui/react"
 import Home from "./Components/Home"
 import ArticleList from './Components/ArticleList';
 import SingleArticle from './Components/SingleArticle';
+import SearchResults from './Components/SearchResults';
 import Login from './Components/Login';
 import Navbar from './Components/Navbar';
 import Footer from "./Components/Footer"
@@ -23,6 +24,7 @@ function App() {
           <Route path="/articles" element={<ArticleList />} />
           <Route path="/articles/:id" element={<SingleArticle />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/search/:userinput" element={<SearchResults />} />
           {/* <Route path="/about" element={<About />} /> */}
         </Routes>
       </main>
