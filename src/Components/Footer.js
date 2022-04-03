@@ -81,7 +81,7 @@ import { ReactNode } from 'react';
           className="footer__links"
           w='100%' 
           direction={'row'} 
-          justify={'space-between'}
+          justify={'flex-end'}
           spacing={6} 
           >
             <Link to="/" className="logo">
@@ -104,7 +104,7 @@ import { ReactNode } from 'react';
             py={4}
             direction={{ base: 'column', md: 'row' }}
             spacing={4}
-            justify={{ base: 'center', md: 'space-between' }}
+            justify={{ base: 'center', md: 'center' }}
             align={{ base: 'center', md: 'center' }}>
             <Text>© 2022 Jan Niklas Pudschun & Tanja Karius</Text>
             {/* <Stack direction={'row'} spacing={6}>

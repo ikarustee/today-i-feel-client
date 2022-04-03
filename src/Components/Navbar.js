@@ -52,7 +52,7 @@ const NavLink = ({ children }) => (
 );
 
 const Navbar = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode()
   const [currentPage, setCurrentPage] = useState("home")
   const [selectedPage, setSelectedPage] = useState()
@@ -102,19 +102,17 @@ const Navbar = () => {
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             aria-label={'Open Menu'}
             display={{ md: 'none' }}
-            onClick={isOpen ? onClose : onOpen}
+            onClick={onToggle}
           />
         </Flex>
-        <Collapse in={isOpen} animateOpacity>
-        {isOpen ? (
-          <Box pb={4} display={{ md: 'none' }}>
+        <Collapse className="collapse" in={isOpen} animateOpacity>
+          <Box className="mobile" pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
               {LinksFromDOM.map((link) => (
                 <NavLink key={link.route}>{link.route} {link.name}</NavLink>
               ))}
             </Stack>
           </Box>
-        ) : null}
 
       </Collapse>
       </Box>
