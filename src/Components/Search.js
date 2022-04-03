@@ -10,7 +10,7 @@ import { ArticleContext } from '../Contexts/ArticleContext';
 
 const Search = () => {
     const {article, loading} = useContext(ArticleContext)
-    // const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [userInput, setUserinput] = useState("")
     const [filteredArticles, setFilteredArticles] = useState()
     
@@ -30,9 +30,9 @@ const Search = () => {
             setUserinput(keyword)
             const foundArticles = article.filter((a) => a.tags.includes(keyword))   
             setFilteredArticles(foundArticles)
-          // setSearchParams(userInput);
+            setSearchParams(keyword);
           // navigate(`/search?${userInput}`, {state: {filteredArticles}})
-          // console.log("Search param is " + searchParams)
+           console.log("Search param is " + searchParams)
         }
       }
 
