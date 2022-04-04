@@ -168,6 +168,8 @@ span.tag label:hover {
 input:checked + label {
   font-size: 32px;
   outline: 2px white solid;
+  border-radius: 6px;
+  background-color: white;
 }
 .tagcloud__btnholder {
   flex-flow: column;
@@ -240,12 +242,17 @@ input:checked + label {
 }
 #search input {
   flex-basis:100%;
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
 }
 #search button {
   position:absolute;
   right:0;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
 }
 
 /* Footer ============= */

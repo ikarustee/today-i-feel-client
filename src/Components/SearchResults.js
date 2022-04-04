@@ -1,32 +1,41 @@
 import React, {useEffect, useState, useContext} from 'react'
-import {useSearchParams, createSearchParams, useParams} from "react-router-dom"
+import {useSearchParams, createSearchParams, useParams, useLocation} from "react-router-dom"
 import { ArticleContext } from '../Contexts/ArticleContext';
+import DotLoader from "react-spinners/DotLoader";
 
 
 const SearchResults = () => {
-    const {userInput} = useParams()
-    const {article, loading} = useContext(ArticleContext)
+    const {articles, isLoading, getArticles} = useContext(ArticleContext)
     const [searchParams, setSearchParams] = useSearchParams();
-    const [filteredArticles, setFilteredArticles] = useState()
-    const foundArticles = article.filter((a) => a.tags.includes("happy"))
-    console.log(foundArticles)
+    const [color, setColor] = useState("#5C90FF");
 
-    useEffect(() => {
-        setSearchParams(createSearchParams(userInput));
-    },[])
+  useEffect(() => {
+    getArticles(decodeURI(searchParams.get("q").split(" ").join("+")))
+    console.log(searchParams.get("q"))
+    // console.log(searchParams.get("q").split(" ").join("+"))
+  },[])
 
-  return (
-    <div>
-                {filteredArticles && filteredArticles
-        .map((a) => {
-            return (
-
-                    <p  key={a.id}>{a.title}</p>
-
-            )
-        })}
-    </div>
-  )
+  if(isLoading) {
+    return <DotLoader color={color} loading={isLoading} size={60} />
+  } else {
+    return (
+      <div>
+        {articles && articles
+          .filter((a) => a.tags.includes(searchParams.get("q")))
+          .map((a) => {
+              return (
+                <p  key={a.id}>{a.title}</p>
+              )
+          })}
+      </div>
+    )}
 }
 
 export default SearchResults
+
+    // let user = searchParams.get("user");
+
+    // const [filteredArticles, setFilteredArticles] = useState()
+    // const foundArticles = articles.filter((a) => a.tags.includes(keyword))
+    // console.log(searchParams.get("q"))
+    // console.log("Search results page")

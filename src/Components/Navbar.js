@@ -68,8 +68,8 @@ const Navbar = () => {
   }
 
   useEffect(() => {
-    setSelectedPage(location.pathname);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // setSelectedPage(location.pathname);
+   //  window.scrollTo({ top: 0, behavior: 'smooth' });
   },[location])
 
   return (

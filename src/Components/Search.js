@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react'
-import { useNavigate, useSearchParams, createSearchParams } from "react-router-dom";
+import { Navigate, useNavigate, useSearchParams, createSearchParams } from "react-router-dom";
 import {
   Button,
   FormControl,
@@ -26,13 +26,18 @@ const Search = () => {
             return alert("Please enter a word")
         } else {
             event.target.tag.value = ""
-            console.log(keyword)
             setUserinput(keyword)
-            const foundArticles = article.filter((a) => a.tags.includes(keyword))   
-            setFilteredArticles(foundArticles)
-            setSearchParams(keyword);
-            // navigate("/", {state: {searchParams}})
-           console.log("Search param is " + searchParams)
+            navigate({
+              pathname: '/search',
+              search: `q=${encodeURI(keyword.split(" ").join("+"))}`,
+            });
+            // console.log(keyword)
+            // const foundArticles = article.filter((a) => a.tags.includes(keyword))   
+            // setFilteredArticles(foundArticles)
+            // setSearchParams({ q: keyword  });
+            // encodeURI("toys for dogs")
+            // navigate("/search")
+            // encodeURI(keyword)
         }
       }
 
@@ -69,12 +74,12 @@ const Search = () => {
           </form>
         </FormControl>
         <div>
-        {filteredArticles && filteredArticles
+        {/* {filteredArticles && filteredArticles
             .map((a) => {
                 return (
                     <p  key={a.id}>{a.title}</p>
             )
-        })}
+        })} */}
     </div>
       </div>
     </>

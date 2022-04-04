@@ -3,26 +3,25 @@ import {useSearchParams, createSearchParams, useParams} from "react-router-dom"
 import { ArticleContext } from '../Contexts/ArticleContext';
 
 
-const ArticleSuggestions = () => {
+const ArticleSuggestions = ({searchParams}) => {
     const {userInput} = useParams()
     const {article, loading} = useContext(ArticleContext)
-    const [searchParams, setSearchParams] = useSearchParams();
+    // const [searchParams, setSearchParams] = useSearchParams();
     const [filteredArticles, setFilteredArticles] = useState()
-    const foundArticles = article.filter((a) => a.tags.includes("happy"))
-    console.log(foundArticles)
+    // const foundArticles = article.filter((a) => a.tags.includes("happy"))
+    // console.log(foundArticles)
+    console.log(searchParams)
 
-    useEffect(() => {
-        setSearchParams(createSearchParams(userInput));
-    },[])
+    // useEffect(() => {
+    //     setSearchParams(createSearchParams(userInput));
+    // },[])
 
   return (
     <div>
-                {filteredArticles && filteredArticles
+      {filteredArticles && filteredArticles
         .map((a) => {
             return (
-
-                    <p  key={a.id}>{a.title}</p>
-
+              <p  key={a.id}>{a.title}</p>
             )
         })}
     </div>

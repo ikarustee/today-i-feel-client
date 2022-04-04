@@ -10,8 +10,6 @@ import {
   Heading,
 } from '@chakra-ui/react';
 
-
-
 let tags = [
   { 
     value: 'happy', 
@@ -111,10 +109,12 @@ const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
 
   useEffect(() => {
     setData(tags.slice(0, initialTags));
+    // console.log(collectedTags)
+    // console.log(location)
     // console.log(tags[0])
     // console.log(tags.length === 2);
     // console.log(totalTags);
@@ -126,18 +126,26 @@ const Home = () => {
     setData(tags.slice(0, counter));
   };
 
+  // const processTags = (e) => {
+  //   const myTag = e.target.name
+  //   const checked = e.target.checked
+  //   const limitTags = 3
+    
 
-  
+  //   if(checked) {
+  //     setCollectedTags((prev) => [...prev, myTag])
+  //   } else {
+  //     const newTags = collectedTags.filter((item) => item.value !== myTag)
+  //     setCollectedTags(newTags)
+  //   }
+  // }
+
   const processTags = (e) => {
     const myTag = e.target.name
     const count = e.target.value
     const checked = e.target.checked
     const limitTags = 3
 
-    const obj = {
-      value: e.target.name, 
-      count: parseInt(count) + 1 
-    }
     // console.log(myTag)
     
     if(checked) {
@@ -145,41 +153,37 @@ const Home = () => {
         alert("Please only select up to 3 choices.");
         e.target.checked = false;
       } else {
-        setCollectedTags((prev) => [...prev, obj])
+        setCollectedTags((prev) => [...prev, myTag])
         setCheckedTags((prev) => prev + 1)
         setNewSearchParams((prev) => [...prev, myTag])
         // console.log(checkedTags)
         console.log(newSearchParams)
       }
     } else {
-      const newTags = collectedTags.filter((item) => item.value !== myTag)
+      const newTags = collectedTags.filter((item) => item !== myTag)
       setCollectedTags(newTags)
       setCheckedTags((prev) => prev - 1)
-      setNewSearchParams(newSearchParams.filter((item) => item.value != myTag))
+      setNewSearchParams(newSearchParams.filter((item) => item != myTag))
       // setSearchParams(myTag, myTag, myTag)
     }
   }
-  // console.log(collectedTags)
-  // console.log(Object.values(collectedTags[0].value))
+  console.log(collectedTags)
 
-  // for(let value in collectedTags) {
-  //   setSearchParams([collectedTags[value].value])
-  // }
-  // console.log(searchParams)
   const handleTagCollect = () => {
     // POST function to DB
-    // const item1 = collectedTags[0].value
-    // console.log(item1)
-    // const {value, count} = collectedTags
     setSearchParams(newSearchParams.join(","))
-    // console.log(value)
-    // console.log(searchParams)
-    navigate("/yoursuggestions", { replace: true, state: searchParams})
+    console.log(newSearchParams.join(","))
+    // navigate(`/yoursuggestions`, {state: searchParams})
+    encodeURI(searchParams)
+    navigate({
+      pathname: '/yoursuggestions',
+      search: `?${createSearchParams(searchParams)}`,
+    });
+
   }
   
   return (
     <>  
-
         <div className="title">
           <Heading as='h1' className="teaser" textAlign={[ 'center', 'center' ]} color='blue.300' >Share your mood.<br /> Take a deep breath. <br />Take your time.</Heading>
           <h4 className="heading--center">Click up to 3 feelings and share them <strong>anonymously</strong> with others</h4>

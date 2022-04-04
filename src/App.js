@@ -1,6 +1,6 @@
 import './App.css';
 import "./fonts.css"
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route, Link, useSearchParams, createSearchParams } from "react-router-dom";
 import {Container, useColorMode} from "@chakra-ui/react"
 import Home from "./Components/Home"
 import ArticleList from './Components/ArticleList';
@@ -10,10 +10,15 @@ import ArticleSuggestions from './Components/ArticleSuggestions';
 import Login from './Components/Login';
 import Navbar from './Components/Navbar';
 import Footer from "./Components/Footer"
+import { useEffect } from 'react';
 
 
 function App() {
+  const [searchParams, setSearchParams] = useSearchParams();
 
+  useEffect(() => {
+    setSearchParams(searchParams)
+  },[])
 
   return (
     <div className="App">
@@ -25,11 +30,15 @@ function App() {
           <Route path="/articles" element={<ArticleList />} />
           <Route path="/articles/:id" element={<SingleArticle />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/search/:userinput" element={<SearchResults />} />
-          <Route path="/yoursuggestions" element={<ArticleSuggestions />} />
-
+          <Route path="/search" element={<SearchResults />} />
+          <Route path="/suggestions" element={<ArticleSuggestions />} />
           {/* <Route path="/about" element={<About />} /> */}
         </Routes>
+        {/* <Routes>
+          <Route path="search">
+            <Route path=":searchparams" element={<ArticleSuggestions />} />
+          </Route>
+        </Routes> */}
       </main>
       </Container>
       <Footer />
