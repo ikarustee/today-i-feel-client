@@ -31,7 +31,7 @@ const Search = () => {
             const foundArticles = article.filter((a) => a.tags.includes(keyword))   
             setFilteredArticles(foundArticles)
             setSearchParams(keyword);
-          // navigate(`/search?${userInput}`, {state: {filteredArticles}})
+            // navigate("/", {state: {searchParams}})
            console.log("Search param is " + searchParams)
         }
       }

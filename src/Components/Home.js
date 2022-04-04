@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 
 
+
 let tags = [
   { 
     value: 'happy', 
@@ -104,6 +105,10 @@ const Home = () => {
   const [increaseTags, setIncreaseTags] = useState(5);
   const [collectedTags, setCollectedTags] = useState([])
   const [data, setData] = useState([]);
+  
+
+
+  // console.log(randomColor)
 
   useEffect(() => {
     setData(tags.slice(0, initialTags));
@@ -132,7 +137,7 @@ const Home = () => {
       value: e.target.name, 
       count: parseInt(count) + 1 
     }
-    // console.log(obj)
+    console.log(myTag)
     if(checked) {
       setCollectedTags((prev) => [...prev, obj])
     } else {
@@ -152,19 +157,22 @@ const Home = () => {
         <div className="tagcloud">
           <form id="tagcloud">
             {data.map((t) => {
+              const colors = ["#FFFFFF", "#E020CF", "#FF3292", "#FF7E5F", "#FFC14B", "#FFFB00", "#F9F871", "#9BDE7E", "#C0BC84", "#C3FCF1", "#154FA6", "#5A57AB"]
+              const randomColor = colors[Math.floor(Math.random() * colors.length)]
+              
               return (
-              <span key={t.value}>  
+              <span key={t.value} className="tag">  
                 <input
                     type="checkbox"
                     onClick={(e) => processTags(e)}
                     id={t.value}
                     value={t.count}
                     name={t.value}
-                    className="tag"
                     >
                 </input>
                 <label
                   htmlFor={t.value}
+                  style={{color: randomColor}}
                 >{t.value}
                 </label>
               </span>

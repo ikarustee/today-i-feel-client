@@ -156,11 +156,14 @@ input[type="checkbox"] {
   padding: 0.5rem;
   margin:4px;
   visibility: hidden;
+  display: none;
 }
 label {
-  border: 1px solid green;
+  display: inline-block;
   padding: 0.5rem;
-  margin:4px;
+  margin: 4px;
+  font-weight: bold;
+  word-break: none;
 }
 input:checked + label {
   color:red;
