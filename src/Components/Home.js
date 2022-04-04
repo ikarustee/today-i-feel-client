@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import { useNavigate, useLocation, useSearchParams, createSearchParams } from "react-router-dom";
 import Search from './Search';
 import {
   Box,
@@ -105,11 +106,12 @@ const Home = () => {
   const [increaseTags, setIncreaseTags] = useState(5);
   const [checkedTags, setCheckedTags] = useState(0)
   const [collectedTags, setCollectedTags] = useState([])
+  const [newSearchParams, setNewSearchParams] = useState([])
   const [data, setData] = useState([]);
-  
+  const [searchParams, setSearchParams] = useSearchParams();
 
-
-  // console.log(randomColor)
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     setData(tags.slice(0, initialTags));
@@ -125,10 +127,7 @@ const Home = () => {
   };
 
 
-  const handleTagCollect = () => {
-
-  }
-
+  
   const processTags = (e) => {
     const myTag = e.target.name
     const count = e.target.value
@@ -139,8 +138,8 @@ const Home = () => {
       value: e.target.name, 
       count: parseInt(count) + 1 
     }
-    console.log(myTag)
-
+    // console.log(myTag)
+    
     if(checked) {
       if(checkedTags >= limitTags) {
         alert("Please only select up to 3 choices.");
@@ -148,15 +147,36 @@ const Home = () => {
       } else {
         setCollectedTags((prev) => [...prev, obj])
         setCheckedTags((prev) => prev + 1)
-        console.log(checkedTags)
+        setNewSearchParams((prev) => [...prev, myTag])
+        // console.log(checkedTags)
+        console.log(newSearchParams)
       }
     } else {
       const newTags = collectedTags.filter((item) => item.value !== myTag)
       setCollectedTags(newTags)
+      setCheckedTags((prev) => prev - 1)
+      setNewSearchParams(newSearchParams.filter((item) => item.value != myTag))
+      // setSearchParams(myTag, myTag, myTag)
     }
   }
   // console.log(collectedTags)
+  // console.log(Object.values(collectedTags[0].value))
 
+  // for(let value in collectedTags) {
+  //   setSearchParams([collectedTags[value].value])
+  // }
+  // console.log(searchParams)
+  const handleTagCollect = () => {
+    // POST function to DB
+    // const item1 = collectedTags[0].value
+    // console.log(item1)
+    // const {value, count} = collectedTags
+    setSearchParams(newSearchParams.join(","))
+    // console.log(value)
+    // console.log(searchParams)
+    navigate("/yoursuggestions", { replace: true, state: searchParams})
+  }
+  
   return (
     <>  
 
