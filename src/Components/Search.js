@@ -29,17 +29,17 @@ const Search = () => {
             setUserinput(keyword)
             navigate({
               pathname: '/search',
-              search: `q=${encodeURI(keyword.split(" ").join("+"))}`,
+              search: `q=${encodeURI(keyword)}`,
             });
-            // console.log(keyword)
-            // const foundArticles = article.filter((a) => a.tags.includes(keyword))   
-            // setFilteredArticles(foundArticles)
-            // setSearchParams({ q: keyword  });
-            // encodeURI("toys for dogs")
-            // navigate("/search")
-            // encodeURI(keyword)
+          }
         }
-      }
+        // console.log(keyword.split(" ").join("+"))
+        // const foundArticles = article.filter((a) => a.tags.includes(keyword))   
+        // setFilteredArticles(foundArticles)
+        // setSearchParams({ q: keyword  });
+        // encodeURI("toys for dogs")
+        // navigate("/search")
+        // encodeURI(keyword)
 
 
 

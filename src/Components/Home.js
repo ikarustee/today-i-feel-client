@@ -157,7 +157,6 @@ const Home = () => {
         setCheckedTags((prev) => prev + 1)
         setNewSearchParams((prev) => [...prev, myTag])
         // console.log(checkedTags)
-        console.log(newSearchParams)
       }
     } else {
       const newTags = collectedTags.filter((item) => item !== myTag)
@@ -167,20 +166,21 @@ const Home = () => {
       // setSearchParams(myTag, myTag, myTag)
     }
   }
+  console.log(newSearchParams)
   console.log(collectedTags)
 
   const handleTagCollect = () => {
     // POST function to DB
-    setSearchParams(newSearchParams.join(","))
-    console.log(newSearchParams.join(","))
-    // navigate(`/yoursuggestions`, {state: searchParams})
+    setSearchParams(newSearchParams.join(" ,"))
+    console.log(newSearchParams)
+
     encodeURI(searchParams)
     navigate({
-      pathname: '/yoursuggestions',
-      search: `?${createSearchParams(searchParams)}`,
+      pathname: '/search',
+      search: `q=${encodeURI(newSearchParams)}`,
     });
-
   }
+
   
   return (
     <>  

@@ -31,7 +31,7 @@ function App() {
           <Route path="/articles/:id" element={<SingleArticle />} />
           <Route path="/login" element={<Login />} />
           <Route path="/search" element={<SearchResults />} />
-          <Route path="/suggestions" element={<ArticleSuggestions />} />
+          {/* <Route path="/search" element={<ArticleSuggestions />} /> */}
           {/* <Route path="/about" element={<About />} /> */}
         </Routes>
         {/* <Routes>
