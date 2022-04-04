@@ -2,6 +2,7 @@ import React, {useContext, useState, useEffect} from 'react';
 import { ArticleContext } from '../Contexts/ArticleContext';
 import DotLoader from "react-spinners/DotLoader";
 
+
 import {
   Box,
   Button,
@@ -15,13 +16,17 @@ import {
 } from '@chakra-ui/react';
 
 const ArticleList = ({p}) => {
-  const {article, loading} = useContext(ArticleContext)
+  const {articles, isLoading, getArticles} = useContext(ArticleContext)
   const [color, setColor] = useState("#5C90FF");
+
+  useEffect(() => {
+    getArticles()
+  },[])
 
   return (
     <>
-    {loading ? (
-     <DotLoader color={color} loading={loading} size={60} />
+    {isLoading ? (
+     <DotLoader color={color} loading={isLoading} size={60} />
     ) : (
      <Container maxW={'7xl'}>
       <Heading as="h1" color="blue.300">All articles</Heading>
@@ -68,7 +73,7 @@ const ArticleList = ({p}) => {
           flexDirection="column"
           justifyContent="center"
           marginTop={{ base: '3', sm: '0' }}>
-          {article.map((a) => {
+          {articles.map((a) => {
               const excerpt = Object.values(a.body)
               return (
                 <div key={a.id}>
@@ -97,7 +102,7 @@ const ArticleList = ({p}) => {
       </Heading>
       <Divider marginTop="5" />
       <Box className="articles__list">
-      {article.map((a) => {
+      {articles.map((a) => {
               const excerpt = Object.values(a.body)
               return (
                 <div  key={a.id} className="single">

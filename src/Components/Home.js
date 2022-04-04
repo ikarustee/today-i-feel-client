@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import { useNavigate, useLocation, useSearchParams, createSearchParams } from "react-router-dom";
 import Search from './Search';
 import {
   Box,
@@ -8,7 +9,6 @@ import {
   Input,
   Heading,
 } from '@chakra-ui/react';
-
 
 let tags = [
   { 
@@ -102,11 +102,19 @@ let tags = [
 const Home = () => {
   const [initialTags , setInitialTags] = useState(5);
   const [increaseTags, setIncreaseTags] = useState(5);
+  const [checkedTags, setCheckedTags] = useState(0)
   const [collectedTags, setCollectedTags] = useState([])
+  const [newSearchParams, setNewSearchParams] = useState([])
   const [data, setData] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const navigate = useNavigate();
+  // const location = useLocation();
 
   useEffect(() => {
     setData(tags.slice(0, initialTags));
+    // console.log(collectedTags)
+    // console.log(location)
     // console.log(tags[0])
     // console.log(tags.length === 2);
     // console.log(totalTags);
@@ -118,53 +126,89 @@ const Home = () => {
     setData(tags.slice(0, counter));
   };
 
+  // const processTags = (e) => {
+  //   const myTag = e.target.name
+  //   const checked = e.target.checked
+  //   const limitTags = 3
+    
 
-  const handleTagCollect = () => {
-
-  }
+  //   if(checked) {
+  //     setCollectedTags((prev) => [...prev, myTag])
+  //   } else {
+  //     const newTags = collectedTags.filter((item) => item.value !== myTag)
+  //     setCollectedTags(newTags)
+  //   }
+  // }
 
   const processTags = (e) => {
     const myTag = e.target.name
     const count = e.target.value
     const checked = e.target.checked
+    const limitTags = 1
 
-    const obj = {
-      value: e.target.name, 
-      count: parseInt(count) + 1 
-    }
-    // console.log(obj)
+    // console.log(myTag)
+    
     if(checked) {
-      setCollectedTags((prev) => [...prev, obj])
+      if(checkedTags >= limitTags) {
+        alert("You can only choose 1 mood.");
+        e.target.checked = false;
+      } else {
+        setCollectedTags((prev) => [...prev, myTag])
+        setCheckedTags((prev) => prev + 1)
+        setNewSearchParams((prev) => [...prev, myTag])
+        // console.log(checkedTags)
+      }
     } else {
-      const newTags = collectedTags.filter((item) => item.value !== myTag)
+      const newTags = collectedTags.filter((item) => item !== myTag)
       setCollectedTags(newTags)
+      setCheckedTags((prev) => prev - 1)
+      setNewSearchParams(newSearchParams.filter((item) => item != myTag))
+      // setSearchParams(myTag, myTag, myTag)
     }
   }
+  console.log(newSearchParams)
   console.log(collectedTags)
 
+  const handleTagCollect = () => {
+    // POST function to DB
+    // setSearchParams({q: newSearchParams})
+    // console.log(searchParams)
+    setSearchParams(newSearchParams.join(" ,"))
+    console.log(newSearchParams)
+
+    encodeURI(searchParams)
+    navigate({
+      pathname: '/search',
+      search: `q=${encodeURI(newSearchParams)}`,
+    });
+  }
+
+  
   return (
     <>  
-
         <div className="title">
           <Heading as='h1' className="teaser" textAlign={[ 'center', 'center' ]} color='blue.300' >Share your mood.<br /> Take a deep breath. <br />Take your time.</Heading>
-          <h4 className="heading--center">Click up to 3 feelings and share them <strong>anonymously</strong> with others</h4>
+          <h4 className="heading--center">Click on one feeling and share it <strong>anonymously</strong> with others</h4>
         </div>
         <div className="tagcloud">
           <form id="tagcloud">
-            {data.map((t) => {
+            {data.map((t, index) => {
+              const colors = ["#FFFFFF", "#E020CF", "#FF3292", "#FF7E5F", "#FFC14B", "#FFFB00", "#F9F871", "#9BDE7E", "#C0BC84", "#C3FCF1", "#154FA6", "#5A57AB"]
+              const randomColor = colors[Math.floor(Math.random() * colors.length)]
+              
               return (
-              <span key={t.value}>  
+              <span key={t.value} className="tag">  
                 <input
                     type="checkbox"
                     onClick={(e) => processTags(e)}
                     id={t.value}
                     value={t.count}
                     name={t.value}
-                    className="tag"
                     >
                 </input>
                 <label
                   htmlFor={t.value}
+                  style={{color: randomColor}}
                 >{t.value}
                 </label>
               </span>
@@ -196,7 +240,6 @@ const Home = () => {
                 </Button>
             </Flex>
         </div>
-
       <Search />
     </> 
   )

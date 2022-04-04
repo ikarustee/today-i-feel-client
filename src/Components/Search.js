@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react'
-import { useNavigate, useSearchParams, createSearchParams } from "react-router-dom";
+import { Navigate, useNavigate, useSearchParams, createSearchParams } from "react-router-dom";
 import {
   Button,
   FormControl,
@@ -10,7 +10,7 @@ import { ArticleContext } from '../Contexts/ArticleContext';
 
 const Search = () => {
     const {article, loading} = useContext(ArticleContext)
-    // const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const [userInput, setUserinput] = useState("")
     const [filteredArticles, setFilteredArticles] = useState()
     
@@ -25,16 +25,22 @@ const Search = () => {
         if(!keyword) {
             return alert("Please enter a word")
         } else {
-            event.target.tag.value = ""
             console.log(keyword)
+            event.target.tag.value = ""
             setUserinput(keyword)
-            const foundArticles = article.filter((a) => a.tags.includes(keyword))   
-            setFilteredArticles(foundArticles)
-          // setSearchParams(userInput);
-          // navigate(`/search?${userInput}`, {state: {filteredArticles}})
-          // console.log("Search param is " + searchParams)
+            navigate({
+              pathname: '/search',
+              search: `q=${encodeURI(keyword.split(" ").join("+"))}`,
+            });
+          }
         }
-      }
+        // console.log(keyword.split(" ").join("+"))
+        // const foundArticles = article.filter((a) => a.tags.includes(keyword))   
+        // setFilteredArticles(foundArticles)
+        // setSearchParams({ q: keyword  });
+        // encodeURI("toys for dogs")
+        // navigate("/search")
+        // encodeURI(keyword)
 
 
 
@@ -69,12 +75,12 @@ const Search = () => {
           </form>
         </FormControl>
         <div>
-        {filteredArticles && filteredArticles
+        {/* {filteredArticles && filteredArticles
             .map((a) => {
                 return (
                     <p  key={a.id}>{a.title}</p>
             )
-        })}
+        })} */}
     </div>
       </div>
     </>

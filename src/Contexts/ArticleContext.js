@@ -3,28 +3,20 @@ import articleDATA from "../helper/articles.json"
 
 export const ArticleContext = createContext()
 
-const URL = articleDATA
+let blogPosts = articleDATA
 const ArticleContextProvider = ({children}) => {
     const [articles, setArticles] = useState([])
     const [isLoading, setIsloading] = useState(true)
 
     async function getArticles() {
         try {
-            // const response = await fetch(URL)
-            // const data = await URL
+            // const response = await fetch(URL + location.search)
+            // let blogPosts = await response.json()
             // console.log(data)
-            const blogPosts = URL.map((a) => {
+            blogPosts = blogPosts.map((a) => {
                 return {
                     ...a,
-                    id: a._id,
-                    title: a.title,
-                    body: a.body,
-                    tags: a.tags,
-                    url: a.url,
-                    ext: a.ext,
-                    visible: a.visible,
-                    createdDate: a.createdDate,
-                    updatedDate: a.updatedDate,
+                    id: a._id
                 }
             });
             setArticles(blogPosts)
@@ -34,16 +26,16 @@ const ArticleContextProvider = ({children}) => {
         }
     }
 
-    useEffect(() => {
-        getArticles()
-    },[])
+    // useEffect(() => {
+    //     getArticles()
+    // },[])
 
     useEffect(() => {
         if(articles.length) return setIsloading(false)
     }, [articles])
 
   return (
-    <ArticleContext.Provider value={{article: articles, loading: isLoading}}>
+    <ArticleContext.Provider value={{articles, isLoading, getArticles}}>
         {children}
     </ArticleContext.Provider>
   )
