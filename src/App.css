@@ -37,8 +37,8 @@ h6 strong {
 }
 @media screen and (min-width: 768px) {
   h1.teaser {
-    font-size:7vh;
-    margin: 0;
+    font-size:8vh;
+    margin: 0 auto 2rem;
   }
 }
 
@@ -110,6 +110,7 @@ main {
 } */
 
 @media screen and (min-width: 768px) {
+  header {margin-bottom: 0;}
   a.logo img {
     position: relative;
     left: 0;
@@ -138,18 +139,12 @@ main {
 .tagcloud {
   background-color: #598EFF;
   border-radius:6px;
-  margin:0 auto;
+  margin:2rem auto;
   padding: 1rem;
   width: 100%;
   /* min-width: 100%; */
   box-sizing: border-box;
   text-align: center;
-}
-.tag-cloud {
-  padding: 0!important;
-}
-.tag-cloud .tag {
-  display: inline-block;
 }
 input[type="checkbox"] {
   width: 60px;
@@ -158,25 +153,21 @@ input[type="checkbox"] {
   visibility: hidden;
   display: none;
 }
-label {
+span.tag label {
   display: inline-block;
   padding: 0.5rem;
   margin: 4px;
   font-weight: bold;
   word-break: none;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+}
+span.tag label:hover {
+  color: #845EC2!important;
 }
 input:checked + label {
-  color:red;
-}
-.tag-cloud-tag {
-  /* -webkit-mix-blend-mode:multiply;*/
-  mix-blend-mode:color-dodge;
-  font-family: 'Work Sans', sans-serif;
-  font-weight: bold;
-}
-.tag-cloud-tag:hover {
-  cursor: pointer;
-  text-decoration: underline;
+  font-size: 32px;
+  outline: 2px white solid;
 }
 .tagcloud__btnholder {
   flex-flow: column;
@@ -202,7 +193,7 @@ input:checked + label {
     justify-content: center;
     align-content: center;
     margin: 2rem auto;
-    max-width: 800px;
+    max-width: 700px;
 }
 }
 

@@ -103,6 +103,7 @@ let tags = [
 const Home = () => {
   const [initialTags , setInitialTags] = useState(5);
   const [increaseTags, setIncreaseTags] = useState(5);
+  const [checkedTags, setCheckedTags] = useState(0)
   const [collectedTags, setCollectedTags] = useState([])
   const [data, setData] = useState([]);
   
@@ -132,20 +133,29 @@ const Home = () => {
     const myTag = e.target.name
     const count = e.target.value
     const checked = e.target.checked
+    const limitTags = 3
 
     const obj = {
       value: e.target.name, 
       count: parseInt(count) + 1 
     }
     console.log(myTag)
+
     if(checked) {
-      setCollectedTags((prev) => [...prev, obj])
+      if(checkedTags >= limitTags) {
+        alert("Please only select up to 3 choices.");
+        e.target.checked = false;
+      } else {
+        setCollectedTags((prev) => [...prev, obj])
+        setCheckedTags((prev) => prev + 1)
+        console.log(checkedTags)
+      }
     } else {
       const newTags = collectedTags.filter((item) => item.value !== myTag)
       setCollectedTags(newTags)
     }
   }
-  console.log(collectedTags)
+  // console.log(collectedTags)
 
   return (
     <>  
@@ -156,7 +166,7 @@ const Home = () => {
         </div>
         <div className="tagcloud">
           <form id="tagcloud">
-            {data.map((t) => {
+            {data.map((t, index) => {
               const colors = ["#FFFFFF", "#E020CF", "#FF3292", "#FF7E5F", "#FFC14B", "#FFFB00", "#F9F871", "#9BDE7E", "#C0BC84", "#C3FCF1", "#154FA6", "#5A57AB"]
               const randomColor = colors[Math.floor(Math.random() * colors.length)]
               
@@ -204,7 +214,6 @@ const Home = () => {
                 </Button>
             </Flex>
         </div>
-
       <Search />
     </> 
   )
