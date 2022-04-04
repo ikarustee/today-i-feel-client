@@ -93,7 +93,13 @@ button.nav__btn {
   z-index: 99;
 }
 .collapse .mobile nav {
+  padding: 3rem 0;
   text-align: center;
+}
+.collapse .mobile nav .chakra-link {
+	display: inline-block;
+	max-width: 20%;
+	margin: 0.5rem auto;
 }
 
 main {
@@ -138,7 +144,7 @@ main {
 }
 .tagcloud {
   background-color: #598EFF;
-  border-radius:6px;
+  border-radius:12px;
   margin:2rem auto;
   padding: 1rem;
   width: 100%;

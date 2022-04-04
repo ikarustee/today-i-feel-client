@@ -25,11 +25,12 @@ const Search = () => {
         if(!keyword) {
             return alert("Please enter a word")
         } else {
+            console.log(keyword)
             event.target.tag.value = ""
             setUserinput(keyword)
             navigate({
               pathname: '/search',
-              search: `q=${encodeURI(keyword)}`,
+              search: `q=${encodeURI(keyword.split(" ").join("+"))}`,
             });
           }
         }

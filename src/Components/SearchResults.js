@@ -10,8 +10,8 @@ const SearchResults = () => {
     const [color, setColor] = useState("#5C90FF");
 
   useEffect(() => {
-    getArticles(decodeURI(searchParams.get("q")))
-    // console.log(searchParams.get("q"))
+    getArticles(decodeURI(searchParams.get("q").split(" ").join(",")))
+    console.log(searchParams.get("q").split(" ").join(","))
     // console.log(searchParams.get("q").split(" ").join("+"))
   },[])
 

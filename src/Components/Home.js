@@ -144,13 +144,13 @@ const Home = () => {
     const myTag = e.target.name
     const count = e.target.value
     const checked = e.target.checked
-    const limitTags = 3
+    const limitTags = 1
 
     // console.log(myTag)
     
     if(checked) {
       if(checkedTags >= limitTags) {
-        alert("Please only select up to 3 choices.");
+        alert("You can only choose 1 mood.");
         e.target.checked = false;
       } else {
         setCollectedTags((prev) => [...prev, myTag])
@@ -171,6 +171,8 @@ const Home = () => {
 
   const handleTagCollect = () => {
     // POST function to DB
+    // setSearchParams({q: newSearchParams})
+    // console.log(searchParams)
     setSearchParams(newSearchParams.join(" ,"))
     console.log(newSearchParams)
 
@@ -186,7 +188,7 @@ const Home = () => {
     <>  
         <div className="title">
           <Heading as='h1' className="teaser" textAlign={[ 'center', 'center' ]} color='blue.300' >Share your mood.<br /> Take a deep breath. <br />Take your time.</Heading>
-          <h4 className="heading--center">Click up to 3 feelings and share them <strong>anonymously</strong> with others</h4>
+          <h4 className="heading--center">Click on one feeling and share it <strong>anonymously</strong> with others</h4>
         </div>
         <div className="tagcloud">
           <form id="tagcloud">
