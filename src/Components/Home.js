@@ -104,9 +104,10 @@ const Home = () => {
   const [increaseTags, setIncreaseTags] = useState(5);
   const [checkedTags, setCheckedTags] = useState(0)
   const [collectedTags, setCollectedTags] = useState([])
-  const [newSearchParams, setNewSearchParams] = useState([])
-  const [data, setData] = useState([]);
+  const [newSearchParams, setNewSearchParams] = useState([]) 
   const [searchParams, setSearchParams] = useSearchParams();
+  const [data, setData] = useState([]);
+ 
 
   const navigate = useNavigate();
   // const location = useLocation();
