@@ -38,7 +38,7 @@ const SearchResults = () => {
             console.log(a);
             return(<div key={a._id}>
               <h2>Title: {a.title}</h2>
-              <p>TagListe: {a.tags}</p>
+              <p>TagListe: {a.tags.join(", ")}</p>
               <p>Body: {a.body}</p>
               <br/>
             </div> )       
