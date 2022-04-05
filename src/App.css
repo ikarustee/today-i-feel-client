@@ -98,7 +98,7 @@ button.nav__btn {
 }
 .collapse .mobile nav .chakra-link {
 	display: inline-block;
-	max-width: 20%;
+	max-width: 33.3333%;
 	margin: 0.5rem auto;
 }
 
@@ -259,6 +259,12 @@ input:checked + label {
   cursor: pointer;
   position: relative;
   z-index: 2;
+}
+
+/* Chart ============== */
+/* =================== */
+.recharts-wrapper {
+  margin: 0 auto;
 }
 
 /* Footer ============= */
