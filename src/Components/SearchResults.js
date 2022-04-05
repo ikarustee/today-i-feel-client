@@ -17,8 +17,8 @@ const SearchResults = () => {
       setIsLoading(true);
       let searchTags = searchParams.get("q").split(" ").join(",");
       let url = "https://todayifeel-server.herokuapp.com/search/"+searchTags;
-      let response = await axios.get(url);
-      console.log(response.data);
+      let response = await axios.get(url,{withCredentials:true});
+      console.log(typeof response.data);
       setSearchResult(response.data);
       setIsLoading(false);
   }
@@ -34,7 +34,7 @@ const SearchResults = () => {
   } else {
     return (
       <div>
-        {searchResult.map((a) => {
+        {typeof searchResult === "string" ? (<p>{searchResult}</p>):(searchResult.map((a) => {
             console.log(a);
             return(<div key={a._id}>
               <h2>Title: {a.title}</h2>
@@ -42,7 +42,7 @@ const SearchResults = () => {
               <p>Body: {a.body}</p>
               <br/>
             </div> )       
-          })} 
+          }))} 
           
       </div>
     )}
