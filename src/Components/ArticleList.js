@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react';
 import { ArticleContext } from '../Contexts/ArticleContext';
+import { css } from "@emotion/react";
 import DotLoader from "react-spinners/DotLoader";
-
 
 import {
   Box,
@@ -18,6 +18,12 @@ import {
 const ArticleList = ({p}) => {
   const {articles, isLoading, getArticles} = useContext(ArticleContext)
   const [color, setColor] = useState("#5C90FF");
+  
+  const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
   useEffect(() => {
     getArticles()
@@ -26,7 +32,9 @@ const ArticleList = ({p}) => {
   return (
     <>
     {isLoading ? (
-     <DotLoader color={color} loading={isLoading} size={60} />
+      <Container className="loader" maxW={'7xl'}>
+        <DotLoader color={color} css={override} loading={!isLoading} size={60} />
+      </Container>
     ) : (
      <Container maxW={'7xl'}>
       <Heading as="h1" color="blue.300">All articles</Heading>

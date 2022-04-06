@@ -11,93 +11,93 @@ import {
   Heading,
 } from '@chakra-ui/react';
 
-let tags = [
-  { 
-    value: 'happy', 
-    count: 78,
-    isActive: false
-   },
-  { 
-    value: 'sad', 
-    count: 60,
-    isActive: false
-   },
-  { 
-    value: 'sleepy', 
-    count: 48,
-    isActive: false
-   },
-  { 
-    value: 'stressed', 
-    count: 45,
-    isActive: false
-   },
-  { 
-    value: 'frustrated', 
-    count: 33,
-    isActive: false
-   },
-  { 
-    value: 'annoyed', 
-    count: 18
-   },
-  { 
-    value: 'tense', 
-    count: 10
-   },
-  { 
-    value: 'irritated', 
-    count: 5
-   },
-  { 
-    value: 'calm', 
-    count: 25
-   },
-  { 
-    value: 'lonely', 
-    count: 4
-   },
-  { 
-    value: 'surprised', 
-    count: 20
-   },
-  { 
-    value: 'bothered', 
-    count: 8
-   },
-  { 
-    value: 'tired', 
-    count: 30
-   },
-  { 
-    value: 'angry', 
-    count: 10
-   },
-  { 
-    value: 'hangry', 
-    count: 50
-   },
-  { 
-    value: 'buoyant', 
-    count: 30
-   },
-  { 
-    value: 'cheerful', 
-    count: 30
-   },
-  { 
-    value: 'grouchy', 
-    count: 30
-   },
-  { 
-    value: 'blessed', 
-    count: 30
-   },
-  { 
-    value: 'blah', 
-    count: 30
-   },
-]
+// let tags = [
+//   { 
+//     value: 'happy', 
+//     count: 78,
+//     isActive: false
+//    },
+//   { 
+//     value: 'sad', 
+//     count: 60,
+//     isActive: false
+//    },
+//   { 
+//     value: 'sleepy', 
+//     count: 48,
+//     isActive: false
+//    },
+//   { 
+//     value: 'stressed', 
+//     count: 45,
+//     isActive: false
+//    },
+//   { 
+//     value: 'frustrated', 
+//     count: 33,
+//     isActive: false
+//    },
+//   { 
+//     value: 'annoyed', 
+//     count: 18
+//    },
+//   { 
+//     value: 'tense', 
+//     count: 10
+//    },
+//   { 
+//     value: 'irritated', 
+//     count: 5
+//    },
+//   { 
+//     value: 'calm', 
+//     count: 25
+//    },
+//   { 
+//     value: 'lonely', 
+//     count: 4
+//    },
+//   { 
+//     value: 'surprised', 
+//     count: 20
+//    },
+//   { 
+//     value: 'bothered', 
+//     count: 8
+//    },
+//   { 
+//     value: 'tired', 
+//     count: 30
+//    },
+//   { 
+//     value: 'angry', 
+//     count: 10
+//    },
+//   { 
+//     value: 'hangry', 
+//     count: 50
+//    },
+//   { 
+//     value: 'buoyant', 
+//     count: 30
+//    },
+//   { 
+//     value: 'cheerful', 
+//     count: 30
+//    },
+//   { 
+//     value: 'grouchy', 
+//     count: 30
+//    },
+//   { 
+//     value: 'blessed', 
+//     count: 30
+//    },
+//   { 
+//     value: 'blah', 
+//     count: 30
+//    },
+// ]
 
 
 const Home = () => {

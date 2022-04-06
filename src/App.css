@@ -48,6 +48,11 @@ h6 strong {
 .chakra-container {
   row-gap: 2rem;
 }
+.loader {
+  min-height: calc(100vh - 147px - 112px);
+  display: flex;
+  align-items: center;
+}
 .App > .chakra-container {
   padding: 0;
 }

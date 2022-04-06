@@ -1,7 +1,9 @@
 import React, {useEffect, useState, useContext} from 'react'
 import {useSearchParams, createSearchParams, useParams, useLocation} from "react-router-dom"
 import { ArticleContext } from '../Contexts/ArticleContext';
+import { Container } from '@chakra-ui/react';
 import DotLoader from "react-spinners/DotLoader";
+import { css } from "@emotion/react";
 import axios from "axios";
 
 
@@ -12,6 +14,12 @@ const SearchResults = () => {
     // const [searchTags, setSearchTags] = useState("")
     const [searchResult, setSearchResult] = useState([])
     const [isLoading, setIsLoading] = useState(true);
+
+    const override = css`
+    display: block;
+    margin: 0 auto;
+    border-color: red;
+  `;
   
     async function getSearchResult(){
       setIsLoading(true);
@@ -30,7 +38,11 @@ const SearchResults = () => {
   },[])
 
   if(isLoading) {
-    return <DotLoader color={color} loading={isLoading} size={60} />
+    return (
+      <Container className="loader" maxW={'7xl'}>
+        <DotLoader color={color} css={override} loading={!isLoading} size={60} />
+      </Container>
+    )
   } else {
     return (
       <div>
