@@ -319,7 +319,7 @@ button.btn--centered {
 .linear-wipe {
   text-align: center;
   
-  background: linear-gradient(to right, #5C90FF 20%, #E020CF 40%, #FF3292 60%, #fee700 80%, #5C90FF 100%);
+  background: linear-gradient(to right, #5C90FF 20%, #E020CF 40%, #FF3292 60%, #9235e3 80%, #5C90FF 100%);
   background-size: 200% auto;
   
   color: #000;
@@ -327,7 +327,7 @@ button.btn--centered {
   text-fill-color: transparent;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: shine 10s linear infinite;
+  animation: shine 15s linear infinite;
 }
 @keyframes shine {
   to {

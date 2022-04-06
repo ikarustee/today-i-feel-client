@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate, useLocation, useSearchParams, createSearchParams } from "react-router-dom";
+import axios from "axios";
 import Search from './Search';
 import {
   Box,
@@ -100,54 +101,51 @@ let tags = [
 
 
 const Home = () => {
-  const [initialTags , setInitialTags] = useState(5);
-  const [increaseTags, setIncreaseTags] = useState(5);
+  const [startSlice , setStartSlice] = useState(0);
+  const [initialTags , setInitialTags] = useState(2);
+  const [increaseTags, setIncreaseTags] = useState(2);
   const [checkedTags, setCheckedTags] = useState(0)
   const [collectedTags, setCollectedTags] = useState([])
   const [newSearchParams, setNewSearchParams] = useState([]) 
   const [searchParams, setSearchParams] = useSearchParams();
   const [data, setData] = useState([]);
- 
 
   const navigate = useNavigate();
   // const location = useLocation();
 
+  async function getTagsFromDB() {
+    const url = "https://todayifeel-server.herokuapp.com/tags"
+    try {
+      const response = await axios.get(url)
+      const tagsDB = response.data
+      // console.log(tagsDB)
+      setData(tagsDB)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   useEffect(() => {
-    setData(tags.slice(0, initialTags));
-    // console.log(collectedTags)
-    // console.log(location)
-    // console.log(tags[0])
-    // console.log(tags.length === 2);
-    // console.log(totalTags);
+    getTagsFromDB()
+    console.log(initialTags)
+    // setData(tags.slice(0, initialTags));
   }, []);
 
   const handleShowmore = () => {
+    // if(initialTags > data.length) {
+    //   setHidden(true)
+    // }
     setInitialTags((prev) => prev + increaseTags);
-    let counter = initialTags + increaseTags;
-    setData(tags.slice(0, counter));
+    console.log("Data length " + data.length + " Initial tags count " + initialTags)
+    // let counter = initialTags + increaseTags;
+    // setData(data.slice(0, counter));
   };
 
-  // const processTags = (e) => {
-  //   const myTag = e.target.name
-  //   const checked = e.target.checked
-  //   const limitTags = 3
-    
-
-  //   if(checked) {
-  //     setCollectedTags((prev) => [...prev, myTag])
-  //   } else {
-  //     const newTags = collectedTags.filter((item) => item.value !== myTag)
-  //     setCollectedTags(newTags)
-  //   }
-  // }
 
   const processTags = (e) => {
     const myTag = e.target.name
-    const count = e.target.value
     const checked = e.target.checked
     const limitTags = 3
-
-    // console.log(myTag)
     
     if(checked) {
       if(checkedTags >= limitTags) {
@@ -157,23 +155,19 @@ const Home = () => {
         setCollectedTags((prev) => [...prev, myTag])
         setCheckedTags((prev) => prev + 1)
         setNewSearchParams((prev) => [...prev, myTag])
-        // console.log(checkedTags)
       }
     } else {
       const newTags = collectedTags.filter((item) => item !== myTag)
       setCollectedTags(newTags)
       setCheckedTags((prev) => prev - 1)
       setNewSearchParams(newSearchParams.filter((item) => item != myTag))
-      // setSearchParams(myTag, myTag, myTag)
     }
   }
   // console.log(newSearchParams)
   // console.log(collectedTags)
 
   const handleTagCollect = () => {
-    // POST function to DB
-    // setSearchParams({q: newSearchParams})
-    
+
     let arr = newSearchParams.unshift("vote")
     console.log(arr)
     setNewSearchParams(arr)
@@ -205,25 +199,28 @@ const Home = () => {
               const randomFontsize = fontSizes[Math.floor(Math.random() * fontSizes.length)]
               
               return (
-              <span key={t.value} className="tag">  
+              <span key={t.name} className="tag">  
                 <input
                     type="checkbox"
                     onClick={(e) => processTags(e)}
-                    id={t.value}
-                    value={t.count}
-                    name={t.value}
+                    id={t.name}
+                    value={t.timesClicked}
+                    name={t.name}
                     >
                 </input>
                 <label
-                  htmlFor={t.value}
+                  htmlFor={t.name}
                   style={{color: randomColor, fontSize: randomFontsize}}
-                >{t.value}
+                >{t.name}
                 </label>
               </span>
               )
-            })}
+            })
+            .slice(startSlice, initialTags)
+            }
             </form>
             <Flex className="tagcloud__btnholder" flexWrap="nowrap" justifyContent="center">
+            {initialTags >= data.length ? (null) : (
               <Button 
                 onClick={handleShowmore} 
                 variant='outline' 
@@ -235,6 +232,7 @@ const Home = () => {
                 >
                   Show more
                 </Button>
+            )}
               <Button 
                 onClick={handleTagCollect} 
                 variant='outline' 
