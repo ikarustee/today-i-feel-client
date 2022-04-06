@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { Radar, RadarChart, PolarGrid, Legend, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
-import {Box, Button, ScaleFade, useDisclosure} from "@chakra-ui/react"
+import {Box, Button, Container, Heading, ScaleFade, useDisclosure} from "@chakra-ui/react"
 import axios from 'axios';
 // import staticDATA from "../helper/tagStats.json"
 
@@ -39,8 +39,9 @@ const Chart = () => {
 
 
   return (
-    <>
-    <Button className="btn--centered" fontWeight="300" onClick={onToggle}>Show chart</Button>
+    <Container className="chart" m="2rem 0" maxW={'7xl'}>
+    <Heading as="h2" textAlign="center" color="blue.300" m="3rem 0 1.5rem">How do others feel?</Heading>
+    <Button className="btn--centered" fontWeight="300" onClick={onToggle}>{isOpen ? "Hide chart" : "Show chart"}</Button>
       <ScaleFade initialScale={0.9} in={isOpen}>
         <Box
           p='1rem'
@@ -64,7 +65,7 @@ const Chart = () => {
           </ResponsiveContainer>
         </Box>
       </ScaleFade>
-    </>
+    </Container>
   )
 }
 

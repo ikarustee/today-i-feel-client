@@ -30,24 +30,27 @@ const LinksFromDOM = [
     name: "All articles"
   },
   {
-    route: "/menu2",
-    name: "Menu 2"
+    route: "/about",
+    name: "About"
   },
   {
-    route: "/menu3",
-    name: "Menu 3"
+    route: "/contact",
+    name: "Contact"
   }
 ];
 
 const NavLink = ({ children }) => (
   <Link
+    className="navlink"
+    transition="all 300ms ease"
     px={2}
     py={1}
     rounded={'md'}
     _hover={{
       textDecoration: 'none',
-      bg: useColorModeValue('gray.200', 'gray.700'),
+      color: "blue.300",
     }}
+    _focus={{boxShadow: "none"}}
     href={children[0]}>{children[2]}</Link>
 );
 
@@ -69,7 +72,7 @@ const Navbar = () => {
 
   useEffect(() => {
     // setSelectedPage(location.pathname);
-   //  window.scrollTo({ top: 0, behavior: 'smooth' });
+   window.scrollTo({ top: 0, behavior: 'smooth' });
   },[location])
 
   return (
@@ -92,7 +95,7 @@ const Navbar = () => {
               display={{ base: 'none', md: 'flex' }}
               >
               {LinksFromDOM.map((link) => (
-                <NavLink key={link.route} onClick={handleClick}>{link.route} {link.name}</NavLink>
+                <NavLink key={link.route} onClick={handleClick} >{link.route} {link.name}</NavLink>
               ))}
             </HStack>
           </HStack>
@@ -113,7 +116,7 @@ const Navbar = () => {
           display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
               {LinksFromDOM.map((link) => (
-                <NavLink key={link.route}>{link.route} {link.name}</NavLink>
+                <NavLink key={link.route} className="link">{link.route} {link.name}</NavLink>
               ))}
             </Stack>
           </Box>

@@ -86,7 +86,7 @@ const ArticleList = ({p}) => {
               return (
                 <div key={a.id}>
                   <Heading marginTop="1" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
-                    <Link href={a.id} textDecoration="none" _hover={{ textDecoration: 'none' }}>
+                    <Link href={`articles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none' }}>
                       {a.title}
                     </Link>
                   </Heading>
@@ -97,7 +97,7 @@ const ArticleList = ({p}) => {
                     fontSize="md">
                     {excerpt.join("").split(" ").slice(0, 25).join(" ") + " ..."}
                   </Text>
-                  <Link href={a.id} className="readmore__btn" textAlign="center"><Button className="readmore__btn" colorScheme='blue' variant='outline'>Read article</Button></Link>
+                  <Link href={`articles/${a._id}`} className="readmore__btn" textAlign="center"><Button className="readmore__btn" color="white" bg="blue.300" outline="blue.300" variant='solid'>Read article</Button></Link>
                 </div>
               )
             })
@@ -105,17 +105,15 @@ const ArticleList = ({p}) => {
             }
         </Box>
       </Box>
-      <Heading as="h2" marginTop="5">
-        Latest articles
-      </Heading>
-      <Divider marginTop="5" />
+      <Heading as="h2" marginTop="5">Latest articles</Heading>
+      <Divider marginTop="5"  marginBottom="2rem"/>
       <Box className="articles__list">
       {articles.map((a) => {
               const excerpt = Object.values(a.body)
               return (
-                <div  key={a.id} className="single">
+                <Box key={a._id} className="single" boxShadow={'lg'} m="0" padding="2rem 1rem" borderRadius={8} _hover={{boxShadow: "xl"}} transition="all 300ms ease">
                 <Heading marginTop="1" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
-                  <Link href={a.id} textDecoration="none" _hover={{ textDecoration: 'none' }}>
+                  <Link href={`articles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }}>
                     {a.title}
                   </Link>
                 </Heading>
@@ -126,8 +124,8 @@ const ArticleList = ({p}) => {
                   fontSize="md">
                   {excerpt.join("").split(" ").slice(0, 25).join(" ") + " ..."}
                 </Text>
-                <Link href={`/articles/${a.id}`} className="readmore__btn" textAlign="center"><Button className="readmore__btn" colorScheme='blue' variant='outline'>Read article</Button></Link>
-                </div>
+                  <Link href={`/articles/${a.id}`} className="readmore__btn" textAlign="center"><Button className="readmore__btn" border="blue.300" borderWidth="2px" color="white" bg="blue.300" _hover={{bg: "white", color: "blue.300", border: "2px solid #5C90FF"}} variant='solid'>Read article</Button></Link>
+                </Box>
               )
             })
             }

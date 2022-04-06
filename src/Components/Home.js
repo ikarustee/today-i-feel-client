@@ -103,7 +103,7 @@ import {
 const Home = () => {
   const [startSlice , setStartSlice] = useState(0);
   const [initialTags , setInitialTags] = useState(5);
-  const [increaseTags, setIncreaseTags] = useState(1);
+  const [increaseTags, setIncreaseTags] = useState(3);
   const [checkedTags, setCheckedTags] = useState(0)
   const [collectedTags, setCollectedTags] = useState([])
   const [newSearchParams, setNewSearchParams] = useState([]) 
