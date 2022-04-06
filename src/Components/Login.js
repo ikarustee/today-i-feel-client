@@ -14,6 +14,9 @@ import {
   } from '@chakra-ui/react';
   
   export default function SimpleCard() {
+    function loginUser(){
+      
+    }
     return (
       <Flex
 
@@ -43,15 +46,15 @@ import {
                   direction={{ base: 'column', sm: 'row' }}
                   align={'start'}
                   justify={'space-between'}>
-                  <Checkbox>Remember me</Checkbox>
-                  <Link color={'blue.400'}>Forgot password?</Link>
+                  {/* <Checkbox>Remember me</Checkbox>
+                  <Link color={'blue.400'}>Forgot password?</Link> */}
                 </Stack>
                 <Button
                   bg={'blue.400'}
                   color={'white'}
                   _hover={{
                     bg: 'blue.500',
-                  }}>
+                  }} onClick={loginUser}>
                   Sign in
                 </Button>
               </Stack>

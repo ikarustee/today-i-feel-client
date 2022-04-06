@@ -104,9 +104,10 @@ const Home = () => {
   const [increaseTags, setIncreaseTags] = useState(5);
   const [checkedTags, setCheckedTags] = useState(0)
   const [collectedTags, setCollectedTags] = useState([])
-  const [newSearchParams, setNewSearchParams] = useState([])
-  const [data, setData] = useState([]);
+  const [newSearchParams, setNewSearchParams] = useState([]) 
   const [searchParams, setSearchParams] = useSearchParams();
+  const [data, setData] = useState([]);
+ 
 
   const navigate = useNavigate();
   // const location = useLocation();
@@ -144,13 +145,13 @@ const Home = () => {
     const myTag = e.target.name
     const count = e.target.value
     const checked = e.target.checked
-    const limitTags = 1
+    const limitTags = 3
 
     // console.log(myTag)
     
     if(checked) {
       if(checkedTags >= limitTags) {
-        alert("You can only choose 1 mood.");
+        alert("You can only choose 3 moods.");
         e.target.checked = false;
       } else {
         setCollectedTags((prev) => [...prev, myTag])
@@ -166,15 +167,19 @@ const Home = () => {
       // setSearchParams(myTag, myTag, myTag)
     }
   }
-  console.log(newSearchParams)
-  console.log(collectedTags)
+  // console.log(newSearchParams)
+  // console.log(collectedTags)
 
   const handleTagCollect = () => {
     // POST function to DB
     // setSearchParams({q: newSearchParams})
-    // console.log(searchParams)
-    setSearchParams(newSearchParams.join(" ,"))
+    
+    let arr = newSearchParams.unshift("vote")
+    console.log(arr)
+    setNewSearchParams(arr)
     console.log(newSearchParams)
+    setSearchParams(newSearchParams.join(" ,"))
+    console.log(searchParams)
 
     encodeURI(searchParams)
     navigate({
@@ -182,6 +187,7 @@ const Home = () => {
       search: `q=${encodeURI(newSearchParams)}`,
     });
   }
+
 
   
   return (

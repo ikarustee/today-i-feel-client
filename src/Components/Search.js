@@ -10,6 +10,7 @@ import { ArticleContext } from '../Contexts/ArticleContext';
 
 const Search = () => {
     const {article, loading} = useContext(ArticleContext)
+    const [newSearchParams, setNewSearchParams] = useState([]) 
     const [searchParams, setSearchParams] = useSearchParams();
     const [userInput, setUserinput] = useState("")
     const [filteredArticles, setFilteredArticles] = useState()
@@ -20,18 +21,15 @@ const Search = () => {
     
     const handleSearch = (event) => {
         event.preventDefault()
-        const keyword = event.target.tag.value
-        
-        if(!keyword) {
+        if(!event.target.tag.value) {
             return alert("Please enter a word")
         } else {
-            console.log(keyword)
-            event.target.tag.value = ""
-            setUserinput(keyword)
+            console.log(event.target.tag.value)
             navigate({
               pathname: '/search',
-              search: `q=${encodeURI(keyword.split(" ").join("+"))}`,
-            });
+              search: `q=${encodeURI("search,"+event.target.tag.value)}`,
+            })
+            event.target.tag.value = "";
           }
         }
         // console.log(keyword.split(" ").join("+"))
