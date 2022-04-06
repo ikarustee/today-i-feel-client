@@ -102,8 +102,8 @@ let tags = [
 
 const Home = () => {
   const [startSlice , setStartSlice] = useState(0);
-  const [initialTags , setInitialTags] = useState(2);
-  const [increaseTags, setIncreaseTags] = useState(2);
+  const [initialTags , setInitialTags] = useState(5);
+  const [increaseTags, setIncreaseTags] = useState(1);
   const [checkedTags, setCheckedTags] = useState(0)
   const [collectedTags, setCollectedTags] = useState([])
   const [newSearchParams, setNewSearchParams] = useState([]) 
@@ -130,17 +130,6 @@ const Home = () => {
     console.log(initialTags)
     // setData(tags.slice(0, initialTags));
   }, []);
-
-  const handleShowmore = () => {
-    // if(initialTags > data.length) {
-    //   setHidden(true)
-    // }
-    setInitialTags((prev) => prev + increaseTags);
-    console.log("Data length " + data.length + " Initial tags count " + initialTags)
-    // let counter = initialTags + increaseTags;
-    // setData(data.slice(0, counter));
-  };
-
 
   const processTags = (e) => {
     const myTag = e.target.name
@@ -222,7 +211,7 @@ const Home = () => {
             <Flex className="tagcloud__btnholder" flexWrap="nowrap" justifyContent="center">
             {initialTags >= data.length ? (null) : (
               <Button 
-                onClick={handleShowmore} 
+                onClick={() => {setInitialTags((prev) => prev + increaseTags)}} 
                 variant='outline' 
                 border='0' 
                 color="white" 
