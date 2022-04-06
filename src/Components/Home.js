@@ -193,14 +193,16 @@ const Home = () => {
   return (
     <>  
         <div className="title">
-          <Heading as='h1' className="teaser" textAlign={[ 'center', 'center' ]} color='blue.300' >Share your mood.<br /> Take a deep breath. <br />Take your time.</Heading>
+          <Heading as='h1' className="teaser linear-wipe" textAlign={[ 'center', 'center' ]} color='blue.300' >Share your mood.<br /> Take a deep breath. <br />Take your time.</Heading>
           <h4 className="heading--center">Click on one feeling and share it <strong>anonymously</strong> with others</h4>
         </div>
         <div className="tagcloud">
           <form id="tagcloud">
             {data.map((t, index) => {
-              const colors = ["#FFFFFF", "#E020CF", "#FF3292", "#FF7E5F", "#FFC14B", "#FFFB00", "#F9F871", "#9BDE7E", "#C0BC84", "#C3FCF1", "#154FA6", "#5A57AB"]
+              const colors = ["#E020CF", "#FF3292", "#FF7E5F", "#FFC14B", "#fee700", "#F9F871", "#9BDE7E", "#C0BC84", "#C3FCF1", "#154FA6", "#5A57AB"]
               const randomColor = colors[Math.floor(Math.random() * colors.length)]
+              const fontSizes = ["1rem", "1.25rem", "1.5rem", "1.75rem"]
+              const randomFontsize = fontSizes[Math.floor(Math.random() * fontSizes.length)]
               
               return (
               <span key={t.value} className="tag">  
@@ -214,7 +216,7 @@ const Home = () => {
                 </input>
                 <label
                   htmlFor={t.value}
-                  style={{color: randomColor}}
+                  style={{color: randomColor, fontSize: randomFontsize}}
                 >{t.value}
                 </label>
               </span>

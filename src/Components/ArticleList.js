@@ -78,7 +78,7 @@ const ArticleList = ({p}) => {
               return (
                 <div key={a.id}>
                   <Heading marginTop="1" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
-                    <Link textDecoration="none" _hover={{ textDecoration: 'none' }}>
+                    <Link href={a.id} textDecoration="none" _hover={{ textDecoration: 'none' }}>
                       {a.title}
                     </Link>
                   </Heading>
@@ -107,7 +107,7 @@ const ArticleList = ({p}) => {
               return (
                 <div  key={a.id} className="single">
                 <Heading marginTop="1" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
-                  <Link textDecoration="none" _hover={{ textDecoration: 'none' }}>
+                  <Link href={a.id} textDecoration="none" _hover={{ textDecoration: 'none' }}>
                     {a.title}
                   </Link>
                 </Heading>

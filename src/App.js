@@ -1,12 +1,12 @@
 import './App.css';
 import "./fonts.css"
-import { Routes, Route, Link, useSearchParams, createSearchParams } from "react-router-dom";
-import {Container, useColorMode} from "@chakra-ui/react"
+import { Routes, Route, Link, useSearchParams } from "react-router-dom";
+import {Container} from "@chakra-ui/react"
 import Home from "./Components/Home"
 import ArticleList from './Components/ArticleList';
 import SingleArticle from './Components/SingleArticle';
 import SearchResults from './Components/SearchResults';
-import ArticleSuggestions from './Components/ArticleSuggestions';
+import Chart from './Components/Chart';
 import Login from './Components/Login';
 import Navbar from './Components/Navbar';
 import Footer from "./Components/Footer"
@@ -22,8 +22,8 @@ function App() {
 
   return (
     <div className="App">
-      <Container maxW='1100px' centerContent>
       <Navbar />
+      <Container maxW='1100px' centerContent>
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -31,6 +31,7 @@ function App() {
           <Route path="/articles/:id" element={<SingleArticle />} />
           <Route path="/login" element={<Login />} />
           <Route path="/search" element={<SearchResults />} />
+          <Route path="/chart" element={<Chart />} />
           {/* <Route path="/search" element={<ArticleSuggestions />} /> */}
           {/* <Route path="/about" element={<About />} /> */}
         </Routes>

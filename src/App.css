@@ -24,6 +24,7 @@ h4 {
 h1.teaser {
   font-size: 11vw;
   margin: 2rem 0 4rem;
+  padding-bottom: 8px;
   line-height: 1;
 }
 h4.heading--center {
@@ -98,7 +99,7 @@ button.nav__btn {
 }
 .collapse .mobile nav .chakra-link {
 	display: inline-block;
-	max-width: 20%;
+	max-width: 33.3333%;
 	margin: 0.5rem auto;
 }
 
@@ -144,7 +145,7 @@ main {
 }
 .tagcloud {
   background-color: #598EFF;
-  border-radius:12px;
+  border-radius:1rem;
   margin:2rem auto;
   padding: 1rem;
   width: 100%;
@@ -244,7 +245,7 @@ input:checked + label {
 }
 #search {
   display:flex;
-  margin: 0 0 3rem;
+  margin: 1rem 0 3rem;
 }
 #search input {
   flex-basis:100%;
@@ -259,6 +260,17 @@ input:checked + label {
   cursor: pointer;
   position: relative;
   z-index: 2;
+}
+
+/* Chart ============== */
+/* =================== */
+.recharts-wrapper {
+  margin: 0 auto;
+}
+path.recharts-polygon {
+  stroke-linejoin: round;
+  stroke-width: 2px;
+  stroke-opacity: 0.2;
 }
 
 /* Footer ============= */
@@ -298,4 +310,27 @@ svg.chakra-icon path {
 }
 .readmore__btn:hover {
   text-decoration: none!important;
+}
+button.btn--centered {
+  margin: 0 auto;
+  display: block;
+}
+
+.linear-wipe {
+  text-align: center;
+  
+  background: linear-gradient(to right, #5C90FF 20%, #E020CF 40%, #FF3292 60%, #fee700 80%, #5C90FF 100%);
+  background-size: 200% auto;
+  
+  color: #000;
+  background-clip: text;
+  text-fill-color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 10s linear infinite;
+}
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
 }

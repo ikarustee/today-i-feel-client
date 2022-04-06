@@ -24,14 +24,18 @@ import {
 const URL = articleDATA
 
 const SingleArticle = () => {
-    const {article, loading} = useContext(ArticleContext)
+    const {articles, isLoading, getArticles} = useContext(ArticleContext)
     const {id} = useParams()
-    const thisArticle = article.find((a) => a.id === id)
+    const thisArticle = articles.find((a) => a.id === id)
     console.log(thisArticle)
     const [color, setColor] = useState("#5C90FF");
 
+    useEffect(() => {
+        getArticles()
+      },[])
+
     if (!thisArticle) {
-        return <DotLoader color={color} loading={loading} size={60} />;
+        return <DotLoader color={color} loading={isLoading} size={60} />;
       } else {
 
   return (
