@@ -38,9 +38,9 @@ const SearchResults = () => {
     border-color: red;
   `;
   
+    let searchTags = searchParams.get("q").split(" ").join(",");
     async function getSearchResult(){
       setIsLoading(true);
-      let searchTags = searchParams.get("q").split(" ").join(",");
       let url = "https://todayifeel-server.herokuapp.com/search/"+searchTags;
       let response = await axios.get(url,{withCredentials:true});
       console.log(typeof response.data);
@@ -65,7 +65,7 @@ const SearchResults = () => {
     return (
       <>
       <Container className="articles" maxW={'7xl'} minH="100vh" m="2rem 0" p="0">
-      <Heading as="h1" color="blue.300" m="1rem 0">Results</Heading>
+      <Heading as="h1" color="blue.300" m="1rem 0">{searchTags.includes("search") ? "Search results" : "Suggested articles"}</Heading>
         <Flex flexWrap="wrap" gap="1rem">
           {typeof searchResult === "string" ? (<p>{searchResult}</p>):(searchResult.map((a) => {
               {/* console.log(a)
