@@ -68,8 +68,6 @@ const SearchResults = () => {
       <Heading as="h1" color="blue.300" m="1rem 0">{searchTags.includes("search") ? "Search results" : "Suggested articles"}</Heading>
         <Flex flexWrap="wrap" gap="1rem">
           {typeof searchResult === "string" ? (<p>{searchResult}</p>):(searchResult.map((a) => {
-              {/* console.log(a)
-              console.log(a.tags) */}
               const excerpt = Object.values(a.body)
               return(
                 <Box

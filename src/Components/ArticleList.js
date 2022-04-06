@@ -97,7 +97,19 @@ const ArticleList = ({p}) => {
                     fontSize="md">
                     {excerpt.join("").split(" ").slice(0, 25).join(" ") + " ..."}
                   </Text>
-                  <Link href={`articles/${a._id}`} className="readmore__btn" textAlign="center"><Button className="readmore__btn" color="white" bg="blue.300" outline="blue.300" variant='solid'>Read article</Button></Link>
+                  <Link href={`articles/${a._id}`} textAlign="center" _hover={{textDecoration: "none"}}>
+                  <Button 
+                    // className="readmore__btn" 
+                      borderColor="transparent" 
+                      borderWidth="2px" 
+                      color="white" 
+                      bg="blue.300"
+                      fontWeight="400"
+                      _hover={{bg: "white", color: "blue.300", border: "2px solid #5C90FF"}} 
+                      variant='solid'>
+                      Read article
+                    </Button>
+                  </Link>
                 </div>
               )
             })
@@ -124,7 +136,19 @@ const ArticleList = ({p}) => {
                   fontSize="md">
                   {excerpt.join("").split(" ").slice(0, 25).join(" ") + " ..."}
                 </Text>
-                  <Link href={`/articles/${a.id}`} className="readmore__btn" textAlign="center"><Button className="readmore__btn" border="blue.300" borderWidth="2px" color="white" bg="blue.300" _hover={{bg: "white", color: "blue.300", border: "2px solid #5C90FF"}} variant='solid'>Read article</Button></Link>
+                  <Link href={`/articles/${a.id}`} textAlign="center" _hover={{textDecoration: "none"}}>
+                    <Button 
+                    // className="readmore__btn" 
+                      borderColor="transparent" 
+                      borderWidth="2px" 
+                      color="white" 
+                      bg="blue.300"
+                      fontWeight="400"
+                      _hover={{bg: "white", color: "blue.300", border: "2px solid #5C90FF"}} 
+                      variant='solid'>
+                      Read article
+                    </Button>
+                  </Link>
                 </Box>
               )
             })
