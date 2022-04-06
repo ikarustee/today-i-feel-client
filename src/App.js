@@ -11,6 +11,8 @@ import Login from './Components/Login';
 import Navbar from './Components/Navbar';
 import Footer from "./Components/Footer"
 import { useEffect } from 'react';
+import Signup from "./Components/Signup";
+import AdminDashboard from "./Components/AdminDashboard"
 
 
 function App() {
@@ -30,6 +32,8 @@ function App() {
           <Route path="/articles" element={<ArticleList />} />
           <Route path="/articles/:id" element={<SingleArticle />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/adminDashboard" element={<AdminDashboard />} />
           <Route path="/search" element={<SearchResults />} />
           <Route path="/chart" element={<Chart />} />
           {/* <Route path="/search" element={<ArticleSuggestions />} /> */}

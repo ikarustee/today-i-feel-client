@@ -17,16 +17,19 @@ import {
   
   export default function SimpleCard() {
     const navigate = useNavigate();
-    function loginUser(){
+    function signupUser(){
       const email = document.getElementById("email").value;
       console.log(email)
       const password = document.getElementById("password").value;
       console.log(password)
-      let url = "https://todayifeel-server.herokuapp.com/login"
+      let url = "https://todayifeel-server.herokuapp.com/user"
       axios.post(url,{email:email,password:password},{withCredentials:true}).then((response)=> {
           navigate("/adminDashboard");
         console.log(response)
         })
+    }
+    function verifyTest(){
+        axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true}).then((response)=>console.log(response))
     }
     return (
       <Flex
@@ -36,7 +39,7 @@ import {
         bg={useColorModeValue('gray.50', 'gray.800')}>
         <Stack spacing={8} mx={'auto'} maxW={'lg'} py={6} px={6}>
           <Stack align={'center'}>
-            <Heading fontSize={'4xl'}>Sign in to your account</Heading>
+            <Heading fontSize={'4xl'}>Create your new Account</Heading>
           </Stack>
           <Box
             rounded={'lg'}
@@ -58,15 +61,23 @@ import {
                   align={'start'}
                   justify={'space-between'}>
                   {/* <Checkbox>Remember me</Checkbox> */}
-                  <Link color={'blue.400'} href={"/signup"}>Create a new Account?</Link>
+                  {/* <Link color={'blue.400'} href={"/signin"}>Create a new Account?</Link> */}
                 </Stack>
                 <Button
                   bg={'blue.400'}
                   color={'white'}
                   _hover={{
                     bg: 'blue.500',
-                  }} onClick={loginUser}>
-                  Log in
+                  }} onClick={signupUser}>
+                  Sign up
+                </Button>
+                <Button
+                  bg={'blue.400'}
+                  color={'white'}
+                  _hover={{
+                    bg: 'blue.500',
+                  }} onClick={verifyTest}>
+                  Verify Test
                 </Button>
               </Stack>
             </Stack>
