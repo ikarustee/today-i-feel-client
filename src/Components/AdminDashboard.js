@@ -30,8 +30,8 @@ import { useEffect, useState } from 'react';
     useEffect(()=>{
         async function verifyTest(){
             axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true}).then((response)=>{
-                console.log(response.data != "OK")
-                if (response.data != "OK"){
+                console.log(response.data !== "OK")
+                if (response.data !== "OK"){
                     alert("Please Login First!")
                     navigate("/login");
                     }

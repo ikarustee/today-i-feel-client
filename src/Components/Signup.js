@@ -28,9 +28,6 @@ import {
         console.log(response)
         })
     }
-    function verifyTest(){
-        axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true}).then((response)=>console.log(response))
-    }
     return (
       <Flex
 
@@ -70,14 +67,6 @@ import {
                     bg: 'blue.500',
                   }} onClick={signupUser}>
                   Sign up
-                </Button>
-                <Button
-                  bg={'blue.400'}
-                  color={'white'}
-                  _hover={{
-                    bg: 'blue.500',
-                  }} onClick={verifyTest}>
-                  Verify Test
                 </Button>
               </Stack>
             </Stack>
