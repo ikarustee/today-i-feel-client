@@ -13,6 +13,8 @@ import {
     Divider,
     Container,
   } from '@chakra-ui/react';
+import { DateTime } from "luxon";
+import ReactMarkdown from "react-markdown";  
 
 const SingleArticle = () => {
     const {articles, isLoading, getArticles} = useContext(ArticleContext)
@@ -29,7 +31,7 @@ const SingleArticle = () => {
 
     useEffect(() => {
         getArticles()
-        // console.log(id)
+        // console.log(thisArticle.createdDate)
     },[])
     
     if (!thisArticle) {
@@ -40,8 +42,9 @@ const SingleArticle = () => {
     <>
         <article>
             <Container>
-                <Heading as="h1" color="blue.300">{thisArticle.title}</Heading>
-                <Text as="p">{thisArticle.body}</Text>
+                <Heading as="h1" color="blue.300" fontSize="2.5rem">{thisArticle.title}</Heading>
+                {DateTime.now().setLocale("de").toFormat('MMMM dd, yyyy')}
+                 <ReactMarkdown className="article__content">{thisArticle.body}</ReactMarkdown>
                 <em>Tags: &nbsp;
                 {thisArticle.tags.map((t) => {
                   return (

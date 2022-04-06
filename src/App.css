@@ -36,6 +36,23 @@ h4.heading--center {
 h6 strong {
   font-weight:500;
 }
+.article__content h2,
+.article__content h3,
+.article__content h4 {
+  color: var(--primary);
+  margin: 1rem 0 0.35rem;
+}
+.article__content h2 {
+  font-size:2rem;
+}
+.article__content h3 {
+  font-size:1.7rem;
+}
+.article__content p,
+.article__content ul {
+  margin-bottom: 0.75rem;
+  line-height: 1.7rem;
+}
 @media screen and (min-width: 768px) {
   h1.teaser {
     font-size: 10vh;
@@ -223,6 +240,9 @@ input:checked + label {
 
 /* Articles =========== */
 /* =================== */
+article {
+  margin: 2rem 0;
+}
 .articles__list {
   display: flex;
   flex-wrap: wrap;
@@ -233,6 +253,7 @@ input:checked + label {
   flex: 1 0 100%;
   margin:0;
 }
+ 
 .excerpt {
   margin-bottom: 1rem;
 }

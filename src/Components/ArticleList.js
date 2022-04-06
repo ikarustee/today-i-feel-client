@@ -13,11 +13,13 @@ import {
   Divider,
   Container,
   VStack,
+  useColorMode
 } from '@chakra-ui/react';
 
 const ArticleList = ({p}) => {
   const {articles, isLoading, getArticles} = useContext(ArticleContext)
   const [color, setColor] = useState("#5C90FF");
+  const { colorMode, toggleColorMode } = useColorMode()
   
   const override = css`
   display: block;
@@ -84,9 +86,9 @@ const ArticleList = ({p}) => {
           {articles.map((a) => {
               const excerpt = Object.values(a.body)
               return (
-                <div key={a.id}>
+                <Box key={a._id} bg={colorMode === "light" ? "white" : "gray.700"} className="single" boxShadow={'lg'} m="0" padding="2rem 1rem" borderRadius={8} _hover={{boxShadow: "xl"}} transition="all 300ms ease">
                   <Heading marginTop="1" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
-                    <Link href={`articles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none' }}>
+                    <Link href={`articles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none' }} _focus={{boxShadow: "none"}}>
                       {a.title}
                     </Link>
                   </Heading>
@@ -105,12 +107,14 @@ const ArticleList = ({p}) => {
                       color="white" 
                       bg="blue.300"
                       fontWeight="400"
+                      height="auto"
+                      padding="4px 10px"
                       _hover={{bg: "white", color: "blue.300", border: "2px solid #5C90FF"}} 
                       variant='solid'>
                       Read article
                     </Button>
                   </Link>
-                </div>
+                </Box>
               )
             })
             .slice(0,1)
@@ -123,9 +127,9 @@ const ArticleList = ({p}) => {
       {articles.map((a) => {
               const excerpt = Object.values(a.body)
               return (
-                <Box key={a._id} className="single" boxShadow={'lg'} m="0" padding="2rem 1rem" borderRadius={8} _hover={{boxShadow: "xl"}} transition="all 300ms ease">
+                <Box key={a._id} bg={colorMode === "light" ? "white" : "gray.700"} className="single" boxShadow={'lg'} m="0" padding="2rem 1rem" borderRadius={8} _hover={{boxShadow: "xl"}} transition="all 300ms ease">
                 <Heading marginTop="1" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
-                  <Link href={`articles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }}>
+                  <Link href={`articles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }} _focus={{boxShadow: "none"}}>
                     {a.title}
                   </Link>
                 </Heading>
@@ -136,14 +140,16 @@ const ArticleList = ({p}) => {
                   fontSize="md">
                   {excerpt.join("").split(" ").slice(0, 25).join(" ") + " ..."}
                 </Text>
-                  <Link href={`/articles/${a.id}`} textAlign="center" _hover={{textDecoration: "none"}}>
+                  <Link href={`/articles/${a.id}`} textAlign="center" _hover={{textDecoration: "none"}} >
                     <Button 
-                    // className="readmore__btn" 
+                      // className="readmore__btn" 
                       borderColor="transparent" 
                       borderWidth="2px" 
                       color="white" 
                       bg="blue.300"
                       fontWeight="400"
+                      height="auto"
+                      padding="4px 10px"
                       _hover={{bg: "white", color: "blue.300", border: "2px solid #5C90FF"}} 
                       variant='solid'>
                       Read article

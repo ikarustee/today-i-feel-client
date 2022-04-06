@@ -77,7 +77,8 @@ const Navbar = () => {
 
   return (
       <header>
-        <Box className="navbar" bg={useColorModeValue('rgba(255,255,255,0.85)', 'transparent')}>
+        <Box className="navbar" bg={useColorModeValue('rgba(255,255,255,0.85)', 'gray.700')}>
+        {/* <Box className="navbar" bg={useColorModeValue('rgba(255,255,255,0.85)', 'transparent')}> */}
         <Flex className="nav" h={16} alignItems={'center'} justifyContent={'space-between'}>
           <ThemeSwitcher />
           <HStack spacing={8} alignItems={'center'}>

@@ -41,7 +41,7 @@ const Chart = () => {
   return (
     <Container className="chart" m="2rem 0" maxW={'7xl'} padding="0">
     <Heading as="h2" textAlign="center" color="blue.300" m="3rem 0 1.5rem">How do others feel?</Heading>
-    <Button colorScheme="blue" className="btn--centered" fontWeight="300" onClick={onToggle}>{isOpen ? "Hide chart" : "Show chart"}</Button>
+    <Button className="btn--centered" fontWeight="300" onClick={onToggle}>{isOpen ? "Hide chart" : "Show chart"}</Button>
       <ScaleFade initialScale={0.9} in={isOpen}>
         <Box
           p='1rem'
