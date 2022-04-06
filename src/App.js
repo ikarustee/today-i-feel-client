@@ -22,8 +22,8 @@ function App() {
 
   return (
     <div className="App">
-      <Container maxW='1100px' centerContent>
       <Navbar />
+      <Container maxW='1100px' centerContent>
       <main>
         <Routes>
           <Route path="/" element={<Home />} />

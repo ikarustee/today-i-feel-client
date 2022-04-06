@@ -74,7 +74,7 @@ const Navbar = () => {
 
   return (
       <header>
-        <Box>
+        <Box className="navbar" in={isOpen} bg={useColorModeValue('rgba(255,255,255,0.85)', 'transparent')}>
         <Flex className="nav" h={16} alignItems={'center'} justifyContent={'space-between'}>
           <ThemeSwitcher />
           <HStack spacing={8} alignItems={'center'}>
@@ -106,7 +106,11 @@ const Navbar = () => {
           />
         </Flex>
         <Collapse className="collapse" in={isOpen} animateOpacity>
-          <Box className="mobile" pb={4} display={{ md: 'none' }}>
+          <Box 
+          bg={useColorModeValue('white', 'gray.700')}
+          className="mobile" 
+          pb={4} 
+          display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
               {LinksFromDOM.map((link) => (
                 <NavLink key={link.route}>{link.route} {link.name}</NavLink>

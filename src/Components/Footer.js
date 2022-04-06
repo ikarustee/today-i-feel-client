@@ -11,6 +11,7 @@ import {
   } from '@chakra-ui/react';
 import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 import logoLight from "../img/logo-light@2x.png"
+import logoNegative from "../img/logoNegative@2x.png"
 import logoDark from "../img/logo-dark@2x.png"
 import { ReactNode } from 'react';
   
@@ -65,8 +66,8 @@ import { ReactNode } from 'react';
 
     return (
       <Box
-        bg={useColorModeValue('gray.50', 'gray.900')}
-        color={useColorModeValue('gray.700', 'gray.200')}
+        bg={useColorModeValue('blue.300', 'gray.700')}
+        color={useColorModeValue('white', 'white')}
         w='100%'
         className="footer"
         >
@@ -86,7 +87,7 @@ import { ReactNode } from 'react';
           >
             <Link to="/" className="logo">
                 {colorMode === 'light' ? 
-                (<img src={logoLight} alt="" width={400}/>) 
+                (<img src={logoNegative} alt="" width={400}/>) 
                 : (<img src={logoDark} alt="" />)
                 }
             </Link>
