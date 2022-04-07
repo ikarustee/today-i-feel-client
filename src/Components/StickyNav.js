@@ -68,8 +68,7 @@ import {Link as RouteLink, useNavigate, useLocation} from "react-router-dom";
           justify={'space-evenly'}
           spacing={6} 
           >
-            <a href="#" onClick={handleBack}>Back</a>
-            {/* <Link href={`${back}`} textAlign="center" m="0" className="link" onClick={() => navigate(-1)}><BiArrowBack/>Back</Link> */}
+            <a href="#" onClick={handleBack}><BiArrowBack/>Back</a>
             <Link textAlign="center" m="0" href={"/"} className="link"><BiHomeHeart/>Home</Link>
             <Link textAlign="center" m="0" href={"/articles"} className="link"><BiListUl/>Articles</Link>
           </Stack>
