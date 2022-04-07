@@ -13,7 +13,6 @@ import {
     Divider,
     Container,
   } from '@chakra-ui/react';
-import { DateTime } from "luxon";
 import ReactMarkdown from "react-markdown";  
 
 const SingleArticle = () => {
@@ -22,6 +21,14 @@ const SingleArticle = () => {
     const thisArticle = articles.find((a) => a.id === id)
     console.log(thisArticle)
     const [color, setColor] = useState("#5C90FF");
+    
+    let date = new Date(thisArticle.createdDate)
+
+    const articleDate = date.toLocaleDateString("en-GB", {
+      year: "numeric",
+      month: "long",
+      day: "2-digit"
+    })
   
     const override = css`
     display: block;
@@ -43,7 +50,7 @@ const SingleArticle = () => {
         <article>
             <Container>
                 <Heading as="h1" color="blue.300" fontSize="2.5rem">{thisArticle.title}</Heading>
-                {DateTime.now().setLocale("de").toFormat('MMMM dd, yyyy')}
+                {articleDate}
                  <ReactMarkdown className="article__content">{thisArticle.body}</ReactMarkdown>
                 <em>Tags: &nbsp;
                 {thisArticle.tags.map((t) => {
