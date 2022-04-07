@@ -73,7 +73,7 @@ const SearchResults = () => {
                 <Box
                  className="single" bg={colorMode === "light" ? "white" : "gray.700"} key={`articles/${a._id}`} boxShadow={'lg'} m="0" padding="2rem 1rem" borderRadius={8} _hover={{boxShadow: "xl"}} transition="all 300ms ease">
                   <Heading className="articles__heading" m="1rem 0" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1" _hover={{color: "purple.300"}}>
-                    <Link href={`articles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none' }}>
+                    <Link href={`articles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none' }} _focus={{boxShadow: "none"}}>
                       {a.title}
                     </Link>
                   </Heading>
