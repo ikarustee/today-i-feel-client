@@ -413,3 +413,9 @@ button.btn--centered {
     filter: hue-rotate(-360deg);
   }
 }
+/* Authentificationerrormessages */
+/* ============================= */
+
+.errorMessage{
+  color: #DD1C1A;
+}
