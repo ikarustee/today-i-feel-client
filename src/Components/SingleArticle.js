@@ -14,21 +14,15 @@ import {
     Container,
   } from '@chakra-ui/react';
 import ReactMarkdown from "react-markdown";  
+import {readableDate} from "../helper/dateformatter"
 
 const SingleArticle = () => {
     const {articles, isLoading, getArticles} = useContext(ArticleContext)
     const {id} = useParams()
     const thisArticle = articles.find((a) => a.id === id)
+    const [articleDate, setArticleDate] = useState()
     console.log(thisArticle)
     const [color, setColor] = useState("#5C90FF");
-    
-    let date = new Date(thisArticle.createdDate)
-
-    const articleDate = date.toLocaleDateString("en-GB", {
-      year: "numeric",
-      month: "long",
-      day: "2-digit"
-    })
   
     const override = css`
     display: block;
@@ -38,7 +32,6 @@ const SingleArticle = () => {
 
     useEffect(() => {
         getArticles()
-        // console.log(thisArticle.createdDate)
     },[])
     
     if (!thisArticle) {
@@ -50,7 +43,7 @@ const SingleArticle = () => {
         <article>
             <Container>
                 <Heading as="h1" color="blue.300" fontSize="2.5rem">{thisArticle.title}</Heading>
-                {articleDate}
+                {readableDate(thisArticle.createdDate)}
                  <ReactMarkdown className="article__content">{thisArticle.body}</ReactMarkdown>
                 <em>Tags: &nbsp;
                 {thisArticle.tags.map((t) => {

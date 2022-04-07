@@ -38,7 +38,7 @@ const ArticleList = ({p}) => {
         <DotLoader color={color} css={override} loading={!isLoading} size={60} />
       </Container>
     ) : (
-     <Container maxW={'7xl'}>
+     <Container maxW={'7xl'} className="article__list" p="0">
       <Heading as="h1" color="blue.300">All articles</Heading>
       <Box
         marginTop={{ base: '1', sm: '5' }}
