@@ -1,3 +1,4 @@
+import {useState, useEffect} from "react";
 import {
     Box,
     chakra,
@@ -10,9 +11,6 @@ import {
     VisuallyHidden,
   } from '@chakra-ui/react';
 import { BiArrowBack, BiHomeHeart, BiListUl } from "react-icons/bi";
-import logoNegative from "../img/logoNegative@2x.png"
-import logoDark from "../img/logo-dark@2x.png"
-import { ReactNode } from 'react';
 import {Link as RouteLink, useNavigate, useLocation} from "react-router-dom";
   
   const Logo = (props) => {
@@ -35,10 +33,20 @@ import {Link as RouteLink, useNavigate, useLocation} from "react-router-dom";
   };
 
   
-  export default function Footer() {
-    const { colorMode, toggleColorMode } = useColorMode()
+  export default function StickyNav() {
     const navigate = useNavigate()
     const location = useLocation()
+
+    const handleBack = (e) => {
+      e.preventDefault()
+      navigate(-2)
+    }
+
+  
+    useEffect(() => {
+      // setSelectedPage(location.pathname);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    },[location])
 
     return (
       <>
@@ -60,7 +68,8 @@ import {Link as RouteLink, useNavigate, useLocation} from "react-router-dom";
           justify={'space-evenly'}
           spacing={6} 
           >
-            <Link textAlign="center" m="0" className="link" onClick={() => navigate(-1)}><BiArrowBack/>Back</Link>
+            <a href="#" onClick={handleBack}>Back</a>
+            {/* <Link href={`${back}`} textAlign="center" m="0" className="link" onClick={() => navigate(-1)}><BiArrowBack/>Back</Link> */}
             <Link textAlign="center" m="0" href={"/"} className="link"><BiHomeHeart/>Home</Link>
             <Link textAlign="center" m="0" href={"/articles"} className="link"><BiListUl/>Articles</Link>
           </Stack>
