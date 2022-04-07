@@ -50,36 +50,42 @@ import { useEffect, useState } from 'react';
           <Stack align={'center'}>
             <Heading fontSize={'4xl'}>Hello Admin</Heading>
           </Stack>
-          <Box
-            rounded={'lg'}
-            bg={useColorModeValue('white', 'gray.700')}
-            boxShadow={'lg'}
-            p={8}>
-                <Button
-                  bg={'blue.400'}
-                  color={'white'}
-                  _hover={{
-                    bg: 'blue.500',
-                  }} onClick={()=>{navigate("/newarticle")}}>
-                  Create New Article
-                </Button>
-                <Button
-                  bg={'blue.400'}
-                  color={'white'}
-                  _hover={{
-                    bg: 'blue.500',
-                  }} onClick={()=>{navigate("/editarticles")}}>
-                  Edit Articles
-                </Button>
-                <Button
-                  bg={'blue.400'}
-                  color={'white'}
-                  _hover={{
-                    bg: 'blue.500',
-                  }} onClick={logoutUser}>
-                  Log out
-                </Button>
-          </Box>
+          
+            <Box
+              rounded={'lg'}
+              bg={useColorModeValue('white', 'gray.700')}
+              boxShadow={'lg'}
+              p={8}
+              alignItems={"center"}
+              justifyContent={"center"}>
+               <Stack width="85%" spacing={8}  align={'center'}>
+                  <Button
+                    bg={'blue.400'}
+                    color={'white'}
+                    _hover={{
+                      bg: 'blue.500',
+                    }} onClick={()=>{navigate("/newarticle")}}>
+                    Create New Article
+                  </Button>
+                  <Button
+                    bg={'blue.400'}
+                    color={'white'}
+                    _hover={{
+                      bg: 'blue.500',
+                    }} onClick={()=>{navigate("/editarticles")}}>
+                    Edit Articles
+                  </Button>
+                  <Button
+                    bg={'blue.400'}
+                    color={'white'}
+                    _hover={{
+                      bg: 'blue.500',
+                    }} onClick={logoutUser}>
+                    Log out
+                  </Button>
+                 </Stack>
+              </Box>
+          
         </Stack>
       </Flex>
     );
