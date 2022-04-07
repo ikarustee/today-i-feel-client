@@ -20,7 +20,7 @@ import { useEffect, useState } from 'react';
     const navigate = useNavigate();
     // const [verify, setVerify] = useState("");
     function logoutUser(){
-      let url = "https://todayifeel-server.herokuapp.com/logout"
+      let url = "http://localhost:3010/logout"
       axios.get(url,{withCredentials:true}).then((response)=> {
           navigate("/");
         console.log(response)
@@ -29,7 +29,7 @@ import { useEffect, useState } from 'react';
    
     useEffect(()=>{
         async function verifyTest(){
-            axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true}).then((response)=>{
+            axios.get("http://localhost:3010/verify",{withCredentials:true}).then((response)=>{
                 console.log(response.data !== "OK")
                 if (response.data !== "OK"){
                     alert("Please Login First!")
@@ -55,6 +55,22 @@ import { useEffect, useState } from 'react';
             bg={useColorModeValue('white', 'gray.700')}
             boxShadow={'lg'}
             p={8}>
+                <Button
+                  bg={'blue.400'}
+                  color={'white'}
+                  _hover={{
+                    bg: 'blue.500',
+                  }} onClick={()=>{navigate("/newarticle")}}>
+                  Create New Article
+                </Button>
+                <Button
+                  bg={'blue.400'}
+                  color={'white'}
+                  _hover={{
+                    bg: 'blue.500',
+                  }} onClick={()=>{navigate("/editarticles")}}>
+                  Edit Articles
+                </Button>
                 <Button
                   bg={'blue.400'}
                   color={'white'}

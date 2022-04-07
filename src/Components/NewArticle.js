@@ -16,7 +16,7 @@ import {
     useColorModeValue,
   } from '@chakra-ui/react';
   import axios from 'axios';
-  import { useState } from 'react';
+  import { useEffect, useState } from 'react';
   import { useNavigate } from 'react-router-dom';
   
 
@@ -46,20 +46,29 @@ import {
     
     function handleNewArticle () {
       const {title, body, tags, url} = userInput
-      const tagArray = tags.split(", ")
-
-      console.log(userInput, tagArray)
-      
-      // const email = document.getElementById("email").value;
-      // console.log(email)
-      // const password = document.getElementById("password").value;
-      // console.log(password)
-      // let server = "https://todayifeel-server.herokuapp.com/articles"
-      // axios.post(server,{title:title,body:body, tags:tags},{withCredentials:true}).then((response)=> {
-      //     navigate("/adminDashboard");
-      //     console.log(response)
-      //   })
+      let tagArray = tags.split(",")
+      tagArray = tagArray.map(el=>el.trim())
+      console.log(title,tagArray)
+    
+      let server = "http://localhost:3010/articles"
+      axios.post(server,{title:title,body:body, tags:tagArray}).then((response)=> {
+            console.log(response)
+            navigate("/adminDashboard")
+          })
     }
+    useEffect(()=>{
+      async function verifyTest(){
+          axios.get("http://localhost:3010/verify",{withCredentials:true}).then((response)=>{
+              console.log(response.data !== "OK")
+              if (response.data !== "OK"){
+                  alert("Please Login First!")
+                  navigate("/login");
+                  }
+              })
+      }
+      verifyTest();
+      
+    },[])
     return (
       <Flex
         className="formholder"
@@ -132,7 +141,7 @@ import {
                 />
               </FormControl>
               <Stack spacing={10}>
-              {error ? (
+              {!error ? (
                 <Button
                   // onClick={handleNewArticle}
                   borderColor="gray.400"

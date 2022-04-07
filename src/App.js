@@ -15,7 +15,8 @@ import Footer from "./Components/Footer"
 import { useEffect } from 'react';
 import Signup from "./Components/Signup";
 import AdminDashboard from "./Components/AdminDashboard"
-
+import EditArticleList from "./Components/EditArticleList"
+import EditSingleArticle from "./Components/EditSingleArticle"
 
 function App() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -44,6 +45,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/adminDashboard" element={<AdminDashboard />} />
           <Route path="/newarticle" element={<NewArticle />} />
+          <Route path="/editarticles" element={<EditArticleList />} />
+          <Route path="/editarticles/:id" element={<EditSingleArticle />} />
           <Route path="/search" element={<SearchResults />} />
           <Route path="/chart" element={<Chart />} />
           {/* <Route path="/search" element={<ArticleSuggestions />} /> */}
