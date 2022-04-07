@@ -10,7 +10,10 @@ body {
   font-family: 'Work Sans';
   font-weight: 300;
 }
-
+a:focus,
+button:focus {
+  box-shadow: none!important;
+}
 /* Typography ========== */
 /* ==================== */
 h1, h2 {

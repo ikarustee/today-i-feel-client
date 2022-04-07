@@ -1,6 +1,7 @@
 import './App.css';
 import "./fonts.css"
-import { Routes, Route, Link, useSearchParams } from "react-router-dom";
+import { useState } from 'react';
+import { Routes, Route, Link, useSearchParams, useLocation } from "react-router-dom";
 import {Container} from "@chakra-ui/react"
 import Home from "./Components/Home"
 import ArticleList from './Components/ArticleList';
@@ -8,6 +9,7 @@ import SingleArticle from './Components/SingleArticle';
 import SearchResults from './Components/SearchResults';
 import Chart from './Components/Chart';
 import Login from './Components/Login';
+import NewArticle from './Components/NewArticle';
 import Navbar from './Components/Navbar';
 import Footer from "./Components/Footer"
 import { useEffect } from 'react';
@@ -17,6 +19,13 @@ import AdminDashboard from "./Components/AdminDashboard"
 
 function App() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const [selectedPage, setSelectedPage] = useState()
+  let location = useLocation();
+
+  useEffect(() => {
+    setSelectedPage(location.pathname);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  },[location])
 
   useEffect(() => {
     setSearchParams(searchParams)
@@ -34,6 +43,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/adminDashboard" element={<AdminDashboard />} />
+          <Route path="/newarticle" element={<NewArticle />} />
           <Route path="/search" element={<SearchResults />} />
           <Route path="/chart" element={<Chart />} />
           {/* <Route path="/search" element={<ArticleSuggestions />} /> */}
