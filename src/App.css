@@ -96,10 +96,11 @@ a.logo img {
 .themeswitcher {
   width: 40px;
   height:40px;
-  position: relative;
-  left: 1rem;
-  top:0;
+  position: fixed;
+  right: 0;
+  top:1rem;
   cursor: pointer;
+  z-index: 95;
 }
 nav {
   position: relative;

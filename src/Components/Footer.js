@@ -72,6 +72,7 @@ import { ReactNode } from 'react';
         className="footer"
         >
         <Container
+          id="sticky"
           as={Stack}
           maxW={'6xl'}
           py={4}
