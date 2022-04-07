@@ -14,7 +14,6 @@ import logoNegative from "../img/logoNegative@2x.png"
 import logoDark from "../img/logo-dark@2x.png"
 import { ReactNode } from 'react';
 import {Link as RouteLink, useNavigate, useLocation} from "react-router-dom";
-import StickyNav from "./StickyNav"
   
   const Logo = (props) => {
     return (
@@ -43,35 +42,29 @@ import StickyNav from "./StickyNav"
 
     return (
       <>
-      <StickyNav></StickyNav>
-      <Box
-        className="footer"
-        >
-        <Box
-          color={useColorModeValue('white', 'white')}
-            borderTopWidth={1}
-            borderStyle={'solid'}
-            borderColor={useColorModeValue('gray.200', 'gray.700')}
-            bg={useColorModeValue('blue.300', 'gray.700')}
+      <Container
+          id="sticky"
+          as={Stack}
+          bg={useColorModeValue('rgba(255,255,255,0.75)', 'gray.700')}
+          backdropFilter="saturate(180%) blur(2px)"
+          color={useColorModeValue('blue.400', 'white')}
+          maxW={'100vw'}
+          py={4}
+          spacing={4}
+          justify={'center'}
+          align={'center'}>
+          <Stack 
+          className="footer__links"
+          w='100%' 
+          direction={'row'} 
+          justify={'space-evenly'}
+          spacing={6} 
           >
-          <Container
-            as={Stack}
-            py={4}
-            flexWrap="wrap"
-            rowGap="0"
-            spacing={4}
-            justify={{ base: 'space-between', md: 'space-between' }}
-            align={{ base: 'center', md: 'center' }}>
-              <Link to="/" className="logo">
-                {colorMode === 'light' ? 
-                (<img src={logoNegative} alt="" width={400}/>) 
-                : (<img src={logoDark} alt="" />)
-                }
-              </Link>
-            <Text>© 2022 Jan Niklas Pudschun & Tanja Karius</Text>
-          </Container>
-        </Box>
-      </Box>
+            <Link textAlign="center" m="0" className="link" onClick={() => navigate(-1)}><BiArrowBack/>Back</Link>
+            <Link textAlign="center" m="0" href={"/"} className="link"><BiHomeHeart/>Home</Link>
+            <Link textAlign="center" m="0" href={"/articles"} className="link"><BiListUl/>Articles</Link>
+          </Stack>
+        </Container>
       </>
     );
   }

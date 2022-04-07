@@ -71,23 +71,23 @@ const Navbar = () => {
   }
 
   useEffect(() => {
-    // setSelectedPage(location.pathname);
-   window.scrollTo({ top: 0, behavior: 'smooth' });
+    setSelectedPage(location.pathname);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   },[location])
 
   return (
+    <>
       <header>
         <Box 
         className="navbar" 
         bg={useColorModeValue('rgba(255,255,255,0.85)', 'gray.700')}
         position="fixed"
         backdropFilter="saturate(180%) blur(5px)"
-        zIndex="90"
         width="100%"
         >
         <Flex className="nav" h={16} alignItems={'center'} justifyContent={'center'}>
             <Box className="nav__logo">
-              <RouteLink to="/" className="logo" zIndex="100">
+              <RouteLink to="/" className="logo">
                 {colorMode === 'light' ? 
                 (<img src={logoLight} alt="" width={400}/>) 
                 : (<img src={logoDark} alt="" />)
@@ -98,6 +98,7 @@ const Navbar = () => {
         </Box>
         <ThemeSwitcher />
       </header>
+      </>
   )
 }
 // <NavLink key={link} >{link.name}</NavLink>

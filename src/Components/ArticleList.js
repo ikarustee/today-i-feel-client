@@ -54,7 +54,7 @@ const ArticleList = ({p}) => {
 
           <Box
             width={{ base: '100%', sm: '85%' }}
-            zIndex="2"
+            // zIndex="2"
             marginLeft={{ base: '0', sm: '5%' }}
             marginTop="5%">
             <Link textDecoration="none" _hover={{ textDecoration: 'none' }}>
@@ -68,7 +68,7 @@ const ArticleList = ({p}) => {
               />
             </Link>
           </Box>
-          <Box className="bg--dotted" zIndex="1" width="100%" position="absolute" height="100%">
+          <Box className="bg--dotted" width="100%" position="absolute" height="100%">
             <Box
               className="bg__dotted"
               backgroundSize="20px 20px"
