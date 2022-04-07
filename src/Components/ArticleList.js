@@ -16,7 +16,7 @@ import {
   useColorMode
 } from '@chakra-ui/react';
 
-const ArticleList = ({p}) => {
+const ArticleList = ({props}) => {
   const {articles, isLoading, getArticles} = useContext(ArticleContext)
   const [color, setColor] = useState("#5C90FF");
   const { colorMode, toggleColorMode } = useColorMode()
