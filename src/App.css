@@ -112,6 +112,10 @@ a.logo img {
   cursor: pointer;
   z-index: 95;
 }
+a.themeswitcher svg {
+  position: relative;
+  top: -0.3rem;
+}
 nav {
   position: relative;
   padding-right:0.5rem;
@@ -144,6 +148,14 @@ form#navsearch {
 }
 form#navsearch.show {
   transform: translateX(3rem);
+}
+button.navsearch  {
+  position: relative;
+  top:-0.3rem;
+}
+button.navsearch svg {
+  width: 24px;
+  height: 24px;
 }
 .chakra-slide.navslide .chakra-form-control #navsearch {
   display: flex;

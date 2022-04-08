@@ -78,7 +78,7 @@ const SearchResults = (props) => {
     console.log(props.voteResult)
     
     getSearchResult();
-  },[])
+  },[searchParams])
 
   if(isLoading) {
     return (
