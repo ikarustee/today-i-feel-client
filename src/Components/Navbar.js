@@ -13,7 +13,11 @@ import {
   useColorModeValue,
   Hide,
   Show,
-  Slide
+  Slide,
+  Menu,
+  MenuItem,
+  MenuButton,
+  MenuList
 } from '@chakra-ui/react';
 import StickyNav from './StickyNav';
 import ThemeSwitcher from "./ThemeSwitcher"
@@ -87,7 +91,7 @@ const Navbar = () => {
           // position="fixed"
           width="100%"
           >
-          <button onClick={onToggle} className="navsearch"><BiSearchAlt2 /></button>
+          <button onClick={onToggle} className="navsearch"><BiSearchAlt2 color="#5C90FF" /></button>
           <Slide className="navslide" direction='left' in={isOpen} style={{ zIndex: 10}}>
             <FormControl>
               <form id="navsearch" onSubmit={handleSearch}>
@@ -121,11 +125,11 @@ const Navbar = () => {
           // position="fixed"
           width="100%"
           >
-          <button onClick={onToggle} className="navsearch"><BiSearchAlt2 /></button>
+          <button onClick={onToggle} className="navsearch"><BiSearchAlt2 color="#5C90FF" /></button>
           <Slide className="navslide" direction='left' in={isOpen} style={{ zIndex: 10}}>
             <FormControl>
-              <form id="navsearch" onSubmit={handleSearch}>
                 <a onClick={onToggle} className="navsearch"><CloseIcon /></a>
+              <form id="navsearch" onSubmit={handleSearch}>
                 <Input 
                   id='text' 
                   type='text' 

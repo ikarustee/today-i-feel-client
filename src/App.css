@@ -147,7 +147,7 @@ form#navsearch input {
   top: 16px;
   left: 5px;
 }
-#navsearch a {width: 40px; height: 40px; background-color: #F7FAFC;}
+#navsearch a {width: 40px; height: 40px; background-color: #F7FAFC; cursor: pointer;}
 #navsearch a svg {position:relative; top: 25%; left:25%;}
 button.nav__btn {
   position: relative;
@@ -186,7 +186,7 @@ main {
 
 @media screen and (min-width: 992px) {
   header {
-    height: 100px;
+    height: 80px;
     margin-bottom: 0;
     display: flex;
     align-content: center;
@@ -387,8 +387,9 @@ path.recharts-polygon {
   justify-content: center;
   gap: 2rem;
 }
-.footer__links a {
-  font-size:12px;
+.footer__links a,
+.copyright {
+  font-size:14px;
 }
 .footer .logo img {
   width: 100px;
@@ -424,7 +425,8 @@ path.recharts-polygon {
     justify-content: center!important;
     gap: 2rem;
   }
-  .footer__links a {
+  .footer__links a,
+  .copyright {
     font-size:16px;
   }
 }
