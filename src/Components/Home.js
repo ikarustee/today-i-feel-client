@@ -155,46 +155,38 @@ const Home = (props) => {
       const newTags = collectedTags.filter((item) => item !== myTag)
       setCollectedTags(newTags)
       setCheckedTags((prev) => prev - 1)
-      setNewSearchParams(newSearchParams.filter((item) => item != myTag))
+      setNewSearchParams(newSearchParams.filter((item) => item !== myTag))
     }
   }
-  // console.log(newSearchParams)
-  // console.log(collectedTags)
-  const handleTagCollect = async () => {
-    let arr = newSearchParams.unshift("vote")
-    console.log(arr)
-    setNewSearchParams(arr)
-    setSearchParams(newSearchParams.join(" ,"))
-    console.log(searchParams)
-    // encodeURI(searchParams)
-    // console.log(searchParams, newSearchParams)
-    let url = "https://todayifeel-server.herokuapp.com/search/"+newSearchParams;
-    let response = await axios.get(url,{withCredentials:true});
-    console.log(response.data);
-    if( typeof response.data === "string"){
-      let save = localStorage.getItem('votedTags')
-      let saveArr = save.split(",")
-      saveArr.shift()
-      saveArr.unshift("voted")
-      console.log(saveArr)
-
-      newSearchParams.shift()
-      let arr = newSearchParams.unshift("voted")
+   const handleTagCollect = async () => {
+    //  console.log(JSON.stringify(newSearchParams).length)
+     if(JSON.stringify(newSearchParams).length > 2){
+      let arr = newSearchParams.unshift("vote")
+      console.log(arr)
       setNewSearchParams(arr)
-      console.log(newSearchParams)
-      alert(response.data +" you will be redirected to the results of you last vote")
-      navigate({
-        pathname: '/search',
-        search: `q=${encodeURI(saveArr)}`,
-    });
-    } else {
-      localStorage.setItem( 'votedTags', newSearchParams );
-        navigate({
-        pathname: '/search',
-        search: `q=${encodeURI(newSearchParams)}`,
-    });
-    }
-   
+      setSearchParams(newSearchParams.join(" ,"))
+      console.log(searchParams)
+      // encodeURI(searchParams)
+      
+      let url = "https://todayifeel-server.herokuapp.com/search/"+newSearchParams;
+      let response = await axios.get(url,{withCredentials:true});
+      console.log(response.data);
+      if( typeof response.data === "string"){
+        alert(response.data)
+        for(let i = 1; i< newSearchParams.length;i++){
+          console.log(newSearchParams[i])
+          document.getElementById(newSearchParams[i]).checked = false;
+        }
+        setCheckedTags(0)
+        setNewSearchParams([])
+      } else {
+        localStorage.setItem( 'votedTags', newSearchParams );
+          navigate({
+          pathname: '/search',
+          search: `q=${encodeURI(newSearchParams)}`,
+      });
+      }
+     }   
   }
 
 
