@@ -53,26 +53,25 @@ import {Link as RouteLink, useNavigate, useLocation} from "react-router-dom";
       <Container
           id="sticky"
           as={Stack}
-          bg={useColorModeValue('rgba(255,255,255,0.75)', 'gray.700')}
+          bg={useColorModeValue('rgb(237 242 247 / 85%)', 'gray.700')}
           backdropFilter="saturate(180%) blur(2px)"
           color={useColorModeValue('blue.400', 'white')}
           maxW={'100vw'}
           py={4}
           spacing={4}
-          justify={'center'}
           align={'center'}>
-          <Stack 
-          className="footer__links"
-          w='100%' 
-          direction={'row'} 
-          justify={'space-evenly'}
-          spacing={6} 
-          >
-          {location.pathname === "/" ? (null) : ( <a href="#" onClick={handleBack}><BiArrowBack/>Back</a>)}
-
-            <Link textAlign="center" m="0" href={"/"} className="link"><BiHomeHeart/>Home</Link>
-            <Link textAlign="center" m="0" href={"/articles"} className="link"><BiListUl/>Articles</Link>
-          </Stack>
+            <Stack 
+            padding="1rem"
+            className="footer__links"
+            w='100%' 
+            direction={'row'} 
+            spacing={2}
+            // gap="1rem"
+            >
+              {location.pathname === "/" ? (null) : ( <a href="#" onClick={handleBack}><BiArrowBack/>Back</a>)}
+              <Link textAlign="center" m="0" href={"/"} className="link"><BiHomeHeart/>Home</Link>
+              <Link textAlign="center" m="0" href={"/articles"} className="link"><BiListUl/>Articles</Link>
+            </Stack>
         </Container>
       </>
     );

@@ -3,41 +3,25 @@ import {Link as RouteLink, useNavigate, useLocation} from "react-router-dom";
 import {useColorMode} from "@chakra-ui/react"
 import {
   Box,
-  Flex,
-  Avatar,
-  HStack,
-  Link,
-  IconButton,
   Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
+  FormControl,
+  Input,
+  Flex,
+  Stack,
+  Link,
   useDisclosure,
   useColorModeValue,
-  Stack,
-  Collapse
+  Hide,
+  Show,
+  Slide
 } from '@chakra-ui/react';
-import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import StickyNav from './StickyNav';
 import ThemeSwitcher from "./ThemeSwitcher"
+import { CloseIcon } from '@chakra-ui/icons'
 import logoLight from "../img/logo-light@2x.png"
 import logoDark from "../img/logo-dark@2x.png"
-
-const LinksFromDOM = [
-  {
-    route: "/articles",
-    name: "All articles"
-  },
-  {
-    route: "/about",
-    name: "About"
-  },
-  {
-    route: "/contact",
-    name: "Contact"
-  }
-];
+import { BiSearchAlt2 } from "react-icons/bi";
+import { BiArrowBack, BiHomeHeart, BiListUl } from "react-icons/bi";
 
 const NavLink = ({ children }) => (
   <Link
@@ -55,14 +39,33 @@ const NavLink = ({ children }) => (
 );
 
 const Navbar = () => {
-  const { isOpen, onOpen, onClose, onToggle } = useDisclosure();
   const { colorMode, toggleColorMode } = useColorMode()
   const [currentPage, setCurrentPage] = useState("home")
+  const { isOpen, onOpen, onToggle } = useDisclosure()
   const [selectedPage, setSelectedPage] = useState()
 
   let location = useLocation();
   let navigate = useNavigate();
   // console.log(LinksFromDOM)
+
+  const handleBack = (e) => {
+    e.preventDefault()
+    navigate(-2)
+  }
+
+  const handleSearch = (event) => {
+    event.preventDefault()
+    if(!event.target.tag.value) {
+        return alert("Please enter a word")
+    } else {
+        console.log(event.target.tag.value)
+        navigate({
+          pathname: '/search',
+          search: `q=${encodeURI("search,"+event.target.tag.value)}`,
+        })
+        event.target.tag.value = "";
+      }
+    }
 
   const handleClick = (e) => {
     setCurrentPage({ current: e.key });
@@ -78,14 +81,29 @@ const Navbar = () => {
   return (
     <>
       <header>
-        <Box 
-        className="navbar" 
-        bg={useColorModeValue('rgba(255,255,255,0.85)', 'gray.700')}
-        // position="fixed"
-        backdropFilter="saturate(180%) blur(5px)"
-        width="100%"
-        >
-        <Flex className="nav" h={16} alignItems={'center'} justifyContent={'center'}>
+        <Hide above="992px">
+          <Box 
+          className="navbar" 
+          // position="fixed"
+          width="100%"
+          >
+          <button onClick={onToggle} className="navsearch"><BiSearchAlt2 /></button>
+          <Slide className="navslide" direction='left' in={isOpen} style={{ zIndex: 10}}>
+            <FormControl>
+              <form id="navsearch" onSubmit={handleSearch}>
+                <a onClick={onToggle} className="navsearch"><CloseIcon /></a>
+                <Input 
+                  id='text' 
+                  type='text' 
+                  name="tag" 
+                  placeholder="Search for e.g. tired"
+                  fontWeight="300"
+                  borderColor={"blue.300"}
+                  focusBorderColor={"blue.300"}
+                  />
+              </form>
+            </FormControl>
+          </Slide>
             <Box className="nav__logo">
               <RouteLink to="/" className="logo">
                 {colorMode === 'light' ? 
@@ -94,9 +112,48 @@ const Navbar = () => {
                 }
               </RouteLink>
             </Box>
-        </Flex>
-        </Box>
-        <ThemeSwitcher />
+          <ThemeSwitcher />
+          </Box>
+        </Hide>
+        <Show above='992px'>
+        <Box 
+          className="navbar" 
+          // position="fixed"
+          width="100%"
+          >
+          <button onClick={onToggle} className="navsearch"><BiSearchAlt2 /></button>
+          <Slide className="navslide" direction='left' in={isOpen} style={{ zIndex: 10}}>
+            <FormControl>
+              <form id="navsearch" onSubmit={handleSearch}>
+                <a onClick={onToggle} className="navsearch"><CloseIcon /></a>
+                <Input 
+                  id='text' 
+                  type='text' 
+                  name="tag" 
+                  placeholder="Search for e.g. tired"
+                  fontWeight="300"
+                  borderColor={"blue.300"}
+                  focusBorderColor={"blue.300"}
+                  />
+              </form>
+            </FormControl>
+          </Slide>
+          <Stack 
+            padding="1rem"
+            className="footer__links"
+            w='100%' 
+            direction={'row'} 
+            justify={'flex-start'}
+            spacing={2}
+            color={useColorModeValue('blue.400', 'white')} 
+            >
+              {location.pathname === "/" ? (null) : ( <a href="#" onClick={handleBack}><BiArrowBack/>Back</a>)}
+              <Link textAlign="center" m="0" href={"/"} className="link"><BiHomeHeart/>Home</Link>
+              <Link textAlign="center" m="0" href={"/articles"} className="link"><BiListUl/>Articles</Link>
+            </Stack>
+          <ThemeSwitcher />
+          </Box>
+        </Show>
       </header>
       </>
   )

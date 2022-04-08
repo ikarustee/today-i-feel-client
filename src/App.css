@@ -60,6 +60,7 @@ h6 strong {
   h1.teaser {
     font-size: 10vh;
     margin: 3rem auto;
+    padding-bottom: 12px;
 }
 }
 
@@ -80,10 +81,13 @@ header {
   height: 80px;
   width: 100%;
   margin: 0 auto 2rem;
-  padding: 0;
+  padding: 0 0 0 15px;
   position: relative;
   /* top: 2rem; */
   box-sizing: border-box;
+  align-content: center;
+  display: flex;
+  align-items: center;
 }
 a.logo {
   z-index: 100;
@@ -99,9 +103,9 @@ a.logo img {
 .themeswitcher {
   width: 40px;
   height:40px;
-  position: fixed;
+  position: relative;
   right: 0;
-  top:1rem;
+  top:0.5rem;
   cursor: pointer;
   z-index: 95;
 }
@@ -116,9 +120,35 @@ nav {
 .navbar {
   z-index: 90;
 }
+.navbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-flow: row;
+}
 .navlink {
   transition: all 300ms ease!important;
 }
+form#navsearch {
+  max-width: calc(50vw - 2rem);
+  margin: 0;
+  top: 1rem;
+  position: relative;
+  left: 1rem;
+  top: 0.5rem;
+}
+form#navsearch input {
+  background-color: white;
+}
+.chakra-slide.navslide .chakra-form-control #navsearch {
+  display: flex;
+  flex-wrap: nowrap;
+  position: relative;
+  top: 16px;
+  left: 5px;
+}
+#navsearch a {width: 40px; height: 40px; background-color: #F7FAFC;}
+#navsearch a svg {position:relative; top: 25%; left:25%;}
 button.nav__btn {
   position: relative;
   right: 15px;
@@ -154,11 +184,14 @@ main {
   }
 } */
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 992px) {
   header {
-    height:100px;
+    height: 100px;
     margin-bottom: 0;
-  }
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
   a.logo img {
     position: relative;
     left: 0;
@@ -168,14 +201,14 @@ main {
   .navbar > .nav {
     height: 100px;
   } */
-  .nav__logo {
+  /* .nav__logo {
     position: absolute;
     left: calc(50% - 75px);
-  }
-  a.themeswitcher {
+  } */
+  /* a.themeswitcher {
     top: 2.2rem;
     right: 0.5rem;
-}
+} */
 }
 
 /* Tag cloud ========== */
@@ -344,7 +377,6 @@ path.recharts-polygon {
 /* Footer ============= */
 /* =================== */
 .footer {
-  /* margin-top: 5rem; */
   position: relative;
   bottom: 0;
   width: 100%;
@@ -354,6 +386,9 @@ path.recharts-polygon {
 .footer__links {
   justify-content: center;
   gap: 2rem;
+}
+.footer__links a {
+  font-size:12px;
 }
 .footer .logo img {
   width: 100px;
@@ -365,16 +400,33 @@ path.recharts-polygon {
   position: sticky;
   bottom: 0;
   z-index: 90;
-  height: 60px;
+  height: 50px;
+  margin-top: 1.5rem;
 }
 #sticky a {
   text-decoration: none;
 }
-#sticky a svg {
+#sticky a svg,
+.footer__links a svg {
   display: inline-block;
   margin-right:4px;
   position: relative;
   top:2px;
+}
+@media screen and (min-width:992px) {
+  #sticky {
+    background-color: rgba(255,255,255,0.85);
+  }
+  .footer {
+    margin-top:3rem;
+  }
+  .footer__links {
+    justify-content: center!important;
+    gap: 2rem;
+  }
+  .footer__links a {
+    font-size:16px;
+  }
 }
 
 

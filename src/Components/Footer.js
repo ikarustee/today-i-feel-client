@@ -8,12 +8,10 @@ import {
     useColorMode,
     useColorModeValue,
     VisuallyHidden,
+    Hide
   } from '@chakra-ui/react';
-import { BiArrowBack, BiHomeHeart, BiListUl } from "react-icons/bi";
 import logoNegative from "../img/logoNegative@2x.png"
 import logoDark from "../img/logo-dark@2x.png"
-import { ReactNode } from 'react';
-import {Link as RouteLink, useNavigate, useLocation} from "react-router-dom";
 import StickyNav from "./StickyNav"
   
   const Logo = (props) => {
@@ -38,12 +36,12 @@ import StickyNav from "./StickyNav"
   
   export default function Footer() {
     const { colorMode, toggleColorMode } = useColorMode()
-    const navigate = useNavigate()
-    const location = useLocation()
 
     return (
       <>
-      <StickyNav></StickyNav>
+      <Hide above="992px">
+        <StickyNav />
+      </Hide>
       <Box
         className="footer"
         >
