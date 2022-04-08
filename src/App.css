@@ -16,13 +16,16 @@ button:focus {
 }
 /* Typography ========== */
 /* ==================== */
-h1, h2 {
+h1, h2, h3, h4, h5, h6 {
   font-family: 'Playfair Display';
   font-weight: normal!important;
   font-style: italic;
 }
 h4 {
   font-size: 2rem;
+  font-family: "Work Sans";
+  font-style: normal;
+  font-weight:300!important;
 }
 h1.teaser {
   font-size: 11vw;
@@ -109,6 +112,10 @@ a.logo img {
   cursor: pointer;
   z-index: 95;
 }
+a.themeswitcher svg {
+  position: relative;
+  top: -0.3rem;
+}
 nav {
   position: relative;
   padding-right:0.5rem;
@@ -133,12 +140,22 @@ form#navsearch {
   max-width: calc(50vw - 2rem);
   margin: 0;
   top: 1rem;
-  position: relative;
-  left: 1rem;
-  top: 0.5rem;
+  position: absolute;
+  left: 0;
+  top: 1rem;
+  transform: translateX(calc(-100% - 1rem - 42px));
+  transition: all 500ms ease;
 }
-form#navsearch input {
-  background-color: white;
+form#navsearch.show {
+  transform: translateX(3rem);
+}
+button.navsearch  {
+  position: relative;
+  top:-0.3rem;
+}
+button.navsearch svg {
+  width: 24px;
+  height: 24px;
 }
 .chakra-slide.navslide .chakra-form-control #navsearch {
   display: flex;
@@ -387,6 +404,10 @@ path.recharts-polygon {
   justify-content: center;
   gap: 2rem;
 }
+.footer__links a:hover {
+  text-decoration: none;
+  color:#BE72E9;
+}
 .footer__links a,
 .copyright {
   font-size:14px;
@@ -397,6 +418,7 @@ path.recharts-polygon {
 .footer a.link {
   margin-left: 0;
 }
+
 #sticky {
   position: sticky;
   bottom: 0;
@@ -476,9 +498,12 @@ svg.chakra-icon path {
   background-position: left bottom;
   width: 100%;
 } 
-button.btn--centered {
+.btn--centered {
   margin: 0 auto;
   display: block;
+}
+a.btn--centered.chart {
+  text-align: center;
 }
 
 .linear-wipe {

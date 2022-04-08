@@ -21,6 +21,7 @@ import {
 } from '@chakra-ui/react';
 import StickyNav from './StickyNav';
 import ThemeSwitcher from "./ThemeSwitcher"
+import NavSearch from './NavSearch';
 import { CloseIcon } from '@chakra-ui/icons'
 import logoLight from "../img/logo-light@2x.png"
 import logoDark from "../img/logo-dark@2x.png"
@@ -47,6 +48,13 @@ const Navbar = () => {
   const [currentPage, setCurrentPage] = useState("home")
   const { isOpen, onOpen, onToggle } = useDisclosure()
   const [selectedPage, setSelectedPage] = useState()
+  const [openClose, setOpenClose] = useState(false)
+
+  const openToggle = () => {
+    console.log("Hello world")
+    setOpenClose((prev) => !prev)
+    console.log(openClose)
+  }
 
   let location = useLocation();
   let navigate = useNavigate();
@@ -56,6 +64,7 @@ const Navbar = () => {
     e.preventDefault()
     navigate(-2)
   }
+
 
   const handleSearch = (event) => {
     event.preventDefault()
@@ -69,6 +78,7 @@ const Navbar = () => {
         })
         event.target.tag.value = "";
       }
+      setOpenClose(false)
     }
 
   const handleClick = (e) => {
@@ -91,23 +101,7 @@ const Navbar = () => {
           // position="fixed"
           width="100%"
           >
-          <button onClick={onToggle} className="navsearch"><BiSearchAlt2 color="#5C90FF" /></button>
-          <Slide className="navslide" direction='left' in={isOpen} style={{ zIndex: 10}}>
-            <FormControl>
-              <form id="navsearch" onSubmit={handleSearch}>
-                <a onClick={onToggle} className="navsearch"><CloseIcon /></a>
-                <Input 
-                  id='text' 
-                  type='text' 
-                  name="tag" 
-                  placeholder="Search for e.g. tired"
-                  fontWeight="300"
-                  borderColor={"blue.300"}
-                  focusBorderColor={"blue.300"}
-                  />
-              </form>
-            </FormControl>
-          </Slide>
+          <NavSearch open={openToggle} openClose={openClose} handleSearch={handleSearch} />
             <Box className="nav__logo">
               <RouteLink to="/" className="logo">
                 {colorMode === 'light' ? 
@@ -125,23 +119,7 @@ const Navbar = () => {
           // position="fixed"
           width="100%"
           >
-          <button onClick={onToggle} className="navsearch"><BiSearchAlt2 color="#5C90FF" /></button>
-          <Slide className="navslide" direction='left' in={isOpen} style={{ zIndex: 10}}>
-            <FormControl>
-                <a onClick={onToggle} className="navsearch"><CloseIcon /></a>
-              <form id="navsearch" onSubmit={handleSearch}>
-                <Input 
-                  id='text' 
-                  type='text' 
-                  name="tag" 
-                  placeholder="Search for e.g. tired"
-                  fontWeight="300"
-                  borderColor={"blue.300"}
-                  focusBorderColor={"blue.300"}
-                  />
-              </form>
-            </FormControl>
-          </Slide>
+          <NavSearch open={openToggle} openClose={openClose} handleSearch={handleSearch} />
           <Stack 
             padding="1rem"
             className="footer__links"

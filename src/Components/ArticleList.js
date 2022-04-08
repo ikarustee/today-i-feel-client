@@ -9,6 +9,7 @@ import {
   Heading,
   Link,
   Image,
+  Tag,
   Text,
   Divider,
   Container,
@@ -87,11 +88,20 @@ const ArticleList = ({p}) => {
               const excerpt = Object.values(a.body)
               return (
                 <Box key={a._id} bg={colorMode === "light" ? "white" : "gray.700"} className="single" boxShadow={'lg'} m="0" padding="2rem 1rem" borderRadius={8} _hover={{boxShadow: "xl"}} transition="all 300ms ease">
-                  <Heading marginTop="1" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
+                  <Heading m="1rem 0 0.35rem" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
                     <Link href={`articles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none' }} _focus={{boxShadow: "none"}}>
                       {a.title}
                     </Link>
                   </Heading>
+                  <Divider m="0 0 0.75rem" />
+                  {a.tags.map((t) => {
+                    return (
+                      <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="gray" color="gray.500" bg="gray.200" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>
+                        <Link href={`/search?q=search,${t}`} _hover={{textDecoration: "none", color: "white"}}>{t}</Link>
+                      </Tag>
+                    )
+                  })}
+                  <Divider m="0.5rem 0 0" />
                   <Text
                     className="excerpt"
                     as="p"
@@ -128,11 +138,20 @@ const ArticleList = ({p}) => {
               const excerpt = Object.values(a.body)
               return (
                 <Box key={a._id} bg={colorMode === "light" ? "white" : "gray.700"} className="single" boxShadow={'lg'} m="0" padding="2rem 1rem" borderRadius={8} _hover={{boxShadow: "xl"}} transition="all 300ms ease">
-                <Heading marginTop="1" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
+                <Heading m="1rem 0 0.35rem" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
                   <Link href={`articles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }} _focus={{boxShadow: "none"}}>
                     {a.title}
                   </Link>
                 </Heading>
+                <Divider m="0 0 0.75rem" />
+                  {a.tags.map((t) => {
+                    return (
+                      <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="gray" color="gray.500" bg="gray.200" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>
+                        <Link href={`/search?q=search,${t}`} _hover={{textDecoration: "none", color: "white"}}>{t}</Link>
+                      </Tag>
+                    )
+                  })}
+                <Divider m="0.5rem 0 0" />
                 <Text
                   className="excerpt"
                   as="p"
@@ -158,6 +177,7 @@ const ArticleList = ({p}) => {
                 </Box>
               )
             })
+            // .splice(1, 8)
             }
         </Box>
       <VStack paddingTop="40px" spacing="2" alignItems="flex-start">
