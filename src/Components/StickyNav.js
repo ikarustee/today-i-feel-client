@@ -53,7 +53,7 @@ import {Link as RouteLink, useNavigate, useLocation} from "react-router-dom";
       <Container
           id="sticky"
           as={Stack}
-          bg={useColorModeValue('rgb(237 242 247 / 85%)', 'gray.700')}
+          bg={useColorModeValue('rgb(237 242 247 / 85%)', 'blue.900')}
           backdropFilter="saturate(180%) blur(2px)"
           color={useColorModeValue('blue.400', 'white')}
           maxW={'100vw'}
