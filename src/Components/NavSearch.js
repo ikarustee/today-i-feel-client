@@ -1,13 +1,14 @@
 import React from 'react'
 import { Input, useColorMode } from '@chakra-ui/react'
 import {BiSearchAlt2} from "react-icons/bi";
+import { CloseIcon } from '@chakra-ui/icons'
 
 const NavSearch = ({open, handleSearch, openClose}) => {
   const { colorMode, toggleColorMode } = useColorMode()
 
   return (
       <>
-    <button onClick={open} className={`navsearch ${open ? "show" : ""}`}><BiSearchAlt2 color="#5C90FF" /></button>
+    <button onClick={open} className={`navsearch ${openClose ? "show" : "hide"}`}>{openClose ? (<CloseIcon color="#5C90FF" />) : (<BiSearchAlt2 color="#5C90FF" />)}</button>
         <form 
         id="navsearch" 
         className={`navsearch ${openClose ? "show" : ""}`}
