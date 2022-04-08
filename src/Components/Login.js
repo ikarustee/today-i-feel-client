@@ -24,7 +24,7 @@ import {
       console.log(email)
       const password = document.getElementById("password").value;
       console.log(password)
-      let url = "https://todayifeel-server.herokuapp.com/login"
+      let url = "http://localhost:3010/login"
       let response = await axios.post(url,{email:email,password:password},{withCredentials:true})
         let data = response.data;
         if(data.errors){
