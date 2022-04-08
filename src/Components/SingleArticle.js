@@ -48,7 +48,7 @@ const SingleArticle = () => {
                 <em>Tags: &nbsp;
                 {thisArticle.tags.map((t) => {
                   return (
-                    <Tag className="article__tag" key={t} size={'sm'} variant="outline" colorScheme="blue">{t}</Tag>
+                    <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="gray" color="gray.500" bg="gray.200">{t}</Tag>
                   )
                 })}
                 </em>

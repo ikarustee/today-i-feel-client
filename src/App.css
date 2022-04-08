@@ -16,7 +16,7 @@ button:focus {
 }
 /* Typography ========== */
 /* ==================== */
-h1, h2 {
+h1, h2, h3, h4, h5, h6 {
   font-family: 'Playfair Display';
   font-weight: normal!important;
   font-style: italic;
@@ -478,9 +478,12 @@ svg.chakra-icon path {
   background-position: left bottom;
   width: 100%;
 } 
-button.btn--centered {
+.btn--centered {
   margin: 0 auto;
   display: block;
+}
+a.btn--centered.chart {
+  text-align: center;
 }
 
 .linear-wipe {

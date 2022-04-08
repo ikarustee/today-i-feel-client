@@ -41,7 +41,20 @@ const Chart = () => {
   return (
     <Container className="chart" m="2rem 0" maxW={'7xl'} padding="0">
     <Heading as="h2" textAlign="center" color="blue.300" m="3rem 0 1.5rem">How do others feel?</Heading>
-    <Button className="btn--centered" fontWeight="300" onClick={onToggle}>{isOpen ? "Hide chart" : "Show chart"}</Button>
+      <Button 
+        className="btn--centered chart" 
+        fontWeight="400" 
+        onClick={onToggle}
+        borderColor="blue.300" 
+        borderWidth="2px" 
+        color="blue.300" 
+        display="block"
+        bg="white"
+        height="auto"
+        padding="4px 10px"
+        _hover={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
+        variant='outlie'
+      >{isOpen ? "Hide chart" : "Show chart"}</Button>
       <ScaleFade initialScale={0.9} in={isOpen}>
         <Box
           p='1rem'
@@ -58,8 +71,8 @@ const Chart = () => {
                 <PolarGrid />
                 <PolarAngleAxis dataKey="name" />
                 {/* <PolarRadiusAxis angle={50} domain={[0, 100]} /> */}
-                <Radar name="all time" dataKey="allTime" stroke="#0a58ff" fill="#154fa6" fillOpacity={0.3} />
-                <Radar name="weekly" dataKey="weekly" stroke="#4782ff" fill="#709dff" fillOpacity={0.6} />
+                <Radar name="all time" dataKey="allTime" stroke="#4782ff" fill="#5C90FF" fillOpacity={0.3} />
+                <Radar name="weekly" dataKey="weekly" stroke="#9922DD" fill="#AB4AE3" fillOpacity={0.6} />
                 <Legend />
             </RadarChart>
           </ResponsiveContainer>
