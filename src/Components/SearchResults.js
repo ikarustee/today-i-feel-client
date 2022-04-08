@@ -102,13 +102,15 @@ const SearchResults = (props) => {
                       {a.title}
                     </Link>
                   </Heading>
-                  <em> Tags: &nbsp;
+                  <Divider m="0 0 0.75rem" />
                   {a.tags.map((t) => {
                     return (
-                      <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="gray" color="gray.500" bg="gray.200">{t}</Tag>
+                      <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="gray" color="gray.500" bg="gray.200" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>
+                        <Link href={`/search?q=search,${t}`} _hover={{textDecoration: "none", color: "white"}}>{t}</Link>
+                      </Tag>
                     )
                   })}
-                  </em>
+                  <Divider m="0.5rem 0 0" />
                   <Text
                     className="excerpt"
                     as="p"
@@ -116,7 +118,21 @@ const SearchResults = (props) => {
                     fontSize="md">
                     {excerpt.join("").split(" ").slice(0, 25).join(" ") + " ..."}
                   </Text>
-                  <Link href={`articles/${a._id}`} className="readmore__btn" color="blue.300" fontWeight={500} textAlign="left" textDecoration="none" _hover={{color: "purple.300"}}>Read article</Link>
+                  <Link href={`articles/${a._id}`}  color="blue.300" fontWeight={500} textAlign="left" textDecoration="none" _hover={{color: "purple.300"}}>
+                    <Button 
+                        // className="readmore__btn" 
+                        borderColor="transparent" 
+                        borderWidth="2px" 
+                        color="white" 
+                        bg="blue.300"
+                        fontWeight="400"
+                        height="auto"
+                        padding="4px 10px"
+                        _hover={{bg: "white", color: "blue.300", border: "2px solid #5C90FF"}} 
+                        variant='solid'>
+                        Read article
+                      </Button>
+                  </Link>
                 <br/>
               </Box> )       
           }

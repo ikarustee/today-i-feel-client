@@ -23,6 +23,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 h4 {
   font-size: 2rem;
+  font-family: "Work Sans";
+  font-style: normal;
+  font-weight:300!important;
 }
 h1.teaser {
   font-size: 11vw;
@@ -389,6 +392,10 @@ path.recharts-polygon {
   justify-content: center;
   gap: 2rem;
 }
+.footer__links a:hover {
+  text-decoration: none;
+  color:#BE72E9;
+}
 .footer__links a,
 .copyright {
   font-size:14px;
@@ -399,6 +406,7 @@ path.recharts-polygon {
 .footer a.link {
   margin-left: 0;
 }
+
 #sticky {
   position: sticky;
   bottom: 0;

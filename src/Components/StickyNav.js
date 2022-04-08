@@ -68,7 +68,7 @@ import {Link as RouteLink, useNavigate, useLocation} from "react-router-dom";
             spacing={2}
             // gap="1rem"
             >
-              {location.pathname === "/" ? (null) : ( <a href="#" onClick={handleBack}><BiArrowBack/>Back</a>)}
+              {location.pathname === "/" ? (null) : ( <a className="link" href="#" onClick={handleBack}><BiArrowBack/>Back</a>)}
               <Link textAlign="center" m="0" href={"/"} className="link"><BiHomeHeart/>Home</Link>
               <Link textAlign="center" m="0" href={"/articles"} className="link"><BiListUl/>Articles</Link>
             </Stack>
