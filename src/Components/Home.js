@@ -103,7 +103,7 @@ import { css } from "@emotion/react";
 // ]
 
 
-const Home = () => {
+const Home = (props) => {
   const [startSlice , setStartSlice] = useState(0);
   const [initialTags , setInitialTags] = useState(5);
   const [increaseTags, setIncreaseTags] = useState(3);
@@ -112,6 +112,7 @@ const Home = () => {
   const [newSearchParams, setNewSearchParams] = useState([]) 
   const [searchParams, setSearchParams] = useSearchParams();
   const [data, setData] = useState([]);
+
   // const [isLoading, setIsLoading] = useState(true)
   const [color, setColor] = useState("#FFFFFF");
 
@@ -135,7 +136,12 @@ const Home = () => {
       console.log(error)
     }
   }
-
+  async function getSearchResult(){
+    // setIsLoading(true);
+    
+    // setIsLoading(false);
+    // setTagURL(url)
+}
   useEffect(() => {
     getTagsFromDB()
     console.log(initialTags)
@@ -161,26 +167,38 @@ const Home = () => {
       const newTags = collectedTags.filter((item) => item !== myTag)
       setCollectedTags(newTags)
       setCheckedTags((prev) => prev - 1)
-      setNewSearchParams(newSearchParams.filter((item) => item != myTag))
+      setNewSearchParams(newSearchParams.filter((item) => item !== myTag))
     }
   }
-  // console.log(newSearchParams)
-  // console.log(collectedTags)
-
-  const handleTagCollect = () => {
-
-    let arr = newSearchParams.unshift("vote")
-    console.log(arr)
-    setNewSearchParams(arr)
-    console.log(newSearchParams)
-    setSearchParams(newSearchParams.join(" ,"))
-    console.log(searchParams)
-
-    encodeURI(searchParams)
-    navigate({
-      pathname: '/search',
-      search: `q=${encodeURI(newSearchParams)}`,
-    });
+   const handleTagCollect = async () => {
+    //  console.log(JSON.stringify(newSearchParams).length)
+     if(JSON.stringify(newSearchParams).length > 2){
+      let arr = newSearchParams.unshift("vote")
+      console.log(arr)
+      setNewSearchParams(arr)
+      setSearchParams(newSearchParams.join(" ,"))
+      console.log(searchParams)
+      // encodeURI(searchParams)
+      
+      let url = "https://todayifeel-server.herokuapp.com/search/"+newSearchParams;
+      let response = await axios.get(url,{withCredentials:true});
+      console.log(response.data);
+      if( typeof response.data === "string"){
+        alert(response.data)
+        for(let i = 1; i< newSearchParams.length;i++){
+          console.log(newSearchParams[i])
+          document.getElementById(newSearchParams[i]).checked = false;
+        }
+        setCheckedTags(0)
+        setNewSearchParams([])
+      } else {
+        localStorage.setItem( 'votedTags', newSearchParams );
+          navigate({
+          pathname: '/search',
+          search: `q=${encodeURI(newSearchParams)}`,
+      });
+      }
+     }   
   }
 
 
@@ -248,7 +266,7 @@ const Home = () => {
                 </Button>
             </Flex>
         </div>
-      <Search />
+      <Search/>
     </> 
   )
 }

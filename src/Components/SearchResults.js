@@ -22,14 +22,14 @@ import { css } from "@emotion/react";
 import axios from "axios";
 
 
-const SearchResults = () => {
-    // const {articles, isLoading, getArticles, setIsloading} = useContext(ArticleContext)
+const SearchResults = (props) => {
+    const {articles, isLoading, getArticles, setIsloading} = useContext(ArticleContext)
     const [searchParams, setSearchParams] = useSearchParams();
     const [color, setColor] = useState("#5C90FF");
-    // const [searchTags, setSearchTags] = useState("")
-    const [searchResult, setSearchResult] = useState([])
-    const [isLoading, setIsLoading] = useState(true);
-    // const [tagURL, setTagURL] = useState("")
+    const [searchResult, setSearchResult] = useState([]);
+    // const [ voteResults, setVoteResult] = useState(props.voteResult)
+    // const [isLoading, setIsLoading] = useState(true);
+    
     const { colorMode, toggleColorMode } = useColorMode()
 
     const override = css`
@@ -40,18 +40,43 @@ const SearchResults = () => {
   
     let searchTags = searchParams.get("q").split(" ").join(",");
     async function getSearchResult(){
-      setIsLoading(true);
-      let url = "https://todayifeel-server.herokuapp.com/search/"+searchTags;
-      let response = await axios.get(url,{withCredentials:true});
-      console.log(typeof response.data);
-      setSearchResult(response.data);
-      setIsLoading(false);
+      // setIsLoading(true);
+      console.log(searchParams.get("q").split(" ").join(",").split(","))
+      if(searchParams.get("q").split(" ").join(",").split(",")[0] === "search"){
+        let url = "https://todayifeel-server.herokuapp.com/search/"+searchTags;
+        let response = await axios.get(url,{withCredentials:true});
+        console.log(response.data);
+        setSearchResult(response.data);
+      } else if(searchParams.get("q").split(" ").join(",").split(",")[0] === "vote"){
+        let arr = searchTags.split(",")
+        arr.shift()
+        arr.unshift("search")
+        arr.join(",")
+        console.log(arr.join(","))
+        let url = "https://todayifeel-server.herokuapp.com/search/"+arr.join(",");
+        let response = await axios.get(url,{withCredentials:true});
+        console.log(response.data);
+        setSearchResult(response.data);
+      } else if(searchParams.get("q").split(" ").join(",").split(",")[0] === "voted"){
+        let arr = searchTags.split(",")
+        arr.shift()
+        arr.unshift("search")
+        arr.join(",")
+        console.log(arr.join(","))
+        let url = "https://todayifeel-server.herokuapp.com/search/"+arr.join(",");
+        let response = await axios.get(url,{withCredentials:true});
+        console.log(response.data);
+        setSearchResult(response.data);
+      }
+      
+      // setIsLoading(false);
       // setTagURL(url)
   }
   useEffect(() => {
-    // getArticles(decodeURI(searchParams.get("q").split(" ").join(",")))
-    console.log(searchParams.get("q").split(" ").join(","))
-    // console.log(searchParams.get("q").split(" ").join("+"))
+    getArticles(decodeURI(searchParams.get("q").split(" ").join(",")))
+    // console.log(searchParams.get("q").split(" ").join(","))
+    console.log(props.voteResult)
+    
     getSearchResult();
   },[])
 
@@ -67,7 +92,7 @@ const SearchResults = () => {
       <Container className="articles" maxW={'7xl'} minH="100vh" m="2rem 0" p="0">
       <Heading as="h1" color="blue.300" m="1rem 0">{searchTags.includes("search") ? "Search results" : "Suggested articles"}</Heading>
         <Flex flexWrap="wrap" gap="1rem">
-          {typeof searchResult === "string" ? (<p>{searchResult}</p>):(searchResult.map((a) => {
+          {searchResult.map((a) => {
               const excerpt = Object.values(a.body)
               return(
                 <Box
@@ -95,7 +120,7 @@ const SearchResults = () => {
                 <br/>
               </Box> )       
           }
-          ))}
+          )}
         </Flex>
       <Chart /> 
       </Container>
