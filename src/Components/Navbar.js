@@ -81,7 +81,7 @@ const Navbar = () => {
         <Box 
         className="navbar" 
         bg={useColorModeValue('rgba(255,255,255,0.85)', 'gray.700')}
-        position="fixed"
+        // position="fixed"
         backdropFilter="saturate(180%) blur(5px)"
         width="100%"
         >
