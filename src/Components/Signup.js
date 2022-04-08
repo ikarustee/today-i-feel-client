@@ -25,7 +25,7 @@ import { Label } from 'recharts';
       console.log(email)
       const password = document.getElementById("password").value;
       console.log(password)
-      let url = "http://localhost:3010/user"
+      let url = "https://todayifeel-server.herokuapp.com/user"
       let response = await axios.post(url,{email:email,password:password},{withCredentials:true});
       let data = response.data;
       if(data.errors){
