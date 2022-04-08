@@ -100,7 +100,7 @@ import {
 // ]
 
 
-const Home = () => {
+const Home = (props) => {
   const [startSlice , setStartSlice] = useState(0);
   const [initialTags , setInitialTags] = useState(5);
   const [increaseTags, setIncreaseTags] = useState(3);
@@ -109,6 +109,7 @@ const Home = () => {
   const [newSearchParams, setNewSearchParams] = useState([]) 
   const [searchParams, setSearchParams] = useSearchParams();
   const [data, setData] = useState([]);
+  const [firstClick, setFirstClick] = useState(true)
 
   const navigate = useNavigate();
   // const location = useLocation();
@@ -124,7 +125,12 @@ const Home = () => {
       console.log(error)
     }
   }
-
+  async function getSearchResult(){
+    // setIsLoading(true);
+    
+    // setIsLoading(false);
+    // setTagURL(url)
+}
   useEffect(() => {
     getTagsFromDB()
     console.log(initialTags)
@@ -154,21 +160,41 @@ const Home = () => {
   }
   // console.log(newSearchParams)
   // console.log(collectedTags)
-
-  const handleTagCollect = () => {
-
+  const handleTagCollect = async () => {
     let arr = newSearchParams.unshift("vote")
     console.log(arr)
     setNewSearchParams(arr)
-    console.log(newSearchParams)
     setSearchParams(newSearchParams.join(" ,"))
     console.log(searchParams)
+    // encodeURI(searchParams)
+    // console.log(searchParams, newSearchParams)
+    let url = "https://todayifeel-server.herokuapp.com/search/"+newSearchParams;
+    let response = await axios.get(url,{withCredentials:true});
+    console.log(response.data);
+    if( typeof response.data === "string"){
+      let save = localStorage.getItem('votedTags')
+      let saveArr = save.split(",")
+      saveArr.shift()
+      saveArr.unshift("voted")
+      console.log(saveArr)
 
-    encodeURI(searchParams)
-    navigate({
-      pathname: '/search',
-      search: `q=${encodeURI(newSearchParams)}`,
+      newSearchParams.shift()
+      let arr = newSearchParams.unshift("voted")
+      setNewSearchParams(arr)
+      console.log(newSearchParams)
+      alert(response.data +" you will be redirected to the results of you last vote")
+      navigate({
+        pathname: '/search',
+        search: `q=${encodeURI(saveArr)}`,
     });
+    } else {
+      localStorage.setItem( 'votedTags', newSearchParams );
+        navigate({
+        pathname: '/search',
+        search: `q=${encodeURI(newSearchParams)}`,
+    });
+    }
+   
   }
 
 
@@ -235,7 +261,7 @@ const Home = () => {
                 </Button>
             </Flex>
         </div>
-      <Search />
+      <Search/>
     </> 
   )
 }

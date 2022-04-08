@@ -50,15 +50,15 @@ import {
       tagArray = tagArray.map(el=>el.trim())
       console.log(title,tagArray)
     
-      let server = "http://localhost:3010/articles"
-      axios.post(server,{title:title,body:body, tags:tagArray}).then((response)=> {
+      let server = "https://todayifeel-server.herokuapp.com/articles"
+      axios.post(server,{title:title,body:body, tags:tagArray, url:url}).then((response)=> {
             console.log(response)
             navigate("/adminDashboard")
           })
     }
     useEffect(()=>{
       async function verifyTest(){
-          axios.get("http://localhost:3010/verify",{withCredentials:true}).then((response)=>{
+          axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true}).then((response)=>{
               console.log(response.data !== "OK")
               if (response.data !== "OK"){
                   alert("Please Login First!")

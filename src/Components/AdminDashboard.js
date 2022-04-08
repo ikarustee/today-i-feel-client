@@ -20,7 +20,7 @@ import { useEffect, useState } from 'react';
     const navigate = useNavigate();
     // const [verify, setVerify] = useState("");
     function logoutUser(){
-      let url = "http://localhost:3010/logout"
+      let url = "https://todayifeel-server.herokuapp.com/logout"
       axios.get(url,{withCredentials:true}).then((response)=> {
           navigate("/");
         console.log(response)
@@ -29,7 +29,7 @@ import { useEffect, useState } from 'react';
    
     useEffect(()=>{
         async function verifyTest(){
-            axios.get("http://localhost:3010/verify",{withCredentials:true}).then((response)=>{
+            axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true}).then((response)=>{
                 console.log(response.data !== "OK")
                 if (response.data !== "OK"){
                     alert("Please Login First!")

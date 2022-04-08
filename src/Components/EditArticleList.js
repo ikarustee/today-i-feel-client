@@ -40,7 +40,7 @@ const EditArticleList = ({p}) => {
 // }
 useEffect(()=>{
     async function verifyTest(){
-        axios.get("http://localhost:3010/verify",{withCredentials:true}).then((response)=>{
+        axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true}).then((response)=>{
             console.log(response.data !== "OK")
             if (response.data !== "OK"){
                 alert("Please Login First!")

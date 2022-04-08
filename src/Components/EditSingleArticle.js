@@ -59,14 +59,14 @@ import {
       tagArray = tagArray.map(el=>el.trim())
       console.log(title,tagArray)
     
-      let server = "http://localhost:3010/articles/"+id.toString()
-      axios.put(server,{title:title,body:body, tags:tagArray}).then((response)=> {
+      let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
+      axios.put(server,{title:title,body:body, tags:tagArray, url:url}).then((response)=> {
             console.log(response)
             navigate("/adminDashboard")
           })
     }
     async function verifyTest(){
-        let response = await axios.get("http://localhost:3010/verify",{withCredentials:true})
+        let response = await axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true})
         console.log(response.data !== "OK")
           if (response.data !== "OK"){
               alert("Please Login First!")
@@ -74,12 +74,6 @@ import {
           }
     }
     useEffect(()=>{
-    //    async function siteSetup(){
-    //     getArticles().then(()=>{}).then(()=>{
-            
-    //     })
-    //    }
-    //    siteSetup()
       getArticles();
       verifyTest();
     },[])
