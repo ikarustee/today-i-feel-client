@@ -5,11 +5,14 @@ import Search from './Search';
 import {
   Box,
   Button,
+  Container,
   Flex,
   FormControl,
   Input,
   Heading,
 } from '@chakra-ui/react';
+import DotLoader from "react-spinners/DotLoader";
+import { css } from "@emotion/react";
 
 // let tags = [
 //   { 
@@ -109,7 +112,15 @@ const Home = (props) => {
   const [newSearchParams, setNewSearchParams] = useState([]) 
   const [searchParams, setSearchParams] = useSearchParams();
   const [data, setData] = useState([]);
-  const [firstClick, setFirstClick] = useState(true)
+
+  // const [isLoading, setIsLoading] = useState(true)
+  const [color, setColor] = useState("#FFFFFF");
+
+  const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
   const navigate = useNavigate();
   // const location = useLocation();
@@ -134,6 +145,7 @@ const Home = (props) => {
   useEffect(() => {
     getTagsFromDB()
     console.log(initialTags)
+    // if(data.length) return setIsLoading(false)
     // setData(tags.slice(0, initialTags));
   }, []);
 
@@ -226,6 +238,7 @@ const Home = (props) => {
             .slice(startSlice, initialTags)
             }
             </form>
+
             <Flex className="tagcloud__btnholder" flexWrap="nowrap" justifyContent="center">
             {initialTags >= data.length ? (null) : (
               <Button 

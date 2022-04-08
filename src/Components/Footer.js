@@ -2,18 +2,17 @@ import {
     Box,
     chakra,
     Container,
+    Flex,
     Link,
     Stack,
     Text,
     useColorMode,
     useColorModeValue,
     VisuallyHidden,
+    Hide
   } from '@chakra-ui/react';
-import { BiArrowBack, BiHomeHeart, BiListUl } from "react-icons/bi";
 import logoNegative from "../img/logoNegative@2x.png"
 import logoDark from "../img/logo-dark@2x.png"
-import { ReactNode } from 'react';
-import {Link as RouteLink, useNavigate, useLocation} from "react-router-dom";
 import StickyNav from "./StickyNav"
   
   const Logo = (props) => {
@@ -38,12 +37,12 @@ import StickyNav from "./StickyNav"
   
   export default function Footer() {
     const { colorMode, toggleColorMode } = useColorMode()
-    const navigate = useNavigate()
-    const location = useLocation()
 
     return (
       <>
-      <StickyNav></StickyNav>
+      <Hide above="992px">
+        <StickyNav />
+      </Hide>
       <Box
         className="footer"
         >
@@ -62,13 +61,21 @@ import StickyNav from "./StickyNav"
             spacing={4}
             justify={{ base: 'space-between', md: 'space-between' }}
             align={{ base: 'center', md: 'center' }}>
-              <Link to="/" className="logo">
-                {colorMode === 'light' ? 
-                (<img src={logoNegative} alt="" width={400}/>) 
-                : (<img src={logoDark} alt="" />)
-                }
-              </Link>
-            <Text>© 2022 Jan Niklas Pudschun & Tanja Karius</Text>
+              <Flex gap="1rem">
+                <Link to="/about" _hover={{color: "blue.700", textDecoration: "none"}}>About</Link>
+                <Link to="/contact" _hover={{color: "blue.700", textDecoration: "none"}}>Contact</Link>
+                <Link to="/imprint" _hover={{color: "blue.700", textDecoration: "none"}}>Imprint</Link>
+                <Link to="/privacy-policy" _hover={{color: "blue.700", textDecoration: "none"}}>Privacy Policy</Link>
+              </Flex>
+              <Flex gap="1rem">
+                <Link to="/" className="logo">
+                  {colorMode === 'light' ? 
+                  (<img src={logoNegative} alt="" width={400}/>) 
+                  : (<img src={logoDark} alt="" />)
+                  }
+                </Link>
+                <Text className="copyright">© 2022 Jan Niklas Pudschun & Tanja Karius</Text>
+              </Flex>
           </Container>
         </Box>
       </Box>
