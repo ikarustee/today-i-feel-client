@@ -85,6 +85,9 @@ header {
   /* top: 2rem; */
   box-sizing: border-box;
 }
+a.logo {
+  z-index: 100;
+}
 a.logo img {
   display: block;
   width: 100%;
@@ -96,10 +99,11 @@ a.logo img {
 .themeswitcher {
   width: 40px;
   height:40px;
-  position: relative;
-  left: 1rem;
-  top:0;
+  position: fixed;
+  right: 0;
+  top:1rem;
   cursor: pointer;
+  z-index: 95;
 }
 nav {
   position: relative;
@@ -108,6 +112,9 @@ nav {
   z-index: 10;
   visibility: visible;
   opacity: 1;
+}
+.navbar {
+  z-index: 90;
 }
 .navlink {
   transition: all 300ms ease!important;
@@ -148,17 +155,27 @@ main {
 } */
 
 @media screen and (min-width: 768px) {
-  header {margin-bottom: 0;}
+  header {
+    height:100px;
+    margin-bottom: 0;
+  }
   a.logo img {
     position: relative;
     left: 0;
     margin: 0;
   }
+  /* .navbar,
+  .navbar > .nav {
+    height: 100px;
+  } */
   .nav__logo {
     position: absolute;
     left: calc(50% - 75px);
-    top: 1rem;
   }
+  a.themeswitcher {
+    top: 2.2rem;
+    right: 0.5rem;
+}
 }
 
 /* Tag cloud ========== */
@@ -260,6 +277,9 @@ article {
 .excerpt {
   margin-bottom: 1rem;
 }
+.bg--dotted {
+  z-index: -1;
+}
 .bg__dotted {
   background-image: radial-gradient(#5C90FF 1px, transparent 1px);
   -webkit-background-size: 20px 20px;
@@ -324,11 +344,12 @@ path.recharts-polygon {
 /* Footer ============= */
 /* =================== */
 .footer {
-  margin-top: 2rem;
-}
-.footer .chakra-stack.chakra-container {
+  /* margin-top: 5rem; */
+  position: relative;
+  bottom: 0;
   width: 100%;
-  max-width: 1100px;
+  max-width: 1100vw;
+  position: relative;
 }
 .footer__links {
   justify-content: center;
@@ -340,6 +361,22 @@ path.recharts-polygon {
 .footer a.link {
   margin-left: 0;
 }
+#sticky {
+  position: sticky;
+  bottom: 0;
+  z-index: 90;
+  height: 60px;
+}
+#sticky a {
+  text-decoration: none;
+}
+#sticky a svg {
+  display: inline-block;
+  margin-right:4px;
+  position: relative;
+  top:2px;
+}
+
 
 /* Elements =========== */
 /* =================== */

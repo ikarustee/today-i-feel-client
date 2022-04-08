@@ -71,17 +71,21 @@ const Navbar = () => {
   }
 
   useEffect(() => {
-    // setSelectedPage(location.pathname);
-   window.scrollTo({ top: 0, behavior: 'smooth' });
+    setSelectedPage(location.pathname);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   },[location])
 
   return (
+    <>
       <header>
-        <Box className="navbar" bg={useColorModeValue('rgba(255,255,255,0.85)', 'gray.700')}>
-        {/* <Box className="navbar" bg={useColorModeValue('rgba(255,255,255,0.85)', 'transparent')}> */}
-        <Flex className="nav" h={16} alignItems={'center'} justifyContent={'space-between'}>
-          <ThemeSwitcher />
-          <HStack spacing={8} alignItems={'center'}>
+        <Box 
+        className="navbar" 
+        bg={useColorModeValue('rgba(255,255,255,0.85)', 'gray.700')}
+        // position="fixed"
+        backdropFilter="saturate(180%) blur(5px)"
+        width="100%"
+        >
+        <Flex className="nav" h={16} alignItems={'center'} justifyContent={'center'}>
             <Box className="nav__logo">
               <RouteLink to="/" className="logo">
                 {colorMode === 'light' ? 
@@ -90,41 +94,11 @@ const Navbar = () => {
                 }
               </RouteLink>
             </Box>
-            <HStack
-              as={'nav'}
-              spacing={4}
-              display={{ base: 'none', md: 'flex' }}
-              >
-              {LinksFromDOM.map((link) => (
-                <NavLink key={link.route} onClick={handleClick} >{link.route} {link.name}</NavLink>
-              ))}
-            </HStack>
-          </HStack>
-          <IconButton
-            className="nav__btn"
-            size={'md'}
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={'Open Menu'}
-            display={{ md: 'none' }}
-            onClick={onToggle}
-          />
         </Flex>
-        <Collapse className="collapse" in={isOpen} animateOpacity>
-          <Box 
-          bg={useColorModeValue('white', 'gray.700')}
-          className="mobile" 
-          pb={4} 
-          display={{ md: 'none' }}>
-            <Stack as={'nav'} spacing={4}>
-              {LinksFromDOM.map((link) => (
-                <NavLink key={link.route} className="link">{link.route} {link.name}</NavLink>
-              ))}
-            </Stack>
-          </Box>
-
-      </Collapse>
-      </Box>
+        </Box>
+        <ThemeSwitcher />
       </header>
+      </>
   )
 }
 // <NavLink key={link} >{link.name}</NavLink>
