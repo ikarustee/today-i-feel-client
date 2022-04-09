@@ -356,6 +356,7 @@ article {
   flex-basis: 100%;
   font-size:14px;
   color: #A0AEC0;
+  margin-top: -4px;
 }
 .excerpt {
   margin-bottom: 1rem;

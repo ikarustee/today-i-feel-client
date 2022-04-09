@@ -68,7 +68,7 @@ import { useEffect, useState } from 'react';
                     borderColor="blue.300"
                     borderWidth="1px" 
                     color="blue.300"
-                    bg="white"
+                    bg={useColorModeValue("white", "gray.700")}
                     fontWeight="300"
                     height="auto"
                     padding="4px 10px"
@@ -83,7 +83,7 @@ import { useEffect, useState } from 'react';
                     borderColor="blue.300"
                     borderWidth="1px" 
                     color="blue.300"
-                    bg="white"
+                    bg={useColorModeValue("white", "gray.700")}
                     fontWeight="300"
                     height="auto"
                     padding="4px 10px"
