@@ -39,6 +39,8 @@ const SearchResults = (props) => {
   `;
   
     let searchTags = searchParams.get("q").split(" ").join(",");
+    let sanitizedSearchTags = searchTags.split(",").slice(1).join(" ")
+    // console.log(sanitizedSearchTags)
     async function getSearchResult(){
       // setIsLoading(true);
       console.log(searchParams.get("q").split(" ").join(",").split(","))
@@ -90,7 +92,7 @@ const SearchResults = (props) => {
     return (
       <>
       <Container className="articles" maxW={'7xl'} minH="100vh" m="2rem 0" p="0">
-      <Heading as="h1" color="blue.300" m="1rem 0">{searchTags.includes("search") ? "Search results" : "Suggested articles"}</Heading>
+      <Heading as="h1" color="blue.300" m="1rem 0">{searchTags.includes("search") ? `Search results for: "${sanitizedSearchTags}"` : `Suggested articles for: "${sanitizedSearchTags}"`}</Heading>
         <Flex flexWrap="wrap" gap="1rem">
           {searchResult.map((a) => {
               const excerpt = Object.values(a.body)
@@ -116,7 +118,7 @@ const SearchResults = (props) => {
                     as="p"
                     marginTop="2"
                     fontSize="md">
-                    {excerpt.join("").split(" ").slice(0, 25).join(" ") + " ..."}
+                    {a.body.replace(/[#_]/g,'').split(" ").slice(0, 25).join(" ") + " ..."}
                   </Text>
                   <Link href={`articles/${a._id}`}  color="blue.300" fontWeight={500} textAlign="left" textDecoration="none" _hover={{color: "purple.300"}}>
                     <Button 
