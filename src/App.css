@@ -354,7 +354,6 @@ article {
   font-size:14px;
   color: #A0AEC0;
 }
-
 .excerpt {
   margin-bottom: 1rem;
 }
@@ -368,8 +367,18 @@ article {
   opacity: 0.4;
   height: 100%;
 }
+.article__date {
+  font-size: 14px;
+  display: block;
+  text-align: center;
+}
 .article__tag {
   margin-right: 4px;
+}
+.article__tag.label {
+  font-size:12px;
+  position: relative;
+  top:-4px;
 }
 @media screen and (min-width:768px) {
   .articles__list .single,
