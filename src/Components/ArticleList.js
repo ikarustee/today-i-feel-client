@@ -40,7 +40,7 @@ const ArticleList = ({p}) => {
       </Container>
     ) : (
      <Container maxW={'7xl'} className="article__list" p="0">
-      <Heading as="h1" color="blue.300">All articles</Heading>
+      <Heading as="h1" color="blue.300">Latest article</Heading>
       <Box
         marginTop={{ base: '1', sm: '5' }}
         display="flex"
@@ -96,7 +96,7 @@ const ArticleList = ({p}) => {
                 borderRadius={8} 
                 _hover={{boxShadow: "xl"}} 
                 transition="all 300ms ease">
-                  <Heading m="1rem 0 0.35rem" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
+                  <Heading m="1rem 0 0.75rem" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
                   <Link href={`articles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }} _focus={{boxShadow: "none"}}>
                       {a.title}
                     </Link>
@@ -139,7 +139,7 @@ const ArticleList = ({p}) => {
             }
         </Box>
       </Box>
-      <Heading as="h2" marginTop="5">Latest articles</Heading>
+      <Heading as="h2" marginTop="5">All articles</Heading>
       <Divider marginTop="5"  marginBottom="2rem"/>
       <Box className="articles__list">
       {articles.map((a) => {
@@ -153,7 +153,7 @@ const ArticleList = ({p}) => {
                 borderRadius={8} 
                 _hover={{boxShadow: "xl"}} 
                 transition="all 300ms ease">
-                <Heading m="1rem 0 0.35rem" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
+                <Heading m="1rem 0 0.75rem" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
                   <Link href={`articles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }} _focus={{boxShadow: "none"}}>
                     {a.title}
                   </Link>

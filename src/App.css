@@ -282,9 +282,10 @@ span.tag label:hover {
   margin: 6px;
 }
 input:checked + label {
-  font-size: 32px;
+  font-size: 32px!important;
   outline: 2px white solid;
   background-color: white;
+  color:#94d600!important;
   mix-blend-mode: luminosity;
 }
 .tagcloud__btnholder {
@@ -445,13 +446,16 @@ path.recharts-polygon {
 .copyright {
   font-size:14px;
 }
+.copyright {
+  flex-wrap: wrap;
+  justify-content: center;
+}
 .footer .logo img {
-  width: 100px;
+  width: 120px;
 }
 .footer a.link {
   margin-left: 0;
 }
-
 #sticky {
   position: sticky;
   bottom: 0;
@@ -475,6 +479,9 @@ path.recharts-polygon {
   }
   .footer {
     margin-top:3rem;
+  }
+  .copyright {
+    flex-wrap: nowrap;
   }
   .footer__links {
     justify-content: center!important;

@@ -77,7 +77,7 @@ import {
         >
         <Stack width="85%" spacing={8} mx={'auto'} py={6} px={6} maxWidth="600px">
           <Box
-            maxW="1100px"
+            maxW="800px"
             rounded={'lg'}
             bg={useColorModeValue('white', 'gray.700')}
             boxShadow={'lg'}

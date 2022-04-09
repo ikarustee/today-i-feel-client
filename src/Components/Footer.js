@@ -67,10 +67,14 @@ import StickyNav from "./StickyNav"
                 <Link to="/imprint" _hover={{color: "blue.700", textDecoration: "none"}}>Imprint</Link>
                 <Link to="/privacy-policy" _hover={{color: "blue.700", textDecoration: "none"}}>Privacy Policy</Link>
               </Flex>
-              <Flex gap="1rem">
+              <Flex 
+              gap="1rem" 
+              className="copyright"
+              alignItems="center"
+              >
                 <Link to="/" className="logo">
                   {colorMode === 'light' ? 
-                  (<img src={logoNegative} alt="" width={400}/>) 
+                  (<img src={logoNegative} alt="" width={100}/>) 
                   : (<img src={logoDark} alt="" />)
                   }
                 </Link>
