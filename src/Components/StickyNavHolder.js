@@ -1,17 +1,9 @@
-import {useState, useEffect} from "react";
 import {
-    Box,
-    chakra,
     Container,
-    Link,
     Stack,
-    Text,
-    useColorMode,
     useColorModeValue,
-    VisuallyHidden,
   } from '@chakra-ui/react';
-import { BiArrowBack, BiHomeHeart, BiListUl, BiLogOutCircle } from "react-icons/bi";
-import {Link as RouteLink, useNavigate, useLocation} from "react-router-dom";
+import StickyNavbar from "./StickyNavbar";
   
   const Logo = (props) => {
     return (
@@ -33,20 +25,8 @@ import {Link as RouteLink, useNavigate, useLocation} from "react-router-dom";
   };
 
   
-  export default function StickyNav() {
-    const navigate = useNavigate()
-    const location = useLocation()
+  export default function StickyNavHolder() {
 
-    const handleBack = (e) => {
-      e.preventDefault()
-      navigate(-2)
-    }
-
-  
-    useEffect(() => {
-      // setSelectedPage(location.pathname);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    },[location])
 
     return (
       <>
@@ -60,22 +40,7 @@ import {Link as RouteLink, useNavigate, useLocation} from "react-router-dom";
           py={4}
           spacing={4}
           align={'center'}>
-            <Stack 
-            padding="1rem"
-            className="footer__links"
-            w='100%' 
-            direction={'row'} 
-            spacing={2}
-            // gap="1rem"
-            >
-              {location.pathname === "/" ? (null) : ( <a className="link" href="#" onClick={handleBack}><BiArrowBack/>Back</a>)}
-              <Link textAlign="center" m="0" href={"/"} className="link"><BiHomeHeart/>Home</Link>
-              <Link textAlign="center" m="0" href={"/articles"} className="link"><BiListUl/>Articles</Link>
-              {location.pathname === "/admindashboard" 
-              || location.pathname === "/newarticle"
-              || location.pathname === "/editarticles"
-              || location.pathname === "/editarticles/:id" ? ( <a className="link" href="#" onClick={handleBack}><BiLogOutCircle/>Logout</a>) : (null)}
-            </Stack>
+        <StickyNavbar />
         </Container>
       </>
     );

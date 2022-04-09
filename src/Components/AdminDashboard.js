@@ -2,15 +2,9 @@ import {
     Flex,
     Box,
     Container,
-    FormControl,
-    FormLabel,
-    Input,
-    Checkbox,
     Stack,
-    Link,
     Button,
     Heading,
-    Text,
     useColorModeValue,
   } from '@chakra-ui/react';
   import axios from 'axios';
@@ -43,23 +37,6 @@ import { useEffect, useState } from 'react';
     },[])
     return (
       <Container maxW={'800px'} className="admin" p="0">
-        <Button
-          onClick={logoutUser}
-          className="logout"
-          borderColor="blue.300"
-          borderWidth="1px" 
-          color="blue.300"
-          bg="white"
-          fontSize="14px"
-          fontWeight="200"
-          padding="4px 10px"
-          position="relative"
-          width="auto"
-          _hover={{bg: "blue.300", color: "white"}} 
-          variant='solid'
-          >
-          Log out
-        </Button>
         <Flex
         bg={useColorModeValue('gray.50', 'gray.800')}
         width="100%"
@@ -79,16 +56,21 @@ import { useEffect, useState } from 'react';
               p={8}
               alignItems={"center"}
               justifyContent={"center"}>
-               <Stack width="100%" spacing={8}  align={'center'} justifyContent={"center"}>
+               <Stack 
+               className="admin__sections"
+               width="100%" 
+               spacing={8}  
+               alignContent={"flex-start"} 
+               justifyContent={"center"}
+               >
                   <Button
                     onClick={()=>{navigate("/newarticle")}}
                     borderColor="blue.300"
-                    borderWidth="2px" 
+                    borderWidth="1px" 
                     color="blue.300"
                     bg="white"
-                    fontWeight="400"
+                    fontWeight="300"
                     height="auto"
-                    margin="0 auto"
                     padding="4px 10px"
                     width="auto"
                     _hover={{bg: "blue.300", color: "white"}} 
@@ -99,12 +81,11 @@ import { useEffect, useState } from 'react';
                   <Button
                     onClick={()=>{navigate("/editarticles")}}
                     borderColor="blue.300"
-                    borderWidth="2px" 
+                    borderWidth="1px" 
                     color="blue.300"
                     bg="white"
-                    fontWeight="400"
+                    fontWeight="300"
                     height="auto"
-                    margin="0 auto"
                     padding="4px 10px"
                     width="auto"
                     _hover={{bg: "blue.300", color: "white"}} 

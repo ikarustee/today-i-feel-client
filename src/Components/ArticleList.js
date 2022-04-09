@@ -120,14 +120,14 @@ const ArticleList = ({p}) => {
                   <Link href={`articles/${a._id}`} textAlign="center" _hover={{textDecoration: "none"}}>
                   <Button 
                     // className="readmore__btn" 
-                      borderColor="transparent" 
-                      borderWidth="2px" 
-                      color="white" 
-                      bg="blue.300"
-                      fontWeight="400"
+                      borderColor="blue.300" 
+                      borderWidth="1px" 
+                      color="blue.300" 
+                      bg={`${colorMode === "light" ? "white" : "gray.700"}`}
+                      fontWeight="300"
                       height="auto"
                       padding="4px 10px"
-                      _hover={{bg: "white", color: "blue.300", border: "2px solid #5C90FF"}} 
+                      _hover={{bg: "blue.300", color: "white", border: "1px solid #5C90FF"}} 
                       variant='solid'>
                       Read article
                     </Button>
@@ -177,14 +177,14 @@ const ArticleList = ({p}) => {
                   <Link href={`/articles/${a.id}`} textAlign="center" _hover={{textDecoration: "none"}} >
                     <Button 
                       // className="readmore__btn" 
-                      borderColor="transparent" 
-                      borderWidth="2px" 
-                      color="white" 
-                      bg="blue.300"
-                      fontWeight="400"
+                      borderColor="blue.300" 
+                      borderWidth="1px" 
+                      color="blue.300" 
+                      bg={`${colorMode === "light" ? "white" : "gray.700"}`}
+                      fontWeight="300"
                       height="auto"
                       padding="4px 10px"
-                      _hover={{bg: "white", color: "blue.300", border: "2px solid #5C90FF"}} 
+                      _hover={{bg: "blue.300", color: "white", border: "1px solid #5C90FF"}} 
                       variant='solid'>
                       Read article
                     </Button>

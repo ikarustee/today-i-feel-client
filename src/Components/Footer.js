@@ -13,7 +13,7 @@ import {
   } from '@chakra-ui/react';
 import logoNegative from "../img/logoNegative@2x.png"
 import logoDark from "../img/logo-dark@2x.png"
-import StickyNav from "./StickyNav"
+import StickyNavHolder from "./StickyNavHolder"
   
   const Logo = (props) => {
     return (
@@ -41,7 +41,7 @@ import StickyNav from "./StickyNav"
     return (
       <>
       <Hide above="992px">
-        <StickyNav />
+        <StickyNavHolder />
       </Hide>
       <Box
         className="footer"

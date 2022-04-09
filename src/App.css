@@ -199,6 +199,7 @@ main {
   position: relative;
   padding: 0 1rem;
   width: 100%;
+  min-height:calc(100vh - 225px);
   box-sizing: border-box;
 }
 
@@ -436,6 +437,23 @@ path.recharts-polygon {
   stroke-opacity: 0.2;
 }
 
+/* Admin dashboard ==== */
+/* =================== */
+@media screen and (min-width: 600px) {
+  .admin__sections {
+    flex-wrap: wrap;
+    flex-direction: row!important;
+    align-content: flex-start!important;
+    justify-content: space-around;
+    column-gap: 1rem;
+  }
+  .admin__sections button {
+    flex-basis: calc(50% - 1rem);
+    margin: 0!important;
+    height: 4rem;
+  }
+}
+
 /* Footer ============= */
 /* =================== */
 .footer {
@@ -449,13 +467,19 @@ path.recharts-polygon {
   justify-content: center;
   gap: 2rem;
 }
+.footer__links a {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: 8px;
+}
 .footer__links a:hover {
   text-decoration: none;
   color:#BE72E9;
 }
 .footer__links a,
 .copyright {
-  font-size:14px;
+  font-size:10px;
 }
 .copyright {
   flex-wrap: wrap;
@@ -471,7 +495,7 @@ path.recharts-polygon {
   position: sticky;
   bottom: 0;
   z-index: 90;
-  height: 50px;
+  height: 60px;
   margin-top: 1.5rem;
 }
 #sticky a {
@@ -487,6 +511,10 @@ path.recharts-polygon {
 @media screen and (min-width:992px) {
   #sticky {
     background-color: rgba(255,255,255,0.85);
+  }
+  #sticky a svg,
+  .footer__links a svg {
+    top:4px;
   }
   .footer {
     margin-top:3rem;

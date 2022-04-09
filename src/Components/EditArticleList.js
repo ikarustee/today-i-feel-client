@@ -80,7 +80,7 @@ useEffect(()=>{
                     {a.title}
                   </Link>
                 </h4>
-                  <Link className="edit__btn" href={`edit/articles/${a.id}`} textAlign="center" _hover={{textDecoration: "none"}} >
+                  <Link className="edit__btn" href={`editarticles/${a._id}`} textAlign="center" _hover={{textDecoration: "none"}} >
                     <Button 
                       // className="readmore__btn" 
                       borderColor="blue.300" 

@@ -3,29 +3,16 @@ import {Link as RouteLink, useNavigate, useLocation} from "react-router-dom";
 import {useColorMode} from "@chakra-ui/react"
 import {
   Box,
-  Button,
-  FormControl,
-  Input,
-  Flex,
-  Stack,
   Link,
   useDisclosure,
-  useColorModeValue,
   Hide,
   Show,
-  Slide,
-  Menu,
-  MenuItem,
-  MenuButton,
-  MenuList
 } from '@chakra-ui/react';
-import StickyNav from './StickyNav';
+import StickyNavbar from "./StickyNavbar";
 import ThemeSwitcher from "./ThemeSwitcher"
 import NavSearch from './NavSearch';
-import { CloseIcon } from '@chakra-ui/icons'
 import logoLight from "../img/logo-light@2x.png"
 import logoDark from "../img/logo-dark@2x.png"
-import { BiSearchAlt2 } from "react-icons/bi";
 import { BiArrowBack, BiHomeHeart, BiListUl } from "react-icons/bi";
 
 const NavLink = ({ children }) => (
@@ -120,19 +107,7 @@ const Navbar = () => {
           width="100%"
           >
           <NavSearch open={openToggle} openClose={openClose} handleSearch={handleSearch} />
-          <Stack 
-            padding="1rem"
-            className="footer__links"
-            w='100%' 
-            direction={'row'} 
-            justify={'flex-start'}
-            spacing={2}
-            color={useColorModeValue('blue.400', 'white')} 
-            >
-              {location.pathname === "/" ? (null) : ( <a href="#" onClick={handleBack}><BiArrowBack/>Back</a>)}
-              <Link textAlign="center" m="0" href={"/"} className="link"><BiHomeHeart/>Home</Link>
-              <Link textAlign="center" m="0" href={"/articles"} className="link"><BiListUl/>Articles</Link>
-            </Stack>
+          <StickyNavbar />
           <ThemeSwitcher />
           </Box>
         </Show>
