@@ -36,6 +36,10 @@ h1.teaser {
 .single h2 {
   margin-top:0;
 }
+.articles__list.edit .single h4 {
+  color: var(--primary);
+  font-weight: 500!important;
+}
 h4.heading--center {
   text-align: center;
   margin: 1rem 0;
@@ -329,6 +333,27 @@ article {
 .articles__list .single {
   padding:2rem;
 }
+.articles__list.edit .single {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+}
+.articles__list.edit .single .edit__heading,
+.articles__list.edit .single .edit__btn {
+  flex-basis: 50%;
+}
+.articles__list.edit .single .edit__btn {
+  justify-self: flex-end;
+  text-align: right;
+}
+.articles__list.edit .single .date {
+  flex-basis: 100%;
+  font-size:14px;
+  color: #A0AEC0;
+}
+
 .excerpt {
   margin-bottom: 1rem;
 }
@@ -353,6 +378,9 @@ article {
   .articles__list .single:last-child,
   .articles .single:last-child {
     flex: 0 0 calc(50% - 0.75rem);
+  }
+  .articles__list.edit .single {
+    flex-basis: 100%;
   }
 }
 
