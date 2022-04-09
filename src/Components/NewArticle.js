@@ -107,7 +107,7 @@ import {
                     value={userInput.body}
                     placeholder="Text"
                     size='sm'
-                    fontWeight="300"
+                    fontWeight="400"
                 />
                 {!error2 ? (
                   <FormHelperText>Enter some text</FormHelperText>
@@ -122,7 +122,7 @@ import {
                     value={userInput.tags}
                     placeholder="e.g. 'sad, tired'"
                     size='sm'
-                    fontWeight="300"
+                    fontWeight="400"
                 />
                 {!error3 ? (
                   <FormHelperText>Enter at least one tag</FormHelperText>
@@ -137,7 +137,7 @@ import {
                     value={userInput.url}
                     placeholder="'https://someurl.com'"
                     size='sm'
-                    fontWeight="300"
+                    fontWeight="400"
                 />
               </FormControl>
               <Stack spacing={10}>

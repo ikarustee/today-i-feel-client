@@ -123,7 +123,7 @@ import {
                         value={userInput.body}
                         placeholder="Text"
                         size='sm'
-                        fontWeight="300"
+                        fontWeight="400"
                     />
                 </FormControl>
                 <FormControl id="tags" isRequired>
@@ -133,7 +133,7 @@ import {
                         value={userInput.tags}
                         placeholder="e.g. 'sad, tired'"
                         size='sm'
-                        fontWeight="300"
+                        fontWeight="400"
                     />
                 </FormControl>
                 <FormControl id="url">
@@ -143,7 +143,7 @@ import {
                         value={userInput.url}
                         placeholder="'https://someurl.com'"
                         size='sm'
-                        fontWeight="300"
+                        fontWeight="400"
                     />
                 </FormControl>
                 <Stack spacing={10}>

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { Stack, Link, useColorModeValue } from '@chakra-ui/react'
-import { BiArrowBack, BiHomeHeart, BiListUl, BiLogOutCircle, BiGridAlt } from "react-icons/bi";
+import { BiArrowBack, BiHomeHeart, BiListUl, BiLogOutCircle, BiGridAlt, BiCoffee } from "react-icons/bi";
 import {Link as RouteLink, useNavigate, useLocation} from "react-router-dom";
 import axios from 'axios';
 
@@ -48,6 +48,7 @@ const StickyNavbar = () => {
       || location.pathname === `/editarticles/${newLoc}` ? ( <a className="link" href="/adminDashboard" ><BiGridAlt/>Dashboard</a>) : (null)}
       <Link textAlign="center" m="0" href={"/"} className="link"><BiHomeHeart/>Home</Link>
       <Link textAlign="center" m="0" href={"/articles"} className="link"><BiListUl/>Articles</Link>
+      <Link textAlign="center" m="0" href={"/about"} className="link"><BiCoffee/>About</Link>
       {location.pathname === "/adminDashboard" 
       || location.pathname === "/newarticle"
       || location.pathname === "/editarticles"

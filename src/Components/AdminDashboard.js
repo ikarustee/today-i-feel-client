@@ -66,10 +66,10 @@ import { useEffect, useState } from 'react';
                   <Button
                     onClick={()=>{navigate("/newarticle")}}
                     borderColor="blue.300"
-                    borderWidth="1px" 
+                    borderWidth="2px" 
                     color="blue.300"
                     bg={useColorModeValue("white", "gray.700")}
-                    fontWeight="300"
+                    fontWeight="400"
                     height="auto"
                     padding="4px 10px"
                     width="auto"
@@ -81,10 +81,10 @@ import { useEffect, useState } from 'react';
                   <Button
                     onClick={()=>{navigate("/editarticles")}}
                     borderColor="blue.300"
-                    borderWidth="1px" 
+                    borderWidth="2px" 
                     color="blue.300"
                     bg={useColorModeValue("white", "gray.700")}
-                    fontWeight="300"
+                    fontWeight="400"
                     height="auto"
                     padding="4px 10px"
                     width="auto"

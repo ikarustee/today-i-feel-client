@@ -466,7 +466,7 @@ path.recharts-polygon {
 }
 .footer__links {
   justify-content: center;
-  gap: 2rem;
+  gap: 1.25rem;
 }
 .footer__links a {
   display: flex;

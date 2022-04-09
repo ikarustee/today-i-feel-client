@@ -62,7 +62,6 @@ import StickyNavHolder from "./StickyNavHolder"
             justify={{ base: 'space-between', md: 'space-between' }}
             align={{ base: 'center', md: 'center' }}>
               <Flex gap="1rem">
-                <Link to="/about" _hover={{color: "blue.700", textDecoration: "none"}}>About</Link>
                 <Link to="/contact" _hover={{color: "blue.700", textDecoration: "none"}}>Contact</Link>
                 <Link to="/imprint" _hover={{color: "blue.700", textDecoration: "none"}}>Imprint</Link>
                 <Link to="/privacy-policy" _hover={{color: "blue.700", textDecoration: "none"}}>Privacy Policy</Link>

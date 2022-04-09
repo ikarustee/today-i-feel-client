@@ -54,7 +54,7 @@ const Search = () => {
               type='text' 
               name="tag" 
               placeholder="Search for e.g. tired"
-              fontWeight="300"
+              fontWeight="400"
               borderColor={"blue.300"}
               focusBorderColor={"blue.300"}
               />

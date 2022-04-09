@@ -121,13 +121,14 @@ const ArticleList = ({p}) => {
                   <Button 
                     // className="readmore__btn" 
                       borderColor="blue.300" 
-                      borderWidth="1px" 
+                      borderWidth="2px" 
                       color="blue.300" 
                       bg={`${colorMode === "light" ? "white" : "gray.700"}`}
-                      fontWeight="300"
+                      fontWeight="400"
                       height="auto"
                       padding="4px 10px"
-                      _hover={{bg: "blue.300", color: "white", border: "1px solid #5C90FF"}} 
+                      _active={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
+                      _hover={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
                       variant='solid'>
                       Read article
                     </Button>
@@ -178,13 +179,13 @@ const ArticleList = ({p}) => {
                     <Button 
                       // className="readmore__btn" 
                       borderColor="blue.300" 
-                      borderWidth="1px" 
+                      borderWidth="2px" 
                       color="blue.300" 
                       bg={`${colorMode === "light" ? "white" : "gray.700"}`}
-                      fontWeight="300"
+                      fontWeight="400"
                       height="auto"
                       padding="4px 10px"
-                      _hover={{bg: "blue.300", color: "white", border: "1px solid #5C90FF"}} 
+                      _hover={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
                       variant='solid'>
                       Read article
                     </Button>
