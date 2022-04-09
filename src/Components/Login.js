@@ -72,7 +72,9 @@ import {
                   color={'white'}
                   _hover={{
                     bg: 'blue.500',
-                  }} onClick={loginUser}>
+                  }}
+                  _focus={{border: "2px #85abff solid"}} 
+                  onClick={loginUser}>
                   Log in
                 </Button>
               </Stack>

@@ -10,7 +10,7 @@ import {
     useColorModeValue,
     VisuallyHidden,
   } from '@chakra-ui/react';
-import { BiArrowBack, BiHomeHeart, BiListUl } from "react-icons/bi";
+import { BiArrowBack, BiHomeHeart, BiListUl, BiLogOutCircle } from "react-icons/bi";
 import {Link as RouteLink, useNavigate, useLocation} from "react-router-dom";
   
   const Logo = (props) => {
@@ -71,6 +71,10 @@ import {Link as RouteLink, useNavigate, useLocation} from "react-router-dom";
               {location.pathname === "/" ? (null) : ( <a className="link" href="#" onClick={handleBack}><BiArrowBack/>Back</a>)}
               <Link textAlign="center" m="0" href={"/"} className="link"><BiHomeHeart/>Home</Link>
               <Link textAlign="center" m="0" href={"/articles"} className="link"><BiListUl/>Articles</Link>
+              {location.pathname === "/admindashboard" 
+              || location.pathname === "/newarticle"
+              || location.pathname === "/editarticles"
+              || location.pathname === "/editarticles/:id" ? ( <a className="link" href="#" onClick={handleBack}><BiLogOutCircle/>Logout</a>) : (null)}
             </Stack>
         </Container>
       </>

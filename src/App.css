@@ -341,9 +341,11 @@ article {
   justify-content: space-between;
   padding: 1rem 1.5rem;
 }
-.articles__list.edit .single .edit__heading,
+.articles__list.edit .single .edit__heading {
+  flex-basis: calc(75% - 1rem);
+}
 .articles__list.edit .single .edit__btn {
-  flex-basis: 50%;
+  flex-basis: calc(25% - 1rem);
 }
 .articles__list.edit .single .edit__btn {
   justify-self: flex-end;
@@ -502,7 +504,6 @@ path.recharts-polygon {
   }
 }
 
-
 /* Elements =========== */
 /* =================== */
 svg.chakra-icon path {
@@ -553,6 +554,10 @@ svg.chakra-icon path {
 }
 a.btn--centered.chart {
   text-align: center;
+}
+.logout {
+  position: relative;
+  right: 0;
 }
 
 .linear-wipe {
