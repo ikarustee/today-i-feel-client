@@ -2,6 +2,7 @@ import React, {useContext, useState, useEffect} from 'react';
 import { ArticleContext } from '../Contexts/ArticleContext';
 import { css } from "@emotion/react";
 import DotLoader from "react-spinners/DotLoader";
+import {readableDate} from "../helper/dateformatter"
 
 import {
   Box,
@@ -102,13 +103,16 @@ const ArticleList = ({p}) => {
                     </Link>
                   </Heading>
                   <Divider m="0 0 0.75rem" />
-                  {a.tags.map((t) => {
-                    return (
-                      <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="blue" color="gray.500" bg="blue.50" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>
-                        <Link href={`/search?q=search,${t}`} _hover={{textDecoration: "none", color: "white"}}>{t}</Link>
-                      </Tag>
-                    )
-                  })}
+                  <span className="article__meta">
+                    {readableDate(a.createdDate)} &nbsp;
+                    {a.tags.map((t) => {
+                      return (
+                        <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="blue" color="gray.500" bg="blue.50" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>
+                          <Link href={`/search?q=search,${t}`} _hover={{textDecoration: "none", color: "white"}}>{t}</Link>
+                        </Tag>
+                      )
+                    })}
+                  </span>
                   <Divider m="0.5rem 0 0" />
                   <Text
                     className="excerpt"
@@ -160,13 +164,16 @@ const ArticleList = ({p}) => {
                   </Link>
                 </Heading>
                 <Divider m="0 0 0.75rem" />
-                  {a.tags.map((t) => {
-                    return (
-                      <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="gray" color="gray.500" bg="gray.200" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>
-                        <Link href={`/search?q=search,${t}`} _hover={{textDecoration: "none", color: "white"}}>{t}</Link>
-                      </Tag>
-                    )
-                  })}
+                <span className="article__meta">
+                    {readableDate(a.createdDate)} &nbsp;
+                    {a.tags.map((t) => {
+                      return (
+                        <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="blue" color="gray.500" bg="blue.50" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>
+                          <Link href={`/search?q=search,${t}`} _hover={{textDecoration: "none", color: "white"}}>{t}</Link>
+                        </Tag>
+                      )
+                    })}
+                  </span>
                 <Divider m="0.5rem 0 0" />
                 <Text
                   className="excerpt"

@@ -42,13 +42,13 @@ const StickyNavbar = () => {
     // gap="1rem"
     >
       {location.pathname === "/" ? (null) : ( <a className="link" href="#" onClick={handleBack}><BiArrowBack/>Back</a>)}
+      <Link textAlign="center" m="0" href={"/"} className="link"><BiHomeHeart/>Home</Link>
+      <Link textAlign="center" m="0" href={"/articles"} className="link"><BiListUl/>Articles</Link>
+      <Link textAlign="center" m="0" href={"/about"} className="link"><BiCoffee/>About</Link>
       {location.pathname === "/adminDashboard" 
       || location.pathname === "/newarticle"
       || location.pathname === "/editarticles"
       || location.pathname === `/editarticles/${newLoc}` ? ( <a className="link" href="/adminDashboard" ><BiGridAlt/>Dashboard</a>) : (null)}
-      <Link textAlign="center" m="0" href={"/"} className="link"><BiHomeHeart/>Home</Link>
-      <Link textAlign="center" m="0" href={"/articles"} className="link"><BiListUl/>Articles</Link>
-      <Link textAlign="center" m="0" href={"/about"} className="link"><BiCoffee/>About</Link>
       {location.pathname === "/adminDashboard" 
       || location.pathname === "/newarticle"
       || location.pathname === "/editarticles"

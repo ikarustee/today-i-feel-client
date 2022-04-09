@@ -466,21 +466,25 @@ path.recharts-polygon {
 }
 .footer__links {
   justify-content: center;
-  gap: 1.25rem;
+  gap: 1.2rem;
 }
 .footer__links a {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   row-gap: 8px;
+  font-weight: normal;
 }
 .footer__links a:hover {
   text-decoration: none;
   color:#BE72E9;
 }
+.footer__links a.link {
+  margin-left: 0;
+}
 .footer__links a,
 .copyright {
-  font-size:10px;
+  font-size:12px;
 }
 .copyright {
   flex-wrap: wrap;
