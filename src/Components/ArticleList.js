@@ -85,7 +85,6 @@ const ArticleList = ({p}) => {
           justifyContent="center"
           marginTop={{ base: '3', sm: '0' }}>
           {articles.map((a) => {
-              const excerpt = Object.values(a.body)
               return (
                 <Box key={a._id} bg={colorMode === "light" ? "white" : "gray.700"} className="single" boxShadow={'lg'} m="0" padding="2rem 1rem" borderRadius={8} _hover={{boxShadow: "xl"}} transition="all 300ms ease">
                   <Heading m="1rem 0 0.35rem" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
@@ -107,7 +106,7 @@ const ArticleList = ({p}) => {
                     as="p"
                     marginTop="2"
                     fontSize="md">
-                    {excerpt.join("").split(" ").slice(0, 25).join(" ") + " ..."}
+                    {a.body.replace(/[#_]/g,'').split(" ").slice(0, 25).join(" ") + " ..."}
                   </Text>
                   <Link href={`articles/${a._id}`} textAlign="center" _hover={{textDecoration: "none"}}>
                   <Button 
@@ -135,7 +134,6 @@ const ArticleList = ({p}) => {
       <Divider marginTop="5"  marginBottom="2rem"/>
       <Box className="articles__list">
       {articles.map((a) => {
-              const excerpt = Object.values(a.body)
               return (
                 <Box key={a._id} bg={colorMode === "light" ? "white" : "gray.700"} className="single" boxShadow={'lg'} m="0" padding="2rem 1rem" borderRadius={8} _hover={{boxShadow: "xl"}} transition="all 300ms ease">
                 <Heading m="1rem 0 0.35rem" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
@@ -157,7 +155,7 @@ const ArticleList = ({p}) => {
                   as="p"
                   marginTop="2"
                   fontSize="md">
-                  {excerpt.join("").split(" ").slice(0, 25).join(" ") + " ..."}
+                  {a.body.replace(/[#_]/g,'').split(" ").slice(0, 25).join(" ") + " ..."}
                 </Text>
                   <Link href={`/articles/${a.id}`} textAlign="center" _hover={{textDecoration: "none"}} >
                     <Button 
@@ -177,7 +175,7 @@ const ArticleList = ({p}) => {
                 </Box>
               )
             })
-            // .splice(1, 8)
+            .splice(1, articles.length)
             }
         </Box>
       <VStack paddingTop="40px" spacing="2" alignItems="flex-start">
