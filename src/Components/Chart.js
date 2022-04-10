@@ -40,7 +40,7 @@ const Chart = () => {
 
   return (
     <Container className="chart" m="2rem 0" maxW={'7xl'} padding="0">
-    <Heading as="h2" textAlign="center" color="blue.300" m="3rem 0 1.5rem">How do others feel?</Heading>
+    <Heading as="h2" size="2xl" textAlign="center" color="blue.300" m="3rem 0 1.5rem">How do others feel?</Heading>
       <Button 
         className="btn--centered chart" 
         fontWeight="400" 

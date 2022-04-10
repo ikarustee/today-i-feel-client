@@ -21,6 +21,12 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: normal!important;
   font-style: italic;
 }
+.info__content h2 {
+  font-size: 2.2rem;
+  font-family: "Work Sans";
+  font-style: normal;
+  font-weight:300!important;
+}
 h4 {
   font-size: 2rem;
   font-family: "Work Sans";
@@ -463,6 +469,54 @@ path.recharts-polygon {
     margin: 0!important;
     height: 4rem;
   }
+}
+/* Info holder ========= */
+/* =================== */
+.info__holder {
+  margin: 5rem 0 3rem;
+}
+.info__content {
+  margin-top: 1rem;
+}
+.info__holder > .info__content svg {
+  flex: 0 0 40px;
+  transform: rotate(0);
+  transition: all 500ms ease;
+}
+.info__content:hover > svg {
+  transform: rotate(-45deg);
+  background-color: #94d600;
+  fill: white;
+}
+.info__holder svg {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  top: 5px;
+  margin-right: 1rem;
+  border-radius: 50%;
+  background-color: white;
+  fill: var(--primary);
+}
+a.info__link {
+  color:#94d600;
+  display:inline-block;
+  transition: all 1000ms ease;
+}
+a.info__link::after {
+  content: "";
+  display: block;
+  width:0;
+  height: 3px;
+  background-color: white;
+  background-size: 0 auto;
+  position: relative;
+  bottom: 0;
+  transition: all 1000ms ease;
+}
+a.info__link:hover::after {
+  background-color: #94d600;
+  width: 100%;
 }
 
 /* Footer ============= */

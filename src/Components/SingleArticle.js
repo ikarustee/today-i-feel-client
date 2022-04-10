@@ -7,8 +7,7 @@ import {
     Tag,
     Divider,
     Container,
-    useColorModeValue,
-    useColorMode,
+    useColorModeValue
   } from '@chakra-ui/react';
 import { ArticleContext } from '../Contexts/ArticleContext';
 import DotLoader from "react-spinners/DotLoader";
@@ -46,8 +45,6 @@ const SingleArticle = () => {
               <Box
                 bg={bg} 
                 color={color}
-                // bg={`${colorMode === "light" ? "blue.300" : "blue.800"}`}
-                // color={`${colorMode === "light" ? "blue.300" : "blue.800"}`}
                 borderRadius="12px"
                 p={8}
                 marginBottom="2rem"

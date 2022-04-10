@@ -21,6 +21,7 @@ import DotLoader from "react-spinners/DotLoader";
 import { css } from "@emotion/react";
 import axios from "axios";
 import {readableDate} from "../helper/dateformatter"
+import { BiRightArrowAlt } from "react-icons/bi";
 
 
 const SearchResults = (props) => {
@@ -30,6 +31,8 @@ const SearchResults = (props) => {
     const [searchResult, setSearchResult] = useState([]);
     // const [ voteResults, setVoteResult] = useState(props.voteResult)
     // const [isLoading, setIsLoading] = useState(true);
+    const bg = useColorModeValue('blue.300', 'blue.900')
+    const fontColor = useColorModeValue('white', 'gray.300')
     
     const { colorMode, toggleColorMode } = useColorMode()
 
@@ -94,56 +97,90 @@ const SearchResults = (props) => {
       <>
       <Container className="articles" maxW={'7xl'} minH="100vh" m="2rem 0" p="0">
       <Heading as="h1" color="blue.300" m="1rem 0">{searchTags.includes("search") ? `Search results for: "${sanitizedSearchTags}"` : `Suggested articles for: "${sanitizedSearchTags}"`}</Heading>
-        <Flex flexWrap="wrap" gap="1rem">
-          {searchResult.map((a) => {
-              const excerpt = Object.values(a.body)
-              return(
-                <Box
-                 className="single" bg={colorMode === "light" ? "white" : "gray.700"} key={`articles/${a._id}`} boxShadow={'lg'} m="0" padding="2rem 1rem" borderRadius={8} _hover={{boxShadow: "xl"}} transition="all 300ms ease">
-                  <Heading className="articles__heading" m="1rem 0" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1" _hover={{color: "purple.300"}}>
-                    <Link href={`articles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none' }} _focus={{boxShadow: "none"}}>
-                      {a.title}
-                    </Link>
-                  </Heading>
-                  <Divider m="0 0 0.75rem" />
-                  <span className="article__meta">
-                    {readableDate(a.createdDate)} &nbsp;
-                    {a.tags.map((t) => {
-                      return (
-                        <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="blue" color="gray.500" bg="blue.50" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>
-                          <Link href={`/search?q=search,${t}`} _hover={{textDecoration: "none", color: "white"}}>{t}</Link>
-                        </Tag>
-                      )
-                    })}
-                  </span>
-                  <Divider m="0.5rem 0 0" />
-                  <Text
-                    className="excerpt"
-                    as="p"
-                    marginTop="2"
-                    fontSize="md">
-                    {a.body.replace(/[#_]/g,'').split(" ").slice(0, 25).join(" ") + " ..."}
-                  </Text>
-                  <Link href={`articles/${a._id}`}  color="blue.300" fontWeight={500} textAlign="left" textDecoration="none" _hover={{color: "purple.300"}}>
-                    <Button 
-                        // className="readmore__btn" 
-                        borderColor="transparent" 
-                        borderWidth="2px" 
-                        color="white" 
-                        bg="blue.300"
-                        fontWeight="400"
-                        height="auto"
-                        padding="4px 10px"
-                        _hover={{bg: "white", color: "blue.300", border: "2px solid #5C90FF"}} 
-                        variant='solid'>
-                        Read article
-                      </Button>
+      <Flex flexWrap="wrap" gap="1rem">
+        {searchResult.map((a) => {
+            const excerpt = Object.values(a.body)
+            return(
+              <Box
+                className="single" bg={colorMode === "light" ? "white" : "gray.700"} key={`articles/${a._id}`} boxShadow={'lg'} m="0" padding="2rem 1rem" borderRadius={8} _hover={{boxShadow: "xl"}} transition="all 300ms ease">
+                <Heading className="articles__heading" m="1rem 0" color="blue.300" as="h2" size="2xl" fontSize="2rem" lineHeight="1.1" _hover={{color: "purple.300"}}>
+                  <Link href={`articles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none' }} _focus={{boxShadow: "none"}}>
+                    {a.title}
                   </Link>
-                <br/>
-              </Box> )       
-          }
-          )}
-        </Flex>
+                </Heading>
+                <Divider m="0 0 0.75rem" />
+                <span className="article__meta">
+                  {readableDate(a.createdDate)} &nbsp;
+                  {a.tags.map((t) => {
+                    return (
+                      <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="blue" color="gray.500" bg="blue.50" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>
+                        <Link href={`/search?q=search,${t}`} _hover={{textDecoration: "none", color: "white"}}>{t}</Link>
+                      </Tag>
+                    )
+                  })}
+                </span>
+                <Divider m="0.5rem 0 0" />
+                <Text
+                  className="excerpt"
+                  as="p"
+                  marginTop="2"
+                  fontSize="md">
+                  {a.body.replace(/[#_]/g,'').split(" ").slice(0, 25).join(" ") + " ..."}
+                </Text>
+                <Link href={`articles/${a._id}`}  color="blue.300" fontWeight={500} textAlign="left" textDecoration="none" _hover={{color: "purple.300"}}>
+                  <Button 
+                      // className="readmore__btn" 
+                      borderColor="transparent" 
+                      borderWidth="2px" 
+                      color="white" 
+                      bg="blue.300"
+                      fontWeight="400"
+                      height="auto"
+                      padding="4px 10px"
+                      _hover={{bg: "white", color: "blue.300", border: "2px solid #5C90FF"}} 
+                      variant='solid'>
+                      Read article
+                    </Button>
+                </Link>
+              <br/>
+            </Box> )       
+        }
+        )}
+      </Flex>
+      <Box
+        className="info__holder"
+      >
+      <Heading 
+      as="h2" 
+      size="2xl" 
+      textAlign={"center"} 
+      color={"blue.300"}
+      marginBottom="2rem"
+      >
+      Seeking for professional help?</Heading>
+      <Flex 
+      className="info__content"
+      bg={bg} 
+      color={fontColor}
+      borderRadius="12px"
+      p={8}
+      boxShadow={"lg"}
+      >
+        <BiRightArrowAlt />
+        <h2>Crisis helpline <strong><a href="tel:+4908001110111" className="info__link">0800 1110111</a></strong> or <strong><a href="tel:+4908001110222" className="info__link">0800 1110222</a></strong></h2>
+      </Flex>
+      <Flex 
+      className="info__content"
+      bg={bg} 
+      color={fontColor}
+      borderRadius="12px"
+      p={8}
+      boxShadow={"lg"}
+      >
+        <BiRightArrowAlt />
+        <h2>Instahelp – professionell online psychological counseling <strong><a href="https://instahelp.me/de/" target="_blank" className="info__link">instahelp.me/de/</a></strong></h2>
+      </Flex>
+      </Box>
       <Chart /> 
       </Container>
       </>
