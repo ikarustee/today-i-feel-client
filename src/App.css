@@ -358,11 +358,15 @@ article {
   justify-self: flex-end;
   text-align: right;
 }
-.articles__list.edit .single .date {
+.articles__list.edit .single .date,
+.articles__list.edit .single .reported {
   flex-basis: 100%;
   font-size:14px;
   color: #A0AEC0;
   margin-top: -4px;
+}
+.articles__list.edit .single .meta > * {
+  margin-right: 8px;
 }
 .excerpt {
   margin-bottom: 1rem;

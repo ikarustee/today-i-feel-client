@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import {
     Box,
     FormControl,
-    Input,
     Button,
     Radio, 
     RadioGroup,
@@ -14,6 +13,7 @@ import {
     Tag,
     Divider,
     Container,
+    useColorMode,
     useColorModeValue
   } from '@chakra-ui/react';
 import { ArticleContext } from '../Contexts/ArticleContext';
@@ -21,7 +21,7 @@ import DotLoader from "react-spinners/DotLoader";
 import { css } from "@emotion/react";
 import ReactMarkdown from "react-markdown";  
 import {readableDate} from "../helper/dateformatter"
-import axios from 'axios';
+import { BiMessageSquare } from 'react-icons/bi';
 
 const SingleArticle = () => {
     const {articles, isLoading, getArticles} = useContext(ArticleContext)
@@ -30,6 +30,15 @@ const SingleArticle = () => {
     // console.log(thisArticle)
     const [value, setValue] = useState("")
     const [userInput, setUserInput] = useState("")
+    const [errorMessage, setErrorMessage] = useState("")
+    const { colorMode, toggleColorMode } = useColorMode()
+    
+    const [mailerState, setMailerState] = useState({
+      message: "",
+      article: ""
+    });
+    
+    const disabled = mailerState.message === "" || mailerState.message.length <= 10
     const bg = useColorModeValue('blue.300', 'blue.900')
     const color = useColorModeValue('white', 'gray.300')
 
@@ -39,17 +48,49 @@ const SingleArticle = () => {
     border-color: red;
   `;
 
-    const handleInputChange = (e) => {
+    // let handleInputChange = (e) => {
+    //   // console.log(e.target.value)
+    //   setUserInput(e.target.value)
+    // }
+
+    function handleStateChange(e) {
       // console.log(e.target.value)
-      setUserInput(e.target.value)
-      // console.log(userInput)
+      setMailerState((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value,
+        article: thisArticle.title,
+        value: value,
+      }));
     }
 
-    const handleSubmit = (e) => {
-      e.preventDefault()
-      // console.log(e)
-      console.log(userInput, value)
-    }
+    const submitEmail = async (e) => {
+      e.preventDefault();
+      console.log(e.target)
+      console.log({ mailerState });
+      const response = await fetch("http://localhost:3001/send", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ mailerState }),
+      })
+        .then((res) => res.json())
+        .then(async (res) => {
+          const resData = await res
+          console.log(resData)
+          if(resData.status === "success") {
+            alert("Message sent")
+          } else if(resData.status === "Fail") {
+            alert("Message failed to sent")
+          }
+        })
+        .then(() => {
+          setMailerState({
+            message: "",
+            article: ""
+          });
+        });
+    };
 
     useEffect(() => {
         getArticles()
@@ -86,6 +127,87 @@ const SingleArticle = () => {
                   })}
                 </em>
                 <Divider m="0.5rem 0 0" />
+                <FormControl isRequired>
+                  <form onSubmit={submitEmail}>
+                    <fieldset>
+                      <legend>Something is not correct or inproper? Let us know.</legend>
+                      <RadioGroup onChange={setValue} value={value}>
+                        <Stack direction='row'>
+                          <Radio value='Wrong information'>Wrong information</Radio>
+                          <Radio value='Outdated'>Outdated</Radio>
+                          <Radio value='Other'>Other</Radio>
+                        </Stack>
+                      </RadioGroup>
+                      <input
+                        type="hidden"
+                        name="article"
+                        onChange={handleStateChange}
+                        value={thisArticle.title}
+                        />
+                      <Textarea
+                        placeholder="Message"
+                        onChange={handleStateChange}
+                        name="message"
+                        value={mailerState.message}
+                        size={"md"}
+                        minLength={"10"}
+                        isRequired
+                      />
+                      {errorMessage}
+                      {disabled ? (
+                        <Button
+                          borderColor="gray.400" 
+                          borderWidth="2px" 
+                          color="gray.400" 
+                          bg={`${colorMode === "light" ? "gray.200" : "gray.700"}`}
+                          fontWeight="400"
+                          height="auto"
+                          padding="4px 10px"
+                          _hover={{bg: "gray.200", color: "gray.400", border: `2px solid #A0AEC0`}} 
+                          variant='solid'
+                      >Send Message</Button>
+                      ) : (
+                      <Button
+                        onSubmit={submitEmail}
+                        type="submit"
+                        borderColor="blue.300" 
+                        borderWidth="2px" 
+                        color="blue.300" 
+                        bg={`${colorMode === "light" ? "white" : "gray.700"}`}
+                        fontWeight="400"
+                        height="auto"
+                        padding="4px 10px"
+                        _active={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
+                        _hover={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
+                        variant='solid'
+                      >Send Message</Button>
+                      )}
+                    </fieldset>
+                  </form>
+                </FormControl>
+                {/* <p>Something is wrong in this article? Let us know.</p>
+                <FormControl >
+                  <form id="report">
+                      <RadioGroup onChange={setValue} value={value}>
+                        <Stack direction='row'>
+                          <Radio value='Wrong information'>Wrong information</Radio>
+                          <Radio value='Outdated'>Outdated</Radio>
+                          <Radio value='Other'>Other</Radio>
+                        </Stack>
+                      </RadioGroup>
+                      <Textarea
+                        value={userInput.text}
+                        name="issue"
+                        onChange={handleInputChange}
+                        placeholder="Describe the issue"
+                        size='md'
+                      />
+                      <Button 
+                        type="submit"
+                      >
+                      Submit</Button>
+                  </form>
+                </FormControl> */}
             </Container>
         </article>
     </>

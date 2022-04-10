@@ -75,11 +75,11 @@ useEffect(()=>{
                 padding="2rem 1rem" 
                 borderRadius={8} 
                 transition="all 300ms ease">
-                <h4 className="edit__heading">
-                  <Link href={`editarticles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }} _focus={{boxShadow: "none"}}>
-                    {a.title}
-                  </Link>
-                </h4>
+                  <h4 className="edit__heading">
+                    <Link href={`editarticles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }} _focus={{boxShadow: "none"}}>
+                      {a.title}
+                    </Link>
+                  </h4>
                   <Link className="edit__btn" href={`editarticles/${a._id}`} textAlign="center" _hover={{textDecoration: "none"}} >
                     <Button 
                       // className="readmore__btn" 
@@ -96,7 +96,10 @@ useEffect(()=>{
                       Edit article
                     </Button>
                   </Link>
-                  <span className="date">Published: {readableDate(a.createdDate)}</span>
+                  <Box className="meta">
+                    <span className="date">Published: {readableDate(a.createdDate)}</span>
+                    <span className="reported">Visible: {a.visible ? "🟢" : "🔴"}</span>
+                  </Box>
                 </Box>
               )
             })
