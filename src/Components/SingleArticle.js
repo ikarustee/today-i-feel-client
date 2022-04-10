@@ -86,31 +86,6 @@ const SingleArticle = () => {
                   })}
                 </em>
                 <Divider m="0.5rem 0 0" />
-                <Box m="2rem 0">
-                <p>Something is wrong in this article? Let us know.</p>
-                <FormControl >
-                  <form onSubmit={handleSubmit} id="report">
-                      <RadioGroup onChange={setValue} value={value}>
-                        <Stack direction='row'>
-                          <Radio value='Wrong information'>Wrong information</Radio>
-                          <Radio value='Outdated'>Outdated</Radio>
-                          <Radio value='Other'>Other</Radio>
-                        </Stack>
-                      </RadioGroup>
-                      <Textarea
-                        value={userInput}
-                        name="issue"
-                        onChange={handleInputChange}
-                        placeholder="Describe the issue"
-                        size='md'
-                      />
-                      <Button 
-                        type="submit"
-                      >
-                      Submit</Button>
-                  </form>
-                </FormControl>
-              </Box>
             </Container>
         </article>
     </>
