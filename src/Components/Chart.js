@@ -26,7 +26,7 @@ const Chart = () => {
                     allTime: t.timesClicked,
                 }
             })
-            setChartData(tagStats)
+            setChartData(tagStats.slice(0,8))
             // console.log(tagStats)
         } catch (error) {
             console.log(error)
@@ -55,7 +55,10 @@ const Chart = () => {
         _hover={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
         variant='outlie'
       >{isOpen ? "Hide chart" : "Show chart"}</Button>
-      <ScaleFade initialScale={0.9} in={isOpen}>
+      <ScaleFade 
+      className={`chart__holder ${isOpen ? "open" : "close"}`}  
+      initialScale={0.9} 
+      in={isOpen}>
         <Box
           p='1rem'
           marginTop={8}

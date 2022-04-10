@@ -432,6 +432,16 @@ article {
 .recharts-wrapper {
   margin: 0 auto;
 }
+.chart__holder.close{
+  height:0;
+  transform: none;
+  transition: height transform 150ms ease;
+}
+.chart__holder.open{
+  height:auto;
+  transform: scale(0.9);
+  transition: height transform 150ms ease;
+}
 path.recharts-polygon {
   stroke-linejoin: round;
   stroke-width: 2px;
@@ -530,6 +540,9 @@ path.recharts-polygon {
   .footer__links {
     justify-content: center!important;
     gap: 2rem;
+  }
+  .footer__links a {
+    font-weight: 300;
   }
   .footer__links a,
   .copyright {

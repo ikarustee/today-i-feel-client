@@ -200,7 +200,7 @@ const ArticleList = ({p}) => {
                 </Box>
               )
             })
-            .splice(1, articles.length)
+            .slice(1, articles.length)
             }
         </Box>
       <VStack paddingTop="40px" spacing="2" alignItems="flex-start">
