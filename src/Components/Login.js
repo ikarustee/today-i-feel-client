@@ -1,3 +1,4 @@
+import {useState} from "react"
 import {
     Flex,
     Box,
@@ -17,6 +18,27 @@ import {
   
   export default function SimpleCard() {
     const navigate = useNavigate();
+    const [userInput, setUserInput] = useState({
+      email: "",
+      password: ""
+    })
+
+    const [active, setActive] = useState(false)
+
+    const handleChange = (e) => {
+      setUserInput({
+        ...userInput,
+        [e.target.name]: e.target.value
+      })
+      if(userInput.email === "") {
+        setActive(false)
+      } else if(userInput.password === "") {
+        setActive(false)
+      } else {
+        setActive(true)
+      }
+    }
+
     async function loginUser(){
       document.getElementById("emailError").value = "";
       document.getElementById("passwordError").value = "";
@@ -51,12 +73,12 @@ import {
             <Stack spacing={4}>
               <FormControl id="email">
                 <FormLabel>Email address</FormLabel>
-                <Input type="email" name="email" />
+                <Input type="email" name="email" value={userInput.email} onChange={handleChange}/>
                 <FormLabel id="emailError" className='errorMessage'></FormLabel>
               </FormControl>
               <FormControl id="password">
                 <FormLabel>Password</FormLabel>
-                <Input type="password" name="password" />
+                <Input type="password" name="password" value={userInput.password} onChange={handleChange}/>
                 <FormLabel id="passwordError" className='errorMessage'></FormLabel>
               </FormControl>
               <Stack spacing={10}>
@@ -68,11 +90,11 @@ import {
                   <Link color={'blue.400'} href={"/signup"}>Create a new Account?</Link>
                 </Stack>
                 <Button
-                  bg={'blue.400'}
-                  color={'white'}
-                  _hover={{
-                    bg: 'blue.500',
-                  }}
+                  bg={`${active ? "white" : "gray.300"}`}
+                  color={`${active ? "blue.400" : "gray.500"}`}
+                  border={`${active ? "2px solid #5C90FF" : "gray.500"}`}
+                  fontWeight="300"
+                  _hover={{bg: 'blue.300', color: "white", border: "2px solid #5C90FF"}}
                   _focus={{border: "2px #85abff solid"}} 
                   onClick={loginUser}>
                   Log in

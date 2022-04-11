@@ -45,6 +45,7 @@ h1.teaser {
 .articles__list.edit .single h4 {
   color: var(--primary);
   font-weight: 500!important;
+  line-height: 1.2;
 }
 h4.heading--center {
   text-align: center;
@@ -228,6 +229,9 @@ main {
     left: 0;
     margin: 0;
   }
+  .themeswitcher {
+    top: 1.5rem;
+  }
   /* .navbar,
   .navbar > .nav {
     height: 100px;
@@ -346,28 +350,87 @@ article {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-content: flex-start;
+  align-items: flex-end;
   padding: 1rem 1.5rem;
+  row-gap: 0.5rem;
 }
 .articles__list.edit .single .edit__heading {
   flex-basis: calc(75% - 1rem);
+  margin-bottom: 0.35rem;
 }
+
 .articles__list.edit .single .edit__btn {
   flex-basis: calc(25% - 1rem);
-}
-.articles__list.edit .single .edit__btn {
   justify-self: flex-end;
   text-align: right;
 }
 .articles__list.edit .single .date,
 .articles__list.edit .single .reported {
-  flex-basis: 100%;
   font-size:14px;
-  color: #A0AEC0;
+  color: #718096;
   margin-top: -4px;
+}
+.articles__list.edit .single .date {
+  flex-basis: 66.6666%;
+  max-width: 160px;
+}
+.articles__list.edit .single .reported{
+  flex-basis: 33.3333%;
 }
 .articles__list.edit .single .meta > * {
   margin-right: 8px;
 }
+.edit__title__meta {
+  flex-basis: 100%;
+}
+.edit__title__meta .meta { display:flex;}
+.edit__title__meta .meta span.reported {display: flex;}
+.edit__title__meta .meta span.reported svg {
+  position: relative;
+  top: 3px;
+  left: 4px;
+}
+.edit__title__meta .meta span.reported svg.visible:not(.not) {
+  color: var(--primary);
+}
+.edit__action {
+  flex-basis: 100%;
+  justify-content: flex-end;
+}
+button.edit__btn,
+button.delete__btn {
+  align-items: flex-end;
+}
+button.edit__btn::before,
+button.delete__btn::before {
+  display: inline-block;
+  position: absolute;
+  font-size: 14px;
+  top: 12px;
+  right: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 250ms ease-in-out;
+}
+button.edit__btn::before {
+  content: "Edit";
+}
+button.delete__btn::before {
+  content: "Delete";
+  left:0;
+}
+button.edit__btn:hover::before {
+  right: 34px;
+  visibility: visible;
+  opacity: 1;
+}
+button.delete__btn:hover::before {
+  left: 32px;
+  visibility: visible;
+  opacity: 1;
+}
+
 .excerpt {
   margin-bottom: 1rem;
 }
@@ -394,17 +457,30 @@ article {
   position: relative;
   top:-4px;
 }
+@media screen and (min-width: 600px) {
+  .edit__title__meta {
+    flex-basis: calc(80% - 1rem);
+}
+.articles__list.edit .single,
+.articles__list.edit .single .date,
+.articles__list.edit .single .reported  {
+  flex-basis: 100%;
+}
+.edit__action {
+  flex-basis: calc(20% - 1rem);
+  justify-content: flex-end;
+  position: relative;
+  left: 1rem;
+}
+}
 @media screen and (min-width:768px) {
   .articles__list .single,
   .articles .single {
     flex: 1 0 calc(50% - 1.5rem);
   }
-  .articles__list .single:last-child,
+  .articles__list:not(.edit) .single:last-child,
   .articles .single:last-child {
     flex: 0 0 calc(50% - 0.75rem);
-  }
-  .articles__list.edit .single {
-    flex-basis: 100%;
   }
 }
 
@@ -546,7 +622,7 @@ a.info__link:hover::after {
   justify-content: center;
   row-gap: 8px;
   font-weight: normal;
-  width: 40px;
+  flex-basis: 40px;
 }
 .footer__links a:hover {
   text-decoration: none;
@@ -586,6 +662,11 @@ a.info__link:hover::after {
   position: relative;
   top:2px;
 }
+@media screen and (min-width: 425px) {
+  .footer__links {
+    gap: 1.5rem;
+}
+}
 @media screen and (min-width:992px) {
   #sticky {
     background-color: rgba(255,255,255,0.85);
@@ -593,6 +674,7 @@ a.info__link:hover::after {
   #sticky a svg,
   .footer__links a svg {
     top:4px;
+    margin-right:0;
   }
   .footer {
     margin-top:3rem;
@@ -602,7 +684,7 @@ a.info__link:hover::after {
   }
   .footer__links {
     justify-content: center!important;
-    gap: 2rem;
+    gap: 3rem;
   }
   .footer__links a {
     font-weight: 300;
