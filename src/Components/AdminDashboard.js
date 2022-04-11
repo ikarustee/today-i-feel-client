@@ -1,15 +1,10 @@
 import {
     Flex,
     Box,
-    FormControl,
-    FormLabel,
-    Input,
-    Checkbox,
+    Container,
     Stack,
-    Link,
     Button,
     Heading,
-    Text,
     useColorModeValue,
   } from '@chakra-ui/react';
   import axios from 'axios';
@@ -41,52 +36,67 @@ import { useEffect, useState } from 'react';
         
     },[])
     return (
-      <Flex
-
+      <Container maxW={'800px'} className="admin" p="0">
+        <Flex
+        bg={useColorModeValue('gray.50', 'gray.800')}
+        width="100%"
         align={'center'}
         justify={'center'}
-        bg={useColorModeValue('gray.50', 'gray.800')}>
-        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={6} px={6}>
-          <Stack align={'center'}>
-            <Heading fontSize={'4xl'}>Hello Admin</Heading>
+        flexWrap={"wrap"}
+        >
+          <Stack align={'center'} >
+            <Heading fontSize={'4xl'} m="1rem 0 2rem" >Hello Admin</Heading>
           </Stack>
-          
             <Box
+              className="admin__dashboard"
               rounded={'lg'}
               bg={useColorModeValue('white', 'gray.700')}
               boxShadow={'lg'}
+              width="100%"
               p={8}
               alignItems={"center"}
               justifyContent={"center"}>
-               <Stack width="85%" spacing={8}  align={'center'}>
+               <Stack 
+               className="admin__sections"
+               width="100%" 
+               spacing={8}  
+               alignContent={"flex-start"} 
+               justifyContent={"center"}
+               >
                   <Button
-                    bg={'blue.400'}
-                    color={'white'}
-                    _hover={{
-                      bg: 'blue.500',
-                    }} onClick={()=>{navigate("/newarticle")}}>
+                    onClick={()=>{navigate("/newarticle")}}
+                    borderColor="blue.300"
+                    borderWidth="2px" 
+                    color="blue.300"
+                    bg={useColorModeValue("white", "gray.700")}
+                    fontWeight="400"
+                    height="auto"
+                    padding="4px 10px"
+                    width="auto"
+                    _hover={{bg: "blue.300", color: "white"}} 
+                    variant='solid'
+                    >
                     Create New Article
                   </Button>
                   <Button
-                    bg={'blue.400'}
-                    color={'white'}
-                    _hover={{
-                      bg: 'blue.500',
-                    }} onClick={()=>{navigate("/editarticles")}}>
+                    onClick={()=>{navigate("/editarticles")}}
+                    borderColor="blue.300"
+                    borderWidth="2px" 
+                    color="blue.300"
+                    bg={useColorModeValue("white", "gray.700")}
+                    fontWeight="400"
+                    height="auto"
+                    padding="4px 10px"
+                    width="auto"
+                    _hover={{bg: "blue.300", color: "white"}} 
+                    variant='solid'
+                    >
                     Edit Articles
-                  </Button>
-                  <Button
-                    bg={'blue.400'}
-                    color={'white'}
-                    _hover={{
-                      bg: 'blue.500',
-                    }} onClick={logoutUser}>
-                    Log out
                   </Button>
                  </Stack>
               </Box>
-          
-        </Stack>
       </Flex>
+      </Container>
+
     );
   }

@@ -13,7 +13,13 @@
     font-style: normal;
     font-display: swap;
 }
-
+@font-face {
+    font-family: 'Work Sans';
+    src: url('./fonts/WorkSans-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
 @font-face {
     font-family: 'Work Sans';
     src: url('./fonts/WorkSans-Light.woff2') format('woff2');

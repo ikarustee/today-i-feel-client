@@ -2,6 +2,7 @@ import React, {useContext, useState, useEffect} from 'react';
 import { ArticleContext } from '../Contexts/ArticleContext';
 import { css } from "@emotion/react";
 import DotLoader from "react-spinners/DotLoader";
+import {readableDate} from "../helper/dateformatter"
 
 import {
   Box,
@@ -40,7 +41,7 @@ const ArticleList = ({p}) => {
       </Container>
     ) : (
      <Container maxW={'7xl'} className="article__list" p="0">
-      <Heading as="h1" color="blue.300">All articles</Heading>
+      <Heading as="h1" color="blue.300">Latest article</Heading>
       <Box
         marginTop={{ base: '1', sm: '5' }}
         display="flex"
@@ -79,47 +80,61 @@ const ArticleList = ({p}) => {
           </Box>
         </Box>
         <Box
+          className="articles__list"
           display="flex"
           flex="1"
           flexDirection="column"
           justifyContent="center"
           marginTop={{ base: '3', sm: '0' }}>
-          {articles.map((a) => {
-              const excerpt = Object.values(a.body)
+          {articles
+            .filter((a) => a.visible)
+            .map((a) => {
               return (
-                <Box key={a._id} bg={colorMode === "light" ? "white" : "gray.700"} className="single" boxShadow={'lg'} m="0" padding="2rem 1rem" borderRadius={8} _hover={{boxShadow: "xl"}} transition="all 300ms ease">
-                  <Heading m="1rem 0 0.35rem" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
-                    <Link href={`articles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none' }} _focus={{boxShadow: "none"}}>
+                <Box 
+                key={a._id} 
+                bg={colorMode === "light" ? "white" : "gray.700"} 
+                className="single" 
+                boxShadow={'lg'} 
+                m="0" 
+                borderRadius={8} 
+                _hover={{boxShadow: "xl"}} 
+                transition="all 300ms ease">
+                  <Heading m="1rem 0 0.75rem" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
+                  <Link href={`articles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }} _focus={{boxShadow: "none"}}>
                       {a.title}
                     </Link>
                   </Heading>
                   <Divider m="0 0 0.75rem" />
-                  {a.tags.map((t) => {
-                    return (
-                      <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="gray" color="gray.500" bg="gray.200" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>
-                        <Link href={`/search?q=search,${t}`} _hover={{textDecoration: "none", color: "white"}}>{t}</Link>
-                      </Tag>
-                    )
-                  })}
+                  <span className="article__meta">
+                    {readableDate(a.createdDate)} &nbsp;
+                    {a.tags.map((t) => {
+                      return (
+                        <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="blue" color="gray.500" bg="blue.50" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>
+                          <Link href={`/search?q=search,${t}`} _hover={{textDecoration: "none", color: "white"}}>{t}</Link>
+                        </Tag>
+                      )
+                    })}
+                  </span>
                   <Divider m="0.5rem 0 0" />
                   <Text
                     className="excerpt"
                     as="p"
                     marginTop="2"
                     fontSize="md">
-                    {excerpt.join("").split(" ").slice(0, 25).join(" ") + " ..."}
+                    {a.body.replace(/[#_]/g,'').split(" ").slice(0, 25).join(" ") + " ..."}
                   </Text>
                   <Link href={`articles/${a._id}`} textAlign="center" _hover={{textDecoration: "none"}}>
                   <Button 
                     // className="readmore__btn" 
-                      borderColor="transparent" 
+                      borderColor="blue.300" 
                       borderWidth="2px" 
-                      color="white" 
-                      bg="blue.300"
+                      color="blue.300" 
+                      bg={`${colorMode === "light" ? "white" : "gray.700"}`}
                       fontWeight="400"
                       height="auto"
                       padding="4px 10px"
-                      _hover={{bg: "white", color: "blue.300", border: "2px solid #5C90FF"}} 
+                      _active={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
+                      _hover={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
                       variant='solid'>
                       Read article
                     </Button>
@@ -131,45 +146,57 @@ const ArticleList = ({p}) => {
             }
         </Box>
       </Box>
-      <Heading as="h2" marginTop="5">Latest articles</Heading>
+      <Heading as="h2" marginTop="5">All articles</Heading>
       <Divider marginTop="5"  marginBottom="2rem"/>
       <Box className="articles__list">
-      {articles.map((a) => {
-              const excerpt = Object.values(a.body)
+      {articles
+        .filter((a) => a.visible)
+        .map((a) => {
               return (
-                <Box key={a._id} bg={colorMode === "light" ? "white" : "gray.700"} className="single" boxShadow={'lg'} m="0" padding="2rem 1rem" borderRadius={8} _hover={{boxShadow: "xl"}} transition="all 300ms ease">
-                <Heading m="1rem 0 0.35rem" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
+                <Box 
+                key={a._id} 
+                bg={colorMode === "light" ? "white" : "gray.700"} 
+                className="single" 
+                boxShadow={'lg'} 
+                m="0" 
+                borderRadius={8} 
+                _hover={{boxShadow: "xl"}} 
+                transition="all 300ms ease">
+                <Heading m="1rem 0 0.75rem" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
                   <Link href={`articles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }} _focus={{boxShadow: "none"}}>
                     {a.title}
                   </Link>
                 </Heading>
                 <Divider m="0 0 0.75rem" />
-                  {a.tags.map((t) => {
-                    return (
-                      <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="gray" color="gray.500" bg="gray.200" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>
-                        <Link href={`/search?q=search,${t}`} _hover={{textDecoration: "none", color: "white"}}>{t}</Link>
-                      </Tag>
-                    )
-                  })}
+                <span className="article__meta">
+                    {readableDate(a.createdDate)} &nbsp;
+                    {a.tags.map((t) => {
+                      return (
+                        <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="blue" color="gray.500" bg="blue.50" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>
+                          <Link href={`/search?q=search,${t}`} _hover={{textDecoration: "none", color: "white"}}>{t}</Link>
+                        </Tag>
+                      )
+                    })}
+                  </span>
                 <Divider m="0.5rem 0 0" />
                 <Text
                   className="excerpt"
                   as="p"
                   marginTop="2"
                   fontSize="md">
-                  {excerpt.join("").split(" ").slice(0, 25).join(" ") + " ..."}
+                  {a.body.replace(/[#_]/g,'').split(" ").slice(0, 25).join(" ") + " ..."}
                 </Text>
                   <Link href={`/articles/${a.id}`} textAlign="center" _hover={{textDecoration: "none"}} >
                     <Button 
                       // className="readmore__btn" 
-                      borderColor="transparent" 
+                      borderColor="blue.300" 
                       borderWidth="2px" 
-                      color="white" 
-                      bg="blue.300"
+                      color="blue.300" 
+                      bg={`${colorMode === "light" ? "white" : "gray.700"}`}
                       fontWeight="400"
                       height="auto"
                       padding="4px 10px"
-                      _hover={{bg: "white", color: "blue.300", border: "2px solid #5C90FF"}} 
+                      _hover={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
                       variant='solid'>
                       Read article
                     </Button>
@@ -177,7 +204,7 @@ const ArticleList = ({p}) => {
                 </Box>
               )
             })
-            // .splice(1, 8)
+            .slice(1, articles.length)
             }
         </Box>
       <VStack paddingTop="40px" spacing="2" alignItems="flex-start">

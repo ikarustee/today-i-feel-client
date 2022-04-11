@@ -13,7 +13,7 @@ import {
   } from '@chakra-ui/react';
 import logoNegative from "../img/logoNegative@2x.png"
 import logoDark from "../img/logo-dark@2x.png"
-import StickyNav from "./StickyNav"
+import StickyNavHolder from "./StickyNavHolder"
   
   const Logo = (props) => {
     return (
@@ -41,7 +41,7 @@ import StickyNav from "./StickyNav"
     return (
       <>
       <Hide above="992px">
-        <StickyNav />
+        <StickyNavHolder />
       </Hide>
       <Box
         className="footer"
@@ -62,15 +62,18 @@ import StickyNav from "./StickyNav"
             justify={{ base: 'space-between', md: 'space-between' }}
             align={{ base: 'center', md: 'center' }}>
               <Flex gap="1rem">
-                <Link to="/about" _hover={{color: "blue.700", textDecoration: "none"}}>About</Link>
                 <Link to="/contact" _hover={{color: "blue.700", textDecoration: "none"}}>Contact</Link>
                 <Link to="/imprint" _hover={{color: "blue.700", textDecoration: "none"}}>Imprint</Link>
                 <Link to="/privacy-policy" _hover={{color: "blue.700", textDecoration: "none"}}>Privacy Policy</Link>
               </Flex>
-              <Flex gap="1rem">
+              <Flex 
+              gap="1rem" 
+              className="copyright"
+              alignItems="center"
+              >
                 <Link to="/" className="logo">
                   {colorMode === 'light' ? 
-                  (<img src={logoNegative} alt="" width={400}/>) 
+                  (<img src={logoNegative} alt="" width={100}/>) 
                   : (<img src={logoDark} alt="" />)
                   }
                 </Link>

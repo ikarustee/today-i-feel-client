@@ -113,8 +113,8 @@ const Home = (props) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [data, setData] = useState([]);
 
-  // const [isLoading, setIsLoading] = useState(true)
-  const [color, setColor] = useState("#FFFFFF");
+  const [isLoading, setIsLoading] = useState(true)
+  const [color, setColor] = useState("#5C90FF");
 
   const override = css`
   display: block;
@@ -145,9 +145,9 @@ const Home = (props) => {
   useEffect(() => {
     getTagsFromDB()
     console.log(initialTags)
-    // if(data.length) return setIsLoading(false)
+    if(data.length) return setIsLoading(false)
     // setData(tags.slice(0, initialTags));
-  }, []);
+  }, [data.length]);
 
   const processTags = (e) => {
     const myTag = e.target.name
@@ -209,7 +209,10 @@ const Home = (props) => {
           <Heading as='h1' className="teaser linear-wipe" textAlign={[ 'center', 'center' ]} color='blue.300' >Share your mood.<br /> Take a deep breath. <br />Take your time.</Heading>
           <h4 className="heading--center">Click on one feeling and share it <strong>anonymously</strong> with others</h4>
         </div>
-        <div className="tagcloud">
+        {isLoading ? (
+            <DotLoader color={color} css={override} loading={isLoading} size={60}  />
+        ) : (
+          <div className="tagcloud">
           <form id="tagcloud">
             {data.map((t, index) => {
               const colors = ["#E020CF", "#FF3292", "#FF7E5F", "#FFC14B", "#fee700", "#F9F871", "#9BDE7E", "#C0BC84", "#C3FCF1", "#154FA6", "#5A57AB"]
@@ -266,6 +269,7 @@ const Home = (props) => {
                 </Button>
             </Flex>
         </div>
+        )}
       <Search/>
     </> 
   )

@@ -49,7 +49,6 @@ function App() {
           <Route path="/editarticles/:id" element={<EditSingleArticle />} />
           <Route path="/search" element={<SearchResults />} />
           <Route path="/chart" element={<Chart />} />
-          {/* <Route path="/search" element={<ArticleSuggestions />} /> */}
           {/* <Route path="/about" element={<About />} /> */}
         </Routes>
         {/* <Routes>
