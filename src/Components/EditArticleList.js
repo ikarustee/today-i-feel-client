@@ -5,6 +5,7 @@ import DotLoader from "react-spinners/DotLoader";
 import {
   Box,
   Button,
+  Flex,
   Heading,
   Link,
   Image,
@@ -18,6 +19,8 @@ import axios from 'axios';
 import {useNavigate} from "react-router-dom"
 import { ArticleContext } from '../Contexts/ArticleContext';
 import {readableDate} from "../helper/dateformatter"
+import { BiEditAlt, BiEraser } from "react-icons/bi";
+import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
 
 const EditArticleList = ({p}) => {
 //   const [articles,setArticle] = useState([])
@@ -32,13 +35,26 @@ const EditArticleList = ({p}) => {
   margin: 0 auto;
   border-color: red;
 `;
-// async function getData(){
-//     setIsLoading(true);
-//     let response = await axios.get("http://localhost:3010/articles")
-//     setArticle(response.data)
-//     console.log(response)
-//     setIsLoading(false)
-// }
+
+const handleDelete = async (e) => {
+  const id = e.target.id
+  console.log(e.target.id)
+  window.confirm("Really delete article?")
+  articles.filter((a) => a._id != id)
+  let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
+  try {
+    const res = await axios.delete(server)
+    console.log("Article deleted")
+    console.log(res)
+    // navigate("/editarticles")
+  } catch (error) {
+    console.log(error)
+  }
+  // window.location.reload();
+
+  getArticles()
+} 
+
 useEffect(()=>{
     async function verifyTest(){
         axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true}).then((response)=>{
@@ -75,7 +91,7 @@ useEffect(()=>{
                 padding="2rem 1rem" 
                 borderRadius={8} 
                 transition="all 300ms ease">
-                <Box>
+                  <Box className="edit__title__meta">
                     <h4 className="edit__heading">
                       <Link href={`editarticles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }} _focus={{boxShadow: "none"}}>
                         {a.title}
@@ -83,39 +99,48 @@ useEffect(()=>{
                     </h4>
                     <Box className="meta">
                       <span className="date">Published: {readableDate(a.createdDate)}</span>
-                      <span className="reported">Visible: {a.visible ? "🟢" : "🔴"}</span>
+                      <span className="reported">Visible: {a.visible ? (<RiEyeLine className="visible" />) : (<RiEyeCloseLine className="visible not" />)}</span>
                     </Box>
                   </Box>
-                  <Link className="edit__btn" href={`editarticles/${a._id}`} textAlign="center" _hover={{textDecoration: "none"}} >
+                  <Flex className="edit__action" columnGap="0.5rem">
+                    <Link className="edit__btn" href={`editarticles/${a._id}`} textAlign="center" _hover={{textDecoration: "none"}} >
+                      <Button 
+                        className="edit__btn" 
+                        border="none"
+                        borderRadius={"8px"}
+                        color="gray.400" 
+                        bg="transparent"
+                        fontSize="18px"
+                        fontWeight="300"
+                        // width="20px"
+                        // height="20px"
+                        padding="0"
+                        _hover={{color: `${colorMode === "light" ? "blue.300" : "gray.400"}`}} 
+                        // _hover={{color: "white"}} 
+                        variant='outline'>
+                          <BiEditAlt id={a._id} color="red.600" />
+                      </Button>
+                    </Link>
                     <Button 
-                      // className="readmore__btn" 
-                      borderColor="blue.300" 
-                      borderWidth="1px" 
-                      color="blue.300" 
-                      bg="white"
-                      fontSize="12px"
+                      className="delete__btn"
+                      onClick={(e) => handleDelete(e)} 
+                      id={a._id}
+                      border="none"
+                      borderRadius={"8px"}
+                      color="gray.400"  
+                      bg="transparent"
+                      fontSize="18px"
                       fontWeight="300"
-                      height="auto"
-                      padding="4px 10px"
-                      _hover={{bg: "blue.300", color: "white", border: "1px solid #5C90FF"}} 
+                      padding="0"
+                      _hover={{color: `${colorMode === "light" ? "red.600" : "red.600"}`}}  
                       variant='outline'>
-                      Edit
+                      <BiEraser 
+                        onClick={(e) => handleDelete(e)} 
+                        id={a._id}
+                        color="red.600"
+                         />
                     </Button>
-                  </Link>
-                  <Button 
-                    // className="readmore__btn" 
-                    borderColor="blue.300" 
-                    borderWidth="1px" 
-                    color="blue.300" 
-                    bg="white"
-                    fontSize="12px"
-                    fontWeight="300"
-                    height="auto"
-                    padding="4px 10px"
-                    _hover={{bg: "blue.300", color: "white", border: "1px solid #5C90FF"}} 
-                    variant='outline'>
-                    Delete
-                  </Button>
+                  </Flex>
                 </Box>
               )
             })
