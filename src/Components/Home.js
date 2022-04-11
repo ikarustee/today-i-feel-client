@@ -105,8 +105,8 @@ import { css } from "@emotion/react";
 
 const Home = (props) => {
   const [startSlice , setStartSlice] = useState(0);
-  const [initialTags , setInitialTags] = useState(5);
-  const [increaseTags, setIncreaseTags] = useState(3);
+  const [initialTags , setInitialTags] = useState(8);
+  const [increaseTags, setIncreaseTags] = useState(5);
   const [checkedTags, setCheckedTags] = useState(0)
   const [collectedTags, setCollectedTags] = useState([])
   const [newSearchParams, setNewSearchParams] = useState([]) 
@@ -215,7 +215,7 @@ const Home = (props) => {
           <div className="tagcloud">
           <form id="tagcloud">
             {data.map((t, index) => {
-              const colors = ["#E020CF", "#FF3292", "#FF7E5F", "#FFC14B", "#fee700", "#F9F871", "#9BDE7E", "#C0BC84", "#C3FCF1", "#154FA6", "#5A57AB"]
+              const colors = ["#b110a2", "#f27bb2", "#FF7E5F", "#FFC14B", "#fee700", "#F9F871", "#9BDE7E", "#C0BC84", "#C3FCF1", "#154FA6", "#5A57AB"]
               const randomColor = colors[Math.floor(Math.random() * colors.length)]
               const fontSizes = ["1rem", "1.25rem", "1.5rem", "1.75rem"]
               const randomFontsize = fontSizes[Math.floor(Math.random() * fontSizes.length)]

@@ -159,12 +159,27 @@ form#navsearch {
   top: 1rem;
   transform: translateX(calc(-100% - 1rem - 42px));
   transition: all 500ms ease;
+  display: flex;
+  flex-wrap: nowrap;
 }
 form#navsearch.show {
   transform: translateX(3rem);
 }
+#navsearch button {
+  position: relative;
+  left: -4px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  position: relative;
+  z-index: 10;
+}
+#navsearch input {
+  position: relative;
+  z-index: 0;
+}
 button.navsearch  {
   position: relative;
+  z-index: 10;
   top:-0.3rem;
 }
 button.navsearch svg {
@@ -265,6 +280,7 @@ main {
   margin:2rem auto;
   padding: 1rem;
   width: 100%;
+  max-width: 800px;
   /* min-width: 100%; */
   box-sizing: border-box;
   text-align: center;
@@ -337,6 +353,14 @@ article {
   flex-wrap: wrap;
   gap: 1.5rem;
 }
+.article__meta {
+  color: #718096;
+  font-size: 12px;
+}
+.article__meta > .date {
+  position: relative;
+  top: -3px;
+}
 .articles__list .single,
 .articles .single {
   flex: 1 0 100%;
@@ -359,7 +383,6 @@ article {
   flex-basis: calc(75% - 1rem);
   margin-bottom: 0.35rem;
 }
-
 .articles__list.edit .single .edit__btn {
   flex-basis: calc(25% - 1rem);
   justify-self: flex-end;
@@ -484,7 +507,19 @@ button.delete__btn:hover::before {
   }
 }
 
-/* Searchform ========= */
+/* Report form ======== */
+/* =================== */
+.report {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.report div[role="radiogroup"] .chakra-stack {
+  margin: 0.5rem 0;
+}
+.report button {
+  margin: 1rem 0;
+}
+/* Search form ======== */
 /* =================== */
 .tagsearch {
   max-width: 375px;
@@ -515,7 +550,6 @@ button.delete__btn:hover::before {
 
 /* Chart ============== */
 /* =================== */
-
 .recharts-wrapper {
   margin: 0 auto;
 }
@@ -523,8 +557,10 @@ button.delete__btn:hover::before {
   height:0;
   transform: none;
   transition: height transform 150ms ease;
+  display: none;
 }
 .chart__holder.open{
+  display: block;
   height:auto;
   transform: scale(0.9);
   transition: height transform 150ms ease;
@@ -554,6 +590,7 @@ path.recharts-polygon {
     height: 4rem;
   }
 }
+
 /* Info holder ========= */
 /* =================== */
 .info__holder {
@@ -587,7 +624,8 @@ a.info__link {
   display:inline-block;
   transition: all 1000ms ease;
 }
-a.info__link::after {
+a.info__link::after,
+h5.info__link::after {
   content: "";
   display: block;
   width:0;
@@ -597,6 +635,9 @@ a.info__link::after {
   position: relative;
   bottom: 0;
   transition: all 1000ms ease;
+}
+h5 a.info__link::after {
+  height: 2px;
 }
 a.info__link:hover::after {
   background-color: #94d600;
@@ -634,6 +675,9 @@ a.info__link:hover::after {
 .footer__links a,
 .copyright {
   font-size:12px;
+}
+.footer__nav a {
+  font-weight:normal;
 }
 .copyright {
   flex-wrap: wrap;

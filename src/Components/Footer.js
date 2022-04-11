@@ -54,6 +54,7 @@ import StickyNavHolder from "./StickyNavHolder"
             bg={useColorModeValue('blue.300', 'gray.700')}
           >
           <Container
+            className="footer__nav"
             as={Stack}
             py={4}
             flexWrap="wrap"
@@ -62,9 +63,9 @@ import StickyNavHolder from "./StickyNavHolder"
             justify={{ base: 'space-between', md: 'space-between' }}
             align={{ base: 'center', md: 'center' }}>
               <Flex gap="1rem">
-                <Link to="/contact" _hover={{color: "blue.700", textDecoration: "none"}}>Contact</Link>
-                <Link to="/imprint" _hover={{color: "blue.700", textDecoration: "none"}}>Imprint</Link>
-                <Link to="/privacy-policy" _hover={{color: "blue.700", textDecoration: "none"}}>Privacy Policy</Link>
+                <Link to="/contact" _hover={{color: "purple.500", textDecoration: "none"}}>Contact</Link>
+                <Link to="/imprint" _hover={{color: "purple.500", textDecoration: "none"}}>Imprint</Link>
+                <Link to="/privacy-policy" _hover={{color: "purple.500", textDecoration: "none"}}>Privacy Policy</Link>
               </Flex>
               <Flex 
               gap="1rem" 

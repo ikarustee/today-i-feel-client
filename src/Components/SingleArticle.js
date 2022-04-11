@@ -4,6 +4,7 @@ import {
     Box,
     FormControl,
     Button,
+    Flex,
     Radio, 
     RadioGroup,
     Textarea,
@@ -21,7 +22,7 @@ import DotLoader from "react-spinners/DotLoader";
 import { css } from "@emotion/react";
 import ReactMarkdown from "react-markdown";  
 import {readableDate} from "../helper/dateformatter"
-import { BiMessageSquare } from 'react-icons/bi';
+import { BiMessageSquare, BiRightArrowAlt } from 'react-icons/bi';
 import axios from 'axios';
 
 const SingleArticle = () => {
@@ -42,6 +43,7 @@ const SingleArticle = () => {
     const disabled = mailerState.message === "" || mailerState.message.length <= 10
     const bg = useColorModeValue('blue.300', 'blue.900')
     const color = useColorModeValue('white', 'gray.300')
+    const fontColor = useColorModeValue('white', 'gray.300')
 
     const override = css`
     display: block;
@@ -93,7 +95,7 @@ const SingleArticle = () => {
     return (
     <>
         <article>
-            <Container p="0" maxW={"800px"} >
+            <Container p="0" maxW={"700px"} >
               <Box
                 bg={bg} 
                 color={color}
@@ -117,10 +119,47 @@ const SingleArticle = () => {
                   })}
                 </em>
                 <Divider m="0.5rem 0 0" />
+                <Box
+                    className="info__holder"
+                  >
+                    <Heading 
+                      as="h3" 
+                      size="lg" 
+                      textAlign={"center"} 
+                      color={"blue.300"}
+                      marginBottom="2rem"
+                    >
+                    Seeking for professional help?</Heading>
+                    <Flex 
+                      className="info__content"
+                      bg={bg} 
+                      color={fontColor}
+                      borderRadius="12px"
+                      p={4}
+                      boxShadow={"lg"}
+                      >
+                      <BiRightArrowAlt />
+                      <Heading 
+                        as="h5" 
+                        size={"md"} 
+                        fontFamily={"Work Sans"}
+                        fontStyle={"normal"}
+                        >Instahelp – professional online psychological counseling <strong><a href="https://instahelp.me/de/" target="_blank" className="info__link">instahelp.me/de/</a></strong></Heading>
+                    </Flex>
+                  </Box>
+                <Heading 
+                  as="h4"
+                  color="purple.400"
+                  size={"md"}
+                  // fontFamily={"Work Sans"} 
+                  fontStyle={"italic"}
+                  // fontWeight="500!important"
+                  textAlign={"center"}
+                  m={"4rem 0 1rem"}
+                  >Something is not correct or inproper? Let us know.</Heading>
                 <FormControl isRequired>
-                  <form onSubmit={submitEmail}>
+                  <form className="report" onSubmit={submitEmail}>
                     <fieldset>
-                      <legend>Something is not correct or inproper? Let us know.</legend>
                       <RadioGroup onChange={setValue} value={value}>
                         <Stack direction='row'>
                           <Radio value='Wrong information'>Wrong information</Radio>
@@ -135,7 +174,10 @@ const SingleArticle = () => {
                         value={thisArticle.title}
                         />
                       <Textarea
-                        placeholder="Message"
+                        placeholder="Type a message ..."
+                        fontWeight={"normal"}
+                        color={"blue.300"}
+                        _placeholder={{color: "blue.300"}}
                         onChange={handleStateChange}
                         name="message"
                         value={mailerState.message}
@@ -175,29 +217,6 @@ const SingleArticle = () => {
                     </fieldset>
                   </form>
                 </FormControl>
-                {/* <p>Something is wrong in this article? Let us know.</p>
-                <FormControl >
-                  <form id="report">
-                      <RadioGroup onChange={setValue} value={value}>
-                        <Stack direction='row'>
-                          <Radio value='Wrong information'>Wrong information</Radio>
-                          <Radio value='Outdated'>Outdated</Radio>
-                          <Radio value='Other'>Other</Radio>
-                        </Stack>
-                      </RadioGroup>
-                      <Textarea
-                        value={userInput.text}
-                        name="issue"
-                        onChange={handleInputChange}
-                        placeholder="Describe the issue"
-                        size='md'
-                      />
-                      <Button 
-                        type="submit"
-                      >
-                      Submit</Button>
-                  </form>
-                </FormControl> */}
             </Container>
         </article>
     </>
