@@ -136,12 +136,12 @@ const Home = (props) => {
       console.log(error)
     }
   }
-  async function getSearchResult(){
-    // setIsLoading(true);
+//   async function getSearchResult(){
+//     // setIsLoading(true);
     
-    // setIsLoading(false);
-    // setTagURL(url)
-}
+//     // setIsLoading(false);
+//     // setTagURL(url)
+// }
   useEffect(() => {
     getTagsFromDB()
     console.log(initialTags)
@@ -180,7 +180,7 @@ const Home = (props) => {
       console.log(searchParams)
       // encodeURI(searchParams)
       
-      let url = "https://todayifeel-server.herokuapp.com/search/"+newSearchParams;
+      let url = "http://localhost:3010/search/"+newSearchParams;
       let response = await axios.get(url,{withCredentials:true});
       console.log(response.data);
       if( typeof response.data === "string"){
@@ -277,43 +277,3 @@ const Home = (props) => {
 
 export default Home
 
-// const index = tags.map(object => object.value).indexOf(tag.value);
-    // console.log(tags[index])
-    // if(!tags[index].isActive) {
-      
-      // console.log(index, clickedTag.value)
-      // tags[index].isActive = true;
-      // clickedTag.isActive = true;
-      // setIsActive(true)
-      // setCountTags((prev) => prev + 1)
-      // setCountTags(countTags + 1)
-      // setSingleTag(tag.value)
-      // setCollectedTags((prev) => [...prev, tag.value])
-    // } else {
-      // console.log("Entered here")
-      // tags[index].isActive = false;
-      // setIsActive(false)
-      // setCountTags(countTags - 1)
-    // }
-    // console.log(tags[index])
-    
-    // if(tag = !isActive) {
-    //     setIsActive(true)
-    //     setCountTags((prev) => prev + 1)
-    //     setCollectedTags((prev) => [...prev, clickedTag])
-    //   } else {
-    //     setCountTags((prev) => prev - 1)
-    //     setCollectedTags((prev) => [...prev.filter((tag) => tag.value === clickedTag)])
-    // }
-    // setSingleTag(clickedTag)
-    // console.log(tags[index].value, tags[index].isActive,countTags, collectedTags)
-    // if(clickedTag === isActive) {
-    //   setIsActive(false)
-    //   setCountTags((prev) => prev - 1)
-    //   console.log("Nothing happens")
-    //   console.log(selCountTags, isActive)
-    // } else {
-    //   setIsActive(true)
-    //   setCountTags((prev) => prev + 1)
-    //   console.log(selCountTags, isActive)
-    // }

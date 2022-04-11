@@ -22,6 +22,7 @@ import { css } from "@emotion/react";
 import ReactMarkdown from "react-markdown";  
 import {readableDate} from "../helper/dateformatter"
 import { BiMessageSquare } from 'react-icons/bi';
+import axios from 'axios';
 
 const SingleArticle = () => {
     const {articles, isLoading, getArticles} = useContext(ArticleContext)
@@ -58,7 +59,7 @@ const SingleArticle = () => {
       setMailerState((prevState) => ({
         ...prevState,
         [e.target.name]: e.target.value,
-        article: thisArticle.title,
+        article: thisArticle,
         value: value,
       }));
     }
@@ -67,29 +68,18 @@ const SingleArticle = () => {
       e.preventDefault();
       console.log(e.target)
       console.log({ mailerState });
-      const response = await fetch("http://localhost:3001/send", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ mailerState }),
-      })
-        .then((res) => res.json())
-        .then(async (res) => {
-          const resData = await res
-          console.log(resData)
-          if(resData.status === "success") {
-            alert("Message sent")
-          } else if(resData.status === "Fail") {
-            alert("Message failed to sent")
-          }
-        })
-        .then(() => {
-          setMailerState({
-            message: "",
-            article: ""
-          });
-        });
+      const response = await axios.post("http://localhost:3010/send", { mailerState })
+      const resData = await response
+      console.log(resData)
+      if(resData.status === "success") {
+        alert("Message sent")
+      } else if(resData.status === "Fail") {
+        alert("Message failed to sent")
+      }
+      setMailerState({
+        message: "",
+        article: ""
+      });
     };
 
     useEffect(() => {

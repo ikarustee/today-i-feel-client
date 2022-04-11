@@ -81,7 +81,7 @@ const SearchResults = (props) => {
   useEffect(() => {
     getArticles(decodeURI(searchParams.get("q").split(" ").join(",")))
     // console.log(searchParams.get("q").split(" ").join(","))
-    console.log(props.voteResult)
+    // console.log(props.voteResult)
     
     getSearchResult();
   },[searchParams])
