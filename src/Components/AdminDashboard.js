@@ -93,6 +93,21 @@ import { useEffect, useState } from 'react';
                     >
                     Edit Articles
                   </Button>
+                  <Button
+                    onClick={()=>{navigate("/reportedarticles")}}
+                    borderColor="blue.300"
+                    borderWidth="2px" 
+                    color="blue.300"
+                    bg={useColorModeValue("white", "gray.700")}
+                    fontWeight="400"
+                    height="auto"
+                    padding="4px 10px"
+                    width="auto"
+                    _hover={{bg: "blue.300", color: "white"}} 
+                    variant='solid'
+                    >
+                    Check Reported Articles
+                  </Button>
                  </Stack>
               </Box>
       </Flex>

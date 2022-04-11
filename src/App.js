@@ -17,6 +17,8 @@ import Signup from "./Components/Signup";
 import AdminDashboard from "./Components/AdminDashboard"
 import EditArticleList from "./Components/EditArticleList"
 import EditSingleArticle from "./Components/EditSingleArticle"
+import ReportedArticleList from "./Components/ReportedArticleList"
+import ReportedArticle from "./Components/ReportedArticle"
 
 function App() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -47,6 +49,8 @@ function App() {
           <Route path="/newarticle" element={<NewArticle />} />
           <Route path="/editarticles" element={<EditArticleList />} />
           <Route path="/editarticles/:id" element={<EditSingleArticle />} />
+          <Route path="/reportedarticles" element={<ReportedArticleList />} />
+          <Route path="/reportedarticles/:id" element={<ReportedArticle/>} />
           <Route path="/search" element={<SearchResults />} />
           <Route path="/chart" element={<Chart />} />
           {/* <Route path="/about" element={<About />} /> */}
