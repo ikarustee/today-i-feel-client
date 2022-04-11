@@ -674,6 +674,7 @@ a.info__link:hover::after {
   #sticky a svg,
   .footer__links a svg {
     top:4px;
+    margin-right:0;
   }
   .footer {
     margin-top:3rem;
