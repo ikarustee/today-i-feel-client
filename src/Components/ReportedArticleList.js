@@ -20,9 +20,9 @@ import { ArticleContext } from '../Contexts/ArticleContext';
 import {readableDate} from "../helper/dateformatter"
 
 const EditArticleList = ({p}) => {
-//   const [articles,setArticle] = useState([])
-  const {articles, isLoading, getArticles} = useContext(ArticleContext)
-//   const [isLoading, setIsLoading] = useState(false)
+  const [articles,setArticles] = useState([])
+  // const {articles, isLoading, getArticles} = useContext(ArticleContext)
+  const [isLoading, setIsLoading] = useState(true)
   const [color, setColor] = useState("#5C90FF");
   const { colorMode, toggleColorMode } = useColorMode()
   const navigate = useNavigate();
@@ -32,13 +32,13 @@ const EditArticleList = ({p}) => {
   margin: 0 auto;
   border-color: red;
 `;
-// async function getData(){
-//     setIsLoading(true);
-//     let response = await axios.get("http://localhost:3010/articles")
-//     setArticle(response.data)
-//     console.log(response)
-//     setIsLoading(false)
-// }
+async function getData(){
+    setIsLoading(true);
+    let response = await axios.get("http://localhost:3010/reports")
+    setArticles(response.data)
+    console.log(response.data)
+    setIsLoading(false)
+}
 useEffect(()=>{
     async function verifyTest(){
         axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true}).then((response)=>{
@@ -50,12 +50,12 @@ useEffect(()=>{
             })
     }
     verifyTest();
-    getArticles();
+    getData();
 },[])
 
   return (
     <>
-    {isLoading ? (
+    {!articles ? (
       <Container className="loader" maxW={'7xl'}>
         <DotLoader color={color} css={override} loading={!isLoading} size={60} />
       </Container>
@@ -66,10 +66,10 @@ useEffect(()=>{
       <Box className="articles__list edit" gap="1rem">
       {articles
         .map((a) => {
-              const excerpt = Object.values(a.body)
+              const excerpt = Object.values(a.article.body)
               return (
                 <Box 
-                key={a._id} 
+                key={a.article._id} 
                 bg={colorMode === "light" ? "white" : "gray.700"} 
                 className="single" 
                 boxShadow={'sm'} m="0" 
@@ -78,7 +78,7 @@ useEffect(()=>{
                 transition="all 300ms ease">
                   <h4 className="edit__heading">
                     <Link href={`reportedarticles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }} _focus={{boxShadow: "none"}}>
-                      {a.title}
+                      {a.article.title}
                     </Link>
                   </h4>
                   <Link className="edit__btn" href={`reportedarticles/${a._id}`} textAlign="center" _hover={{textDecoration: "none"}} >
@@ -98,8 +98,8 @@ useEffect(()=>{
                     </Button>
                   </Link>
                   <Box className="meta">
-                    <span className="date">Published: {readableDate(a.createdDate)}</span>
-                    <span className="reported">Visible: {a.visible ? "🟢" : "🔴"}</span>
+                    <span className="date">Published: {readableDate(a.article.createdDate)}</span>
+                    <span className="reported">Visible: {a.article.visible ? "🟢" : "🔴"}</span>
                   </Box>
                 </Box>
               )

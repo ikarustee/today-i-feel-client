@@ -23,17 +23,20 @@ import {
   import { FaCommentDollar } from 'react-icons/fa';
   import DotLoader from "react-spinners/DotLoader";
   import { css } from "@emotion/react";
+import ReactMarkdown from 'react-markdown';
   export default function EditSingleArticle() {
     
     const {id} = useParams()
-    const {articles, isLoading, getArticles} = useContext(ArticleContext)
-    const thisArticle=articles.find((a) => a.id === id)
+    // const {articles, isLoading, getArticles} = useContext(ArticleContext)
+    const [thisArticle, setThisArticle]= useState({})
     const [visible, setVisible] = useState(true)
+    const [isLoading, setIsLoading] = useState(true)
     const [userInput, setUserInput] = useState({
       title: "",
       body: "",
       tags: "",
-      url: ""
+      url: "",
+      visible:true
     })
 
     const userInputEmpty = JSON.stringify(userInput).length
@@ -43,32 +46,71 @@ import {
     margin: 0 auto;
     border-color: red;
   `;
-    
+    async function getData(){
+      setIsLoading(true);
+      console.log("http://localhost:3010/reports/"+id.toString())
+      let response = await axios.get("http://localhost:3010/reports/"+id.toString())
+      setThisArticle(response.data[0])
+      console.log(response.data[0])
+      setIsLoading(false)
+    }
     const navigate = useNavigate();
     
     const handleChange = (e) => {
-      setVisible((prev) => !prev)
-      setUserInput({
-        ...userInput,
-        [e.target.name]: e.target.value,
-        visible: visible
-      })
+      if(e.target.name === "visible"){
+        setVisible((prev) => !prev)
+        setUserInput({
+          ...userInput,
+          visible: visible
+        })
+      } else {
+        setUserInput({
+          ...userInput,
+          [e.target.name]: e.target.value,
+          // visible: visible
+        })
+      }
+      
+      
       console.log(userInput)
     }
     
     function updateArticle () {
-      const {title, body, tags, url, visible } = userInput
+      const {title, body, tags, url} = userInput
       console.log(userInput)
       console.log(tags)
       let tagArray = tags.split(",")
       tagArray = tagArray.map(el=>el.trim())
-      console.log(title,tagArray)
+      console.log({title:title,body:body, tags:tagArray, url:url})
     
       let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
-      axios.put(server,{title:title,body:body, tags:tagArray, url:url, visible: visible}).then((response)=> {
+      axios.put(server,{title:title,body:body, tags:tagArray, url:url}).then((response)=> {
             console.log(response)
-            navigate("/adminDashboard")
+            deleteReport()
+          }).then((response)=>{
+            // navigate("/reportedarticles")
           })
+    }
+    function deleteReport(){
+      let server = "https://todayifeel-server.herokuapp.com/reports/"+id.toString()
+      axios.delete(server).then((response)=>{
+        console.log(response)
+        // navigate("/reportedarticles")
+      })
+    }
+    function invisibleArticle(){
+      const {title, body, tags, url} = userInput
+      console.log(userInput)
+      console.log(tags)
+      let tagArray = tags.split(",")
+      tagArray = tagArray.map(el=>el.trim())
+      console.log({title:title,body:body, tags:tagArray, url:url,visible:false})    
+      let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
+      axios.put(server,{title:title,body:body, tags:tagArray, url:url,visible:false}).then((response)=> {
+            console.log(response)
+            // navigate("/reportedarticles")
+          })
+    
     }
     async function verifyTest(){
         let response = await axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true})
@@ -79,27 +121,30 @@ import {
           }
     }
     useEffect(()=>{
-      getArticles();
       verifyTest();
+      getData();
     },[])
     useEffect(()=>{
         
-        if(thisArticle){
-            console.log(thisArticle.tags)
+        if(thisArticle && !isLoading){
+          setIsLoading(true)
+            console.log(thisArticle)
             setUserInput({
-            title: thisArticle.title,
-            body: thisArticle.body,
-            tags: thisArticle.tags.join(", "),
-            url: thisArticle.url
-          }
-
-        )}
-    },[thisArticle])
+              title: thisArticle.article.title,
+              body: thisArticle.article.body,
+              tags: thisArticle.article.tags.join(", "),
+              url: thisArticle.article.url,
+              visible: thisArticle.article.visible
+          })
+          setVisible(thisArticle.article.visible)
+          setIsLoading(false)
+      }
+    },[thisArticle, isLoading])
 
 
     return (
         <>
-        {!thisArticle ? (
+        {isLoading ? (
             <DotLoader color={color} css={override} loading={isLoading} size={60} />
             ):(
                 <Flex
@@ -109,9 +154,13 @@ import {
             >
             <Stack width="85%" spacing={8} mx={'auto'} py={6} px={6} maxWidth="600px">
                 <Stack align={'base'}>
-                <Heading fontSize={'2xl'} color="blue.300" m="0 0 2rem" textAlign="left">Check reported article</Heading>
+                <Heading fontSize={'2xl'} color="blue.300" m="0 0 2rem" textAlign="left">Check report</Heading>
                 </Stack>
                 <Stack spacing={4}>
+                <Heading fontSize={'2xl'} color="blue.300" m="0 0 2rem" textAlign="left">Issue:</Heading>
+                  <Heading fontSize={'xl'} color="blue.300" m="0 0 2rem" textAlign="left">{thisArticle.reason}</Heading>
+                  <ReactMarkdown className="article__content">{thisArticle.comment}</ReactMarkdown>
+                  <Heading fontSize={'xl'} color="blue.300" m="0 0 2rem" textAlign="left">article under review:</Heading>
                 <FormControl id="title" isRequired >
                     <Input
                     onChange={handleChange} 
@@ -158,7 +207,8 @@ import {
                     value={userInput.visible}
                     size='lg'
                     onChange={handleChange}
-                    // onClick={handleChange}
+                    isChecked={visible}
+                    // checked={userInput.visible}
                   />
                   <label htmlFor="visible">Visible</label>
                 </FormControl>
@@ -178,7 +228,39 @@ import {
                     _hover={{bg: "blue.300", color: "white"}} 
                     variant='solid' 
                     >
-                    Update
+                    Article changed and Report closed
+                    </Button>
+                    <Button
+                    onClick={deleteReport}
+                    borderColor="blue.300"
+                    borderWidth="2px" 
+                    color="blue.300"
+                    bg="white"
+                    fontWeight="400"
+                    height="auto"
+                    margin="0 auto"
+                    padding="4px 10px"
+                    width="150px"
+                    _hover={{bg: "blue.300", color: "white"}} 
+                    variant='solid' 
+                    >
+                    Report dismissed
+                    </Button>
+                    <Button
+                    onClick={invisibleArticle}
+                    borderColor="blue.300"
+                    borderWidth="2px" 
+                    color="blue.300"
+                    bg="white"
+                    fontWeight="400"
+                    height="auto"
+                    margin="0 auto"
+                    padding="4px 10px"
+                    width="150px"
+                    _hover={{bg: "blue.300", color: "white"}} 
+                    variant='solid' 
+                    >
+                    Article temporarly made invisible
                     </Button>
 
              
