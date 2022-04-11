@@ -478,7 +478,7 @@ button.delete__btn:hover::before {
   .articles .single {
     flex: 1 0 calc(50% - 1.5rem);
   }
-  .articles__list .single:last-child,
+  .articles__list:not(.edit) .single:last-child,
   .articles .single:last-child {
     flex: 0 0 calc(50% - 0.75rem);
   }

@@ -77,20 +77,20 @@ useEffect(()=>{
       </Container>
     ) : (
      <Container maxW={'800px'} className="article__list" p="0">
-      <Heading as="h1" color="blue.300">All articles</Heading>
+      <Heading as="h1" color="blue.300" m="3rem 0 1rem">All articles</Heading>
       <Divider marginTop="5"  marginBottom="2rem"/>
       <Box className="articles__list edit" gap="1rem">
       {articles.map((a) => {
               const excerpt = Object.values(a.body)
               return (
                 <Box 
-                key={a._id} 
-                bg={colorMode === "light" ? "white" : "gray.700"} 
-                className="single" 
-                boxShadow={'sm'} m="0" 
-                padding="2rem 1rem" 
-                borderRadius={8} 
-                transition="all 300ms ease">
+                  key={a._id} 
+                  bg={colorMode === "light" ? "white" : "gray.700"} 
+                  className="single" 
+                  boxShadow={'sm'} m="0" 
+                  padding="2rem 1rem" 
+                  borderRadius={8} 
+                  transition="all 300ms ease">
                   <Box className="edit__title__meta">
                     <h4 className="edit__heading">
                       <Link href={`editarticles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }} _focus={{boxShadow: "none"}}>
