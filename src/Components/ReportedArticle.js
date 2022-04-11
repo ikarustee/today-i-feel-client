@@ -28,7 +28,6 @@ import {
     const {id} = useParams()
     const {articles, isLoading, getArticles} = useContext(ArticleContext)
     const thisArticle=articles.find((a) => a.id === id)
-    // const [article, setArticle] = useState(thisArticle)
     const [visible, setVisible] = useState(true)
     const [userInput, setUserInput] = useState({
       title: "",
@@ -36,6 +35,7 @@ import {
       tags: "",
       url: ""
     })
+
     const userInputEmpty = JSON.stringify(userInput).length
     const [color, setColor] = useState("#5C90FF");
     const override = css`
@@ -53,17 +53,19 @@ import {
         [e.target.name]: e.target.value,
         visible: visible
       })
+      console.log(userInput)
     }
     
     function updateArticle () {
-      const {title, body, tags, url, visible} = userInput
+      const {title, body, tags, url, visible } = userInput
       console.log(userInput)
+      console.log(tags)
       let tagArray = tags.split(",")
       tagArray = tagArray.map(el=>el.trim())
       console.log(title,tagArray)
     
       let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
-      axios.put(server,{title:title,body:body, tags:tagArray, url:url, visible:visible}).then((response)=> {
+      axios.put(server,{title:title,body:body, tags:tagArray, url:url, visible: visible}).then((response)=> {
             console.log(response)
             navigate("/adminDashboard")
           })
@@ -107,7 +109,7 @@ import {
             >
             <Stack width="85%" spacing={8} mx={'auto'} py={6} px={6} maxWidth="600px">
                 <Stack align={'base'}>
-                <Heading fontSize={'2xl'} color="blue.300" m="0 0 2rem" textAlign="left">Edit article</Heading>
+                <Heading fontSize={'2xl'} color="blue.300" m="0 0 2rem" textAlign="left">Check reported article</Heading>
                 </Stack>
                 <Stack spacing={4}>
                 <FormControl id="title" isRequired >
@@ -120,14 +122,14 @@ import {
                     />
                 </FormControl>
                 <FormControl id="body" isRequired>
-                    <Textarea
-                        onChange={handleChange}
-                        name="body"
-                        value={userInput.body}
-                        placeholder="Text"
-                        size='sm'
-                        fontWeight="400"
-                    />
+                  <Textarea
+                      onChange={handleChange}
+                      name="body"
+                      value={userInput.body}
+                      placeholder="Text"
+                      size='sm'
+                      fontWeight="400"
+                  />
                 </FormControl>
                 <FormControl id="tags" isRequired>
                     <Input
@@ -140,17 +142,17 @@ import {
                     />
                 </FormControl>
                 <FormControl id="url">
-                    <Input
-                        onChange={handleChange}
-                        name="url"
-                        value={userInput.url}
-                        placeholder="'https://someurl.com'"
-                        size='sm'
-                        fontWeight="400"
-                    />
+                  <Input
+                      onChange={handleChange}
+                      name="url"
+                      value={userInput.url}
+                      placeholder="'https://someurl.com'"
+                      size='sm'
+                      fontWeight="400"
+                  />
                 </FormControl>
                 <FormControl>
-                <Checkbox
+                  <Checkbox
                     id="visible"
                     name="visible"
                     value={userInput.visible}

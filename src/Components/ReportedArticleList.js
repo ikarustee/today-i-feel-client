@@ -61,10 +61,11 @@ useEffect(()=>{
       </Container>
     ) : (
      <Container maxW={'800px'} className="article__list" p="0">
-      <Heading as="h1" color="blue.300">All articles</Heading>
+      <Heading as="h1" color="blue.300">Reported articles</Heading>
       <Divider marginTop="5"  marginBottom="2rem"/>
       <Box className="articles__list edit" gap="1rem">
-      {articles.map((a) => {
+      {articles
+        .map((a) => {
               const excerpt = Object.values(a.body)
               return (
                 <Box 
@@ -75,18 +76,12 @@ useEffect(()=>{
                 padding="2rem 1rem" 
                 borderRadius={8} 
                 transition="all 300ms ease">
-                <Box>
-                    <h4 className="edit__heading">
-                      <Link href={`editarticles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }} _focus={{boxShadow: "none"}}>
-                        {a.title}
-                      </Link>
-                    </h4>
-                    <Box className="meta">
-                      <span className="date">Published: {readableDate(a.createdDate)}</span>
-                      <span className="reported">Visible: {a.visible ? "🟢" : "🔴"}</span>
-                    </Box>
-                  </Box>
-                  <Link className="edit__btn" href={`editarticles/${a._id}`} textAlign="center" _hover={{textDecoration: "none"}} >
+                  <h4 className="edit__heading">
+                    <Link href={`reportedarticles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }} _focus={{boxShadow: "none"}}>
+                      {a.title}
+                    </Link>
+                  </h4>
+                  <Link className="edit__btn" href={`reportedarticles/${a._id}`} textAlign="center" _hover={{textDecoration: "none"}} >
                     <Button 
                       // className="readmore__btn" 
                       borderColor="blue.300" 
@@ -102,20 +97,10 @@ useEffect(()=>{
                       Edit
                     </Button>
                   </Link>
-                  <Button 
-                    // className="readmore__btn" 
-                    borderColor="blue.300" 
-                    borderWidth="1px" 
-                    color="blue.300" 
-                    bg="white"
-                    fontSize="12px"
-                    fontWeight="300"
-                    height="auto"
-                    padding="4px 10px"
-                    _hover={{bg: "blue.300", color: "white", border: "1px solid #5C90FF"}} 
-                    variant='outline'>
-                    Delete
-                  </Button>
+                  <Box className="meta">
+                    <span className="date">Published: {readableDate(a.createdDate)}</span>
+                    <span className="reported">Visible: {a.visible ? "🟢" : "🔴"}</span>
+                  </Box>
                 </Box>
               )
             })

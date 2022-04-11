@@ -461,14 +461,17 @@ path.recharts-polygon {
 
 /* Admin dashboard ==== */
 /* =================== */
+.admin__sections button {
+  height: 4rem;
+}
 @media screen and (min-width: 600px) {
   .admin__sections {
     flex-wrap: wrap;
     flex-direction: row!important;
     align-content: flex-start!important;
-    justify-content: space-around;
-    column-gap: 1rem;
-  }
+    justify-content: flex-start!important;
+    gap: 1rem;
+}
   .admin__sections button {
     flex-basis: calc(50% - 1rem);
     margin: 0!important;
@@ -543,6 +546,7 @@ a.info__link:hover::after {
   justify-content: center;
   row-gap: 8px;
   font-weight: normal;
+  width: 40px;
 }
 .footer__links a:hover {
   text-decoration: none;
@@ -569,7 +573,7 @@ a.info__link:hover::after {
   position: sticky;
   bottom: 0;
   z-index: 90;
-  height: 50px;
+  /* height: 50px; */
   margin-top: 1.5rem;
 }
 #sticky a {

@@ -48,11 +48,17 @@ const StickyNavbar = () => {
       {location.pathname === "/adminDashboard" 
       || location.pathname === "/newarticle"
       || location.pathname === "/editarticles"
-      || location.pathname === `/editarticles/${newLoc}` ? ( <a className="link" href="/adminDashboard" ><BiGridAlt/>Dashboard</a>) : (null)}
+      || location.pathname === `/editarticles/${newLoc}` ? ( <a className="link" href="/adminDashboard" ><BiGridAlt/>Dashboard</a>) : (null)
+      || location.pathname === "/reportedarticles"
+      || location.pathname === `/reportedarticles/${newLoc}` ? ( <a className="link" href="/adminDashboard" ><BiGridAlt/>Dashboard</a>) : (null)
+      }
       {location.pathname === "/adminDashboard" 
       || location.pathname === "/newarticle"
       || location.pathname === "/editarticles"
-      || location.pathname === `/editarticles/${newLoc}` ? ( <a className="link" href="#" onClick={logoutUser}><BiLogOutCircle/>Logout</a>) : (null)}
+      || location.pathname === `/editarticles/${newLoc}` ? ( <a className="link" href="#" onClick={logoutUser}><BiLogOutCircle/>Logout</a>) : (null)
+      || location.pathname === "/reportedarticles"
+      || location.pathname === `/reportedarticles/${newLoc}` ? ( <a className="link" href="#" onClick={logoutUser}><BiLogOutCircle/>Logout</a>) : (null)
+      }
     </Stack>
   )
 }
