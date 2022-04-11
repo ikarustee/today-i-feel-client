@@ -98,7 +98,9 @@ const SearchResults = (props) => {
       <Container className="articles" maxW={'7xl'} minH="100vh" m="2rem 0" p="0">
       <Heading as="h1" color="blue.300" m="1rem 0">{searchTags.includes("search") ? `Search results for: "${sanitizedSearchTags}"` : `Suggested articles for: "${sanitizedSearchTags}"`}</Heading>
       <Flex flexWrap="wrap" gap="1rem">
-        {searchResult.map((a) => {
+        {searchResult
+          .filter((a) => a.visible)
+          .map((a) => {
             const excerpt = Object.values(a.body)
             return(
               <Box

@@ -86,7 +86,9 @@ const ArticleList = ({p}) => {
           flexDirection="column"
           justifyContent="center"
           marginTop={{ base: '3', sm: '0' }}>
-          {articles.map((a) => {
+          {articles
+            .filter((a) => a.visible)
+            .map((a) => {
               return (
                 <Box 
                 key={a._id} 
@@ -147,7 +149,9 @@ const ArticleList = ({p}) => {
       <Heading as="h2" marginTop="5">All articles</Heading>
       <Divider marginTop="5"  marginBottom="2rem"/>
       <Box className="articles__list">
-      {articles.map((a) => {
+      {articles
+        .filter((a) => a.visible)
+        .map((a) => {
               return (
                 <Box 
                 key={a._id} 
