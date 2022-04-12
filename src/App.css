@@ -39,7 +39,7 @@ h4.heading--center {
   text-transform: none;
 }
 h1.teaser {
-  font-size: 11vw;
+  font-size: 10vw;
   margin: 2rem 0 4rem;
   padding-bottom: 8px;
   line-height: 1;
@@ -156,6 +156,8 @@ nav {
   transition: all 300ms ease!important;
 }
 form#navsearch {
+  display: flex;
+  flex-wrap: nowrap;
   max-width: calc(50vw - 2rem);
   margin: 0;
   top: 1rem;
@@ -163,13 +165,16 @@ form#navsearch {
   left: 0;
   top: 1rem;
   transform: translateX(calc(-100% - 1rem - 42px));
-  transition: all 500ms ease;
-  display: flex;
-  flex-wrap: nowrap;
   z-index: 11;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 500ms ease;
 }
 form#navsearch.show {
   transform: translateX(3rem);
+  visibility: visible;
+  opacity: 1;
+  transition: all 500ms ease;
 }
 #navsearch button {
   position: relative;

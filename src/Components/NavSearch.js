@@ -11,7 +11,7 @@ const NavSearch = ({open, handleSearch, openClose}) => {
     <button onClick={open} className={`navsearch ${openClose ? "show" : "hide"}`}>{openClose ? (<CloseIcon color="#5C90FF" />) : (<BiSearchAlt2 color="#5C90FF" />)}</button>
         <form 
         id="navsearch" 
-        className={`navsearch ${openClose ? "show" : ""}`}
+        className={`navsearch ${openClose ? "show" : "hide"}`}
         onSubmit={handleSearch}>
             <Input
             bg={`${colorMode === "light" ? "white" : "gray.100"}`} 
