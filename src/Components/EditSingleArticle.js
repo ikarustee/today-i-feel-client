@@ -28,7 +28,6 @@ import {
     const {id} = useParams()
     const {articles, isLoading, getArticles} = useContext(ArticleContext)
     const thisArticle=articles.find((a) => a.id === id)
-    // const [article, setArticle] = useState(thisArticle)
     const [visible, setVisible] = useState(true)
     const [userInput, setUserInput] = useState({
       title: "",
@@ -43,7 +42,6 @@ import {
     margin: 0 auto;
     border-color: red;
   `;
-    
     const navigate = useNavigate();
     
     const handleChange = (e) => {
@@ -65,9 +63,17 @@ import {
       let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
       axios.put(server,{title:title,body:body, tags:tagArray, url:url, visible:visible}).then((response)=> {
             console.log(response)
-            navigate("/adminDashboard")
+             navigate("/adminDashboard")
           })
     }
+    function toggleVisible(){
+      let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
+      axios.put(server,{...thisArticle,visible:!thisArticle.visible}).then((response)=> {
+            console.log(response)
+            // navigate("/reportedarticles")
+            getArticles();
+          })
+        }
     async function verifyTest(){
         let response = await axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true})
         console.log(response.data !== "OK")
@@ -78,6 +84,7 @@ import {
     }
     useEffect(()=>{
       getArticles();
+      // getData();
       verifyTest();
     },[])
     useEffect(()=>{
@@ -88,7 +95,8 @@ import {
             title: thisArticle.title,
             body: thisArticle.body,
             tags: thisArticle.tags.join(", "),
-            url: thisArticle.url
+            url: thisArticle.url,
+            visible:thisArticle.visible
           }
 
         )}
@@ -149,17 +157,24 @@ import {
                         fontWeight="400"
                     />
                 </FormControl>
-                <FormControl>
-                <Checkbox
-                    id="visible"
-                    name="visible"
-                    value={userInput.visible}
-                    size='lg'
-                    onChange={handleChange}
-                    // onClick={handleChange}
-                  />
-                  <label htmlFor="visible">Visible</label>
-                </FormControl>
+                
+                <span className="reported">Visible: {thisArticle.visible ? "🟢" : "🔴"}</span>
+                    <Button
+                    onClick={toggleVisible}
+                    borderColor="blue.300"
+                    borderWidth="2px" 
+                    color="blue.300"
+                    bg="white"
+                    fontWeight="400"
+                    height="auto"
+                    margin="0 auto"
+                    padding="4px 10px"
+                    width="150px"
+                    _hover={{bg: "blue.300", color: "white"}} 
+                    variant='solid' 
+                    >
+                    toggle visibilty
+                    </Button>
                 <Stack spacing={10}>
                 
                     <Button

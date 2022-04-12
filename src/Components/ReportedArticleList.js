@@ -20,9 +20,10 @@ import { ArticleContext } from '../Contexts/ArticleContext';
 import {readableDate} from "../helper/dateformatter"
 
 const EditArticleList = ({p}) => {
-//   const [articles,setArticle] = useState([])
-  const {articles, isLoading, getArticles} = useContext(ArticleContext)
-//   const [isLoading, setIsLoading] = useState(false)
+  // const [articles,setArticles] = useState([])
+  const {articles, getArticles} = useContext(ArticleContext)
+  const [isLoading, setIsLoading] = useState(true)
+  const [reportedArticles, setReportedArticles] = useState([]);
   const [color, setColor] = useState("#5C90FF");
   const { colorMode, toggleColorMode } = useColorMode()
   const navigate = useNavigate();
@@ -34,13 +35,28 @@ const EditArticleList = ({p}) => {
 `;
 // async function getData(){
 //     setIsLoading(true);
-//     let response = await axios.get("http://localhost:3010/articles")
-//     setArticle(response.data)
-//     console.log(response)
+//     let response = await axios.get("https://todayifeel-server.herokuapp.com/reports")
+//     setArticles(response.data)
+//     console.log(response.data)
 //     setIsLoading(false)
 // }
+function collectReports(){
+  setIsLoading(true)
+  let arr = [];
+  for(let i = 0; i< articles.length;i++){
+    // console.log(JSON.stringify(articles[i].reports).length)
+      if(JSON.stringify(articles[i].reports).length > 2){
+        // console.log(articles[i].reports.length)
+            arr.push(articles[i])
+            console.log(arr)
+      }
+  }
+  console.log(arr)
+  setReportedArticles(arr)
+  setIsLoading(false)
+}
 useEffect(()=>{
-    async function verifyTest(){
+    async function verify(){
         axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true}).then((response)=>{
             console.log(response.data !== "OK")
             if (response.data !== "OK"){
@@ -48,10 +64,13 @@ useEffect(()=>{
                 navigate("/login");
                 }
             })
-    }
-    verifyTest();
-    getArticles();
+      }
+      getArticles();
+  verify();
 },[])
+useEffect(()=>{
+  collectReports();
+},[articles])
 
   return (
     <>
@@ -64,7 +83,7 @@ useEffect(()=>{
       <Heading as="h1" color="blue.300">Reported articles</Heading>
       <Divider marginTop="5"  marginBottom="2rem"/>
       <Box className="articles__list edit" gap="1rem">
-      {articles
+      {reportedArticles
         .map((a) => {
               const excerpt = Object.values(a.body)
               return (

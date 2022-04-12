@@ -23,17 +23,21 @@ import {
   import { FaCommentDollar } from 'react-icons/fa';
   import DotLoader from "react-spinners/DotLoader";
   import { css } from "@emotion/react";
+import ReactMarkdown from 'react-markdown';
   export default function EditSingleArticle() {
     
     const {id} = useParams()
     const {articles, isLoading, getArticles} = useContext(ArticleContext)
-    const thisArticle=articles.find((a) => a.id === id)
+    const thisArticle = articles.find((a) => a.id === id)
     const [visible, setVisible] = useState(true)
+    // const [isLoading, setIsLoading] = useState(true)
+   
     const [userInput, setUserInput] = useState({
       title: "",
       body: "",
       tags: "",
-      url: ""
+      url: "",
+      visible:true
     })
 
     const userInputEmpty = JSON.stringify(userInput).length
@@ -43,32 +47,63 @@ import {
     margin: 0 auto;
     border-color: red;
   `;
-    
+   
     const navigate = useNavigate();
+
     
     const handleChange = (e) => {
-      setVisible((prev) => !prev)
-      setUserInput({
-        ...userInput,
-        [e.target.name]: e.target.value,
-        visible: visible
-      })
+      if(e.target.name === "visible"){
+        setVisible((prev) => !prev)
+        setUserInput({
+          ...userInput,
+          visible: visible
+        })
+      } else {
+        setUserInput({
+          ...userInput,
+          [e.target.name]: e.target.value,
+          // visible: visible
+        })
+      }
+      
+      
       console.log(userInput)
     }
     
     function updateArticle () {
-      const {title, body, tags, url, visible } = userInput
-      console.log(userInput)
-      console.log(tags)
+      const {title, body, tags, url} = userInput
+      // console.log(userInput)
+      // console.log(tags)
       let tagArray = tags.split(",")
       tagArray = tagArray.map(el=>el.trim())
-      console.log(title,tagArray)
+      console.log({title:title,body:body, tags:tagArray, url:url})
     
       let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
-      axios.put(server,{title:title,body:body, tags:tagArray, url:url, visible: visible}).then((response)=> {
+      axios.put(server,{title:title,body:body, tags:tagArray, url:url}).then((response)=> {
             console.log(response)
-            navigate("/adminDashboard")
+            // deleteReport()
+            getArticles();
           })
+    }
+    function deleteReport(index){
+      let array = thisArticle.reports;
+      array.splice(index,1)
+      console.log(array)
+      let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
+      axios.put(server,{...thisArticle,report:array}).then((response)=>{
+        console.log(response)
+        // navigate("/reportedarticles")
+        getArticles();
+      })
+    }
+    function toggleVisible(){
+      let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
+      axios.put(server,{...thisArticle,visible:!thisArticle.visible}).then((response)=> {
+            console.log(response)
+            // navigate("/reportedarticles")
+            getArticles();
+          })
+    
     }
     async function verifyTest(){
         let response = await axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true})
@@ -79,27 +114,30 @@ import {
           }
     }
     useEffect(()=>{
-      getArticles();
       verifyTest();
+      getArticles();
     },[])
     useEffect(()=>{
         
         if(thisArticle){
-            console.log(thisArticle.tags)
+            console.log(thisArticle)
             setUserInput({
-            title: thisArticle.title,
-            body: thisArticle.body,
-            tags: thisArticle.tags.join(", "),
-            url: thisArticle.url
-          }
-
-        )}
+              title: thisArticle.title,
+              body: thisArticle.body,
+              tags: thisArticle.tags.join(", "),
+              url: thisArticle.url,
+              visible: thisArticle.visible
+          })
+          setVisible(thisArticle.visible)
+          let reportsArr = thisArticle.reports
+          console.log(reportsArr)
+      }
     },[thisArticle])
 
 
     return (
         <>
-        {!thisArticle ? (
+        {isLoading ? (
             <DotLoader color={color} css={override} loading={isLoading} size={60} />
             ):(
                 <Flex
@@ -109,9 +147,55 @@ import {
             >
             <Stack width="85%" spacing={8} mx={'auto'} py={6} px={6} maxWidth="600px">
                 <Stack align={'base'}>
-                <Heading fontSize={'2xl'} color="blue.300" m="0 0 2rem" textAlign="left">Check reported article</Heading>
+                <Heading fontSize={'2xl'} color="blue.300" m="0 0 2rem" textAlign="left">Check report</Heading>
                 </Stack>
                 <Stack spacing={4}>
+                <Heading fontSize={'2xl'} color="blue.300" m="0 0 2rem" textAlign="left">Reports:</Heading>
+                {/* {thisArticle.reports?.length >=1 ? ( */}
+                <Box display="flex"
+                  flexDirection={{ base: 'row', sm: 'column' }}
+                  // justifyContent="space-between"
+                  flexWrap="wrap"
+                  >
+                  {thisArticle.reports.length >=1 && thisArticle.reports.map((a,index) => {
+                    
+                    return (
+                      <Box key={index}
+                        display="flex"
+                        flexDirection='column'
+                        justifyContent="center"
+                        alignItems="center"
+                        flexWrap="wrap"
+                        width="200px"
+                        borderColor="blue.300"
+                        borderWidth="2px"
+                        borderRadius="6px"
+                        margin="10px"
+                      >
+                        <Heading fontSize={'l'} color="blue.300" m="0 0 2rem"  marginTop="10px">{a.reportReason}</Heading>
+                        <p fontSize={'l'}>{a.reportComment}</p>
+                        <Button onClick={()=>deleteReport(index)}
+                        borderColor="blue.300"
+                        borderWidth="2px" 
+                        color="blue.300"
+                        bg="white"
+                        fontWeight="400"
+                        height="auto"
+                        margin="0 auto"
+                        marginBottom="10px"
+                        marginTop="10px"
+                        padding="4px 10px"
+                        width="150px"
+                        _hover={{bg: "blue.300", color: "white"}} 
+                        variant='solid' >
+                          Report closed
+                        </Button>
+                      </Box>
+
+                    )
+                  })}
+                  </Box>
+                <Heading fontSize={'xl'} color="blue.300" m="0 0 2rem" textAlign="left">article:</Heading>
                 <FormControl id="title" isRequired >
                     <Input
                     onChange={handleChange} 
@@ -151,20 +235,20 @@ import {
                       fontWeight="400"
                   />
                 </FormControl>
-                <FormControl>
+                {/* <FormControl>
                   <Checkbox
                     id="visible"
                     name="visible"
                     value={userInput.visible}
                     size='lg'
                     onChange={handleChange}
-                    // onClick={handleChange}
+                    isChecked={visible}
+                    // checked={userInput.visible}
                   />
                   <label htmlFor="visible">Visible</label>
-                </FormControl>
+                </FormControl> */}
                 <Stack spacing={10}>
-                
-                    <Button
+                  <Button
                     onClick={updateArticle}
                     borderColor="blue.300"
                     borderWidth="2px" 
@@ -178,7 +262,24 @@ import {
                     _hover={{bg: "blue.300", color: "white"}} 
                     variant='solid' 
                     >
-                    Update
+                    update
+                    </Button>
+                    <span className="reported">Visible: {thisArticle.visible ? "🟢" : "🔴"}</span>
+                    <Button
+                    onClick={toggleVisible}
+                    borderColor="blue.300"
+                    borderWidth="2px" 
+                    color="blue.300"
+                    bg="white"
+                    fontWeight="400"
+                    height="auto"
+                    margin="0 auto"
+                    padding="4px 10px"
+                    width="150px"
+                    _hover={{bg: "blue.300", color: "white"}} 
+                    variant='solid' 
+                    >
+                    toggle visibilty
                     </Button>
 
              

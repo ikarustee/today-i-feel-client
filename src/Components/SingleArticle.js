@@ -36,7 +36,8 @@ const SingleArticle = () => {
     
     const [mailerState, setMailerState] = useState({
       message: "",
-      article: ""
+      value:"",
+      article: thisArticle
     });
     
     const disabled = mailerState.message === "" || mailerState.message.length <= 10
@@ -55,12 +56,13 @@ const SingleArticle = () => {
     // }
 
     function handleStateChange(e) {
-      // console.log(e.target.value)
+      // console.log(e.target.name, e.target.value)
       setMailerState((prevState) => ({
         ...prevState,
         [e.target.name]: e.target.value,
-        article: thisArticle,
-        value: value,
+        articleTitle: thisArticle.title,
+        articleId: thisArticle.id,
+        value: value
       }));
     }
 
@@ -68,7 +70,7 @@ const SingleArticle = () => {
       e.preventDefault();
       console.log(e.target)
       console.log({ mailerState });
-      const response = await axios.post("http://localhost:3010/send", { mailerState })
+      const response = await axios.post("https://todayifeel-server.herokuapp.com/send", { mailerState })
       const resData = await response
       console.log(resData)
       if(resData.status === "success") {
@@ -78,7 +80,9 @@ const SingleArticle = () => {
       }
       setMailerState({
         message: "",
-        article: ""
+        value:"",
+        articleTitle: thisArticle.title,
+        articleId: thisArticle.id
       });
     };
 
