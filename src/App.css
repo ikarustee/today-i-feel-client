@@ -430,7 +430,7 @@ article {
   margin-bottom: 0.35rem;
 }
 .articles__list.edit .single .edit__btn {
-  flex-basis: calc(25% - 1rem);
+  flex-basis: 40px;
   justify-self: flex-end;
   text-align: right;
 }
@@ -467,9 +467,15 @@ article {
   flex-basis: 100%;
   justify-content: flex-end;
 }
-button.edit__btn,
-button.delete__btn {
-  align-items: flex-end;
+button.edit__btn, button.delete__btn {
+  display: block;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  align-items: center;
+  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 button.edit__btn::before,
 button.delete__btn::before {
@@ -498,6 +504,9 @@ button.delete__btn:hover::before {
   left: 32px;
   visibility: visible;
   opacity: 1;
+}
+button.delete__btn svg {
+  pointer-events: none;
 }
 
 .excerpt {
