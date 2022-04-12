@@ -14,95 +14,6 @@ import {
 import DotLoader from "react-spinners/DotLoader";
 import { css } from "@emotion/react";
 
-// let tags = [
-//   { 
-//     value: 'happy', 
-//     count: 78,
-//     isActive: false
-//    },
-//   { 
-//     value: 'sad', 
-//     count: 60,
-//     isActive: false
-//    },
-//   { 
-//     value: 'sleepy', 
-//     count: 48,
-//     isActive: false
-//    },
-//   { 
-//     value: 'stressed', 
-//     count: 45,
-//     isActive: false
-//    },
-//   { 
-//     value: 'frustrated', 
-//     count: 33,
-//     isActive: false
-//    },
-//   { 
-//     value: 'annoyed', 
-//     count: 18
-//    },
-//   { 
-//     value: 'tense', 
-//     count: 10
-//    },
-//   { 
-//     value: 'irritated', 
-//     count: 5
-//    },
-//   { 
-//     value: 'calm', 
-//     count: 25
-//    },
-//   { 
-//     value: 'lonely', 
-//     count: 4
-//    },
-//   { 
-//     value: 'surprised', 
-//     count: 20
-//    },
-//   { 
-//     value: 'bothered', 
-//     count: 8
-//    },
-//   { 
-//     value: 'tired', 
-//     count: 30
-//    },
-//   { 
-//     value: 'angry', 
-//     count: 10
-//    },
-//   { 
-//     value: 'hangry', 
-//     count: 50
-//    },
-//   { 
-//     value: 'buoyant', 
-//     count: 30
-//    },
-//   { 
-//     value: 'cheerful', 
-//     count: 30
-//    },
-//   { 
-//     value: 'grouchy', 
-//     count: 30
-//    },
-//   { 
-//     value: 'blessed', 
-//     count: 30
-//    },
-//   { 
-//     value: 'blah', 
-//     count: 30
-//    },
-// ]
-
-
 const Home = (props) => {
   const [startSlice , setStartSlice] = useState(0);
   const [initialTags , setInitialTags] = useState(8);
@@ -204,7 +115,7 @@ const Home = (props) => {
 
   
   return (
-    <>  
+    <div id="home">  
         <div className="title">
           <Heading as='h1' className="teaser linear-wipe" textAlign={[ 'center', 'center' ]} color='blue.300' >Share your mood.<br /> Take a deep breath. <br />Take your time.</Heading>
           <h4 className="heading--center">Click on one feeling and share it <strong>anonymously</strong> with others</h4>
@@ -271,7 +182,7 @@ const Home = (props) => {
         </div>
         )}
       <Search/>
-    </> 
+    </div> 
   )
 }
 

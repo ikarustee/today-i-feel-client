@@ -40,11 +40,11 @@ const handleDelete = async (e) => {
   const id = e.target.id
   console.log(e.target.id)
   window.confirm("Really delete article?")
-  articles.filter((a) => a._id != id)
+  // articles.filter((a) => a._id != id)
   let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
   try {
     const res = await axios.delete(server)
-    console.log("Article deleted")
+    // alert("Article deleted")
     console.log(res)
     // navigate("/editarticles")
   } catch (error) {
@@ -52,7 +52,7 @@ const handleDelete = async (e) => {
   }
   // window.location.reload();
 
-  getArticles()
+  getArticles();
 } 
 
 useEffect(()=>{
@@ -84,7 +84,7 @@ useEffect(()=>{
               const excerpt = Object.values(a.body)
               return (
                 <Box 
-                  key={a._id} 
+                  key={a.id} 
                   bg={colorMode === "light" ? "white" : "gray.700"} 
                   className="single" 
                   boxShadow={'sm'} m="0" 
@@ -93,7 +93,7 @@ useEffect(()=>{
                   transition="all 300ms ease">
                   <Box className="edit__title__meta">
                     <h4 className="edit__heading">
-                      <Link href={`editarticles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }} _focus={{boxShadow: "none"}}>
+                      <Link href={`editarticles/${a.id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }} _focus={{boxShadow: "none"}}>
                         {a.title}
                       </Link>
                     </h4>
@@ -103,7 +103,7 @@ useEffect(()=>{
                     </Box>
                   </Box>
                   <Flex className="edit__action" columnGap="0.5rem">
-                    <Link className="edit__btn" href={`editarticles/${a._id}`} textAlign="center" _hover={{textDecoration: "none"}} >
+                    <Link className="edit__btn" href={`editarticles/${a.id}`} textAlign="center" _hover={{textDecoration: "none"}} >
                       <Button 
                         className="edit__btn" 
                         border="none"
@@ -116,15 +116,17 @@ useEffect(()=>{
                         // height="20px"
                         padding="0"
                         _hover={{color: `${colorMode === "light" ? "blue.300" : "gray.400"}`}} 
+                        _active={{color: `${colorMode === "light" ? "blue.300" : "gray.400"}`}} 
+                        _focus={{color: `${colorMode === "light" ? "blue.300" : "gray.400"}`}} 
                         // _hover={{color: "white"}} 
                         variant='outline'>
-                          <BiEditAlt id={a._id} color="red.600" />
+                          <BiEditAlt id={a.id} color="red.600" />
                       </Button>
                     </Link>
                     <Button 
                       className="delete__btn"
                       onClick={(e) => handleDelete(e)} 
-                      id={a._id}
+                      id={a.id}
                       border="none"
                       borderRadius={"8px"}
                       color="gray.400"  
@@ -133,10 +135,12 @@ useEffect(()=>{
                       fontWeight="300"
                       padding="0"
                       _hover={{color: `${colorMode === "light" ? "red.600" : "red.600"}`}}  
+                      _active={{color: `${colorMode === "light" ? "red.600" : "red.600"}`}}  
+                      _focus={{color: `${colorMode === "light" ? "red.600" : "red.600"}`}}  
                       variant='outline'>
                       <BiEraser 
                         onClick={(e) => handleDelete(e)} 
-                        id={a._id}
+                        id={a.id}
                         color="red.600"
                          />
                     </Button>

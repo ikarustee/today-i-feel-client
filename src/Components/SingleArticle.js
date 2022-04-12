@@ -102,9 +102,8 @@ const SingleArticle = () => {
                 borderRadius="12px"
                 p={8}
                 marginBottom="2rem"
-
                 >
-                <Heading color={color} as="h1" fontSize="2.5rem" textAlign="center">{thisArticle.title}</Heading>
+                <Heading color={color} as="h1" size="2xl"  textAlign="center">{thisArticle.title}</Heading>
                 <span className="article__date">{readableDate(thisArticle.createdDate)}</span>
               </Box>
                  <ReactMarkdown className="article__content">{thisArticle.body}</ReactMarkdown>
@@ -124,8 +123,8 @@ const SingleArticle = () => {
                   <Box className='report'>
                     <Heading 
                         as="h4"
-                        color="purple.400"
-                        size={"md"}
+                        color="blue.300"
+                        size={"lg"}
                         // fontFamily={"Work Sans"} 
                         fontStyle={"italic"}
                         // fontWeight="500!important"

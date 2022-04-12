@@ -9,6 +9,7 @@
 body {
   font-family: 'Work Sans';
   font-weight: 300;
+  overflow-x: hidden;
 }
 a:focus,
 button:focus {
@@ -75,7 +76,7 @@ h6 strong {
 }
 @media screen and (min-width: 768px) {
   h1.teaser {
-    font-size: 10vh;
+    font-size: 9vh;
     margin: 3rem auto;
     padding-bottom: 12px;
 }
@@ -181,7 +182,7 @@ form#navsearch.show {
 button.navsearch {
   position: relative;
   z-index: 7;
-  top: 1rem;
+  top: -0.2rem;
   height: 40px;
 }
 button.navsearch svg {
@@ -226,13 +227,55 @@ main {
   min-height:calc(100vh - 233px);
   box-sizing: border-box;
 }
-
-/* @media screen and (min-width: 600px) {
-  main {
-    padding: 0;
+#home::before {
+  content: "";
+  background-image: url("/src/img/meditation.svg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: -6vh;
+  width: 50%;
+  z-index: 3;
+  mix-blend-mode: multiply;
+  height: 400px;
+}
+#home .title {
+  position: relative;
+  z-index: 2;
+}
+#about .teaser {
+  position: relative;
+  z-index: 4;
+  text-shadow: 0 0 12px rgba(255,255,255,0.85);
+}
+#about::before {
+  content: "";
+  background-image: url("/src/img/relax sleep.svg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  display: inline-table;
+  position: absolute;
+  left: -10%;
+  top: -6vh;
+  width: 50%;
+  height: 400px;
+  z-index: 3;
+  mix-blend-mode: normal;
+}
+@media screen and (min-width: 768px) {
+  #home::before {
+    top:-10vh;
   }
-} */
-
+  .col-12 {
+    width:100%;
+  }
+  .col-8 {
+    margin: 0 auto;
+    width:75%;
+  }
+}
 @media screen and (min-width: 992px) {
   header {
     height: 80px;
@@ -240,7 +283,10 @@ main {
     display: flex;
     align-content: center;
     align-items: center;
-}
+  }
+  button.navsearch {
+    top: 1rem;
+  }
   a.logo img {
     position: relative;
     left: 0;
@@ -249,18 +295,15 @@ main {
   .themeswitcher {
     top: 1.5rem;
   }
-  /* .navbar,
-  .navbar > .nav {
-    height: 100px;
-  } */
-  /* .nav__logo {
-    position: absolute;
-    left: calc(50% - 75px);
-  } */
-  /* a.themeswitcher {
-    top: 2.2rem;
-    right: 0.5rem;
-} */
+  #home::before {
+    height: 400px;
+    right: -10vw;
+  }
+  #about::before {
+    left: -16%;
+    top: -3rem;
+    height: 100%;
+  }
 }
 
 /* Tag cloud ========== */
@@ -771,6 +814,27 @@ a.info__link:hover::after {
 
 /* Elements =========== */
 /* =================== */
+.bg__morph {
+  background: var(--primary);
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  height: 300px;
+}
+.bg__morph::before {
+  content:"";
+  display: inline-block;
+  background-image: url("/src/img/blogging.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 400px;
+  position: absolute;
+  left: 0;
+  top:0;
+  z-index: 5;
+}
 svg.chakra-icon path {
   fill: var(--primary);
 }
