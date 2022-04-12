@@ -47,15 +47,9 @@ import ReactMarkdown from 'react-markdown';
     margin: 0 auto;
     border-color: red;
   `;
-    // async function getData(){
-    //   setIsLoading(true);
-    //   console.log("https://todayifeel-server.herokuapp.com/reports/"+id.toString())
-    //   let response = await axios.get("https://todayifeel-server.herokuapp.com/reports/"+id.toString())
-    //   setThisArticle(response.data[0])
-    //   console.log(response.data[0])
-    //   setIsLoading(false)
-    // }
+   
     const navigate = useNavigate();
+
     
     const handleChange = (e) => {
       if(e.target.name === "visible"){
@@ -78,41 +72,36 @@ import ReactMarkdown from 'react-markdown';
     
     function updateArticle () {
       const {title, body, tags, url} = userInput
-      console.log(userInput)
-      console.log(tags)
+      // console.log(userInput)
+      // console.log(tags)
       let tagArray = tags.split(",")
       tagArray = tagArray.map(el=>el.trim())
       console.log({title:title,body:body, tags:tagArray, url:url})
     
-      let server = "https://todayifeel-server.herokuapp.com/articles/"+thisArticle.article._id.toString()
+      let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
       axios.put(server,{title:title,body:body, tags:tagArray, url:url}).then((response)=> {
             console.log(response)
-            deleteReport()
-          }).then((response)=>{
-            // navigate("/reportedarticles")
+            // deleteReport()
+            getArticles();
           })
     }
-    function deleteReport(){
-      let server = "https://todayifeel-server.herokuapp.com/reports/"+id.toString()
-      axios.delete(server).then((response)=>{
+    function deleteReport(index){
+      let array = thisArticle.reports;
+      array.splice(index,1)
+      console.log(array)
+      let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
+      axios.put(server,{...thisArticle,report:array}).then((response)=>{
         console.log(response)
-        navigate("/reportedarticles")
+        // navigate("/reportedarticles")
+        getArticles();
       })
     }
-    function invisibleArticle(){
-      const {title, body, tags, url} = userInput
-      console.log(userInput)
-      console.log(tags)
-      let tagArray = tags.split(",")
-      tagArray = tagArray.map(el=>el.trim())
-      console.log({title:title,body:body, tags:tagArray, url:url,visible:false})    
-      let server = "https://todayifeel-server.herokuapp.com/articles/"+thisArticle.article._id.toString()
-      axios.put(server,{title:title,body:body, tags:tagArray, url:url,visible:false}).then((response)=> {
+    function toggleVisible(){
+      let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
+      axios.put(server,{...thisArticle,visible:!thisArticle.visible}).then((response)=> {
             console.log(response)
-            axios.put("https://todayifeel-server.herokuapp.com/reports/"+id.toString(),{reason:thisArticle.reason,comment:thisArticle.comment, article:response.data})
-          }).then((response)=>{
-            console.log(response)
-            navigate("/reportedarticles")
+            // navigate("/reportedarticles")
+            getArticles();
           })
     
     }
@@ -133,13 +122,15 @@ import ReactMarkdown from 'react-markdown';
         if(thisArticle){
             console.log(thisArticle)
             setUserInput({
-              title: thisArticle.article.title,
-              body: thisArticle.article.body,
-              tags: thisArticle.article.tags.join(", "),
-              url: thisArticle.article.url,
-              visible: thisArticle.article.visible
+              title: thisArticle.title,
+              body: thisArticle.body,
+              tags: thisArticle.tags.join(", "),
+              url: thisArticle.url,
+              visible: thisArticle.visible
           })
-          setVisible(thisArticle.article.visible)
+          setVisible(thisArticle.visible)
+          let reportsArr = thisArticle.reports
+          console.log(reportsArr)
       }
     },[thisArticle])
 
@@ -159,10 +150,33 @@ import ReactMarkdown from 'react-markdown';
                 <Heading fontSize={'2xl'} color="blue.300" m="0 0 2rem" textAlign="left">Check report</Heading>
                 </Stack>
                 <Stack spacing={4}>
-                <Heading fontSize={'2xl'} color="blue.300" m="0 0 2rem" textAlign="left">Issue:</Heading>
-                  <Heading fontSize={'xl'} color="blue.300" m="0 0 2rem" textAlign="left">{thisArticle.reason}</Heading>
-                  <ReactMarkdown className="article__content">{thisArticle.comment}</ReactMarkdown>
-                  <Heading fontSize={'xl'} color="blue.300" m="0 0 2rem" textAlign="left">article under review:</Heading>
+                <Heading fontSize={'2xl'} color="blue.300" m="0 0 2rem" textAlign="left">Reports:</Heading>
+                {/* {thisArticle.reports?.length >=1 ? ( */}
+                  {thisArticle.reports.length >=1 && thisArticle.reports.map((a,index) => {
+                    
+                    return (
+                      <Stack key={index}>
+                        <Heading fontSize={'l'} color="blue.300" m="0 0 2rem" textAlign="left">{a.reportReason}</Heading>
+                        <ReactMarkdown >{a.reportComment}</ReactMarkdown>
+                        <Button onClick={()=>deleteReport(index)}
+                        borderColor="blue.300"
+                        borderWidth="2px" 
+                        color="blue.300"
+                        bg="white"
+                        fontWeight="400"
+                        height="auto"
+                        margin="0 auto"
+                        padding="4px 10px"
+                        width="150px"
+                        _hover={{bg: "blue.300", color: "white"}} 
+                        variant='solid' >
+                          Report closed
+                        </Button>
+                      </Stack>
+
+                    )
+                  })}
+                <Heading fontSize={'xl'} color="blue.300" m="0 0 2rem" textAlign="left">article:</Heading>
                 <FormControl id="title" isRequired >
                     <Input
                     onChange={handleChange} 
@@ -202,7 +216,7 @@ import ReactMarkdown from 'react-markdown';
                       fontWeight="400"
                   />
                 </FormControl>
-                <FormControl>
+                {/* <FormControl>
                   <Checkbox
                     id="visible"
                     name="visible"
@@ -213,10 +227,9 @@ import ReactMarkdown from 'react-markdown';
                     // checked={userInput.visible}
                   />
                   <label htmlFor="visible">Visible</label>
-                </FormControl>
+                </FormControl> */}
                 <Stack spacing={10}>
-                
-                    <Button
+                  <Button
                     onClick={updateArticle}
                     borderColor="blue.300"
                     borderWidth="2px" 
@@ -230,10 +243,11 @@ import ReactMarkdown from 'react-markdown';
                     _hover={{bg: "blue.300", color: "white"}} 
                     variant='solid' 
                     >
-                    Article changed and Report closed
+                    update
                     </Button>
+                    <span className="reported">Visible: {thisArticle.visible ? "🟢" : "🔴"}</span>
                     <Button
-                    onClick={deleteReport}
+                    onClick={toggleVisible}
                     borderColor="blue.300"
                     borderWidth="2px" 
                     color="blue.300"
@@ -246,23 +260,7 @@ import ReactMarkdown from 'react-markdown';
                     _hover={{bg: "blue.300", color: "white"}} 
                     variant='solid' 
                     >
-                    Report dismissed
-                    </Button>
-                    <Button
-                    onClick={invisibleArticle}
-                    borderColor="blue.300"
-                    borderWidth="2px" 
-                    color="blue.300"
-                    bg="white"
-                    fontWeight="400"
-                    height="auto"
-                    margin="0 auto"
-                    padding="4px 10px"
-                    width="150px"
-                    _hover={{bg: "blue.300", color: "white"}} 
-                    variant='solid' 
-                    >
-                    Article temporarly made invisible
+                    toggle visibilty
                     </Button>
 
              

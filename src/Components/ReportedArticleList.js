@@ -21,7 +21,8 @@ import {readableDate} from "../helper/dateformatter"
 
 const EditArticleList = ({p}) => {
   // const [articles,setArticles] = useState([])
-  const {articles, isLoading, getArticles} = useContext(ArticleContext)
+  const {articles, getArticles} = useContext(ArticleContext)
+  const [isLoading, setIsLoading] = useState(true)
   const [reportedArticles, setReportedArticles] = useState([]);
   const [color, setColor] = useState("#5C90FF");
   const { colorMode, toggleColorMode } = useColorMode()
@@ -40,35 +41,40 @@ const EditArticleList = ({p}) => {
 //     setIsLoading(false)
 // }
 function collectReports(){
+  setIsLoading(true)
   let arr = [];
   for(let i = 0; i< articles.length;i++){
-      if(articles[i].reportReason !== "/" || articles[i].reportComment !== "/"){
-        arr.push(articles[i])
+    // console.log(JSON.stringify(articles[i].reports).length)
+      if(JSON.stringify(articles[i].reports).length > 2){
+        // console.log(articles[i].reports.length)
+            arr.push(articles[i])
+            console.log(arr)
       }
   }
+  console.log(arr)
   setReportedArticles(arr)
-
+  setIsLoading(false)
 }
 useEffect(()=>{
-    async function setup(){
+    async function verify(){
         axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true}).then((response)=>{
             console.log(response.data !== "OK")
             if (response.data !== "OK"){
                 alert("Please Login First!")
                 navigate("/login");
                 }
-            }).then((response)=>{
-              getArticles()
-            }).then((response)=>{
-              collectReports();
             })
-    }
-  setup();
+      }
+      getArticles();
+  verify();
 },[])
+useEffect(()=>{
+  collectReports();
+},[articles])
 
   return (
     <>
-    {!reportedArticles ? (
+    {isLoading ? (
       <Container className="loader" maxW={'7xl'}>
         <DotLoader color={color} css={override} loading={!isLoading} size={60} />
       </Container>
