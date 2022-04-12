@@ -152,12 +152,28 @@ import ReactMarkdown from 'react-markdown';
                 <Stack spacing={4}>
                 <Heading fontSize={'2xl'} color="blue.300" m="0 0 2rem" textAlign="left">Reports:</Heading>
                 {/* {thisArticle.reports?.length >=1 ? ( */}
+                <Box display="flex"
+                  flexDirection={{ base: 'row', sm: 'column' }}
+                  // justifyContent="space-between"
+                  flexWrap="wrap"
+                  >
                   {thisArticle.reports.length >=1 && thisArticle.reports.map((a,index) => {
                     
                     return (
-                      <Stack key={index}>
-                        <Heading fontSize={'l'} color="blue.300" m="0 0 2rem" textAlign="left">{a.reportReason}</Heading>
-                        <ReactMarkdown >{a.reportComment}</ReactMarkdown>
+                      <Box key={index}
+                        display="flex"
+                        flexDirection='column'
+                        justifyContent="center"
+                        alignItems="center"
+                        flexWrap="wrap"
+                        width="200px"
+                        borderColor="blue.300"
+                        borderWidth="2px"
+                        borderRadius="6px"
+                        margin="10px"
+                      >
+                        <Heading fontSize={'l'} color="blue.300" m="0 0 2rem"  marginTop="10px">{a.reportReason}</Heading>
+                        <p fontSize={'l'}>{a.reportComment}</p>
                         <Button onClick={()=>deleteReport(index)}
                         borderColor="blue.300"
                         borderWidth="2px" 
@@ -166,16 +182,19 @@ import ReactMarkdown from 'react-markdown';
                         fontWeight="400"
                         height="auto"
                         margin="0 auto"
+                        marginBottom="10px"
+                        marginTop="10px"
                         padding="4px 10px"
                         width="150px"
                         _hover={{bg: "blue.300", color: "white"}} 
                         variant='solid' >
                           Report closed
                         </Button>
-                      </Stack>
+                      </Box>
 
                     )
                   })}
+                  </Box>
                 <Heading fontSize={'xl'} color="blue.300" m="0 0 2rem" textAlign="left">article:</Heading>
                 <FormControl id="title" isRequired >
                     <Input
