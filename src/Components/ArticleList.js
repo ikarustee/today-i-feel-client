@@ -1,4 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import { ArticleContext } from '../Contexts/ArticleContext';
 import { css } from "@emotion/react";
 import DotLoader from "react-spinners/DotLoader";
@@ -8,7 +9,6 @@ import {
   Box,
   Button,
   Heading,
-  Link,
   Image,
   Tag,
   Text,
@@ -73,7 +73,7 @@ const ArticleList = ({p}) => {
                 _hover={{boxShadow: "xl"}} 
                 transition="all 300ms ease">
                   <Heading m="1rem 0 0.75rem" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
-                  <Link href={`articles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }} _focus={{boxShadow: "none"}}>
+                  <Link to={`${a._id}`}>
                       {a.title}
                     </Link>
                   </Heading>
@@ -83,7 +83,7 @@ const ArticleList = ({p}) => {
                     {a.tags.map((t) => {
                       return (
                         <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="blue" color="gray.500" bg="blue.50" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>
-                          <Link href={`/search?q=search,${t}`} _hover={{textDecoration: "none", color: "white"}}>{t}</Link>
+                          <Link to={`/search?q=search,${t}`}>{t}</Link>
                         </Tag>
                       )
                     })}
@@ -96,7 +96,7 @@ const ArticleList = ({p}) => {
                     fontSize="md">
                     {a.body.replace(/[#_]/g,'').split(" ").slice(0, 25).join(" ") + " ..."}
                   </Text>
-                  <Link href={`articles/${a._id}`} textAlign="center" _hover={{textDecoration: "none"}}>
+                  <Link to={`${a._id}`} textAlign="center" _hover={{textDecoration: "none"}}>
                   <Button 
                     // className="readmore__btn" 
                       borderColor="blue.300" 
@@ -136,7 +136,7 @@ const ArticleList = ({p}) => {
                 _hover={{boxShadow: "xl"}} 
                 transition="all 300ms ease">
                 <Heading m="1rem 0 0.75rem" color="blue.300" as="h2" fontSize="2rem" lineHeight="1.1">
-                  <Link href={`articles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }} _focus={{boxShadow: "none"}}>
+                  <Link to={`${a._id}`} >
                     {a.title}
                   </Link>
                 </Heading>
@@ -146,7 +146,7 @@ const ArticleList = ({p}) => {
                     {a.tags.map((t) => {
                       return (
                         <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="blue" color="gray.500" bg="blue.50" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>
-                          <Link href={`/search?q=search,${t}`} _hover={{textDecoration: "none", color: "white"}}>{t}</Link>
+                          <Link to={`/search?q=search,${t}`} >{t}</Link>
                         </Tag>
                       )
                     })}
@@ -159,7 +159,7 @@ const ArticleList = ({p}) => {
                   fontSize="md">
                   {a.body.replace(/[#_]/g,'').split(" ").slice(0, 25).join(" ") + " ..."}
                 </Text>
-                  <Link href={`/articles/${a.id}`} textAlign="center" _hover={{textDecoration: "none"}} >
+                  <Link to={`${a.id}`} >
                     <Button 
                       // className="readmore__btn" 
                       borderColor="blue.300" 

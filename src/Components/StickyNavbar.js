@@ -15,7 +15,7 @@ const StickyNavbar = () => {
 
     const handleBack = (e) => {
       e.preventDefault()
-      navigate(-2)
+      navigate(-1)
     }
 
     function logoutUser(){
