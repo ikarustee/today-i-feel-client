@@ -876,6 +876,10 @@ a.info__link:hover::after {
 }
 #about .bg__morph:nth-child(1)::before {
   background-image: url("/src/img/blogging.svg");
+  left: 10%;
+  top: calc(-100% + 150px);
+  z-index: 5;
+  margin: 0 auto;
 }
 .bg__morph.home {
   position: absolute;
