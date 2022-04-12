@@ -119,104 +119,102 @@ const SingleArticle = () => {
                   })}
                 </em>
                 <Divider m="0.5rem 0 0" />
-                <Box
-                    className="info__holder"
-                  >
+
+                  <Stack gap={"1rem"} direction={"column"}  className="report info__holder">
+                  <Box className='report'>
                     <Heading 
-                      as="h3" 
-                      size="lg" 
-                      textAlign={"center"} 
-                      color={"blue.300"}
-                      marginBottom="2rem"
-                    >
-                    Seeking for professional help?</Heading>
-                    <Flex 
-                      className="info__content"
-                      bg={bg} 
-                      color={fontColor}
-                      borderRadius="12px"
-                      p={4}
-                      boxShadow={"lg"}
-                      >
-                      <BiRightArrowAlt />
-                      <Heading 
-                        as="h5" 
-                        size={"md"} 
-                        fontFamily={"Work Sans"}
-                        fontStyle={"normal"}
-                        >Instahelp – professional online psychological counseling <strong><a href="https://instahelp.me/de/" target="_blank" className="info__link">instahelp.me/de/</a></strong></Heading>
-                    </Flex>
-                  </Box>
-                <Heading 
-                  as="h4"
-                  color="purple.400"
-                  size={"md"}
-                  // fontFamily={"Work Sans"} 
-                  fontStyle={"italic"}
-                  // fontWeight="500!important"
-                  textAlign={"center"}
-                  m={"4rem 0 1rem"}
-                  >Something is not correct or inproper? Let us know.</Heading>
-                <FormControl isRequired>
-                  <form className="report" onSubmit={submitEmail}>
-                    <fieldset>
-                      <RadioGroup onChange={setValue} value={value}>
-                        <Stack direction='row'>
-                          <Radio value='Wrong information'>Wrong information</Radio>
-                          <Radio value='Outdated'>Outdated</Radio>
-                          <Radio value='Other'>Other</Radio>
-                        </Stack>
-                      </RadioGroup>
-                      <input
-                        type="hidden"
-                        name="article"
-                        onChange={handleStateChange}
-                        value={thisArticle.title}
-                        />
-                      <Textarea
-                        placeholder="Type a message ..."
-                        fontWeight={"normal"}
-                        color={"blue.300"}
-                        _placeholder={{color: "blue.300"}}
-                        onChange={handleStateChange}
-                        name="message"
-                        value={mailerState.message}
+                        as="h4"
+                        color="purple.400"
                         size={"md"}
-                        minLength={"10"}
-                        isRequired
-                      />
-                      {errorMessage}
-                      {disabled ? (
-                        <Button
-                          borderColor="gray.400" 
-                          borderWidth="2px" 
-                          color="gray.400" 
-                          bg={`${colorMode === "light" ? "gray.200" : "gray.700"}`}
-                          fontWeight="400"
-                          height="auto"
-                          padding="4px 10px"
-                          _hover={{bg: "gray.200", color: "gray.400", border: `2px solid #A0AEC0`}} 
-                          variant='solid'
-                      >Send Message</Button>
-                      ) : (
-                      <Button
-                        onSubmit={submitEmail}
-                        type="submit"
-                        borderColor="blue.300" 
-                        borderWidth="2px" 
-                        color="blue.300" 
-                        bg={`${colorMode === "light" ? "white" : "gray.700"}`}
-                        fontWeight="400"
-                        height="auto"
-                        padding="4px 10px"
-                        _active={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
-                        _hover={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
-                        variant='solid'
-                      >Send Message</Button>
-                      )}
-                    </fieldset>
-                  </form>
-                </FormControl>
+                        // fontFamily={"Work Sans"} 
+                        fontStyle={"italic"}
+                        // fontWeight="500!important"
+                        textAlign={"center"}
+                        m={"2rem 0 1rem"}
+                        >Something is not correct or inproper? Let us know.</Heading>
+                      <FormControl isRequired>
+                        <form className="report" onSubmit={submitEmail}>
+                          <fieldset>
+                            <RadioGroup onChange={setValue} value={value}>
+                              <Stack direction='row'>
+                                <Radio value='Wrong information'>Wrong information</Radio>
+                                <Radio value='Outdated'>Outdated</Radio>
+                                <Radio value='Other'>Other</Radio>
+                              </Stack>
+                            </RadioGroup>
+                            <input
+                              type="hidden"
+                              name="article"
+                              onChange={handleStateChange}
+                              value={thisArticle.title}
+                              />
+                            <Textarea
+                              placeholder="Type a message ..."
+                              fontWeight={"normal"}
+                              color={"blue.300"}
+                              _placeholder={{color: "blue.300"}}
+                              onChange={handleStateChange}
+                              name="message"
+                              value={mailerState.message}
+                              size={"md"}
+                              minLength={"10"}
+                              isRequired
+                            />
+                            {errorMessage}
+                            {disabled ? (
+                              <Button
+                                borderColor="gray.400" 
+                                borderWidth="2px" 
+                                color="gray.400" 
+                                bg={`${colorMode === "light" ? "gray.200" : "gray.700"}`}
+                                fontWeight="400"
+                                height="auto"
+                                padding="4px 10px"
+                                _hover={{bg: "gray.200", color: "gray.400", border: `2px solid #A0AEC0`}} 
+                                variant='solid'
+                            >Send Message</Button>
+                            ) : (
+                            <Button
+                              onSubmit={submitEmail}
+                              type="submit"
+                              borderColor="blue.300" 
+                              borderWidth="2px" 
+                              color="blue.300" 
+                              bg={`${colorMode === "light" ? "white" : "gray.700"}`}
+                              fontWeight="400"
+                              height="auto"
+                              padding="4px 10px"
+                              _active={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
+                              _hover={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
+                              variant='solid'
+                            >Send Message</Button>
+                            )}
+                          </fieldset>
+                        </form>
+                      </FormControl>
+                    </Box>
+                    <Box
+                        className="info__holder"
+                      >
+                        <Flex 
+                          className="info__content"
+                          bg={bg} 
+                          color={fontColor}
+                          borderRadius="12px"
+                          p={4}
+                          boxShadow={"lg"}
+                          >
+                          <BiRightArrowAlt />
+                          <Heading 
+                            as="h5" 
+                            size={"md"} 
+                            fontFamily={"Work Sans"}
+                            fontStyle={"normal"}
+                            >Instahelp – professional online psychological counseling <strong><a href="https://instahelp.me/de/" target="_blank" className="info__link">instahelp.me/de/</a></strong></Heading>
+                        </Flex>
+                    </Box> 
+                  </Stack>
+
             </Container>
         </article>
     </>

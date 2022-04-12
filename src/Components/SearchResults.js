@@ -140,6 +140,7 @@ const SearchResults = (props) => {
                       height="auto"
                       padding="4px 10px"
                       _active={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
+                      _focus={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
                       _hover={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
                       variant='solid'>
                       Read article

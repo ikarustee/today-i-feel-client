@@ -168,8 +168,8 @@ const ArticleList = ({p}) => {
                   </Link>
                 </Heading>
                 <Divider m="0 0 0.75rem" />
-                <span className="article__meta">
-                    {readableDate(a.createdDate)} &nbsp;
+                 <span className="article__meta">
+                    <span className="date">{readableDate(a.createdDate)} &nbsp;</span>
                     {a.tags.map((t) => {
                       return (
                         <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="blue" color="gray.500" bg="blue.50" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>
