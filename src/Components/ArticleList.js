@@ -41,48 +41,21 @@ const ArticleList = ({p}) => {
       </Container>
     ) : (
      <Container maxW={'7xl'} className="article__list" p="0">
-      <Heading as="h1" color="blue.300">Latest article</Heading>
-      <Box
-        marginTop={{ base: '1', sm: '5' }}
-        display="flex"
-        flexDirection={{ base: 'column', sm: 'row' }}
-        justifyContent="space-between">
+      <Heading as="h1" color="blue.300" m={"2rem 0"}>Latest article</Heading>
         <Box
           display="flex"
           flex="1"
-          marginRight="3"
+          gap={"2rem"}
           position="relative"
+          justifyContent={"space-between"}
+          alignContent={"center"}
           alignItems="center">
-
-          <Box
-            width={{ base: '100%', sm: '85%' }}
-            // zIndex="2"
-            marginLeft={{ base: '0', sm: '5%' }}
-            marginTop="5%">
-            <Link textDecoration="none" _hover={{ textDecoration: 'none' }}>
-              <Image
-                borderRadius="lg"
-                src={
-                  'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=800&q=80'
-                }
-                alt="some good alt text"
-                objectFit="contain"
-              />
-            </Link>
-          </Box>
-          <Box className="bg--dotted" width="100%" position="absolute" height="100%">
-            <Box
-              className="bg__dotted"
-              backgroundSize="20px 20px"
-              opacity="0.4"
-              height="100%"
-            />
-          </Box>
-        </Box>
+          <Box className="bg__morph" flexBasis={{base: "100%", md: "35%"}}></Box>
         <Box
           className="articles__list"
           display="flex"
-          flex="1"
+          flexGrow={"0"}
+          flexBasis={{base: "100%", md: "calc(50% - 1rem)"}}
           flexDirection="column"
           justifyContent="center"
           marginTop={{ base: '3', sm: '0' }}>
@@ -106,7 +79,7 @@ const ArticleList = ({p}) => {
                   </Heading>
                   <Divider m="0 0 0.75rem" />
                   <span className="article__meta">
-                    {readableDate(a.createdDate)} &nbsp;
+                    <span className="date">{readableDate(a.createdDate)} &nbsp;</span>
                     {a.tags.map((t) => {
                       return (
                         <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="blue" color="gray.500" bg="blue.50" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>
@@ -168,8 +141,8 @@ const ArticleList = ({p}) => {
                   </Link>
                 </Heading>
                 <Divider m="0 0 0.75rem" />
-                <span className="article__meta">
-                    {readableDate(a.createdDate)} &nbsp;
+                 <span className="article__meta">
+                    <span className="date">{readableDate(a.createdDate)} &nbsp;</span>
                     {a.tags.map((t) => {
                       return (
                         <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="blue" color="gray.500" bg="blue.50" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>

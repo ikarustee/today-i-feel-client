@@ -112,7 +112,7 @@ const SearchResults = (props) => {
                 </Heading>
                 <Divider m="0 0 0.75rem" />
                 <span className="article__meta">
-                  {readableDate(a.createdDate)} &nbsp;
+                  <span className="date">{readableDate(a.createdDate)} &nbsp;</span>
                   {a.tags.map((t) => {
                     return (
                       <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="blue" color="gray.500" bg="blue.50" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>
@@ -132,14 +132,16 @@ const SearchResults = (props) => {
                 <Link href={`articles/${a._id}`}  color="blue.300" fontWeight={500} textAlign="left" textDecoration="none" _hover={{color: "purple.300"}}>
                   <Button 
                       // className="readmore__btn" 
-                      borderColor="transparent" 
+                      borderColor="blue.300" 
                       borderWidth="2px" 
-                      color="white" 
-                      bg="blue.300"
+                      color="blue.300" 
+                      bg={`${colorMode === "light" ? "white" : "gray.700"}`}
                       fontWeight="400"
                       height="auto"
                       padding="4px 10px"
-                      _hover={{bg: "white", color: "blue.300", border: "2px solid #5C90FF"}} 
+                      _active={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
+                      _focus={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
+                      _hover={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
                       variant='solid'>
                       Read article
                     </Button>
@@ -149,39 +151,39 @@ const SearchResults = (props) => {
         }
         )}
       </Flex>
-      <Box
-        className="info__holder"
-      >
-      <Heading 
-      as="h2" 
-      size="2xl" 
-      textAlign={"center"} 
-      color={"blue.300"}
-      marginBottom="2rem"
-      >
-      Seeking for professional help?</Heading>
-      <Flex 
-      className="info__content"
-      bg={bg} 
-      color={fontColor}
-      borderRadius="12px"
-      p={8}
-      boxShadow={"lg"}
-      >
+        <Box
+          className="info__holder"
+        >
+        <Heading 
+          as="h2" 
+          size="2xl" 
+          textAlign={"center"} 
+          color={"blue.300"}
+          marginBottom="2rem"
+        >
+        Seeking for professional help?</Heading>
+        <Flex 
+          className="info__content"
+          bg={bg} 
+          color={fontColor}
+          borderRadius="12px"
+          p={8}
+          boxShadow={"lg"}
+        >
         <BiRightArrowAlt />
         <h2>Crisis helpline <strong><a href="tel:+4908001110111" className="info__link">0800 1110111</a></strong> or <strong><a href="tel:+4908001110222" className="info__link">0800 1110222</a></strong></h2>
-      </Flex>
-      <Flex 
-      className="info__content"
-      bg={bg} 
-      color={fontColor}
-      borderRadius="12px"
-      p={8}
-      boxShadow={"lg"}
-      >
-        <BiRightArrowAlt />
-        <h2>Instahelp – professionell online psychological counseling <strong><a href="https://instahelp.me/de/" target="_blank" className="info__link">instahelp.me/de/</a></strong></h2>
-      </Flex>
+        </Flex>
+        <Flex 
+          className="info__content"
+          bg={bg} 
+          color={fontColor}
+          borderRadius="12px"
+          p={8}
+          boxShadow={"lg"}
+          >
+          <BiRightArrowAlt />
+          <h2>Instahelp – professional online psychological counseling <strong><a href="https://instahelp.me/de/" target="_blank" className="info__link">instahelp.me/de/</a></strong></h2>
+        </Flex>
       </Box>
       <Chart /> 
       </Container>

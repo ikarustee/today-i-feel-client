@@ -14,99 +14,10 @@ import {
 import DotLoader from "react-spinners/DotLoader";
 import { css } from "@emotion/react";
 
-// let tags = [
-//   { 
-//     value: 'happy', 
-//     count: 78,
-//     isActive: false
-//    },
-//   { 
-//     value: 'sad', 
-//     count: 60,
-//     isActive: false
-//    },
-//   { 
-//     value: 'sleepy', 
-//     count: 48,
-//     isActive: false
-//    },
-//   { 
-//     value: 'stressed', 
-//     count: 45,
-//     isActive: false
-//    },
-//   { 
-//     value: 'frustrated', 
-//     count: 33,
-//     isActive: false
-//    },
-//   { 
-//     value: 'annoyed', 
-//     count: 18
-//    },
-//   { 
-//     value: 'tense', 
-//     count: 10
-//    },
-//   { 
-//     value: 'irritated', 
-//     count: 5
-//    },
-//   { 
-//     value: 'calm', 
-//     count: 25
-//    },
-//   { 
-//     value: 'lonely', 
-//     count: 4
-//    },
-//   { 
-//     value: 'surprised', 
-//     count: 20
-//    },
-//   { 
-//     value: 'bothered', 
-//     count: 8
-//    },
-//   { 
-//     value: 'tired', 
-//     count: 30
-//    },
-//   { 
-//     value: 'angry', 
-//     count: 10
-//    },
-//   { 
-//     value: 'hangry', 
-//     count: 50
-//    },
-//   { 
-//     value: 'buoyant', 
-//     count: 30
-//    },
-//   { 
-//     value: 'cheerful', 
-//     count: 30
-//    },
-//   { 
-//     value: 'grouchy', 
-//     count: 30
-//    },
-//   { 
-//     value: 'blessed', 
-//     count: 30
-//    },
-//   { 
-//     value: 'blah', 
-//     count: 30
-//    },
-// ]
-
-
 const Home = (props) => {
   const [startSlice , setStartSlice] = useState(0);
-  const [initialTags , setInitialTags] = useState(5);
-  const [increaseTags, setIncreaseTags] = useState(3);
+  const [initialTags , setInitialTags] = useState(8);
+  const [increaseTags, setIncreaseTags] = useState(5);
   const [checkedTags, setCheckedTags] = useState(0)
   const [collectedTags, setCollectedTags] = useState([])
   const [newSearchParams, setNewSearchParams] = useState([]) 
@@ -204,8 +115,9 @@ const Home = (props) => {
 
   
   return (
-    <>  
+    <div id="home">  
         <div className="title">
+          <Box className="bg__morph home" flexBasis={{base: "100%", md: "50%"}}></Box>
           <Heading as='h1' className="teaser linear-wipe" textAlign={[ 'center', 'center' ]} color='blue.300' >Share your mood.<br /> Take a deep breath. <br />Take your time.</Heading>
           <h4 className="heading--center">Click on one feeling and share it <strong>anonymously</strong> with others</h4>
         </div>
@@ -215,7 +127,7 @@ const Home = (props) => {
           <div className="tagcloud">
           <form id="tagcloud">
             {data.map((t, index) => {
-              const colors = ["#E020CF", "#FF3292", "#FF7E5F", "#FFC14B", "#fee700", "#F9F871", "#9BDE7E", "#C0BC84", "#C3FCF1", "#154FA6", "#5A57AB"]
+              const colors = ["#b110a2", "#f27bb2", "#FF7E5F", "#FFC14B", "#fee700", "#F9F871", "#9BDE7E", "#C0BC84", "#C3FCF1", "#154FA6", "#5A57AB"]
               const randomColor = colors[Math.floor(Math.random() * colors.length)]
               const fontSizes = ["1rem", "1.25rem", "1.5rem", "1.75rem"]
               const randomFontsize = fontSizes[Math.floor(Math.random() * fontSizes.length)]
@@ -271,7 +183,7 @@ const Home = (props) => {
         </div>
         )}
       <Search/>
-    </> 
+    </div> 
   )
 }
 

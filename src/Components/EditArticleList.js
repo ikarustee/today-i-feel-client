@@ -38,13 +38,14 @@ const EditArticleList = ({p}) => {
 
 const handleDelete = async (e) => {
   const id = e.target.id
-  console.log(e.target.id)
+  console.log(id)
+  // alert("Clicked") 
   window.confirm("Really delete article?")
-  articles.filter((a) => a._id != id)
+  // articles.filter((a) => a._id != id)
   let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
   try {
     const res = await axios.delete(server)
-    console.log("Article deleted")
+    // alert("Article deleted")
     console.log(res)
     // navigate("/editarticles")
   } catch (error) {
@@ -52,28 +53,34 @@ const handleDelete = async (e) => {
   }
   // window.location.reload();
 
-  getArticles()
-} 
+  getArticles();
+}  
 
-useEffect(()=>{
-    async function verifyTest(){
-        axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true}).then((response)=>{
-            console.log(response.data !== "OK")
-            if (response.data !== "OK"){
-                alert("Please Login First!")
-                navigate("/login");
-                }
-            })
-    }
-    verifyTest();
+  useEffect(()=>{
+      async function verifyTest(){
+          axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true}).then((response)=>{
+              console.log(response.data !== "OK")
+              if (response.data !== "OK"){
+                  alert("Please Login First!")
+                  navigate("/login");
+                  }
+              })
+      }
+      verifyTest();
+     
+      console.log(articles)
+  },[])
+
+  useEffect(() => {
     getArticles();
-},[])
+  },[])
+
 
   return (
     <>
     {isLoading ? (
       <Container className="loader" maxW={'7xl'}>
-        <DotLoader color={color} css={override} loading={!isLoading} size={60} />
+        <DotLoader color={color} css={override} loading={isLoading} size={60} />
       </Container>
     ) : (
      <Container maxW={'800px'} className="article__list" p="0">
@@ -82,6 +89,7 @@ useEffect(()=>{
       <Box className="articles__list edit" gap="1rem">
       {articles.map((a) => {
               const excerpt = Object.values(a.body)
+
               return (
                 <Box 
                   key={a._id} 
@@ -116,15 +124,17 @@ useEffect(()=>{
                         // height="20px"
                         padding="0"
                         _hover={{color: `${colorMode === "light" ? "blue.300" : "gray.400"}`}} 
+                        _active={{color: `${colorMode === "light" ? "blue.300" : "gray.400"}`}} 
+                        _focus={{color: `${colorMode === "light" ? "blue.300" : "gray.400"}`}} 
                         // _hover={{color: "white"}} 
                         variant='outline'>
                           <BiEditAlt id={a._id} color="red.600" />
                       </Button>
                     </Link>
                     <Button 
-                      className="delete__btn"
-                      onClick={(e) => handleDelete(e)} 
                       id={a._id}
+                      onClick={(e) => handleDelete(e)} 
+                      className="delete__btn"
                       border="none"
                       borderRadius={"8px"}
                       color="gray.400"  
@@ -133,10 +143,10 @@ useEffect(()=>{
                       fontWeight="300"
                       padding="0"
                       _hover={{color: `${colorMode === "light" ? "red.600" : "red.600"}`}}  
+                      _active={{color: `${colorMode === "light" ? "red.600" : "red.600"}`}}  
+                      _focus={{color: `${colorMode === "light" ? "red.600" : "red.600"}`}}  
                       variant='outline'>
-                      <BiEraser 
-                        onClick={(e) => handleDelete(e)} 
-                        id={a._id}
+                      <BiEraser
                         color="red.600"
                          />
                     </Button>

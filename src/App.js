@@ -9,6 +9,7 @@ import SingleArticle from './Components/SingleArticle';
 import SearchResults from './Components/SearchResults';
 import Chart from './Components/Chart';
 import Login from './Components/Login';
+import About from './Components/About';
 import NewArticle from './Components/NewArticle';
 import Navbar from './Components/Navbar';
 import Footer from "./Components/Footer"
@@ -52,8 +53,8 @@ function App() {
           <Route path="/reportedarticles" element={<ReportedArticleList />} />
           <Route path="/reportedarticles/:id" element={<ReportedArticle/>} />
           <Route path="/search" element={<SearchResults />} />
-          <Route path="/chart" element={<Chart />} />
-          {/* <Route path="/about" element={<About />} /> */}
+          {/* <Route path="/chart" element={<Chart />} /> */}
+          <Route path="/about" element={<About />} />
         </Routes>
         {/* <Routes>
           <Route path="search">

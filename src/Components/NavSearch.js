@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, useColorMode } from '@chakra-ui/react'
+import { Input, useColorMode, Button } from '@chakra-ui/react'
 import {BiSearchAlt2} from "react-icons/bi";
 import { CloseIcon } from '@chakra-ui/icons'
 
@@ -24,6 +24,12 @@ const NavSearch = ({open, handleSearch, openClose}) => {
             borderColor={"blue.300"}
             focusBorderColor={"blue.300"}
             />
+            <Button 
+              type="submit"
+              p="10px"
+              bg="blue.300" 
+              color="white"
+              onSubmit={handleSearch}><BiSearchAlt2 /></Button>
         </form>
     </>
   )

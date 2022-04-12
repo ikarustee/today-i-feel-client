@@ -4,6 +4,7 @@ import {
     Box,
     FormControl,
     Button,
+    Flex,
     Radio, 
     RadioGroup,
     Textarea,
@@ -21,7 +22,7 @@ import DotLoader from "react-spinners/DotLoader";
 import { css } from "@emotion/react";
 import ReactMarkdown from "react-markdown";  
 import {readableDate} from "../helper/dateformatter"
-import { BiMessageSquare } from 'react-icons/bi';
+import { BiMessageSquare, BiRightArrowAlt } from 'react-icons/bi';
 import axios from 'axios';
 
 const SingleArticle = () => {
@@ -43,6 +44,7 @@ const SingleArticle = () => {
     const disabled = mailerState.message === "" || mailerState.message.length <= 10
     const bg = useColorModeValue('blue.300', 'blue.900')
     const color = useColorModeValue('white', 'gray.300')
+    const fontColor = useColorModeValue('white', 'gray.300')
 
     const override = css`
     display: block;
@@ -97,16 +99,15 @@ const SingleArticle = () => {
     return (
     <>
         <article>
-            <Container p="0" maxW={"800px"} >
+            <Container p="0" maxW={"700px"} >
               <Box
                 bg={bg} 
                 color={color}
                 borderRadius="12px"
                 p={8}
                 marginBottom="2rem"
-
                 >
-                <Heading color={color} as="h1" fontSize="2.5rem" textAlign="center">{thisArticle.title}</Heading>
+                <Heading color={color} as="h1" size="2xl"  textAlign="center">{thisArticle.title}</Heading>
                 <span className="article__date">{readableDate(thisArticle.createdDate)}</span>
               </Box>
                  <ReactMarkdown className="article__content">{thisArticle.body}</ReactMarkdown>
@@ -121,87 +122,102 @@ const SingleArticle = () => {
                   })}
                 </em>
                 <Divider m="0.5rem 0 0" />
-                <FormControl isRequired>
-                  <form onSubmit={submitEmail}>
-                    <fieldset>
-                      <legend>Something is not correct or inproper? Let us know.</legend>
-                      <RadioGroup onChange={setValue} value={value}>
-                        <Stack direction='row'>
-                          <Radio value='Wrong information'>Wrong information</Radio>
-                          <Radio value='Outdated'>Outdated</Radio>
-                          <Radio value='Other'>Other</Radio>
-                        </Stack>
-                      </RadioGroup>
-                      <input
-                        type="hidden"
-                        name="article"
-                        onChange={handleStateChange}
-                        value={thisArticle.title}
-                        />
-                      <Textarea
-                        placeholder="Message"
-                        onChange={handleStateChange}
-                        name="message"
-                        value={mailerState.message}
-                        size={"md"}
-                        minLength={"10"}
-                        isRequired
-                      />
-                      {errorMessage}
-                      {disabled ? (
-                        <Button
-                          borderColor="gray.400" 
-                          borderWidth="2px" 
-                          color="gray.400" 
-                          bg={`${colorMode === "light" ? "gray.200" : "gray.700"}`}
-                          fontWeight="400"
-                          height="auto"
-                          padding="4px 10px"
-                          _hover={{bg: "gray.200", color: "gray.400", border: `2px solid #A0AEC0`}} 
-                          variant='solid'
-                      >Send Message</Button>
-                      ) : (
-                      <Button
-                        onSubmit={submitEmail}
-                        type="submit"
-                        borderColor="blue.300" 
-                        borderWidth="2px" 
-                        color="blue.300" 
-                        bg={`${colorMode === "light" ? "white" : "gray.700"}`}
-                        fontWeight="400"
-                        height="auto"
-                        padding="4px 10px"
-                        _active={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
-                        _hover={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
-                        variant='solid'
-                      >Send Message</Button>
-                      )}
-                    </fieldset>
-                  </form>
-                </FormControl>
-                {/* <p>Something is wrong in this article? Let us know.</p>
-                <FormControl >
-                  <form id="report">
-                      <RadioGroup onChange={setValue} value={value}>
-                        <Stack direction='row'>
-                          <Radio value='Wrong information'>Wrong information</Radio>
-                          <Radio value='Outdated'>Outdated</Radio>
-                          <Radio value='Other'>Other</Radio>
-                        </Stack>
-                      </RadioGroup>
-                      <Textarea
-                        value={userInput.text}
-                        name="issue"
-                        onChange={handleInputChange}
-                        placeholder="Describe the issue"
-                        size='md'
-                      />
-                      <Button 
-                        type="submit"
+
+                  <Stack gap={"1rem"} direction={"column"}  className="report info__holder">
+                  <Box className='report'>
+                    <Heading 
+                        as="h4"
+                        color="blue.300"
+                        size={"lg"}
+                        // fontFamily={"Work Sans"} 
+                        fontStyle={"italic"}
+                        // fontWeight="500!important"
+                        textAlign={"center"}
+                        m={"2rem 0 1rem"}
+                        >Something is not correct or inproper? Let us know.</Heading>
+                      <FormControl isRequired>
+                        <form className="report" onSubmit={submitEmail}>
+                          <fieldset>
+                            <RadioGroup onChange={setValue} value={value}>
+                              <Stack direction='row'>
+                                <Radio value='Wrong information'>Wrong information</Radio>
+                                <Radio value='Outdated'>Outdated</Radio>
+                                <Radio value='Other'>Other</Radio>
+                              </Stack>
+                            </RadioGroup>
+                            <input
+                              type="hidden"
+                              name="article"
+                              onChange={handleStateChange}
+                              value={thisArticle.title}
+                              />
+                            <Textarea
+                              placeholder="Type a message ..."
+                              fontWeight={"normal"}
+                              color={"blue.300"}
+                              _placeholder={{color: "blue.300"}}
+                              onChange={handleStateChange}
+                              name="message"
+                              value={mailerState.message}
+                              size={"md"}
+                              minLength={"10"}
+                              isRequired
+                            />
+                            {errorMessage}
+                            {disabled ? (
+                              <Button
+                                borderColor="gray.400" 
+                                borderWidth="2px" 
+                                color="gray.400" 
+                                bg={`${colorMode === "light" ? "gray.200" : "gray.700"}`}
+                                fontWeight="400"
+                                height="auto"
+                                padding="4px 10px"
+                                _hover={{bg: "gray.200", color: "gray.400", border: `2px solid #A0AEC0`}} 
+                                variant='solid'
+                            >Send Message</Button>
+                            ) : (
+                            <Button
+                              onSubmit={submitEmail}
+                              type="submit"
+                              borderColor="blue.300" 
+                              borderWidth="2px" 
+                              color="blue.300" 
+                              bg={`${colorMode === "light" ? "white" : "gray.700"}`}
+                              fontWeight="400"
+                              height="auto"
+                              padding="4px 10px"
+                              _active={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
+                              _hover={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
+                              variant='solid'
+                            >Send Message</Button>
+                            )}
+                          </fieldset>
+                        </form>
+                      </FormControl>
+                    </Box>
+                    <Box
+                        className="info__holder"
                       >
-                      Submit</Button>
-                  </form>
-                </FormControl> */}
+                        <Flex 
+                          className="info__content"
+                          bg={bg} 
+                          color={fontColor}
+                          borderRadius="12px"
+                          p={4}
+                          boxShadow={"lg"}
+                          >
+                          <BiRightArrowAlt />
+                          <Heading 
+                            as="h5" 
+                            size={"md"} 
+                            fontFamily={"Work Sans"}
+                            fontStyle={"normal"}
+                            >Instahelp – professional online psychological counseling <strong><a href="https://instahelp.me/de/" target="_blank" className="info__link">instahelp.me/de/</a></strong></Heading>
+                        </Flex>
+                    </Box> 
+                  </Stack>
+
             </Container>
         </article>
     </>
