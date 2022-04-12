@@ -95,11 +95,11 @@ useEffect(()=>{
                 borderRadius={8} 
                 transition="all 300ms ease">
                   <h4 className="edit__heading">
-                    <Link to={`${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }} _focus={{boxShadow: "none"}}>
+                    <Link to={`${a._id}`} textDecoration="none" >
                       {a.title}
                     </Link>
                   </h4>
-                  <Link className="edit__btn" to={`${a._id}`} textAlign="center" _hover={{textDecoration: "none"}} >
+                  <Link className="edit__btn" to={`${a._id}`}>
                     <Button 
                       // className="readmore__btn" 
                       borderColor="blue.300" 
