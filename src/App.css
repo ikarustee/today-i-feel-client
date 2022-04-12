@@ -155,22 +155,24 @@ nav {
 .navlink {
   transition: all 300ms ease!important;
 }
-form#navsearch {
+form#navsearch.navsearch {
   display: flex;
   flex-wrap: nowrap;
-  max-width: calc(50vw - 2rem);
+  max-width: 0;
   margin: 0;
   top: 1rem;
   position: absolute;
   left: 0;
   top: 1rem;
-  transform: translateX(calc(-100% - 1rem - 42px));
+  transform: translateX(0);
   z-index: 11;
   visibility: hidden;
   opacity: 0;
   transition: all 500ms ease;
 }
 form#navsearch.show {
+  flex-wrap: nowrap;
+  max-width: calc(50vw - 2rem);
   transform: translateX(3rem);
   visibility: visible;
   opacity: 1;
@@ -842,19 +844,22 @@ a.info__link:hover::after {
   width: 100%;
   height: 300px;
   animation: morph 15s ease-in-out infinite both alternate;
+  align-content: center;
+  align-items: center;
+  display: flex;
 }
 @keyframes morph {
   0% {border-radius: 40% 60% 60% 40% / 60% 30% 70% 40%;} 
   100% {border-radius: 40% 60%;} 
 }
-.bg__morph::before {
+.bg__morph:before {
   content:"";
   display: inline-block;
-  background-image: url("/src/img/blogging.svg");
+  background-image: none;
   background-size: contain;
   background-repeat: no-repeat;
   width: 100%;
-  height: 400px;
+  height: 300px;
   position: absolute;
   left: 0;
   top:0;
@@ -870,8 +875,7 @@ a.info__link:hover::after {
   align-items: center;
 }
 #about .bg__morph:nth-child(1)::before {
-  background-image: none;
-  height: 0;
+  background-image: url("/src/img/blogging.svg");
 }
 .bg__morph.home {
   position: absolute;

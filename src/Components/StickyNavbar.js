@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
-import { Stack, Link, useColorModeValue } from '@chakra-ui/react'
+import { Stack, useColorModeValue } from '@chakra-ui/react'
 import { BiArrowBack, BiHomeHeart, BiListUl, BiLogOutCircle, BiGridAlt, BiCoffee } from "react-icons/bi";
-import {Link as RouteLink, useNavigate, useLocation} from "react-router-dom";
+import {Link, useNavigate, useLocation} from "react-router-dom";
 import axios from 'axios';
 
 const StickyNavbar = () => {
@@ -42,22 +42,22 @@ const StickyNavbar = () => {
     // gap="1rem"
     >
       {location.pathname === "/" ? (null) : ( <a className="link" href="#" onClick={handleBack}><BiArrowBack/>Back</a>)}
-      <Link textAlign="center" m="0" href={"/"} className="link"><BiHomeHeart/>Home</Link>
-      <Link textAlign="center" m="0" href={"/articles"} className="link"><BiListUl/>Articles</Link>
-      <Link textAlign="center" m="0" href={"/about"} className="link"><BiCoffee/>About</Link>
+      <Link to="/" className="link"><BiHomeHeart/>Home</Link>
+      <Link to="/articles" className="link"><BiListUl/>Articles</Link>
+      <Link to='/about' className="link"><BiCoffee/>About</Link>
       {location.pathname === "/adminDashboard" 
       || location.pathname === "/newarticle"
       || location.pathname === "/editarticles"
-      || location.pathname === `/editarticles/${newLoc}` ? ( <a className="link" href="/adminDashboard" ><BiGridAlt/>Dashboard</a>) : (null)
+      || location.pathname === `/editarticles/${newLoc}` ? ( <Link className="link" to="/adminDashboard" ><BiGridAlt/>Dashboard</Link>) : (null)
       || location.pathname === "/reportedarticles"
-      || location.pathname === `/reportedarticles/${newLoc}` ? ( <a className="link" href="/adminDashboard" ><BiGridAlt/>Dashboard</a>) : (null)
+      || location.pathname === `/reportedarticles/${newLoc}` ? ( <Link className="link" to="/adminDashboard" ><BiGridAlt/>Dashboard</Link>) : (null)
       }
       {location.pathname === "/adminDashboard" 
       || location.pathname === "/newarticle"
       || location.pathname === "/editarticles"
-      || location.pathname === `/editarticles/${newLoc}` ? ( <a className="link" href="#" onClick={logoutUser}><BiLogOutCircle/>Logout</a>) : (null)
+      || location.pathname === `/editarticles/${newLoc}` ? ( <Link className="link" to="#" onClick={logoutUser}><BiLogOutCircle/>Logout</Link>) : (null)
       || location.pathname === "/reportedarticles"
-      || location.pathname === `/reportedarticles/${newLoc}` ? ( <a className="link" href="#" onClick={logoutUser}><BiLogOutCircle/>Logout</a>) : (null)
+      || location.pathname === `/reportedarticles/${newLoc}` ? ( <Link className="link" to="#" onClick={logoutUser}><BiLogOutCircle/>Logout</Link>) : (null)
       }
     </Stack>
   )
