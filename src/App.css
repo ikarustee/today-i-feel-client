@@ -892,10 +892,10 @@ a.info__link:hover::after {
 .article__list .bg__morph {
   width: 85%;
   position: relative;
-  left: 7.5%;
 }
 .article__list .bg__morph::before{
   background-image: url("/src/img/vision.svg");
+  background-position-x: 50%;
   transform: scaleX(-1);
 }
 svg.chakra-icon path {
@@ -950,6 +950,11 @@ a.btn--centered.chart {
 .logout {
   position: relative;
   right: 0;
+}
+@media screen and (min-width: 768px) {
+  .article__list .bg__morph {
+    left: 7.5%;
+  }
 }
 
 .linear-wipe {

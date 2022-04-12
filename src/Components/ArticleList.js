@@ -49,8 +49,10 @@ const ArticleList = ({p}) => {
           position="relative"
           justifyContent={"space-between"}
           alignContent={"center"}
-          alignItems="center">
-          <Box className="bg__morph" flexBasis={{base: "100%", md: "35%"}}></Box>
+          alignItems="center"
+          flexWrap={{base: "wrap", md: "nowrap"}}
+          >
+          <Box className="bg__morph" flexBasis={{base: "100%", md: "35%"}} justifyContent={"center"}></Box>
         <Box
           className="articles__list"
           display="flex"
