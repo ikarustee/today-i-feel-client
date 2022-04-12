@@ -27,10 +27,11 @@ import ReactMarkdown from 'react-markdown';
   export default function EditSingleArticle() {
     
     const {id} = useParams()
-    // const {articles, isLoading, getArticles} = useContext(ArticleContext)
-    const [thisArticle, setThisArticle]= useState({})
+    const {articles, isLoading, getArticles} = useContext(ArticleContext)
+    const thisArticle = articles.find((a) => a.id === id)
     const [visible, setVisible] = useState(true)
-    const [isLoading, setIsLoading] = useState(true)
+    // const [isLoading, setIsLoading] = useState(true)
+   
     const [userInput, setUserInput] = useState({
       title: "",
       body: "",
@@ -46,14 +47,14 @@ import ReactMarkdown from 'react-markdown';
     margin: 0 auto;
     border-color: red;
   `;
-    async function getData(){
-      setIsLoading(true);
-      console.log("http://localhost:3010/reports/"+id.toString())
-      let response = await axios.get("http://localhost:3010/reports/"+id.toString())
-      setThisArticle(response.data[0])
-      console.log(response.data[0])
-      setIsLoading(false)
-    }
+    // async function getData(){
+    //   setIsLoading(true);
+    //   console.log("https://todayifeel-server.herokuapp.com/reports/"+id.toString())
+    //   let response = await axios.get("https://todayifeel-server.herokuapp.com/reports/"+id.toString())
+    //   setThisArticle(response.data[0])
+    //   console.log(response.data[0])
+    //   setIsLoading(false)
+    // }
     const navigate = useNavigate();
     
     const handleChange = (e) => {
@@ -83,7 +84,7 @@ import ReactMarkdown from 'react-markdown';
       tagArray = tagArray.map(el=>el.trim())
       console.log({title:title,body:body, tags:tagArray, url:url})
     
-      let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
+      let server = "https://todayifeel-server.herokuapp.com/articles/"+thisArticle.article._id.toString()
       axios.put(server,{title:title,body:body, tags:tagArray, url:url}).then((response)=> {
             console.log(response)
             deleteReport()
@@ -95,7 +96,7 @@ import ReactMarkdown from 'react-markdown';
       let server = "https://todayifeel-server.herokuapp.com/reports/"+id.toString()
       axios.delete(server).then((response)=>{
         console.log(response)
-        // navigate("/reportedarticles")
+        navigate("/reportedarticles")
       })
     }
     function invisibleArticle(){
@@ -105,10 +106,13 @@ import ReactMarkdown from 'react-markdown';
       let tagArray = tags.split(",")
       tagArray = tagArray.map(el=>el.trim())
       console.log({title:title,body:body, tags:tagArray, url:url,visible:false})    
-      let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
+      let server = "https://todayifeel-server.herokuapp.com/articles/"+thisArticle.article._id.toString()
       axios.put(server,{title:title,body:body, tags:tagArray, url:url,visible:false}).then((response)=> {
             console.log(response)
-            // navigate("/reportedarticles")
+            axios.put("https://todayifeel-server.herokuapp.com/reports/"+id.toString(),{reason:thisArticle.reason,comment:thisArticle.comment, article:response.data})
+          }).then((response)=>{
+            console.log(response)
+            navigate("/reportedarticles")
           })
     
     }
@@ -122,12 +126,11 @@ import ReactMarkdown from 'react-markdown';
     }
     useEffect(()=>{
       verifyTest();
-      getData();
+      getArticles();
     },[])
     useEffect(()=>{
         
-        if(thisArticle && !isLoading){
-          setIsLoading(true)
+        if(thisArticle){
             console.log(thisArticle)
             setUserInput({
               title: thisArticle.article.title,
@@ -137,9 +140,8 @@ import ReactMarkdown from 'react-markdown';
               visible: thisArticle.article.visible
           })
           setVisible(thisArticle.article.visible)
-          setIsLoading(false)
       }
-    },[thisArticle, isLoading])
+    },[thisArticle])
 
 
     return (

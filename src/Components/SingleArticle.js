@@ -36,7 +36,7 @@ const SingleArticle = () => {
     
     const [mailerState, setMailerState] = useState({
       message: "",
-      article: ""
+      articleID: ""
     });
     
     const disabled = mailerState.message === "" || mailerState.message.length <= 10
@@ -68,7 +68,7 @@ const SingleArticle = () => {
       e.preventDefault();
       console.log(e.target)
       console.log({ mailerState });
-      const response = await axios.post("http://localhost:3010/send", { mailerState })
+      const response = await axios.post("https://todayifeel-server.herokuapp.com/send", { mailerState })
       const resData = await response
       console.log(resData)
       if(resData.status === "success") {

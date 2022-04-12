@@ -180,7 +180,7 @@ const Home = (props) => {
       console.log(searchParams)
       // encodeURI(searchParams)
       
-      let url = "http://localhost:3010/search/"+newSearchParams;
+      let url = "https://todayifeel-server.herokuapp.com/search/"+newSearchParams;
       let response = await axios.get(url,{withCredentials:true});
       console.log(response.data);
       if( typeof response.data === "string"){

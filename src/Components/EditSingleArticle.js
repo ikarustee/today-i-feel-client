@@ -30,6 +30,7 @@ import {
     const thisArticle=articles.find((a) => a.id === id)
     // const [article, setArticle] = useState(thisArticle)
     const [visible, setVisible] = useState(true)
+    // const [reportsList, setReportsList] = useState([])
     const [userInput, setUserInput] = useState({
       title: "",
       body: "",
@@ -43,7 +44,14 @@ import {
     margin: 0 auto;
     border-color: red;
   `;
-    
+  // async function getData(){
+  //   // setIsLoading(true);
+  //   console.log("https://todayifeel-server.herokuapp.com/reports")
+  //   let response = await axios.get("https://todayifeel-server.herokuapp.com/reports")
+  //   setReportsList(response.data)
+  //   console.log(response.data)
+  //   // setIsLoading(false)
+  // }
     const navigate = useNavigate();
     
     const handleChange = (e) => {
@@ -65,7 +73,14 @@ import {
       let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
       axios.put(server,{title:title,body:body, tags:tagArray, url:url, visible:visible}).then((response)=> {
             console.log(response)
-            navigate("/adminDashboard")
+            // for(let i = 0 ; i < reportsList.length;i++){
+            //   console.log(reportsList.article)
+            //   if(reportsList.article._id === id){
+            //     axios.put("https://todayifeel-server.herokuapp.com/reports/"+reportsList._id.toString(),{reason:thisArticle.reason,comment:thisArticle.comment, article:response.data})
+            //     break;
+            //   }
+            // }
+             navigate("/adminDashboard")
           })
     }
     async function verifyTest(){
@@ -78,6 +93,7 @@ import {
     }
     useEffect(()=>{
       getArticles();
+      // getData();
       verifyTest();
     },[])
     useEffect(()=>{
@@ -88,7 +104,8 @@ import {
             title: thisArticle.title,
             body: thisArticle.body,
             tags: thisArticle.tags.join(", "),
-            url: thisArticle.url
+            url: thisArticle.url,
+            visible:thisArticle.visible
           }
 
         )}

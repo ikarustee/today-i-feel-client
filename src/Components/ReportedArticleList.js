@@ -20,9 +20,9 @@ import { ArticleContext } from '../Contexts/ArticleContext';
 import {readableDate} from "../helper/dateformatter"
 
 const EditArticleList = ({p}) => {
-  const [articles,setArticles] = useState([])
-  // const {articles, isLoading, getArticles} = useContext(ArticleContext)
-  const [isLoading, setIsLoading] = useState(true)
+  // const [articles,setArticles] = useState([])
+  const {articles, isLoading, getArticles} = useContext(ArticleContext)
+  const [reportedArticles, setReportedArticles] = useState([]);
   const [color, setColor] = useState("#5C90FF");
   const { colorMode, toggleColorMode } = useColorMode()
   const navigate = useNavigate();
@@ -32,30 +32,43 @@ const EditArticleList = ({p}) => {
   margin: 0 auto;
   border-color: red;
 `;
-async function getData(){
-    setIsLoading(true);
-    let response = await axios.get("http://localhost:3010/reports")
-    setArticles(response.data)
-    console.log(response.data)
-    setIsLoading(false)
+// async function getData(){
+//     setIsLoading(true);
+//     let response = await axios.get("https://todayifeel-server.herokuapp.com/reports")
+//     setArticles(response.data)
+//     console.log(response.data)
+//     setIsLoading(false)
+// }
+function collectReports(){
+  let arr = [];
+  for(let i = 0; i< articles.length;i++){
+      if(articles[i].reportReason !== "/" || articles[i].reportComment !== "/"){
+        arr.push(articles[i])
+      }
+  }
+  setReportedArticles(arr)
+
 }
 useEffect(()=>{
-    async function verifyTest(){
+    async function setup(){
         axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true}).then((response)=>{
             console.log(response.data !== "OK")
             if (response.data !== "OK"){
                 alert("Please Login First!")
                 navigate("/login");
                 }
+            }).then((response)=>{
+              getArticles()
+            }).then((response)=>{
+              collectReports();
             })
     }
-    verifyTest();
-    getData();
+  setup();
 },[])
 
   return (
     <>
-    {!articles ? (
+    {!reportedArticles ? (
       <Container className="loader" maxW={'7xl'}>
         <DotLoader color={color} css={override} loading={!isLoading} size={60} />
       </Container>
@@ -64,12 +77,12 @@ useEffect(()=>{
       <Heading as="h1" color="blue.300">Reported articles</Heading>
       <Divider marginTop="5"  marginBottom="2rem"/>
       <Box className="articles__list edit" gap="1rem">
-      {articles
+      {reportedArticles
         .map((a) => {
-              const excerpt = Object.values(a.article.body)
+              const excerpt = Object.values(a.body)
               return (
                 <Box 
-                key={a.article._id} 
+                key={a._id} 
                 bg={colorMode === "light" ? "white" : "gray.700"} 
                 className="single" 
                 boxShadow={'sm'} m="0" 
@@ -78,7 +91,7 @@ useEffect(()=>{
                 transition="all 300ms ease">
                   <h4 className="edit__heading">
                     <Link href={`reportedarticles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }} _focus={{boxShadow: "none"}}>
-                      {a.article.title}
+                      {a.title}
                     </Link>
                   </h4>
                   <Link className="edit__btn" href={`reportedarticles/${a._id}`} textAlign="center" _hover={{textDecoration: "none"}} >
@@ -98,8 +111,8 @@ useEffect(()=>{
                     </Button>
                   </Link>
                   <Box className="meta">
-                    <span className="date">Published: {readableDate(a.article.createdDate)}</span>
-                    <span className="reported">Visible: {a.article.visible ? "🟢" : "🔴"}</span>
+                    <span className="date">Published: {readableDate(a.createdDate)}</span>
+                    <span className="reported">Visible: {a.visible ? "🟢" : "🔴"}</span>
                   </Box>
                 </Box>
               )
