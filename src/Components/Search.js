@@ -47,7 +47,7 @@ const Search = () => {
         <div className="tagsearch">
         {/* <p>Selected: | Tag name: {singleTag} | Tag count: {countTags}</p> */}
         <FormControl>
-          <p>Or search for other topics of your interest</p>
+          <h4 className="heading--center">Or search for other topics of your interest</h4>
           <form id="search" onSubmit={handleSearch}>
             <Input 
               id='text' 

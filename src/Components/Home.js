@@ -117,6 +117,7 @@ const Home = (props) => {
   return (
     <div id="home">  
         <div className="title">
+          <Box className="bg__morph home" flexBasis={{base: "100%", md: "50%"}}></Box>
           <Heading as='h1' className="teaser linear-wipe" textAlign={[ 'center', 'center' ]} color='blue.300' >Share your mood.<br /> Take a deep breath. <br />Take your time.</Heading>
           <h4 className="heading--center">Click on one feeling and share it <strong>anonymously</strong> with others</h4>
         </div>
