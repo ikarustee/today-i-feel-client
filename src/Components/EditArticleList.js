@@ -7,7 +7,6 @@ import {
   Button,
   Flex,
   Heading,
-  Link,
   Image,
   Text,
   Divider,
@@ -16,7 +15,7 @@ import {
   useColorMode
 } from '@chakra-ui/react';
 import axios from 'axios';
-import {useNavigate} from "react-router-dom"
+import {useNavigate, Link} from "react-router-dom"
 import { ArticleContext } from '../Contexts/ArticleContext';
 import {readableDate} from "../helper/dateformatter"
 import { BiEditAlt, BiEraser } from "react-icons/bi";
@@ -101,7 +100,7 @@ const handleDelete = async (e) => {
                   transition="all 300ms ease">
                   <Box className="edit__title__meta">
                     <h4 className="edit__heading">
-                      <Link href={`editarticles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }} _focus={{boxShadow: "none"}}>
+                      <Link to={`${a._id}`}>
                         {a.title}
                       </Link>
                     </h4>
@@ -111,7 +110,7 @@ const handleDelete = async (e) => {
                     </Box>
                   </Box>
                   <Flex className="edit__action" columnGap="0.5rem">
-                    <Link className="edit__btn" href={`editarticles/${a._id}`} textAlign="center" _hover={{textDecoration: "none"}} >
+                    <Link className="edit__btn" to={`${a._id}`} >
                       <Button 
                         className="edit__btn" 
                         border="none"
