@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext} from 'react';
-import {Helmet} from "react-helmet"
+import { Helmet } from 'react-helmet-async';
 import { css } from "@emotion/react";
 import DotLoader from "react-spinners/DotLoader";
 import {

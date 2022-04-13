@@ -2,6 +2,7 @@ import './App.css';
 import "./fonts.css"
 import { useState } from 'react';
 import { Routes, Route, useSearchParams, useLocation } from "react-router-dom";
+import { Helmet } from 'react-helmet-async';
 import {Container} from "@chakra-ui/react"
 import Home from "./Components/Home"
 import ArticleList from './Components/ArticleList';

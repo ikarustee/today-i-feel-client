@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react';
-import {Helmet} from "react-helmet"
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { ArticleContext } from '../Contexts/ArticleContext';
 import { css } from "@emotion/react";

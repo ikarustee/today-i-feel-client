@@ -369,7 +369,7 @@ main {
 }
 .tagcloud {
   background-color: #598EFF;
-  border-radius:1rem;
+  border-radius:0.5rem;
   margin:2rem auto;
   padding: 1rem;
   width: 100%;
