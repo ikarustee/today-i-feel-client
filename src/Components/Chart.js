@@ -1,24 +1,17 @@
 import React, {useState, useEffect} from 'react'
-import { Radar, RadarChart, PolarGrid, Legend, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
+import { Radar, RadarChart, PolarGrid, Legend, PolarAngleAxis, ResponsiveContainer } from 'recharts';
 import {Box, Button, Container, Heading, ScaleFade, useDisclosure} from "@chakra-ui/react"
 import axios from 'axios';
-// import staticDATA from "../helper/tagStats.json"
-
-// let tagStats = staticDATA
 
 const Chart = () => {
     const URL = "https://todayifeel-server.herokuapp.com/tags";
-    // const [initialData, setInitialData] = useState([])
     const [chartData, setChartData] = useState([])
-    const [tagData, setTagData] = useState([])
     const { isOpen, onToggle } = useDisclosure()
 
     async function getTags() {
         try {
             const response = await axios.get(URL)
-            // .then((response) => setTagData(response.data))
             const test = await response.data
-            // console.log(test)
             const tagStats = test.map((t) => {
                 return {
                     name: t.name,
@@ -27,7 +20,6 @@ const Chart = () => {
                 }
             })
             setChartData(tagStats.slice(0,8))
-            // console.log(tagStats)
         } catch (error) {
             console.log(error)
         }
@@ -73,7 +65,6 @@ const Chart = () => {
             <RadarChart cx="50%" cy="50%" outerRadius={100} data={chartData}>
                 <PolarGrid />
                 <PolarAngleAxis dataKey="name" />
-                {/* <PolarRadiusAxis angle={50} domain={[0, 100]} /> */}
                 <Radar name="all time" dataKey="allTime" stroke="#4782ff" fill="#5C90FF" fillOpacity={0.3} />
                 <Radar name="weekly" dataKey="weekly" stroke="#9922DD" fill="#AB4AE3" fillOpacity={0.6} />
                 <Legend />

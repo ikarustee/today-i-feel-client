@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext} from 'react'
-import {useSearchParams, Link, createSearchParams, useParams, useLocation} from "react-router-dom"
+import {useSearchParams, Link} from "react-router-dom"
 import { Helmet } from 'react-helmet';
 import { ArticleContext } from '../Contexts/ArticleContext';
 import Chart from "./Chart"
@@ -9,11 +9,9 @@ import {
   Container,
   Flex,
   Heading,
-  Image,
   Tag,
   Text,
   Divider,
-  VStack,
   useColorMode,
   useColorModeValue
 } from '@chakra-ui/react';
@@ -25,12 +23,10 @@ import { BiRightArrowAlt } from "react-icons/bi";
 
 
 const SearchResults = (props) => {
-    const {articles, isLoading, getArticles, setIsloading} = useContext(ArticleContext)
+    const {articles, isLoading, getArticles} = useContext(ArticleContext)
     const [searchParams, setSearchParams] = useSearchParams();
     const [color, setColor] = useState("#5C90FF");
     const [searchResult, setSearchResult] = useState([]);
-    // const [ voteResults, setVoteResult] = useState(props.voteResult)
-    // const [isLoading, setIsLoading] = useState(true);
     const bg = useColorModeValue('blue.300', 'blue.900')
     const fontColor = useColorModeValue('white', 'gray.300')
     
@@ -44,50 +40,33 @@ const SearchResults = (props) => {
   
     let searchTags = searchParams.get("q").split(",")
     let arr = searchTags.map(tag=>{return tag.trim()})
-    // console.log(arr)
     searchTags = arr.join(",")
-    console.log(searchTags)
-    // console.log(searchParams.get("q"))
     let sanitizedSearchTags = searchTags.split(",").slice(1).join(" ")
-    // console.log(sanitizedSearchTags)
     async function getSearchResult(){
-      // setIsLoading(true);
-      console.log(searchParams.get("q").split(" ").join(",").split(","))
       if(searchParams.get("q").split(" ").join(",").split(",")[0] === "search"){
         let url = "https://todayifeel-server.herokuapp.com/search/"+searchTags;
         let response = await axios.get(url,{withCredentials:true});
-        // console.log(response.data);
         setSearchResult(response.data);
       } else if(searchParams.get("q").split(" ").join(",").split(",")[0] === "vote"){
         let arr = searchTags.split(",")
         arr.shift()
         arr.unshift("search")
         arr.join(",")
-        // console.log(arr.join(","))
         let url = "https://todayifeel-server.herokuapp.com/search/"+arr.join(",");
         let response = await axios.get(url,{withCredentials:true});
-        // console.log(response.data);
         setSearchResult(response.data);
       } else if(searchParams.get("q").split(" ").join(",").split(",")[0] === "voted"){
         let arr = searchTags.split(",")
         arr.shift()
         arr.unshift("search")
         arr.join(",")
-        // console.log(arr.join(","))
         let url = "https://todayifeel-server.herokuapp.com/search/"+arr.join(",");
         let response = await axios.get(url,{withCredentials:true});
-        // console.log(response.data);
         setSearchResult(response.data);
       }
-      
-      // setIsLoading(false);
-      // setTagURL(url)
   }
   useEffect(() => {
     getArticles(decodeURI(searchParams.get("q").split(" ").join(",")))
-    // console.log(searchParams.get("q").split(" ").join(","))
-    // console.log(props.voteResult)
-    
     getSearchResult();
   },[searchParams])
 
@@ -107,7 +86,6 @@ const SearchResults = (props) => {
         {searchResult
           .filter((a) => a.visible)
           .map((a) => {
-            const excerpt = Object.values(a.body)
             return(
               <Box
                 className="single" bg={colorMode === "light" ? "white" : "gray.700"} key={`articles/${a._id}`} boxShadow={'lg'} m="0" padding="2rem 1rem" borderRadius={8} _hover={{boxShadow: "xl"}} transition="all 300ms ease">
@@ -137,7 +115,6 @@ const SearchResults = (props) => {
                 </Text>
                 <Link to={`/articles/${a._id}`} > 
                   <Button 
-                      // className="readmore__btn" 
                       borderColor="blue.300" 
                       borderWidth="2px" 
                       color="blue.300" 
@@ -194,13 +171,5 @@ const SearchResults = (props) => {
       </>
     )}
   }
-  // .filter((a) => a.tags.includes(searchParams.get("q").split("+").join(" ")))
 
 export default SearchResults
-
-    // let user = searchParams.get("user");
-
-    // const [filteredArticles, setFilteredArticles] = useState()
-    // const foundArticles = articles.filter((a) => a.tags.includes(keyword))
-    // console.log(searchParams.get("q"))
-    // console.log("Search results page")

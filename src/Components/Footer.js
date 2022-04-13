@@ -1,6 +1,5 @@
 import {
     Box,
-    chakra,
     Container,
     Flex,
     Link,
@@ -8,7 +7,6 @@ import {
     Text,
     useColorMode,
     useColorModeValue,
-    VisuallyHidden,
     Hide
   } from '@chakra-ui/react';
 import logoNegative from "../img/logoNegative@2x.png"

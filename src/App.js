@@ -1,14 +1,12 @@
 import './App.css';
 import "./fonts.css"
 import { useState } from 'react';
-import { Routes, Route, Link, useSearchParams, useLocation } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { Routes, Route, useSearchParams, useLocation } from "react-router-dom";
 import {Container} from "@chakra-ui/react"
 import Home from "./Components/Home"
 import ArticleList from './Components/ArticleList';
 import SingleArticle from './Components/SingleArticle';
 import SearchResults from './Components/SearchResults';
-import Chart from './Components/Chart';
 import Login from './Components/Login';
 import About from './Components/About';
 import NewArticle from './Components/NewArticle';
@@ -55,13 +53,7 @@ function App() {
           <Route path="/reportedarticles" element={<ReportedArticleList />} />
           <Route path="/reportedarticles/:id" element={<ReportedArticle/>} />
           <Route path="/search" element={<SearchResults />} />
-          {/* <Route path="/chart" element={<Chart />} /> */}
         </Routes>
-        {/* <Routes>
-          <Route path="search">
-            <Route path=":searchparams" element={<ArticleSuggestions />} />
-          </Route>
-        </Routes> */}
       </main>
       </Container>
       <Footer />
@@ -70,5 +62,3 @@ function App() {
 }
 
 export default App;
-
-// <img src={logoLight} alt="" />

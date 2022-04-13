@@ -1,26 +1,18 @@
 import {
     Flex,
     Box,
-    Checkbox,
     FormControl,
-    FormLabel,
-    FormErrorMessage,
-    FormHelperText,
-    Input,
+     Input,
     Textarea,
     Stack,
-    Link,
     Button,
     Heading,
-    Text,
-    useColorModeValue,
   } from '@chakra-ui/react';
   import axios from 'axios';
   import { useEffect, useState,useContext } from 'react';
   import { useNavigate } from 'react-router-dom';
   import { ArticleContext } from '../Contexts/ArticleContext'
   import { useParams } from 'react-router-dom';
-  import { FaCommentDollar } from 'react-icons/fa';
   import DotLoader from "react-spinners/DotLoader";
   import { css } from "@emotion/react";
   import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
@@ -36,7 +28,6 @@ import {
       tags: "",
       url: ""
     })
-    const userInputEmpty = JSON.stringify(userInput).length
     const [color, setColor] = useState("#5C90FF");
     const override = css`
     display: block;
@@ -56,28 +47,21 @@ import {
     
     function updateArticle () {
       const {title, body, tags, url, visible} = userInput
-      console.log(userInput)
       let tagArray = tags.split(",")
       tagArray = tagArray.map(el=>el.trim())
-      console.log(title,tagArray)
-    
       let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
       axios.put(server,{title:title,body:body, tags:tagArray, url:url, visible:visible}).then((response)=> {
-            console.log(response)
              navigate("/adminDashboard")
           })
     }
     function toggleVisible(){
       let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
       axios.put(server,{...thisArticle,visible:!thisArticle.visible}).then((response)=> {
-            console.log(response)
-            // navigate("/reportedarticles")
             getArticles();
           })
         }
     async function verifyTest(){
         let response = await axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true})
-        console.log(response.data !== "OK")
           if (response.data !== "OK"){
               alert("Please Login First!")
               navigate("/login");
@@ -85,13 +69,11 @@ import {
     }
     useEffect(()=>{
       getArticles();
-      // getData();
       verifyTest();
     },[])
     useEffect(()=>{
         
         if(thisArticle){
-            console.log(thisArticle.tags)
             setUserInput({
             title: thisArticle.title,
             body: thisArticle.body,
@@ -200,5 +182,4 @@ import {
 
         )}
     </> )
-// }
 }

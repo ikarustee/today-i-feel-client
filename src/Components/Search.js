@@ -1,22 +1,14 @@
-import React, {useState, useEffect, useContext} from 'react'
-import { Navigate, useNavigate, useSearchParams, createSearchParams } from "react-router-dom";
+import React from 'react'
+import {useNavigate } from "react-router-dom";
 import {
   Button,
   FormControl,
   Input,
 } from '@chakra-ui/react';
-import { ArticleContext } from '../Contexts/ArticleContext';
+
 
 
 const Search = () => {
-    const {article, loading} = useContext(ArticleContext)
-    const [newSearchParams, setNewSearchParams] = useState([]) 
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [userInput, setUserinput] = useState("")
-    const [filteredArticles, setFilteredArticles] = useState()
-    
-    // console.log(foundArticles)
-    
     const navigate = useNavigate(); 
     
     const handleSearch = (event) => {
@@ -24,7 +16,6 @@ const Search = () => {
         if(!event.target.tag.value) {
             return alert("Please enter a word")
         } else {
-            console.log(event.target.tag.value)
             navigate({
               pathname: '/search',
               search: `q=${encodeURI("search,"+event.target.tag.value)}`,
@@ -32,20 +23,10 @@ const Search = () => {
             event.target.tag.value = "";
           }
         }
-        // console.log(keyword.split(" ").join("+"))
-        // const foundArticles = article.filter((a) => a.tags.includes(keyword))   
-        // setFilteredArticles(foundArticles)
-        // setSearchParams({ q: keyword  });
-        // encodeURI("toys for dogs")
-        // navigate("/search")
-        // encodeURI(keyword)
-
-
 
   return (
     <>
         <div className="tagsearch">
-        {/* <p>Selected: | Tag name: {singleTag} | Tag count: {countTags}</p> */}
         <FormControl>
           <h4 className="heading--center">Or search for other mental health terms that interest you</h4>
           <form id="search" onSubmit={handleSearch}>
@@ -73,12 +54,6 @@ const Search = () => {
           </form>
         </FormControl>
         <div>
-        {/* {filteredArticles && filteredArticles
-            .map((a) => {
-                return (
-                    <p  key={a.id}>{a.title}</p>
-            )
-        })} */}
     </div>
       </div>
     </>

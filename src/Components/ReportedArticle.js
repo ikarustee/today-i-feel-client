@@ -1,19 +1,12 @@
 import {
     Flex,
     Box,
-    Checkbox,
     FormControl,
-    FormLabel,
-    FormErrorMessage,
-    FormHelperText,
     Input,
     Textarea,
     Stack,
-    Link,
     Button,
     Heading,
-    Text,
-    useColorModeValue,
     useColorMode
   } from '@chakra-ui/react';
   import axios from 'axios';
@@ -21,19 +14,15 @@ import {
   import { useNavigate } from 'react-router-dom';
   import { ArticleContext } from '../Contexts/ArticleContext'
   import { useParams } from 'react-router-dom';
-  import { FaCommentDollar } from 'react-icons/fa';
   import DotLoader from "react-spinners/DotLoader";
   import { css } from "@emotion/react";
-import ReactMarkdown from 'react-markdown';
-import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
-import {readableDate} from "../helper/dateformatter"
+  import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
   export default function EditSingleArticle() {
     
     const {id} = useParams()
     const {articles, isLoading, getArticles} = useContext(ArticleContext)
     const thisArticle = articles.find((a) => a.id === id)
     const [visible, setVisible] = useState(true)
-    // const [isLoading, setIsLoading] = useState(true)
     const { colorMode, toggleColorMode } = useColorMode()
     const [userInput, setUserInput] = useState({
       title: "",
@@ -42,8 +31,6 @@ import {readableDate} from "../helper/dateformatter"
       url: "",
       visible:true
     })
-
-    const userInputEmpty = JSON.stringify(userInput).length
     const [color, setColor] = useState("#5C90FF");
     const override = css`
     display: block;
@@ -52,7 +39,6 @@ import {readableDate} from "../helper/dateformatter"
   `;
    
     const navigate = useNavigate();
-
     
     const handleChange = (e) => {
       if(e.target.name === "visible"){
@@ -65,52 +51,36 @@ import {readableDate} from "../helper/dateformatter"
         setUserInput({
           ...userInput,
           [e.target.name]: e.target.value,
-          // visible: visible
         })
       }
-      
-      
-      console.log(userInput)
     }
     
     function updateArticle () {
       const {title, body, tags, url} = userInput
-      // console.log(userInput)
-      // console.log(tags)
       let tagArray = tags.split(",")
       tagArray = tagArray.map(el=>el.trim())
-      console.log({title:title,body:body, tags:tagArray, url:url})
-    
       let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
       axios.put(server,{title:title,body:body, tags:tagArray, url:url}).then((response)=> {
-            console.log(response)
-            // deleteReport()
             getArticles();
           })
     }
     function deleteReport(index){
       let array = thisArticle.reports;
       array.splice(index,1)
-      console.log(array)
       let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
       axios.put(server,{...thisArticle,report:array}).then((response)=>{
-        console.log(response)
-        // navigate("/reportedarticles")
         getArticles();
       })
     }
     function toggleVisible(){
       let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
       axios.put(server,{...thisArticle,visible:!thisArticle.visible}).then((response)=> {
-            console.log(response)
-            // navigate("/reportedarticles")
             getArticles();
           })
     
     }
     async function verifyTest(){
         let response = await axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true})
-        console.log(response.data !== "OK")
           if (response.data !== "OK"){
               alert("Please Login First!")
               navigate("/login");
@@ -121,9 +91,7 @@ import {readableDate} from "../helper/dateformatter"
       getArticles();
     },[])
     useEffect(()=>{
-        
         if(thisArticle){
-            console.log(thisArticle)
             setUserInput({
               title: thisArticle.title,
               body: thisArticle.body,
@@ -132,8 +100,6 @@ import {readableDate} from "../helper/dateformatter"
               visible: thisArticle.visible
           })
           setVisible(thisArticle.visible)
-          let reportsArr = thisArticle.reports
-          console.log(reportsArr)
       }
     },[thisArticle])
 
@@ -168,7 +134,6 @@ import {readableDate} from "../helper/dateformatter"
                         width="100%"
                         paddingLeft="15px"
                         paddingTop="15px"
-                        padingBottom="15px"
                         margin="10px"
                         boxShadow={'lg'} 
                         bg={colorMode === "light" ? "white" : "gray.700"}
@@ -182,7 +147,6 @@ import {readableDate} from "../helper/dateformatter"
                         borderColor="blue.300"
                         borderWidth="2px" 
                         color="blue.300"
-                        // bg="white"
                         fontWeight="400"
                         height="auto"
                         marginBottom="10px"
@@ -205,7 +169,6 @@ import {readableDate} from "../helper/dateformatter"
                     <Button className="reported" onClick={toggleVisible} borderColor="blue.300"
                     borderWidth="2px" 
                     color="blue.300"
-                    // bg="white"
                     fontWeight="400"
                     height="28.8px"
                     marginLeft= "20px"
@@ -260,7 +223,6 @@ import {readableDate} from "../helper/dateformatter"
                     borderColor="blue.300"
                     borderWidth="2px" 
                     color="blue.300"
-                    // bg="white"
                     fontWeight="400"
                     height="40px"
                     margin-top= "0.5rem"
@@ -278,5 +240,4 @@ import {readableDate} from "../helper/dateformatter"
 
         )}
     </> )
-// }
 }

@@ -6,12 +6,9 @@ import {
   Box,
   Button,
   Heading,
-  Image,
-  Text,
   Flex,
   Divider,
   Container,
-  VStack,
   useColorMode
 } from '@chakra-ui/react';
 import axios from 'axios';
@@ -19,7 +16,7 @@ import {useNavigate, Link} from "react-router-dom"
 import {Helmet} from "react-helmet"
 import { ArticleContext } from '../Contexts/ArticleContext';
 import {readableDate} from "../helper/dateformatter"
-import { BiEditAlt, BiEraser } from "react-icons/bi";
+import { BiEditAlt } from "react-icons/bi";
 import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
 
 const EditArticleList = ({p}) => {
@@ -36,32 +33,21 @@ const EditArticleList = ({p}) => {
   margin: 0 auto;
   border-color: red;
 `;
-// async function getData(){
-//     setIsLoading(true);
-//     let response = await axios.get("https://todayifeel-server.herokuapp.com/reports")
-//     setArticles(response.data)
-//     console.log(response.data)
-//     setIsLoading(false)
-// }
+
 function collectReports(){
   setIsLoading(true)
   let arr = [];
   for(let i = 0; i< articles.length;i++){
-    // console.log(JSON.stringify(articles[i].reports).length)
       if(JSON.stringify(articles[i].reports).length > 2){
-        // console.log(articles[i].reports.length)
             arr.push(articles[i])
-            console.log(arr)
       }
   }
-  console.log(arr)
   setReportedArticles(arr)
   setIsLoading(false)
 }
 useEffect(()=>{
     async function verify(){
         axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true}).then((response)=>{
-            console.log(response.data !== "OK")
             if (response.data !== "OK"){
                 alert("Please Login First!")
                 navigate("/login");
@@ -90,7 +76,6 @@ useEffect(()=>{
       <Box className="articles__list edit" gap="1rem">
       {reportedArticles
         .map((a) => {
-              const excerpt = Object.values(a.body)
               return (
                 <Box 
                 key={a._id} 
@@ -121,13 +106,10 @@ useEffect(()=>{
                         bg="transparent"
                         fontSize="18px"
                         fontWeight="300"
-                        // width="20px"
-                        // height="20px"
                         padding="0"
                         _hover={{color: `${colorMode === "light" ? "blue.300" : "gray.400"}`}} 
                         _active={{color: `${colorMode === "light" ? "blue.300" : "gray.400"}`}} 
                         _focus={{color: `${colorMode === "light" ? "blue.300" : "gray.400"}`}} 
-                        // _hover={{color: "white"}} 
                         variant='outline'>
                           <BiEditAlt id={a._id} color="red.600" />
                       </Button>

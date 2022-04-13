@@ -4,27 +4,22 @@ import {
     FormControl,
     FormLabel,
     Input,
-    Checkbox,
     Stack,
-    Link,
     Button,
     Heading,
-    Text,
     useColorModeValue,
   } from '@chakra-ui/react';
   import axios from 'axios';
   import { useNavigate } from 'react-router-dom';
-import { Label } from 'recharts';
-  
+ 
   export default function SimpleCard() {
     const navigate = useNavigate();
+   
     async function signupUser(){
       document.getElementById("emailError").value = "";
       document.getElementById("passwordError").value = "";
       const email = document.getElementById("email").value;
-      console.log(email)
       const password = document.getElementById("password").value;
-      console.log(password)
       let url = "https://todayifeel-server.herokuapp.com/user"
       let response = await axios.post(url,{email:email,password:password},{withCredentials:true});
       let data = response.data;
@@ -35,12 +30,9 @@ import { Label } from 'recharts';
       } else {
         navigate("/adminDashboard");
       }
-      
-      console.log(response)
     }
     return (
       <Flex
-
         align={'center'}
         justify={'center'}
         bg={useColorModeValue('gray.50', 'gray.800')}>
@@ -69,8 +61,6 @@ import { Label } from 'recharts';
                   direction={{ base: 'column', sm: 'row' }}
                   align={'start'}
                   justify={'space-between'}>
-                  {/* <Checkbox>Remember me</Checkbox> */}
-                  {/* <Link color={'blue.400'} href={"/signin"}>Create a new Account?</Link> */}
                 </Stack>
                 <Button
                   bg={'blue.400'}

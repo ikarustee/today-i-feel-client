@@ -7,26 +7,17 @@ import {
     Heading,
     useColorModeValue,
   } from '@chakra-ui/react';
-  import axios from 'axios';
-import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from "react-helmet";
   
-  export default function SimpleCard() {
+export default function SimpleCard() {
     const navigate = useNavigate();
-    // const [verify, setVerify] = useState("");
-    function logoutUser(){
-      let url = "https://todayifeel-server.herokuapp.com/logout"
-      axios.get(url,{withCredentials:true}).then((response)=> {
-          navigate("/");
-        console.log(response)
-        })
-    }
    
     useEffect(()=>{
         async function verifyTest(){
             axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true}).then((response)=>{
-                console.log(response.data !== "OK")
                 if (response.data !== "OK"){
                     alert("Please Login First!")
                     navigate("/login");
@@ -38,7 +29,7 @@ import { Helmet } from "react-helmet";
     },[])
     return (
       <Container maxW={'800px'} className="admin" p="0">
-      <Helmet><title>Today I Feel | Admin Dashboard</title></Helmet>  
+        <Helmet><title>Today I Feel | Admin Dashboard</title></Helmet>  
         <Flex
         bg={useColorModeValue('gray.50', 'gray.800')}
         width="100%"
@@ -112,7 +103,7 @@ import { Helmet } from "react-helmet";
                   </Button>
                  </Stack>
               </Box>
-      </Flex>
+        </Flex>
       </Container>
 
     );

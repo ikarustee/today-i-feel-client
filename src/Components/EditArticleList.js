@@ -2,17 +2,13 @@ import React, { useState, useEffect, useContext} from 'react';
 import {Helmet} from "react-helmet"
 import { css } from "@emotion/react";
 import DotLoader from "react-spinners/DotLoader";
-
 import {
   Box,
   Button,
   Flex,
   Heading,
-  Image,
-  Text,
   Divider,
   Container,
-  VStack,
   useColorMode
 } from '@chakra-ui/react';
 import axios from 'axios';
@@ -23,9 +19,7 @@ import { BiEditAlt, BiEraser } from "react-icons/bi";
 import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
 
 const EditArticleList = ({p}) => {
-//   const [articles,setArticle] = useState([])
   const {articles, isLoading, getArticles} = useContext(ArticleContext)
-//   const [isLoading, setIsLoading] = useState(false)
   const [color, setColor] = useState("#5C90FF");
   const { colorMode, toggleColorMode } = useColorMode()
   const navigate = useNavigate();
@@ -38,28 +32,19 @@ const EditArticleList = ({p}) => {
 
 const handleDelete = async (e) => {
   const id = e.target.id
-  console.log(id)
-  // alert("Clicked") 
   window.confirm("Really delete article?")
-  // articles.filter((a) => a._id != id)
   let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
   try {
     const res = await axios.delete(server)
-    // alert("Article deleted")
-    console.log(res)
-    // navigate("/editarticles")
   } catch (error) {
     console.log(error)
   }
-  // window.location.reload();
-
   getArticles();
 }  
 
   useEffect(()=>{
       async function verifyTest(){
           axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true}).then((response)=>{
-              console.log(response.data !== "OK")
               if (response.data !== "OK"){
                   alert("Please Login First!")
                   navigate("/login");
@@ -67,14 +52,8 @@ const handleDelete = async (e) => {
               })
       }
       verifyTest();
-     
-      console.log(articles)
+      getArticles();
   },[])
-
-  useEffect(() => {
-    getArticles();
-  },[])
-
 
   return (
     <>
@@ -90,8 +69,6 @@ const handleDelete = async (e) => {
       <Divider marginTop="5"  marginBottom="2rem"/>
       <Box className="articles__list edit" gap="1rem">
       {articles.map((a) => {
-              const excerpt = Object.values(a.body)
-
               return (
                 <Box 
                   key={a._id} 
@@ -122,13 +99,10 @@ const handleDelete = async (e) => {
                         bg="transparent"
                         fontSize="18px"
                         fontWeight="300"
-                        // width="20px"
-                        // height="20px"
                         padding="0"
                         _hover={{color: `${colorMode === "light" ? "blue.300" : "gray.400"}`}} 
                         _active={{color: `${colorMode === "light" ? "blue.300" : "gray.400"}`}} 
                         _focus={{color: `${colorMode === "light" ? "blue.300" : "gray.400"}`}} 
-                        // _hover={{color: "white"}} 
                         variant='outline'>
                           <BiEditAlt id={a._id} color="red.600" />
                       </Button>
