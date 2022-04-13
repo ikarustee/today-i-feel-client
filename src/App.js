@@ -2,6 +2,7 @@ import './App.css';
 import "./fonts.css"
 import { useState } from 'react';
 import { Routes, Route, Link, useSearchParams, useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import {Container} from "@chakra-ui/react"
 import Home from "./Components/Home"
 import ArticleList from './Components/ArticleList';
@@ -44,6 +45,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/articles" element={<ArticleList />} />
           <Route path="/articles/:id" element={<SingleArticle />} />
+          <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/adminDashboard" element={<AdminDashboard />} />
@@ -54,7 +56,6 @@ function App() {
           <Route path="/reportedarticles/:id" element={<ReportedArticle/>} />
           <Route path="/search" element={<SearchResults />} />
           {/* <Route path="/chart" element={<Chart />} /> */}
-          <Route path="/about" element={<About />} />
         </Routes>
         {/* <Routes>
           <Route path="search">

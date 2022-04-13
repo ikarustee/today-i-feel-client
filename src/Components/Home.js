@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import { Helmet } from "react-helmet";
 import { useNavigate, useLocation, useSearchParams, createSearchParams } from "react-router-dom";
 import axios from "axios";
 import Search from './Search';
@@ -115,7 +116,8 @@ const Home = (props) => {
 
   
   return (
-    <div id="home">  
+    <div id="home">
+      <Helmet><title>Today I Feel | You're not alone</title></Helmet>  
         <div className="title">
           <Box className="bg__morph home" flexBasis={{base: "100%", md: "50%"}}></Box>
           <Heading as='h1' className="teaser linear-wipe" textAlign={[ 'center', 'center' ]} color='blue.300' >Share your mood.<br /> Take a deep breath. <br />Take your time.</Heading>

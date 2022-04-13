@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 import {useNavigate, Link} from "react-router-dom"
+import {Helmet} from "react-helmet"
 import { ArticleContext } from '../Contexts/ArticleContext';
 import {readableDate} from "../helper/dateformatter"
 
@@ -75,10 +76,12 @@ useEffect(()=>{
     <>
     {isLoading ? (
       <Container className="loader" maxW={'7xl'}>
+        <Helmet><title>Today I Feel | Reported Articles</title></Helmet>
         <DotLoader color={color} css={override} loading={!isLoading} size={60} />
       </Container>
     ) : (
      <Container maxW={'800px'} className="article__list" p="0">
+      <Helmet><title>Today I Feel | Reported Articles</title></Helmet>
       <Heading as="h1" color="blue.300">Reported articles</Heading>
       <Divider marginTop="5"  marginBottom="2rem"/>
       <Box className="articles__list edit" gap="1rem">

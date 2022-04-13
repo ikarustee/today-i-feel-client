@@ -826,8 +826,7 @@ a.info__link:hover::after {
 .footer__links a.link {
   margin-left: 0;
 }
-.footer__links a,
-.copyright {
+.footer__links a {
   font-size:12px;
 }
 .footer__nav a {
