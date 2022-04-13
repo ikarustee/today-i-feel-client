@@ -23,6 +23,7 @@ import {
   import { FaCommentDollar } from 'react-icons/fa';
   import DotLoader from "react-spinners/DotLoader";
   import { css } from "@emotion/react";
+  import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
   export default function EditSingleArticle() {
     
     const {id} = useParams()
@@ -115,7 +116,22 @@ import {
             >
             <Stack width="85%" spacing={8} mx={'auto'} py={6} px={6} maxWidth="600px">
                 <Stack align={'base'}>
-                <Heading fontSize={'2xl'} color="blue.300" m="0 0 2rem" textAlign="left">Edit article</Heading>
+                <Box className="edit__title__meta">
+                <Box className="meta" display="flex" alignItems="center">
+                    <Heading fontSize={'2xl'} color="blue.300" m="0 " textAlign="left">Edit article:</Heading>
+                    <Button className="reported" onClick={toggleVisible} borderColor="blue.300"
+                    borderWidth="2px" 
+                    color="blue.300"
+                    // bg="white"
+                    fontWeight="400"
+                    height="28.8px"
+                    marginLeft= "20px"
+                    padding="4px 10px"
+                    width="28.8px"
+                    _hover={{bg: "blue.300", color: "white"}} 
+                    variant='solid' >{thisArticle.visible ? (<RiEyeLine className="visible" />) : (<RiEyeCloseLine className="visible not" />)}</Button>
+                  </Box>
+                  </Box>
                 </Stack>
                 <Stack spacing={4}>
                 <FormControl id="title" isRequired >
@@ -157,24 +173,6 @@ import {
                         fontWeight="400"
                     />
                 </FormControl>
-                
-                <span className="reported">Visible: {thisArticle.visible ? "🟢" : "🔴"}</span>
-                    <Button
-                    onClick={toggleVisible}
-                    borderColor="blue.300"
-                    borderWidth="2px" 
-                    color="blue.300"
-                    bg="white"
-                    fontWeight="400"
-                    height="auto"
-                    margin="0 auto"
-                    padding="4px 10px"
-                    width="150px"
-                    _hover={{bg: "blue.300", color: "white"}} 
-                    variant='solid' 
-                    >
-                    toggle visibilty
-                    </Button>
                 <Stack spacing={10}>
                 
                     <Button
@@ -182,7 +180,7 @@ import {
                     borderColor="blue.300"
                     borderWidth="2px" 
                     color="blue.300"
-                    bg="white"
+                    
                     fontWeight="400"
                     height="auto"
                     margin="0 auto"

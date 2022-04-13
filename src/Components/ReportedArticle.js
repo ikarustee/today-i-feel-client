@@ -14,6 +14,7 @@ import {
     Heading,
     Text,
     useColorModeValue,
+    useColorMode
   } from '@chakra-ui/react';
   import axios from 'axios';
   import { useEffect, useState,useContext } from 'react';
@@ -24,6 +25,8 @@ import {
   import DotLoader from "react-spinners/DotLoader";
   import { css } from "@emotion/react";
 import ReactMarkdown from 'react-markdown';
+import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
+import {readableDate} from "../helper/dateformatter"
   export default function EditSingleArticle() {
     
     const {id} = useParams()
@@ -31,7 +34,7 @@ import ReactMarkdown from 'react-markdown';
     const thisArticle = articles.find((a) => a.id === id)
     const [visible, setVisible] = useState(true)
     // const [isLoading, setIsLoading] = useState(true)
-   
+    const { colorMode, toggleColorMode } = useColorMode()
     const [userInput, setUserInput] = useState({
       title: "",
       body: "",
@@ -150,52 +153,68 @@ import ReactMarkdown from 'react-markdown';
                 <Heading fontSize={'2xl'} color="blue.300" m="0 0 2rem" textAlign="left">Check report</Heading>
                 </Stack>
                 <Stack spacing={4}>
-                <Heading fontSize={'2xl'} color="blue.300" m="0 0 2rem" textAlign="left">Reports:</Heading>
-                {/* {thisArticle.reports?.length >=1 ? ( */}
+                <Heading fontSize={'2xl'} color="blue.300" m="0 0 1rem" textAlign="left">Reports:</Heading>
                 <Box display="flex"
                   flexDirection={{ base: 'row', sm: 'column' }}
-                  // justifyContent="space-between"
                   flexWrap="wrap"
                   >
                   {thisArticle.reports.length >=1 && thisArticle.reports.map((a,index) => {
                     
                     return (
+                      
                       <Box key={index}
                         display="flex"
                         flexDirection='column'
-                        justifyContent="center"
-                        alignItems="center"
-                        flexWrap="wrap"
-                        width="200px"
-                        borderColor="blue.300"
-                        borderWidth="2px"
-                        borderRadius="6px"
+                        width="100%"
+                        paddingLeft="15px"
+                        paddingTop="15px"
+                        padingBottom="15px"
                         margin="10px"
+                        boxShadow={'lg'} 
+                        bg={colorMode === "light" ? "white" : "gray.700"}
                       >
-                        <Heading fontSize={'l'} color="blue.300" m="0 0 2rem"  marginTop="10px">{a.reportReason}</Heading>
+                        <Heading fontSize={'xl'} color="blue.300" marginBottom="5px"> Report:{` ${index+1}`}</Heading>
+                        <Heading fontSize={'l'} color="blue.300" > Reason:</Heading>
+                        <p>{a.reportReason}</p>
+                        <Heading fontSize={'l'} color="blue.300" > Message:</Heading>
                         <p fontSize={'l'}>{a.reportComment}</p>
                         <Button onClick={()=>deleteReport(index)}
                         borderColor="blue.300"
                         borderWidth="2px" 
                         color="blue.300"
-                        bg="white"
+                        // bg="white"
                         fontWeight="400"
                         height="auto"
-                        margin="0 auto"
                         marginBottom="10px"
                         marginTop="10px"
                         padding="4px 10px"
-                        width="150px"
+                        width="100px"
+                        maxHeight="40px"
                         _hover={{bg: "blue.300", color: "white"}} 
                         variant='solid' >
-                          Report closed
+                          resolved
                         </Button>
                       </Box>
-
                     )
                   })}
                   </Box>
-                <Heading fontSize={'xl'} color="blue.300" m="0 0 2rem" textAlign="left">article:</Heading>
+                
+                <Box className="edit__title__meta">
+                <Box className="meta" display="flex" alignItems="center">
+                    <Heading fontSize={'2xl'} color="blue.300" m="0 " textAlign="left">article:</Heading>
+                    <Button className="reported" onClick={toggleVisible} borderColor="blue.300"
+                    borderWidth="2px" 
+                    color="blue.300"
+                    // bg="white"
+                    fontWeight="400"
+                    height="28.8px"
+                    marginLeft= "20px"
+                    padding="4px 10px"
+                    width="28.8px"
+                    _hover={{bg: "blue.300", color: "white"}} 
+                    variant='solid' >{thisArticle.visible ? (<RiEyeLine className="visible" />) : (<RiEyeCloseLine className="visible not" />)}</Button>
+                  </Box>
+                  </Box>
                 <FormControl id="title" isRequired >
                     <Input
                     onChange={handleChange} 
@@ -235,54 +254,23 @@ import ReactMarkdown from 'react-markdown';
                       fontWeight="400"
                   />
                 </FormControl>
-                {/* <FormControl>
-                  <Checkbox
-                    id="visible"
-                    name="visible"
-                    value={userInput.visible}
-                    size='lg'
-                    onChange={handleChange}
-                    isChecked={visible}
-                    // checked={userInput.visible}
-                  />
-                  <label htmlFor="visible">Visible</label>
-                </FormControl> */}
-                <Stack spacing={10}>
+                <Stack display="flex" justifyContent="space-evenly" flexDirection="row">
                   <Button
                     onClick={updateArticle}
                     borderColor="blue.300"
                     borderWidth="2px" 
                     color="blue.300"
-                    bg="white"
+                    // bg="white"
                     fontWeight="400"
-                    height="auto"
-                    margin="0 auto"
+                    height="40px"
+                    margin-top= "0.5rem"
                     padding="4px 10px"
                     width="150px"
                     _hover={{bg: "blue.300", color: "white"}} 
                     variant='solid' 
                     >
                     update
-                    </Button>
-                    <span className="reported">Visible: {thisArticle.visible ? "🟢" : "🔴"}</span>
-                    <Button
-                    onClick={toggleVisible}
-                    borderColor="blue.300"
-                    borderWidth="2px" 
-                    color="blue.300"
-                    bg="white"
-                    fontWeight="400"
-                    height="auto"
-                    margin="0 auto"
-                    padding="4px 10px"
-                    width="150px"
-                    _hover={{bg: "blue.300", color: "white"}} 
-                    variant='solid' 
-                    >
-                    toggle visibilty
-                    </Button>
-
-             
+                    </Button>             
                 </Stack>
                 </Stack>
             </Stack>
