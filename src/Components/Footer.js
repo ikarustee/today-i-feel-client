@@ -51,7 +51,8 @@ import StickyNavHolder from "./StickyNavHolder"
             borderTopWidth={1}
             borderStyle={'solid'}
             borderColor={useColorModeValue('gray.200', 'gray.700')}
-            bg={useColorModeValue('blue.300', 'gray.500')}
+            bg={useColorModeValue('gray.400', 'gray.700')}
+            
           >
           <Container
             className="footer__nav"
@@ -74,8 +75,7 @@ import StickyNavHolder from "./StickyNavHolder"
             borderTopWidth={1}
             borderStyle={'solid'}
             borderColor={useColorModeValue('gray.400', 'gray.700')}
-            bg={useColorModeValue('gray.400', 'gray.700')}
-          >
+            bg={useColorModeValue('blue.300', 'gray.500')}>
           <Container
             className="footer__nav"
             as={Stack}

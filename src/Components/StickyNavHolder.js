@@ -33,7 +33,7 @@ import StickyNavbar from "./StickyNavbar";
       <Container
           id="sticky"
           as={Stack}
-          bg={useColorModeValue('rgb(237 242 247 / 85%)', 'blue.900')}
+          bg={useColorModeValue('rgb(233 238 243 / 85%)', 'rgb(32 56 107 / 85%)')}
           backdropFilter="saturate(180%) blur(2px)"
           color={useColorModeValue('blue.400', 'white')}
           maxW={'100vw'}

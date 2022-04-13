@@ -59,6 +59,7 @@ h4.heading--center {
   margin: 1rem 0;
   font-size: 1.3rem;
   line-height: 1.2;
+  position: relative;
 }
 h6 strong {
   font-weight:500;
@@ -307,11 +308,13 @@ main {
   .title::before {
     position: absolute;
     height: 300px;
-    background-position-x: 115%;
+    background-position-x: 100%;
     margin-top: 0;
     top: -13vh;
     mix-blend-mode: multiply;
-  }
+    width: 400px;
+    right: -10%;
+}
   .col-12 {
     width:100%;
   }
