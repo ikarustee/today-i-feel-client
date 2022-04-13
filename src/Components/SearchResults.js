@@ -41,7 +41,12 @@ const SearchResults = (props) => {
     border-color: red;
   `;
   
-    let searchTags = searchParams.get("q").split(" ").join(",");
+    let searchTags = searchParams.get("q").split(",")
+    let arr = searchTags.map(tag=>{return tag.trim()})
+    // console.log(arr)
+    searchTags = arr.join(",")
+    console.log(searchTags)
+    // console.log(searchParams.get("q"))
     let sanitizedSearchTags = searchTags.split(",").slice(1).join(" ")
     // console.log(sanitizedSearchTags)
     async function getSearchResult(){
@@ -50,27 +55,27 @@ const SearchResults = (props) => {
       if(searchParams.get("q").split(" ").join(",").split(",")[0] === "search"){
         let url = "https://todayifeel-server.herokuapp.com/search/"+searchTags;
         let response = await axios.get(url,{withCredentials:true});
-        console.log(response.data);
+        // console.log(response.data);
         setSearchResult(response.data);
       } else if(searchParams.get("q").split(" ").join(",").split(",")[0] === "vote"){
         let arr = searchTags.split(",")
         arr.shift()
         arr.unshift("search")
         arr.join(",")
-        console.log(arr.join(","))
+        // console.log(arr.join(","))
         let url = "https://todayifeel-server.herokuapp.com/search/"+arr.join(",");
         let response = await axios.get(url,{withCredentials:true});
-        console.log(response.data);
+        // console.log(response.data);
         setSearchResult(response.data);
       } else if(searchParams.get("q").split(" ").join(",").split(",")[0] === "voted"){
         let arr = searchTags.split(",")
         arr.shift()
         arr.unshift("search")
         arr.join(",")
-        console.log(arr.join(","))
+        // console.log(arr.join(","))
         let url = "https://todayifeel-server.herokuapp.com/search/"+arr.join(",");
         let response = await axios.get(url,{withCredentials:true});
-        console.log(response.data);
+        // console.log(response.data);
         setSearchResult(response.data);
       }
       
