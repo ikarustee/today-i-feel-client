@@ -23,6 +23,7 @@ import {
   import { FaCommentDollar } from 'react-icons/fa';
   import DotLoader from "react-spinners/DotLoader";
   import { css } from "@emotion/react";
+  import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
   export default function EditSingleArticle() {
     
     const {id} = useParams()
@@ -158,7 +159,7 @@ import {
                     />
                 </FormControl>
                 
-                <span className="reported">Visible: {thisArticle.visible ? "🟢" : "🔴"}</span>
+                <span className="reported">Visible: {thisArticle.visible ? (<RiEyeLine className="visible" />) : (<RiEyeCloseLine className="visible not" />)}</span>
                     <Button
                     onClick={toggleVisible}
                     borderColor="blue.300"

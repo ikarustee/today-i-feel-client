@@ -8,6 +8,7 @@ import {
   Heading,
   Image,
   Text,
+  Flex,
   Divider,
   Container,
   VStack,
@@ -17,6 +18,8 @@ import axios from 'axios';
 import {useNavigate, Link} from "react-router-dom"
 import { ArticleContext } from '../Contexts/ArticleContext';
 import {readableDate} from "../helper/dateformatter"
+import { BiEditAlt, BiEraser } from "react-icons/bi";
+import { RiEyeCloseLine, RiEyeLine } from "react-icons/ri";
 
 const EditArticleList = ({p}) => {
   // const [articles,setArticles] = useState([])
@@ -94,31 +97,40 @@ useEffect(()=>{
                 padding="2rem 1rem" 
                 borderRadius={8} 
                 transition="all 300ms ease">
+                  <Box className="edit__title__meta">
                   <h4 className="edit__heading">
                     <Link to={`${a._id}`} textDecoration="none" >
                       {a.title}
                     </Link>
                   </h4>
-                  <Link className="edit__btn" to={`${a._id}`}>
-                    <Button 
-                      // className="readmore__btn" 
-                      borderColor="blue.300" 
-                      borderWidth="1px" 
-                      color="blue.300" 
-                      bg="white"
-                      fontSize="12px"
-                      fontWeight="300"
-                      height="auto"
-                      padding="4px 10px"
-                      _hover={{bg: "blue.300", color: "white", border: "1px solid #5C90FF"}} 
-                      variant='outline'>
-                      Edit
-                    </Button>
-                  </Link>
                   <Box className="meta">
                     <span className="date">Published: {readableDate(a.createdDate)}</span>
-                    <span className="reported">Visible: {a.visible ? "🟢" : "🔴"}</span>
+                    <span className="reported">Visible: {a.visible ? (<RiEyeLine className="visible" />) : (<RiEyeCloseLine className="visible not" />)}</span>
                   </Box>
+                  </Box>
+                  <Flex className="edit__action" columnGap="0.5rem">
+                  <Link className="edit__btn" to={`${a._id}`}>
+                  <Button 
+                        className="edit__btn" 
+                        border="none"
+                        borderRadius={"8px"}
+                        color="gray.400" 
+                        bg="transparent"
+                        fontSize="18px"
+                        fontWeight="300"
+                        // width="20px"
+                        // height="20px"
+                        padding="0"
+                        _hover={{color: `${colorMode === "light" ? "blue.300" : "gray.400"}`}} 
+                        _active={{color: `${colorMode === "light" ? "blue.300" : "gray.400"}`}} 
+                        _focus={{color: `${colorMode === "light" ? "blue.300" : "gray.400"}`}} 
+                        // _hover={{color: "white"}} 
+                        variant='outline'>
+                          <BiEditAlt id={a._id} color="red.600" />
+                      </Button>
+                  </Link>
+                  </Flex>
+                  
                 </Box>
               )
             })
