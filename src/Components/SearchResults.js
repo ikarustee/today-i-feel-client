@@ -157,6 +157,7 @@ const SearchResults = (props) => {
         }
         )}
       </Flex>
+      <Chart /> 
         <Box
           className="info__holder"
         >
@@ -188,8 +189,7 @@ const SearchResults = (props) => {
           <BiRightArrowAlt />
           <h2>Instahelp – professional online psychological counseling <strong><a href="https://instahelp.me/de/" target="_blank" className="info__link">instahelp.me/de/</a></strong></h2>
         </Flex>
-      </Box>
-      <Chart /> 
+        </Box>
       </Container>
       </>
     )}
