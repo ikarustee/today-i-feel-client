@@ -17,7 +17,7 @@ import { css } from "@emotion/react";
 
 const Home = (props) => {
   const [startSlice , setStartSlice] = useState(0);
-  const [initialTags , setInitialTags] = useState(8);
+  const [initialTags , setInitialTags] = useState(7);
   const [increaseTags, setIncreaseTags] = useState(5);
   const [checkedTags, setCheckedTags] = useState(0)
   const [collectedTags, setCollectedTags] = useState([])
