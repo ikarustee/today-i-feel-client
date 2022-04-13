@@ -154,26 +154,18 @@ import {readableDate} from "../helper/dateformatter"
                 </Stack>
                 <Stack spacing={4}>
                 <Heading fontSize={'2xl'} color="blue.300" m="0 0 1rem" textAlign="left">Reports:</Heading>
-                {/* {thisArticle.reports?.length >=1 ? ( */}
                 <Box display="flex"
                   flexDirection={{ base: 'row', sm: 'column' }}
-                  // justifyContent="space-between"
                   flexWrap="wrap"
                   >
                   {thisArticle.reports.length >=1 && thisArticle.reports.map((a,index) => {
                     
                     return (
-                      <Box display="flex" flexDirection="row" justifyContent="space-between" alignItems="center"  >
+                      
                       <Box key={index}
                         display="flex"
                         flexDirection='column'
-                        // justifyContent="center"
-                        // alignItems="center"
-                        // flexWrap="wrap"
                         width="100%"
-                        // borderColor="blue.300"
-                        // borderWidth="2px"
-                        // borderRadius="6px"
                         paddingLeft="15px"
                         paddingTop="15px"
                         padingBottom="15px"
@@ -203,9 +195,6 @@ import {readableDate} from "../helper/dateformatter"
                           resolved
                         </Button>
                       </Box>
-                      </Box>
-                      
-
                     )
                   })}
                   </Box>
