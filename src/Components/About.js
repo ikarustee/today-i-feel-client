@@ -46,15 +46,15 @@ const About = () => {
                 >Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </Heading>
             </Box>
         </Stack>
-        <Flex className="col-12" margin="6rem 0" gap="1rem" flexWrap={{base: "wrap", md: "nowrap"}} >
-            <Box flexBasis={{base: "100%", md: "33.3333%"}} m={"0 auto"}>
+        <Flex className="col-12" margin="6rem 0" gap="1rem" flexWrap={{base: "wrap", md: "nowrap"}}>
+            <Box flexBasis={{base: "100%", md: "33.3333%"}} m={"0 auto"}  order={{base: "2", md: "1"}}>
                 <Heading as="h3" size="lg" m={"0 0 0.5rem"} color={"blue.300"}>Aenean vulputate eleifend tellus.</Heading>
                 <p>Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. </p>
             </Box>
-            <Box className="bg__morph" flexBasis={{base: "100%", md: "50%"}}><Heading as="h2" size="2xl" textAlign={"center"} color="white">Mindfulness is a key</Heading></Box>
+            <Box className="bg__morph" justifyContent={"center"} flexBasis={{base: "100%", md: "50%"}} order={{base: "1", md: "2"}}><Heading as="h2" size="2xl" textAlign={"center"} color="white">Mindfulness is a key</Heading></Box>
         </Flex>
         <Flex className="col-12" margin="6rem 0" gap="1rem" flexWrap={{base: "wrap", md: "nowrap"}} >
-            <Box className="bg__morph" flexBasis={{base: "100%", md: "50%"}}></Box>
+            <Box className="bg__morph" flexBasis={{base: "100%", md: "50%"}} marginBottom={{base: "3rem", md: "0"}}></Box>
             <Box flexBasis={{base: "100%", md: "33.3333%"}} m={"0 auto"}>
                 <Heading as="h3" size="lg" m={"0 0 0.5rem"} color={"blue.300"}>Aenean vulputate eleifend tellus.</Heading>
                 <p>Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. </p>

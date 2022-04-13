@@ -6,7 +6,6 @@ import {
   Box,
   Button,
   Heading,
-  Link,
   Image,
   Text,
   Divider,
@@ -15,7 +14,7 @@ import {
   useColorMode
 } from '@chakra-ui/react';
 import axios from 'axios';
-import {useNavigate} from "react-router-dom"
+import {useNavigate, Link} from "react-router-dom"
 import { ArticleContext } from '../Contexts/ArticleContext';
 import {readableDate} from "../helper/dateformatter"
 
@@ -96,11 +95,11 @@ useEffect(()=>{
                 borderRadius={8} 
                 transition="all 300ms ease">
                   <h4 className="edit__heading">
-                    <Link href={`reportedarticles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none', color: "purple.300" }} _focus={{boxShadow: "none"}}>
+                    <Link to={`${a._id}`} textDecoration="none" >
                       {a.title}
                     </Link>
                   </h4>
-                  <Link className="edit__btn" href={`reportedarticles/${a._id}`} textAlign="center" _hover={{textDecoration: "none"}} >
+                  <Link className="edit__btn" to={`${a._id}`}>
                     <Button 
                       // className="readmore__btn" 
                       borderColor="blue.300" 

@@ -40,7 +40,7 @@ h4.heading--center {
 }
 h1.teaser {
   font-size: 10vw;
-  margin: 2rem 0 4rem;
+  margin: 3rem 0 2rem;
   padding-bottom: 8px;
   line-height: 1;
 }
@@ -80,9 +80,14 @@ h6 strong {
 }
 @media screen and (min-width: 768px) {
   h1.teaser {
-    font-size: 9vh;
+    font-size: 8vh;
     margin: 3rem auto;
     padding-bottom: 12px;
+}
+}
+@media screen and (min-width: 992px) {
+  h1.teaser {
+    font-size: 11vh;
 }
 }
 
@@ -239,20 +244,23 @@ main {
   min-height:calc(100vh - 233px - 3rem);
   box-sizing: border-box;
 }
-
-#home::before {
+.title::before {
+  margin-top: -6vh;
   content: "";
   background-image: url("/src/img/meditation.svg");
   background-size: 100%;
   background-repeat: no-repeat;
   display: inline-block;
-  position: absolute;
+  position: relative;
   right: 0;
-  top: -6vh;
-  width: 50%;
+  top: -0;
+  width: 100%;
   z-index: 1;
   /* mix-blend-mode: multiply; */
-  height: 400px;
+  height: 250px;
+  background-size: contain;
+  background-position-x: 50%;
+  margin-bottom: -6vh;
 }
 #home .title {
   position: relative;
@@ -270,16 +278,26 @@ main {
   background-repeat: no-repeat;
   display: inline-table;
   position: absolute;
-  left: -10%;
-  top: -6vh;
-  width: 50%;
-  height: 400px;
+  width: 100%;
+  height: 200px;
   z-index: 3;
   mix-blend-mode: normal;
+  background-size: contain;
+  background-position: left center;
+  left: 0;
+  top: -13vh;
 }
 @media screen and (min-width: 768px) {
   #home::before {
     top:-10vh;
+  }
+  .title::before {
+    position: absolute;
+    height: 300px;
+    background-position-x: 115%;
+    margin-top: 0;
+    top: -13vh;
+    mix-blend-mode: multiply;
   }
   .col-12 {
     width:100%;
@@ -313,10 +331,10 @@ main {
     right: -10vw;
   }
   #about::before {
-    left: -16%;
-    top: -3rem;
-    height: 100%;
-  }
+    left: -15%;
+    top: -10vh;
+    height: 400px;
+}
 }
 
 /* Tag cloud ========== */
@@ -806,6 +824,9 @@ a.info__link:hover::after {
     gap: 1.5rem;
 }
 }
+@media screen and (min-width: 600px) {
+  .footer__links a {font-size:16px;}
+}
 @media screen and (min-width:992px) {
   #sticky {
     background-color: rgba(255,255,255,0.85);
@@ -843,7 +864,7 @@ a.info__link:hover::after {
   z-index: 10;
   width: 100%;
   height: 300px;
-  animation: morph 15s ease-in-out infinite both alternate;
+  animation: morph 10s ease-in-out infinite both alternate;
   align-content: center;
   align-items: center;
   display: flex;
@@ -876,6 +897,10 @@ a.info__link:hover::after {
 }
 #about .bg__morph:nth-child(1)::before {
   background-image: url("/src/img/blogging.svg");
+  left: 10%;
+  top: calc(-100% + 150px);
+  z-index: 5;
+  margin: 0 auto;
 }
 .bg__morph.home {
   position: absolute;
@@ -892,10 +917,10 @@ a.info__link:hover::after {
 .article__list .bg__morph {
   width: 85%;
   position: relative;
-  left: 7.5%;
 }
 .article__list .bg__morph::before{
   background-image: url("/src/img/vision.svg");
+  background-position-x: 50%;
   transform: scaleX(-1);
 }
 svg.chakra-icon path {
@@ -950,6 +975,11 @@ a.btn--centered.chart {
 .logout {
   position: relative;
   right: 0;
+}
+@media screen and (min-width: 768px) {
+  .article__list .bg__morph {
+    left: 7.5%;
+  }
 }
 
 .linear-wipe {

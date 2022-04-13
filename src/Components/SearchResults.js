@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext} from 'react'
-import {useSearchParams, createSearchParams, useParams, useLocation} from "react-router-dom"
+import {useSearchParams, Link, createSearchParams, useParams, useLocation} from "react-router-dom"
 import { ArticleContext } from '../Contexts/ArticleContext';
 import Chart from "./Chart"
 import {
@@ -8,7 +8,6 @@ import {
   Container,
   Flex,
   Heading,
-  Link,
   Image,
   Tag,
   Text,
@@ -106,7 +105,7 @@ const SearchResults = (props) => {
               <Box
                 className="single" bg={colorMode === "light" ? "white" : "gray.700"} key={`articles/${a._id}`} boxShadow={'lg'} m="0" padding="2rem 1rem" borderRadius={8} _hover={{boxShadow: "xl"}} transition="all 300ms ease">
                 <Heading className="articles__heading" m="1rem 0" color="blue.300" as="h2" size="2xl" fontSize="2rem" lineHeight="1.1" _hover={{color: "purple.300"}}>
-                  <Link href={`articles/${a._id}`} textDecoration="none" _hover={{ textDecoration: 'none' }} _focus={{boxShadow: "none"}}>
+                  <Link to={`/articles/${a._id}`}>
                     {a.title}
                   </Link>
                 </Heading>
@@ -116,7 +115,7 @@ const SearchResults = (props) => {
                   {a.tags.map((t) => {
                     return (
                       <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="blue" color="gray.500" bg="blue.50" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>
-                        <Link href={`/search?q=search,${t}`} _hover={{textDecoration: "none", color: "white"}}>{t}</Link>
+                        <Link to={`/search?q=search,${t}`}>{t}</Link>
                       </Tag>
                     )
                   })}
@@ -129,7 +128,7 @@ const SearchResults = (props) => {
                   fontSize="md">
                   {a.body.replace(/[#_]/g,'').split(" ").slice(0, 25).join(" ") + " ..."}
                 </Text>
-                <Link href={`articles/${a._id}`}  color="blue.300" fontWeight={500} textAlign="left" textDecoration="none" _hover={{color: "purple.300"}}>
+                <Link to={`/articles/${a._id}`} > 
                   <Button 
                       // className="readmore__btn" 
                       borderColor="blue.300" 
