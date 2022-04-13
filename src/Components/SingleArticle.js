@@ -1,5 +1,6 @@
 import React, {useContext, useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import {
     Box,
     FormControl,
@@ -96,7 +97,8 @@ const SingleArticle = () => {
     } else {
         
     return (
-    <>
+    <>  
+      <Helmet><title>Today I Feel | {thisArticle.title}</title></Helmet>
         <article>
             <Container p="0" maxW={"700px"} >
               <Box
