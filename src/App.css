@@ -544,14 +544,16 @@ button.delete__btn::before {
   left:0;
 }
 button.edit__btn:hover::before {
-  right: 34px;
+  top: -7px;
   visibility: visible;
   opacity: 1;
+  right: 7px;
 }
 button.delete__btn:hover::before {
-  left: 32px;
+  left: 0;
   visibility: visible;
   opacity: 1;
+  top: -7px;
 }
 button.delete__btn svg {
   pointer-events: none;

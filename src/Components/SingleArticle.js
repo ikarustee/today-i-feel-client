@@ -68,24 +68,23 @@ const SingleArticle = () => {
     const submitEmail = async (e) => {
       e.preventDefault();
       console.log(e.target)
-      setSuccess(true)
-
+      
       // console.log({ mailerState });
-      // const response = await axios.post("https://todayifeel-server.herokuapp.com/send", { mailerState })
-      // const resData = await response
-      // // console.log(resData.data.status)
-      // if(resData.data.status === "success") {
-      //   alert("Message sent")
-        
-      // } else if(resData.data.status === "Fail") {
-      //   alert("Message failed to sent")
-      // }
-      // setMailerState({
-      //   message: "",
-      //   value:"",
-      //   articleTitle: thisArticle.title,
-      //   articleId: thisArticle.id
-      // });
+      const response = await axios.post("https://todayifeel-server.herokuapp.com/send", { mailerState })
+      const resData = await response
+      // console.log(resData.data.status)
+      if(resData.data.status === "success") {
+        // alert("Message sent")
+        setSuccess(true)
+      } else if(resData.data.status === "Fail") {
+        alert("Message failed to sent")
+      }
+      setMailerState({
+        message: "",
+        value:"",
+        articleTitle: thisArticle.title,
+        articleId: thisArticle.id
+      });
     };
 
     useEffect(() => {
