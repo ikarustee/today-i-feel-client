@@ -163,7 +163,7 @@ nav {
 form#navsearch.navsearch {
   display: flex;
   flex-wrap: nowrap;
-  max-width: 0;
+  width: 0;
   margin: 0;
   top: 1rem;
   position: absolute;
@@ -177,7 +177,7 @@ form#navsearch.navsearch {
 }
 form#navsearch.show {
   flex-wrap: nowrap;
-  max-width: calc(50vw - 2rem);
+  width: calc(100vw - 5rem);
   transform: translateX(3rem);
   visibility: visible;
   opacity: 1;
@@ -192,6 +192,9 @@ form#navsearch.show {
   z-index: 10;
 }
 #navsearch input {
+  font-size: 14px;
+  flex-basis: 80%;
+  padding: 4px;
   position: relative;
   z-index: 0;
 }
@@ -288,6 +291,9 @@ main {
   top: -13vh;
 }
 @media screen and (min-width: 768px) {
+  form#navsearch.show {
+    max-width: calc(50vw - 2rem);
+  }
   #home::before {
     top:-10vh;
   }

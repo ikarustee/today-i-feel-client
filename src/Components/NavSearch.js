@@ -14,12 +14,13 @@ const NavSearch = ({open, handleSearch, openClose}) => {
         className={`navsearch ${openClose ? "show" : "hide"}`}
         onSubmit={handleSearch}>
             <Input
-            bg={`${colorMode === "light" ? "white" : "gray.100"}`} 
-            _placeholder={{color: `${colorMode === "light" ? "gray.400" : "gray.500"}`}}
+            bg={`${colorMode === "light" ? "white" : "gray.600"}`} 
+            // _placeholder={{color: `${colorMode === "light" ? "gray.400" : "gray.500"}`}}
+            // color={{color: `${colorMode === "light" ? "gray.400" : "gray.500"}`}}
             id='text' 
             type='text' 
             name="tag" 
-            placeholder="Search for e.g. tired"
+            placeholder="Search for e.g. 'tired, stressed'"
             fontWeight="400"
             borderColor={"blue.300"}
             focusBorderColor={"blue.300"}
