@@ -98,7 +98,7 @@ const ArticleList = ({p}) => {
                     fontSize="md">
                     {a.body.replace(/[#_]/g,'').split(" ").slice(0, 25).join(" ") + " ..."}
                   </Text>
-                  <Link to={`${a._id}`} textAlign="center" _hover={{textDecoration: "none"}}>
+                  <Link to={`${a._id}`}>
                   <Button 
                     // className="readmore__btn" 
                       borderColor="blue.300" 

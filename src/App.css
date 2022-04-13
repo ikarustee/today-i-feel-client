@@ -4,6 +4,7 @@
 }
 :root {
   --primary: #598EFF;
+  --info: #94d600;
 }
 
 body {
@@ -405,7 +406,7 @@ input:checked + label {
   font-size: 32px!important;
   outline: 2px white solid;
   background-color: white;
-  color:#94d600!important;
+  color:var(--info)!important;
   mix-blend-mode: luminosity;
 }
 .tagcloud__btnholder {
@@ -614,6 +615,24 @@ button.delete__btn svg {
 .report {
   margin: 0;
 }
+.report p.success {
+  border: 1px solid var(--info);
+  border-radius: 6px;
+  padding: 4px 8px;
+  box-sizing: border-box;
+  text-align: center;
+  height:0;
+  transition: all 1000ms ease;
+}
+.report p.success.hide {
+  visibility: hidden;
+  opacity: 0;
+}
+.report p.success.show {
+  height: auto;
+  visibility: visible;
+  opacity: 1;
+}
 .report div[role="radiogroup"] .chakra-stack {
   margin: 0.5rem 0;
 }
@@ -736,7 +755,7 @@ path.recharts-polygon {
 }
 .info__content:hover > svg {
   transform: rotate(-45deg);
-  background-color: #94d600;
+  background-color: var(--info);
   fill: white;
 }
 .info__holder svg {
@@ -750,7 +769,7 @@ path.recharts-polygon {
   fill: var(--primary);
 }
 a.info__link {
-  color:#94d600;
+  color:var(--info);
   display:inline-block;
   transition: all 1000ms ease;
 }
@@ -770,7 +789,7 @@ h5 a.info__link::after {
   height: 2px;
 }
 a.info__link:hover::after {
-  background-color: #94d600;
+  background-color: var(--info);
   width: 100%;
 }
 @media screen and (min-width:768px) {
