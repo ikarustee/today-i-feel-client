@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import { ArticleContext } from '../Contexts/ArticleContext';
 import { css } from "@emotion/react";
 import DotLoader from "react-spinners/DotLoader";
+import BounceLoader from "react-spinners/BounceLoader"
 import {readableDate} from "../helper/dateformatter"
 
 import {
   Box,
   Button,
   Heading,
+  Image,
   Tag,
   Text,
   Divider,
@@ -20,14 +22,26 @@ import {
 
 const ArticleList = ({p}) => {
   const {articles, isLoading, getArticles} = useContext(ArticleContext)
+  const [startArticleCount, setStartArticleCount] = useState(1)
+  const [initialArticles, setinitialArticles] = useState(7)
+  const [loadingMore, setLoadingMore] = useState(false)
   const [color, setColor] = useState("#5C90FF");
-  const { colorMode } = useColorMode()
+  const { colorMode, toggleColorMode } = useColorMode()
   
   const override = css`
   display: block;
   margin: 0 auto;
   border-color: red;
 `;
+
+  const handleLoadmore = () => {
+    setLoadingMore(true)
+    const timer = setTimeout(() => {
+      setinitialArticles((prev) => prev + 4)
+      setLoadingMore(false)
+    }, 1000);
+    return () => clearTimeout(timer);
+  }
 
   useEffect(() => {
     getArticles()
@@ -86,7 +100,7 @@ const ArticleList = ({p}) => {
                     <span className="date">{readableDate(a.createdDate)} &nbsp;</span>
                     {a.tags.map((t) => {
                       return (
-                        <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="blue" color="gray.500" bg="blue.50" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>
+                        <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="blue" color="gray.500" bg="blue.50" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300", color: "white"}}>
                           <Link to={`/search?q=search,${t}`}>{t}</Link>
                         </Tag>
                       )
@@ -100,18 +114,16 @@ const ArticleList = ({p}) => {
                     fontSize="md">
                     {a.body.replace(/[#_]/g,'').split(" ").slice(0, 25).join(" ") + " ..."}
                   </Text>
-                  <Link to={`${a._id}`}>
+                  <Link to={`${a._id}`} className="readmore">
                   <Button 
-                      borderColor="blue.300" 
-                      borderWidth="2px" 
+                      className="readmore__btn" 
                       color="blue.300" 
                       bg={`${colorMode === "light" ? "white" : "gray.700"}`}
                       fontWeight="400"
                       height="auto"
-                      padding="4px 10px"
-                      _active={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
-                      _hover={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
-                      variant='solid'>
+                      padding="0"
+                      _hover={{bg: "white", color: "purple.300"}} 
+                      variant='solid' >
                       Read article
                     </Button>
                   </Link>
@@ -148,7 +160,7 @@ const ArticleList = ({p}) => {
                     <span className="date">{readableDate(a.createdDate)} &nbsp;</span>
                     {a.tags.map((t) => {
                       return (
-                        <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="blue" color="gray.500" bg="blue.50" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>
+                        <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="blue" color="gray.500" bg="blue.50" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300", color: "white"}}>
                           <Link to={`/search?q=search,${t}`} >{t}</Link>
                         </Tag>
                       )
@@ -162,16 +174,15 @@ const ArticleList = ({p}) => {
                   fontSize="md">
                   {a.body.replace(/[#_]/g,'').split(" ").slice(0, 25).join(" ") + " ..."}
                 </Text>
-                  <Link to={`${a.id}`} >
+                  <Link to={`${a.id}`} className="readmore">
                     <Button 
-                      borderColor="blue.300" 
-                      borderWidth="2px" 
+                      className="readmore__btn" 
                       color="blue.300" 
                       bg={`${colorMode === "light" ? "white" : "gray.700"}`}
                       fontWeight="400"
                       height="auto"
-                      padding="4px 10px"
-                      _hover={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
+                      padding="0"
+                      _hover={{bg: "white", color: "purple.300"}} 
                       variant='solid'>
                       Read article
                     </Button>
@@ -179,9 +190,13 @@ const ArticleList = ({p}) => {
                 </Box>
               )
             })
-            .slice(1, articles.length)
+            .slice(startArticleCount, initialArticles)
             }
         </Box>
+        <div className={`bounceloader ${loadingMore && "loading"}`} >
+          <BounceLoader color={color} loading={loadingMore} css={override} size={75} />
+        </div>
+        {initialArticles >= articles.length ? (null) : (<button className="loadmore" onClick={handleLoadmore}>Load more</button>)}
       <VStack paddingTop="40px" spacing="2" alignItems="flex-start">
         <Heading as="h2">What we write about</Heading>
         <Text
