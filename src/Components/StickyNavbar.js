@@ -10,8 +10,6 @@ const StickyNavbar = () => {
     const location = useLocation()
 
     let newLoc = location.pathname.split("/").pop()
-    console.log(newLoc)
-
 
     const handleBack = (e) => {
       e.preventDefault()
@@ -22,7 +20,6 @@ const StickyNavbar = () => {
       let url = "https://todayifeel-server.herokuapp.com/logout"
       axios.get(url,{withCredentials:true}).then((response)=> {
           navigate("/");
-        console.log(response)
         })
     }
   
@@ -39,7 +36,6 @@ const StickyNavbar = () => {
     direction={'row'} 
     spacing={2}
     color={useColorModeValue('blue.400', 'white')} 
-    // gap="1rem"
     >
       {location.pathname === "/" ? (null) : ( <a className="link" href="#" onClick={handleBack}><BiArrowBack/>Back</a>)}
       <Link to="/" className="link"><BiHomeHeart/>Home</Link>

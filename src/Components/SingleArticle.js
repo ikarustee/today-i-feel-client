@@ -23,7 +23,7 @@ import DotLoader from "react-spinners/DotLoader";
 import { css } from "@emotion/react";
 import ReactMarkdown from "react-markdown";  
 import {readableDate} from "../helper/dateformatter"
-import { BiMessageSquare, BiRightArrowAlt } from 'react-icons/bi';
+import { BiRightArrowAlt } from 'react-icons/bi';
 import axios from 'axios';
 
 const SingleArticle = () => {
@@ -55,7 +55,6 @@ const SingleArticle = () => {
 
 
     function handleStateChange(e) {
-      // console.log(e.target.name, e.target.value)
       setMailerState((prevState) => ({
         ...prevState,
         [e.target.name]: e.target.value,
@@ -67,14 +66,9 @@ const SingleArticle = () => {
 
     const submitEmail = async (e) => {
       e.preventDefault();
-      console.log(e.target)
-      
-      // console.log({ mailerState });
       const response = await axios.post("https://todayifeel-server.herokuapp.com/send", { mailerState })
       const resData = await response
-      // console.log(resData.data.status)
       if(resData.data.status === "success") {
-        // alert("Message sent")
         setSuccess(true)
       } else if(resData.data.status === "Fail") {
         alert("Message failed to sent")
@@ -128,9 +122,7 @@ const SingleArticle = () => {
                         as="h4"
                         color="blue.300"
                         size={"lg"}
-                        // fontFamily={"Work Sans"} 
                         fontStyle={"italic"}
-                        // fontWeight="500!important"
                         textAlign={"center"}
                         m={"2rem 0 1rem"}
                         >Something is not correct or inproper? Let us know.</Heading>

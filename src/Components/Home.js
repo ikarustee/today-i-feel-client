@@ -1,15 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import { Helmet } from "react-helmet";
-import { useNavigate, useLocation, useSearchParams, createSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import Search from './Search';
 import {
   Box,
   Button,
-  Container,
   Flex,
-  FormControl,
-  Input,
   Heading,
 } from '@chakra-ui/react';
 import DotLoader from "react-spinners/DotLoader";
@@ -35,30 +32,21 @@ const Home = (props) => {
 `;
 
   const navigate = useNavigate();
-  // const location = useLocation();
 
   async function getTagsFromDB() {
     const url = "https://todayifeel-server.herokuapp.com/tags"
     try {
       const response = await axios.get(url)
       const tagsDB = response.data
-      // console.log(tagsDB)
       setData(tagsDB)
     } catch (error) {
       console.log(error)
     }
   }
-//   async function getSearchResult(){
-//     // setIsLoading(true);
-    
-//     // setIsLoading(false);
-//     // setTagURL(url)
-// }
+
   useEffect(() => {
     getTagsFromDB()
-    console.log(initialTags)
     if(data.length) return setIsLoading(false)
-    // setData(tags.slice(0, initialTags));
   }, [data.length]);
 
   const processTags = (e) => {
@@ -83,22 +71,15 @@ const Home = (props) => {
     }
   }
    const handleTagCollect = async () => {
-    //  console.log(JSON.stringify(newSearchParams).length)
      if(JSON.stringify(newSearchParams).length > 2){
       let arr = newSearchParams.unshift("vote")
-      console.log(arr)
       setNewSearchParams(arr)
       setSearchParams(newSearchParams.join(" ,"))
-      console.log(searchParams)
-      // encodeURI(searchParams)
-      
       let url = "https://todayifeel-server.herokuapp.com/search/"+newSearchParams;
       let response = await axios.get(url,{withCredentials:true});
-      console.log(response.data);
       if( typeof response.data === "string"){
         alert(response.data)
         for(let i = 1; i< newSearchParams.length;i++){
-          console.log(newSearchParams[i])
           document.getElementById(newSearchParams[i]).checked = false;
         }
         setCheckedTags(0)
@@ -113,8 +94,6 @@ const Home = (props) => {
      }   
   }
 
-
-  
   return (
     <div id="home">
       <Helmet><title>Today I Feel | You're not alone</title></Helmet>  
@@ -155,7 +134,6 @@ const Home = (props) => {
             .slice(startSlice, initialTags)
             }
             </form>
-
             <Flex className="tagcloud__btnholder" flexWrap="nowrap" justifyContent="center">
             {initialTags >= data.length ? (null) : (
               <Button 

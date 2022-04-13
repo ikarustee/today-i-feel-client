@@ -1,18 +1,14 @@
 import {
     Flex,
     Box,
-    Checkbox,
     FormControl,
-    FormLabel,
     FormErrorMessage,
     FormHelperText,
     Input,
     Textarea,
     Stack,
-    Link,
     Button,
     Heading,
-    Text,
     useColorModeValue,
   } from '@chakra-ui/react';
   import {Helmet} from "react-helmet"
@@ -29,13 +25,10 @@ import {
       url: ""
     })
 
-    // const [error, setError] = useState(null)
     let error = userInput.title.length >= 2
     let error2 = userInput.body >= 2
     let error3 = userInput.tags >= 2
-    
-
-    
+     
     const navigate = useNavigate();
     
     const handleChange = (e) => {
@@ -49,26 +42,21 @@ import {
       const {title, body, tags, url} = userInput
       let tagArray = tags.split(",")
       tagArray = tagArray.map(el=>el.trim())
-      console.log(title,tagArray)
-    
       let server = "https://todayifeel-server.herokuapp.com/articles"
       axios.post(server,{title:title,body:body, tags:tagArray, url:url}).then((response)=> {
-            console.log(response)
             navigate("/adminDashboard")
           })
     }
     useEffect(()=>{
       async function verifyTest(){
           axios.get("https://todayifeel-server.herokuapp.com/verify",{withCredentials:true}).then((response)=>{
-              console.log(response.data !== "OK")
-              if (response.data !== "OK"){
+                if (response.data !== "OK"){
                   alert("Please Login First!")
                   navigate("/login");
                   }
               })
       }
       verifyTest();
-      
     },[])
     return (
       <>
@@ -146,7 +134,6 @@ import {
               <Stack spacing={10}>
               {!error ? (
                 <Button
-                  // onClick={handleNewArticle}
                   borderColor="gray.400"
                   borderWidth="2px" 
                   color="gray.400"
@@ -156,7 +143,6 @@ import {
                   margin="0 auto"
                   padding="4px 10px"
                   width="150px"
-                  // _hover={{bg: "white", color: "blue.300", border: "2px solid #5C90FF"}} 
                   variant='solid' 
                   >
                   Publish
@@ -178,7 +164,6 @@ import {
                   >
                   Publish
                 </Button>
-
               )}
               </Stack>
             </Stack>

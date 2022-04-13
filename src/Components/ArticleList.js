@@ -10,7 +10,6 @@ import {
   Box,
   Button,
   Heading,
-  Image,
   Tag,
   Text,
   Divider,
@@ -22,7 +21,7 @@ import {
 const ArticleList = ({p}) => {
   const {articles, isLoading, getArticles} = useContext(ArticleContext)
   const [color, setColor] = useState("#5C90FF");
-  const { colorMode, toggleColorMode } = useColorMode()
+  const { colorMode } = useColorMode()
   
   const override = css`
   display: block;
@@ -103,7 +102,6 @@ const ArticleList = ({p}) => {
                   </Text>
                   <Link to={`${a._id}`}>
                   <Button 
-                    // className="readmore__btn" 
                       borderColor="blue.300" 
                       borderWidth="2px" 
                       color="blue.300" 
@@ -166,7 +164,6 @@ const ArticleList = ({p}) => {
                 </Text>
                   <Link to={`${a.id}`} >
                     <Button 
-                      // className="readmore__btn" 
                       borderColor="blue.300" 
                       borderWidth="2px" 
                       color="blue.300" 

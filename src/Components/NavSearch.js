@@ -15,8 +15,6 @@ const NavSearch = ({open, handleSearch, openClose}) => {
         onSubmit={handleSearch}>
             <Input
             bg={`${colorMode === "light" ? "white" : "gray.600"}`} 
-            // _placeholder={{color: `${colorMode === "light" ? "gray.400" : "gray.500"}`}}
-            // color={{color: `${colorMode === "light" ? "gray.400" : "gray.500"}`}}
             id='text' 
             type='text' 
             name="tag" 
