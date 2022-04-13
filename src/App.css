@@ -4,6 +4,7 @@
 }
 :root {
   --primary: #598EFF;
+  --info: #94d600;
 }
 
 body {
@@ -24,10 +25,12 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: capitalize;
 }
 .info__content h2 {
-  font-size: 2.2rem;
+  font-size: 1.5rem;
   font-family: "Work Sans";
   font-style: normal;
-  font-weight:300!important;
+  font-weight: 300!important;
+  text-transform: none;
+  line-height: 1.3;
 }
 h4 {
   font-size: 2rem;
@@ -57,6 +60,7 @@ h4.heading--center {
   margin: 1rem 0;
   font-size: 1.3rem;
   line-height: 1.2;
+  position: relative;
 }
 h6 strong {
   font-weight:500;
@@ -83,6 +87,9 @@ h6 strong {
     font-size: 8vh;
     margin: 3rem auto;
     padding-bottom: 12px;
+}
+.info__content h2 {
+  font-size: 2.2rem;
 }
 }
 @media screen and (min-width: 992px) {
@@ -163,7 +170,7 @@ nav {
 form#navsearch.navsearch {
   display: flex;
   flex-wrap: nowrap;
-  max-width: 0;
+  width: 0;
   margin: 0;
   top: 1rem;
   position: absolute;
@@ -177,7 +184,7 @@ form#navsearch.navsearch {
 }
 form#navsearch.show {
   flex-wrap: nowrap;
-  max-width: calc(50vw - 2rem);
+  width: calc(100vw - 5rem);
   transform: translateX(3rem);
   visibility: visible;
   opacity: 1;
@@ -192,6 +199,9 @@ form#navsearch.show {
   z-index: 10;
 }
 #navsearch input {
+  font-size: 14px;
+  flex-basis: 80%;
+  padding: 4px;
   position: relative;
   z-index: 0;
 }
@@ -287,6 +297,11 @@ main {
   left: 0;
   top: -13vh;
 }
+@media screen and (min-width: 600px) {
+  form#navsearch.show {
+    max-width: calc(35vw - 2rem);
+  }
+}
 @media screen and (min-width: 768px) {
   #home::before {
     top:-10vh;
@@ -294,11 +309,13 @@ main {
   .title::before {
     position: absolute;
     height: 300px;
-    background-position-x: 115%;
+    background-position-x: 100%;
     margin-top: 0;
     top: -13vh;
     mix-blend-mode: multiply;
-  }
+    width: 400px;
+    right: -10%;
+}
   .col-12 {
     width:100%;
   }
@@ -389,7 +406,7 @@ input:checked + label {
   font-size: 32px!important;
   outline: 2px white solid;
   background-color: white;
-  color:#94d600!important;
+  color:var(--info)!important;
   mix-blend-mode: luminosity;
 }
 .tagcloud__btnholder {
@@ -527,14 +544,16 @@ button.delete__btn::before {
   left:0;
 }
 button.edit__btn:hover::before {
-  right: 34px;
+  top: -7px;
   visibility: visible;
   opacity: 1;
+  right: 7px;
 }
 button.delete__btn:hover::before {
-  left: 32px;
+  left: 0;
   visibility: visible;
   opacity: 1;
+  top: -7px;
 }
 button.delete__btn svg {
   pointer-events: none;
@@ -597,6 +616,24 @@ button.delete__btn svg {
 /* =================== */
 .report {
   margin: 0;
+}
+.report p.success {
+  border: 1px solid var(--info);
+  border-radius: 6px;
+  padding: 4px 8px;
+  box-sizing: border-box;
+  text-align: center;
+  height:0;
+  transition: all 1000ms ease;
+}
+.report p.success.hide {
+  visibility: hidden;
+  opacity: 0;
+}
+.report p.success.show {
+  height: auto;
+  visibility: visible;
+  opacity: 1;
 }
 .report div[role="radiogroup"] .chakra-stack {
   margin: 0.5rem 0;
@@ -711,6 +748,7 @@ path.recharts-polygon {
 }
 .info__content {
   margin-top: 1rem;
+  padding: 1rem;
 }
 .info__holder > .info__content svg {
   flex: 0 0 40px;
@@ -719,7 +757,7 @@ path.recharts-polygon {
 }
 .info__content:hover > svg {
   transform: rotate(-45deg);
-  background-color: #94d600;
+  background-color: var(--info);
   fill: white;
 }
 .info__holder svg {
@@ -733,7 +771,7 @@ path.recharts-polygon {
   fill: var(--primary);
 }
 a.info__link {
-  color:#94d600;
+  color:var(--info);
   display:inline-block;
   transition: all 1000ms ease;
 }
@@ -753,8 +791,13 @@ h5 a.info__link::after {
   height: 2px;
 }
 a.info__link:hover::after {
-  background-color: #94d600;
+  background-color: var(--info);
   width: 100%;
+}
+@media screen and (min-width:768px) {
+  .info__content {
+    padding: 2rem;
+  }
 }
 
 /* Footer ============= */
@@ -785,8 +828,7 @@ a.info__link:hover::after {
 .footer__links a.link {
   margin-left: 0;
 }
-.footer__links a,
-.copyright {
+.footer__links a {
   font-size:12px;
 }
 .footer__nav a {

@@ -1,5 +1,6 @@
 import React, {useContext, useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import {
     Box,
     FormControl,
@@ -29,9 +30,8 @@ const SingleArticle = () => {
     const {articles, isLoading, getArticles} = useContext(ArticleContext)
     const {id} = useParams()
     const thisArticle = articles.find((a) => a.id === id)
-    // console.log(thisArticle)
     const [value, setValue] = useState("")
-    const [userInput, setUserInput] = useState("")
+    const [success, setSuccess] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
     const { colorMode, toggleColorMode } = useColorMode()
     
@@ -45,6 +45,7 @@ const SingleArticle = () => {
     const bg = useColorModeValue('blue.300', 'blue.900')
     const color = useColorModeValue('white', 'gray.300')
     const fontColor = useColorModeValue('white', 'gray.300')
+    const formColor = useColorModeValue('gray.600', 'gray.200')
 
     const override = css`
     display: block;
@@ -52,10 +53,6 @@ const SingleArticle = () => {
     border-color: red;
   `;
 
-    // let handleInputChange = (e) => {
-    //   // console.log(e.target.value)
-    //   setUserInput(e.target.value)
-    // }
 
     function handleStateChange(e) {
       // console.log(e.target.name, e.target.value)
@@ -71,13 +68,15 @@ const SingleArticle = () => {
     const submitEmail = async (e) => {
       e.preventDefault();
       console.log(e.target)
-      console.log({ mailerState });
+      
+      // console.log({ mailerState });
       const response = await axios.post("https://todayifeel-server.herokuapp.com/send", { mailerState })
       const resData = await response
-      console.log(resData)
-      if(resData.status === "success") {
-        alert("Message sent")
-      } else if(resData.status === "Fail") {
+      // console.log(resData.data.status)
+      if(resData.data.status === "success") {
+        // alert("Message sent")
+        setSuccess(true)
+      } else if(resData.data.status === "Fail") {
         alert("Message failed to sent")
       }
       setMailerState({
@@ -97,7 +96,8 @@ const SingleArticle = () => {
     } else {
         
     return (
-    <>
+    <>  
+      <Helmet><title>Today I Feel | {thisArticle.title}</title></Helmet>
         <article>
             <Container p="0" maxW={"700px"} >
               <Box
@@ -122,7 +122,6 @@ const SingleArticle = () => {
                   })}
                 </em>
                 <Divider m="0.5rem 0 0" />
-
                   <Stack gap={"1rem"} direction={"column"}  className="report info__holder">
                   <Box className='report'>
                     <Heading 
@@ -137,6 +136,7 @@ const SingleArticle = () => {
                         >Something is not correct or inproper? Let us know.</Heading>
                       <FormControl isRequired>
                         <form className="report" onSubmit={submitEmail}>
+                        <p className={`success ${success ? "show" : "hide"}`}>Thank you for helping us! 💙</p>
                           <fieldset>
                             <RadioGroup onChange={setValue} value={value}>
                               <Stack direction='row'>
@@ -154,7 +154,7 @@ const SingleArticle = () => {
                             <Textarea
                               placeholder="Type a message ..."
                               fontWeight={"normal"}
-                              color={"blue.300"}
+                              color={formColor}
                               _placeholder={{color: "blue.300"}}
                               onChange={handleStateChange}
                               name="message"
@@ -173,7 +173,9 @@ const SingleArticle = () => {
                                 fontWeight="400"
                                 height="auto"
                                 padding="4px 10px"
-                                _hover={{bg: "gray.200", color: "gray.400", border: `2px solid #A0AEC0`}} 
+                                _hover={{bg: "gray.200", color: "gray.400", border: `2px solid #A0AEC0`}}
+                                pointerEvents={"none"} 
+                                cursor={"default"}
                                 variant='solid'
                             >Send Message</Button>
                             ) : (
@@ -195,7 +197,7 @@ const SingleArticle = () => {
                           </fieldset>
                         </form>
                       </FormControl>
-                    </Box>
+                  </Box>
                     <Box
                         className="info__holder"
                       >
@@ -204,8 +206,8 @@ const SingleArticle = () => {
                           bg={bg} 
                           color={fontColor}
                           borderRadius="12px"
-                          p={4}
                           boxShadow={"lg"}
+                          p={6}
                           >
                           <BiRightArrowAlt />
                           <Heading 

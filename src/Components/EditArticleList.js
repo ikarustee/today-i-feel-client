@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext} from 'react';
+import {Helmet} from "react-helmet"
 import { css } from "@emotion/react";
 import DotLoader from "react-spinners/DotLoader";
 
@@ -79,10 +80,12 @@ const handleDelete = async (e) => {
     <>
     {isLoading ? (
       <Container className="loader" maxW={'7xl'}>
+        <Helmet><title>Today I Feel | Edit Articles</title></Helmet>
         <DotLoader color={color} css={override} loading={isLoading} size={60} />
       </Container>
     ) : (
      <Container maxW={'800px'} className="article__list" p="0">
+      <Helmet><title>Today I Feel | Edit Articles</title></Helmet>
       <Heading as="h1" color="blue.300" m="3rem 0 1rem">All articles</Heading>
       <Divider marginTop="5"  marginBottom="2rem"/>
       <Box className="articles__list edit" gap="1rem">

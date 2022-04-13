@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet';
 import { 
     Box,
     Flex,
@@ -12,7 +13,8 @@ from '@chakra-ui/react'
 const About = () => {
 
   return (
-    <Container id="about" maxWidth={"800px"}>
+      <Container id="about" maxWidth={"800px"}>
+        <Helmet><title>Today I Feel | About</title></Helmet>
         <Box
             bg={useColorModeValue("blue.300", "blue.900" )} 
             borderRadius="12px"

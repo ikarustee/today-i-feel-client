@@ -53,7 +53,7 @@ const Search = () => {
               id='text' 
               type='text' 
               name="tag" 
-              placeholder="Search for e.g. tired"
+              placeholder="Search for e.g. 'tired, stressed'"
               fontWeight="400"
               borderColor={"blue.300"}
               focusBorderColor={"blue.300"}

@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useContext} from 'react'
 import {useSearchParams, Link, createSearchParams, useParams, useLocation} from "react-router-dom"
+import { Helmet } from 'react-helmet';
 import { ArticleContext } from '../Contexts/ArticleContext';
 import Chart from "./Chart"
 import {
@@ -99,6 +100,7 @@ const SearchResults = (props) => {
   } else {
     return (
       <>
+      <Helmet><title>Today I Feel | Search Results</title></Helmet>
       <Container className="articles" maxW={'7xl'} minH="100vh" m="2rem 0" p="0">
       <Heading as="h1" color="blue.300" m="1rem 0">{searchTags.includes("search") ? `Search results for: "${sanitizedSearchTags}"` : `Suggested articles for: "${sanitizedSearchTags}"`}</Heading>
       <Flex flexWrap="wrap" gap="1rem">
@@ -155,6 +157,7 @@ const SearchResults = (props) => {
         }
         )}
       </Flex>
+      <Chart /> 
         <Box
           className="info__holder"
         >
@@ -171,7 +174,6 @@ const SearchResults = (props) => {
           bg={bg} 
           color={fontColor}
           borderRadius="12px"
-          p={8}
           boxShadow={"lg"}
         >
         <BiRightArrowAlt />
@@ -182,14 +184,12 @@ const SearchResults = (props) => {
           bg={bg} 
           color={fontColor}
           borderRadius="12px"
-          p={8}
           boxShadow={"lg"}
           >
           <BiRightArrowAlt />
           <h2>Instahelp – professional online psychological counseling <strong><a href="https://instahelp.me/de/" target="_blank" className="info__link">instahelp.me/de/</a></strong></h2>
         </Flex>
-      </Box>
-      <Chart /> 
+        </Box>
       </Container>
       </>
     )}

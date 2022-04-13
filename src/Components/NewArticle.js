@@ -15,6 +15,7 @@ import {
     Text,
     useColorModeValue,
   } from '@chakra-ui/react';
+  import {Helmet} from "react-helmet"
   import axios from 'axios';
   import { useEffect, useState } from 'react';
   import { useNavigate } from 'react-router-dom';
@@ -70,6 +71,8 @@ import {
       
     },[])
     return (
+      <>
+      <Helmet><title>Today I Feel | New Article</title></Helmet>
       <Flex
         className="formholder"
         align={'center'}
@@ -182,5 +185,6 @@ import {
           </Box>
         </Stack>
       </Flex>
+      </>
     );
   }

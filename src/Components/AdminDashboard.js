@@ -9,7 +9,8 @@ import {
   } from '@chakra-ui/react';
   import axios from 'axios';
 import { useEffect, useState } from 'react';
-  import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Helmet } from "react-helmet";
   
   export default function SimpleCard() {
     const navigate = useNavigate();
@@ -37,6 +38,7 @@ import { useEffect, useState } from 'react';
     },[])
     return (
       <Container maxW={'800px'} className="admin" p="0">
+      <Helmet><title>Today I Feel | Admin Dashboard</title></Helmet>  
         <Flex
         bg={useColorModeValue('gray.50', 'gray.800')}
         width="100%"

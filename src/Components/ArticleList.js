@@ -1,4 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react';
+import {Helmet} from "react-helmet"
 import { Link } from 'react-router-dom';
 import { ArticleContext } from '../Contexts/ArticleContext';
 import { css } from "@emotion/react";
@@ -37,10 +38,12 @@ const ArticleList = ({p}) => {
     <>
     {isLoading ? (
       <Container className="loader" maxW={'7xl'}>
+        <Helmet><title>Today I Feel | Articles</title></Helmet>
         <DotLoader color={color} css={override} loading={!isLoading} size={60} />
       </Container>
     ) : (
      <Container maxW={'7xl'} className="article__list" p="0">
+     <Helmet><title>Today I Feel | Articles</title></Helmet>
       <Heading as="h1" color="blue.300" m={"2rem 0"}>Latest article</Heading>
         <Box
           display="flex"
@@ -98,7 +101,7 @@ const ArticleList = ({p}) => {
                     fontSize="md">
                     {a.body.replace(/[#_]/g,'').split(" ").slice(0, 25).join(" ") + " ..."}
                   </Text>
-                  <Link to={`${a._id}`} textAlign="center" _hover={{textDecoration: "none"}}>
+                  <Link to={`${a._id}`}>
                   <Button 
                     // className="readmore__btn" 
                       borderColor="blue.300" 
