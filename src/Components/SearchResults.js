@@ -171,7 +171,6 @@ const SearchResults = (props) => {
           bg={bg} 
           color={fontColor}
           borderRadius="12px"
-          p={8}
           boxShadow={"lg"}
         >
         <BiRightArrowAlt />
@@ -182,7 +181,6 @@ const SearchResults = (props) => {
           bg={bg} 
           color={fontColor}
           borderRadius="12px"
-          p={8}
           boxShadow={"lg"}
           >
           <BiRightArrowAlt />
