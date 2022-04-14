@@ -123,6 +123,7 @@ import {
                 <Box display="flex"
                   flexDirection={{ base: 'row', sm: 'column' }}
                   flexWrap="wrap"
+                  gap="1rem"
                   >
                   {thisArticle.reports.length >=1 && thisArticle.reports.map((a,index) => {
                     

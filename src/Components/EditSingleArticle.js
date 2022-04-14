@@ -46,11 +46,11 @@ import {
     }
     
     function updateArticle () {
-      const {title, body, tags, url, visible} = userInput
+      const {title, body, tags, url} = userInput
       let tagArray = tags.split(",")
       tagArray = tagArray.map(el=>el.trim())
       let server = "https://todayifeel-server.herokuapp.com/articles/"+id.toString()
-      axios.put(server,{title:title,body:body, tags:tagArray, url:url, visible:visible}).then((response)=> {
+      axios.put(server,{title:title,body:body, tags:tagArray, url:url}).then((response)=> {
              navigate("/adminDashboard")
           })
     }
@@ -173,8 +173,6 @@ import {
                     >
                     Update
                     </Button>
-
-             
                 </Stack>
                 </Stack>
             </Stack>
