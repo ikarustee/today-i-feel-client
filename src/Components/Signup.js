@@ -10,11 +10,13 @@ import {
     useColorModeValue,
   } from '@chakra-ui/react';
   import axios from 'axios';
+import { useState } from 'react';
   import { useNavigate } from 'react-router-dom';
  
   export default function SimpleCard() {
     const navigate = useNavigate();
-   
+    const [active, setActive] = useState(false)
+    
     async function signupUser(){
       document.getElementById("emailError").value = "";
       document.getElementById("passwordError").value = "";
@@ -62,12 +64,14 @@ import {
                   align={'start'}
                   justify={'space-between'}>
                 </Stack>
-                <Button
-                  bg={'blue.400'}
-                  color={'white'}
-                  _hover={{
-                    bg: 'blue.500',
-                  }} onClick={signupUser}>
+                  <Button
+                  bg={`${active ? "white" : "gray.300"}`}
+                  color={`${active ? "blue.400" : "gray.500"}`}
+                  border={`${active ? "2px solid #5C90FF" : "gray.500"}`}
+                  fontWeight="300"
+                  _hover={{bg: 'blue.300', color: "white", border: "2px solid #5C90FF"}}
+                  _focus={{border: "2px #85abff solid"}}
+                   onClick={signupUser}>
                   Sign up
                 </Button>
               </Stack>
