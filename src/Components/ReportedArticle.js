@@ -130,11 +130,13 @@ import {
                       
                       <Box key={index}
                         display="flex"
+                        borderRadius={"8px"}
                         flexDirection='column'
                         width="100%"
-                        paddingLeft="15px"
-                        paddingTop="15px"
-                        margin="10px"
+                        padding={"1rem 1.5rem"}
+                        // paddingLeft="15px"
+                        // paddingTop="15px"
+                        // margin="10px"
                         boxShadow={'lg'} 
                         bg={colorMode === "light" ? "white" : "gray.700"}
                       >
