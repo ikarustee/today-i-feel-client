@@ -122,7 +122,7 @@ const ArticleList = ({p}) => {
                       fontWeight="400"
                       height="auto"
                       padding="0"
-                      _hover={{bg: "white", color: "purple.300"}} 
+                      _hover={{color: "purple.300"}} 
                       variant='solid' >
                       Read article
                     </Button>
@@ -182,7 +182,7 @@ const ArticleList = ({p}) => {
                       fontWeight="400"
                       height="auto"
                       padding="0"
-                      _hover={{bg: "white", color: "purple.300"}} 
+                      _hover={{color: "purple.300"}} 
                       variant='solid'>
                       Read article
                     </Button>
