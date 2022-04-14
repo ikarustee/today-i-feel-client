@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useContext} from 'react'
 import {useSearchParams, Link} from "react-router-dom"
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { ArticleContext } from '../Contexts/ArticleContext';
 import Chart from "./Chart"
 import {
@@ -82,13 +82,21 @@ const SearchResults = (props) => {
       <Helmet><title>Today I Feel | Search Results</title></Helmet>
       <Container className="articles" maxW={'7xl'} minH="100vh" m="2rem 0" p="0">
       <Heading as="h1" color="blue.300" m="1rem 0">{searchTags.includes("search") ? `Search results for: "${sanitizedSearchTags}"` : `Suggested articles for: "${sanitizedSearchTags}"`}</Heading>
-      <Flex flexWrap="wrap" gap="1rem">
+      <Flex flexWrap="wrap" gap="1rem" className="articles__list">
         {searchResult
           .filter((a) => a.visible)
           .map((a) => {
             return(
               <Box
-                className="single" bg={colorMode === "light" ? "white" : "gray.700"} key={`articles/${a._id}`} boxShadow={'lg'} m="0" padding="2rem 1rem" borderRadius={8} _hover={{boxShadow: "xl"}} transition="all 300ms ease">
+                key={a._id} 
+                bg={colorMode === "light" ? "white" : "gray.700"} 
+                className="single" 
+                boxShadow={'lg'} 
+                m="0" 
+                borderRadius={8} 
+                _hover={{boxShadow: "xl"}} 
+                transition="all 300ms ease"
+                >
                 <Heading className="articles__heading" m="1rem 0" color="blue.300" as="h2" size="2xl" fontSize="2rem" lineHeight="1.1" _hover={{color: "purple.300"}}>
                   <Link to={`/articles/${a._id}`}>
                     {a.title}
@@ -99,7 +107,7 @@ const SearchResults = (props) => {
                   <span className="date">{readableDate(a.createdDate)} &nbsp;</span>
                   {a.tags.map((t) => {
                     return (
-                      <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="blue" color="gray.500" bg="blue.50" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300"}}>
+                      <Tag className="article__tag" key={t} size={'sm'} variant="solid" colorScheme="blue" color="gray.500" bg="blue.50" transition="all 300ms ease" _hover={{textDecoration: "none", bg: "purple.300", color: "white"}}>
                         <Link to={`/search?q=search,${t}`}>{t}</Link>
                       </Tag>
                     )
@@ -113,23 +121,19 @@ const SearchResults = (props) => {
                   fontSize="md">
                   {a.body.replace(/[#_]/g,'').split(" ").slice(0, 25).join(" ") + " ..."}
                 </Text>
-                <Link to={`/articles/${a._id}`} > 
+                <Link to={`/articles/${a._id}`}  className="readmore"> 
                   <Button 
-                      borderColor="blue.300" 
-                      borderWidth="2px" 
+                      className="readmore__btn" 
                       color="blue.300" 
                       bg={`${colorMode === "light" ? "white" : "gray.700"}`}
                       fontWeight="400"
                       height="auto"
-                      padding="4px 10px"
-                      _active={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
-                      _focus={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
-                      _hover={{bg: "blue.300", color: "white", border: "2px solid #5C90FF"}} 
-                      variant='solid'>
+                      padding="0"
+                      _hover={{bg: "white", color: "purple.300"}} 
+                      variant='solid' >
                       Read article
                     </Button>
                 </Link>
-              <br/>
             </Box> )       
         }
         )}

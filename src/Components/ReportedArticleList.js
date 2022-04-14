@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react';
 import axios from 'axios';
 import {useNavigate, Link} from "react-router-dom"
-import {Helmet} from "react-helmet"
+import { Helmet } from 'react-helmet-async';
 import { ArticleContext } from '../Contexts/ArticleContext';
 import {readableDate} from "../helper/dateformatter"
 import { BiEditAlt } from "react-icons/bi";
