@@ -1,4 +1,4 @@
-# Today I Feel <a href="https://todayifeel.netlify.app/" target="_blank" alt="Today I Feel">🔗 todayifeel.netlify.app</a>
+# Today I Feel [🔗 todayifeel.netlify.app](https://todayifeel.netlify.app/){target="_blank"}
 ## WBS Coding School Final Project
 
 In a world where everything is accelerating and you are seemingly expected to be faster, better and richer, it is easy to feel overwhelmed and alone. A general awareness of mental health and mindfulness has only emerged in the last few years, not least thanks to the internet. But many people still find it difficult to open up themselves to others.
